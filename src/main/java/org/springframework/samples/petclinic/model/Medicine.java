@@ -28,6 +28,7 @@ public class Medicine extends NamedEntity {
 
 	@OneToOne
 	@Valid
+	@JoinColumn(name = "type_id")
 	private PetType		petType;
 
 	@ManyToOne

@@ -30,14 +30,15 @@ public class Vaccine extends NamedEntity {
 	@Column(name = "age")
 	private Date		age;
 
+	@OneToOne
+	@Valid
+	@JoinColumn(name = "type_id")
+	private PetType		petType;
+
 	@ManyToOne
 	@Valid
 	@JoinColumn(name = "sickness_id")
 	private Sickness	sickness;
-
-	@OneToOne
-	@Valid
-	private PetType		petType;
 
 
 	@Override
