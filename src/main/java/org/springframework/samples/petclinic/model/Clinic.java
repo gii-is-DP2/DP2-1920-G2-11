@@ -65,7 +65,7 @@ public class Clinic extends NamedEntity {
 			inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> products;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Vet> vets;
 
 

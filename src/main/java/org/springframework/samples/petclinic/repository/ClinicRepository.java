@@ -34,16 +34,16 @@ import org.springframework.samples.petclinic.model.PetType;
  */
 public interface ClinicRepository {
 
-	/**
-	 * Retrieve all <code>Product</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Product</code>s
-	 */
-	List<Product> findClinicProducts() throws DataAccessException;
-	/**
-	 * Retrieve all <code>Vet</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Vet</code>s
-	 */
-	List<Vet> findClinicVets() throws DataAccessException;
+//	/**
+//	 * Retrieve all <code>Product</code>s from the data store.
+//	 * @return a <code>Collection</code> of <code>Product</code>s
+//	 */
+//	List<Product> findProducts() throws DataAccessException;
+//	/**
+//	 * Retrieve all <code>Vet</code>s from the data store.
+//	 * @return a <code>Collection</code> of <code>Vet</code>s
+//	 */
+//	List<Vet> findVets() throws DataAccessException;
 	/**
 	 * Retrieve a <code>Pet</code> from the data store by id.
 	 * @param id the id to search for
