@@ -20,42 +20,27 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Product;
-import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.samples.petclinic.model.Clinic;
 
 /**
- * Repository class for <code>Pet</code> domain objects All method names are compliant
+ * Repository class for <code>Visit</code> domain objects All method names are compliant
  * with Spring Data naming conventions so this interface can easily be extended for Spring
  * Data See here:
  * http://static.springsource.org/spring-data/jpa/docs/current/reference/html/jpa.repositories.html#jpa.query-methods.query-creation
  *
- * @author Aureliano Piqueras
+ * @author Ken Krebs
+ * @author Juergen Hoeller
+ * @author Sam Brannen
+ * @author Michael Isvy
  */
-public interface ClinicRepository {
+public interface ProductRepository {
 
 	/**
-	 * Retrieve all <code>Product</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Product</code>s
-	 */
-	List<Product> findClinicProducts(int id) throws DataAccessException;
-	/**
-	 * Retrieve all <code>Vet</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Vet</code>s
-	 */
-	List<Vet> findClinicVets(int id) throws DataAccessException;
-	/**
-	 * Retrieve a <code>Clinic</code> from the data store by id.
-	 * @param id the id to search for
-	 * @return the <code>Clinic</code> if found
-	 * @throws org.springframework.dao.DataRetrievalFailureException if not found
-	 */
-	Clinic findById(int id) throws DataAccessException;
-
-	/**
-	 * Save a <code>Clinic</code> to the data store, either inserting or updating it.
-	 * @param pet the <code>Clinic</code> to save
+	 * Save a <code>Visit</code> to the data store, either inserting or updating it.
+	 * @param visit the <code>Visit</code> to save
 	 * @see BaseEntity#isNew
 	 */
-	void save(Clinic clinic) throws DataAccessException;
+	void save(Product product) throws DataAccessException;
+
+	List<Product> findByProductTypeId(Integer productTypeId);
 
 }
