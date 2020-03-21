@@ -22,7 +22,7 @@ public class SicknessController {
 
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses")
 	public String showSicknesses(@PathVariable final int petId, final Map<String, Object> model) {
-		model.put("sicknesses", this.sicknessService.findAll());
+		model.put("sicknesses", this.sicknessService.findSicknessesByPetId(petId));
 		return "sicknesses/sicknessList";
 	}
 }

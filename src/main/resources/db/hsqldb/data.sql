@@ -62,3 +62,17 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (1, 'Coronavirus', 'fiebre,tos,problemas respiratorios', 1, 3);
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (2, 'Rabia', 'Esputa muchas babas,está muy rabioso', 1, 2);
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (3, 'Coronavirus', 'fiebre,tos,problemas respiratorios', 1, 4);
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (4, 'Hepatitis', 'inapetencia,letargia', 1, 1);
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (5, 'Coronavirus', 'fiebre,tos,problemas respiratorios,no da vueltas en la rueda', 1, 6);
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (6, 'Aspergilosis', 'Dificultad al respirar,dejar de comer', 1, 5);
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (7, 'SIDA', 'Esputa muchas babas,está muy rabioso', 2, 2);
+
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (1, 'Vacuna A', 'A,S,D,F', 4, 3);
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (2, 'Vacuna B', 'Q,W,E,R', 6, 1);
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (3, 'Vacuna C', 'Z,X,C,V', 8, 2);
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (4, 'Vacuna D', 'T,Y,U,I', 2, 4);
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (5, 'Vacuna E', 'G,H,J,K', 11, 5);
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (6, 'Vacunote', 'V,B,N,M', 14, 6);

@@ -31,7 +31,7 @@ public class Sickness extends NamedEntity {
 	@ManyToOne
 	@Valid
 	@JoinColumn(name = "type_id")
-	private PetType	petType;
+	private PetType	type;
 
 
 	@Override
@@ -60,11 +60,11 @@ public class Sickness extends NamedEntity {
 		this.severity = severity;
 	}
 
-	public PetType getPetType() {
-		return this.petType;
+	public PetType getType() {
+		return this.type;
 	}
 
-	public void setPetType(final PetType petType) {
-		this.petType = petType;
+	public void setType(final PetType type) {
+		this.type = type;
 	}
 }

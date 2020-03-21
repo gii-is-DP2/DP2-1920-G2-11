@@ -1,18 +1,14 @@
 
 package org.springframework.samples.petclinic.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "vaccines")
@@ -26,14 +22,9 @@ public class Vaccine extends NamedEntity {
 	@Column(name = "components")
 	private String		components;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "age")
-	private Date		age;
-
-	@OneToOne
-	@Valid
-	@JoinColumn(name = "type_id")
-	private PetType		petType;
+	@NotNull
+	@Column(name = "months")
+	private Integer		months;
 
 	@ManyToOne
 	@Valid
@@ -59,12 +50,12 @@ public class Vaccine extends NamedEntity {
 		this.components = components;
 	}
 
-	public Date getAge() {
-		return this.age;
+	public Integer getMonths() {
+		return this.months;
 	}
 
-	public void setAge(final Date age) {
-		this.age = age;
+	public void setMonths(final Integer months) {
+		this.months = months;
 	}
 
 	public Sickness getSickness() {
@@ -73,14 +64,6 @@ public class Vaccine extends NamedEntity {
 
 	public void setSickness(final Sickness sickness) {
 		this.sickness = sickness;
-	}
-
-	public PetType getPetType() {
-		return this.petType;
-	}
-
-	public void setPetType(final PetType petType) {
-		this.petType = petType;
 	}
 
 }
