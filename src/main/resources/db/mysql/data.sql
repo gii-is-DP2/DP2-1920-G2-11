@@ -51,3 +51,24 @@ INSERT IGNORE INTO visits VALUES (1, 7, '2010-03-04', 'rabies shot');
 INSERT IGNORE INTO visits VALUES (2, 8, '2011-03-04', 'rabies shot');
 INSERT IGNORE INTO visits VALUES (3, 8, '2009-06-04', 'neutered');
 INSERT IGNORE INTO visits VALUES (4, 7, '2008-09-04', 'spayed');
+
+INSERT IGNORE INTO sicknesses VALUES (1, 'Coronavirus', 'fiebre,tos,problemas respiratorios', 1, 3);
+INSERT IGNORE INTO sicknesses VALUES (2, 'Rabia', 'Esputa muchas babas,está muy rabioso', 1, 2);
+INSERT IGNORE INTO sicknesses VALUES (3, 'Coronavirus', 'fiebre,tos,problemas respiratorios', 1, 4);
+INSERT IGNORE INTO sicknesses VALUES (4, 'Hepatitis', 'inapetencia,letargia', 1, 1);
+INSERT IGNORE INTO sicknesses VALUES (5, 'Coronavirus', 'fiebre,tos,problemas respiratorios,no da vueltas en la rueda', 1, 6);
+INSERT IGNORE INTO sicknesses VALUES (6, 'Aspergilosis', 'Dificultad al respirar,dejar de comer', 1, 5);
+
+INSERT IGNORE INTO medicines VALUES (1, 'Medicina A', 'A,B,W,Y', 'Mucho amor', 4, 3);
+INSERT IGNORE INTO medicines VALUES (2, 'Medicina B', 'T,F,H,K', 'Videos de Willyrex', 3, 1);
+INSERT IGNORE INTO medicines VALUES (3, 'Medicina C', 'Q,J,D,C', 'Ruta motera', 2, 2);
+INSERT IGNORE INTO medicines VALUES (4, 'Medicina D', 'V.F,S,Z', 'Jugar a la switch', 1, 4);
+INSERT IGNORE INTO medicines VALUES (5, 'Medicina E', 'K,Y,O,Ñ', 'Salir en bicicleta', 6, 5);
+INSERT IGNORE INTO medicines VALUES (6, 'Medicinote', 'Q,E,W,R', 'Mandar un correo a Corchuelo desde un mail que no es de la US', 5, 6);
+
+INSERT IGNORE INTO vaccines VALUES (1, 'Vacuna A', 'A,S,D,F', 4, 4, 3);
+INSERT IGNORE INTO vaccines VALUES (2, 'Vacuna B', 'Q,W,E,R', 6, 3, 1);
+INSERT IGNORE INTO vaccines VALUES (3, 'Vacuna C', 'Z,X,C,V', 8, 2, 2);
+INSERT IGNORE INTO vaccines VALUES (4, 'Vacuna D', 'T,Y,U,I', 2, 1, 4);
+INSERT IGNORE INTO vaccines VALUES (5, 'Vacuna E', 'G,H,J,K', 11, 6, 5);
+INSERT IGNORE INTO vaccines VALUES (6, 'Vacunote', 'V,B,N,M', 14, 5, 6);

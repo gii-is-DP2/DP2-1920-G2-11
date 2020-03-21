@@ -53,3 +53,30 @@ CREATE TABLE IF NOT EXISTS visits (
   description VARCHAR(255),
   FOREIGN KEY (pet_id) REFERENCES pets(id)
 ) engine=InnoDB;
+
+CREATE TABLE IF NOT EXISTS sicknesses (
+  id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(30),
+  symptom VARCHAR(200),
+  severity INTEGER,
+  type_id INT(4) UNSIGNED NOT NULL,
+  INDEX(type_id),
+  FOREIGN KEY (type_id) REFERENCES types(id)
+) engine=InnoDB;
+
+CREATE TABLE IF NOT EXISTS medicines (
+  id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(30),
+  components VARCHAR(100),
+  treatment VARCHAR(200),
+  FOREIGN KEY (type_id) REFERENCES types(id)
+  FOREIGN KEY (sickness_id) REFERENCES sicknesses(id)
+) engine=InnoDB;
+
+CREATE TABLE IF NOT EXISTS vaccines (
+  id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(30),
+  components VARCHAR(60),
+  months INTEGER,
+  FOREIGN KEY (sickness_id) REFERENCES sicknesses(id)
+) engine=InnoDB;
