@@ -15,10 +15,12 @@
  */
 package org.springframework.samples.petclinic.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.BaseEntity;
+import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Product;
 
 /**
@@ -42,5 +44,13 @@ public interface ProductRepository {
 	void save(Product product) throws DataAccessException;
 
 	List<Product> findByProductTypeId(Integer productTypeId);
+	
+
+	/**
+	 * Retrieve all <code>Product</code>s from the data store.
+	 * @return a <code>Collection</code> of <code>Product</code>s
+	 */
+	Collection<Product> findAll() throws DataAccessException;
+
 
 }

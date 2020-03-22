@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -32,6 +33,13 @@ import org.springframework.samples.petclinic.model.Clinic;
  * @author Aureliano Piqueras
  */
 public interface ClinicRepository {
+	
+
+	/**
+	 * Retrieve all <code>Clinic</code>s from the data store.
+	 * @return a <code>Collection</code> of <code>Clinic</code>s
+	 */
+	Collection<Clinic> findAll() throws DataAccessException;
 
 	/**
 	 * Retrieve all <code>Product</code>s from the data store.

@@ -16,15 +16,14 @@
 package org.springframework.samples.petclinic.repository.springdatajpa;
 
 import org.springframework.data.repository.Repository;
-import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.samples.petclinic.repository.VisitRepository;
+import org.springframework.samples.petclinic.model.Product;
+import org.springframework.samples.petclinic.repository.ProductRepository;
 
 /**
  * Spring Data JPA specialization of the {@link VisitRepository} interface
  *
- * @author Michael Isvy
- * @since 15.1.2013
+ * @author Aureliano Piqueras
  */
-public interface SpringDataProductRepository extends VisitRepository, Repository<Visit, Integer> {
+public interface SpringDataProductRepository extends ProductRepository, Repository<Product, Integer> {
 
 }
