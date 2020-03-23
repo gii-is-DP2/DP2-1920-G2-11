@@ -36,20 +36,10 @@ import org.springframework.samples.petclinic.model.Product;
  */
 public interface ProductRepository {
 
-	/**
-	 * Save a <code>Visit</code> to the data store, either inserting or updating it.
-	 * @param visit the <code>Visit</code> to save
-	 * @see BaseEntity#isNew
-	 */
 	void save(Product product) throws DataAccessException;
 
 	List<Product> findByProductTypeId(Integer productTypeId);
-	
 
-	/**
-	 * Retrieve all <code>Product</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Product</code>s
-	 */
 	Collection<Product> findAll() throws DataAccessException;
 
 

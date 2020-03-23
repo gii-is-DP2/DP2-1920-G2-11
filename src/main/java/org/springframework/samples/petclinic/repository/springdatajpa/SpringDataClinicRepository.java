@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.repository.springdatajpa;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -35,12 +36,12 @@ import org.springframework.samples.petclinic.repository.PetRepository;
 public interface SpringDataClinicRepository extends ClinicRepository, Repository<Clinic, Integer> {
 	
 	@Override
-	@Query("SELECT clinic FROM Clinic clinic left join fetch clinic.products WHERE clinic.id =:id")
-	public List<Product> findClinicProducts(@Param("id") int id);
+	@Query("SELECT c.products FROM Clinic c WHERE c.id =:id")
+	public Collection<Product> findClinicProducts(@Param("id") int id);
 	
 	@Override
-	@Query("SELECT clinic FROM Clinic clinic left join fetch clinic.vets WHERE clinic.id =:id")
-	public List<Vet> findClinicVets(@Param("id") int id);
+	@Query("SELECT c.vets FROM Clinic c WHERE c.id =:id")
+	public Collection<Vet> findClinicVets(@Param("id") int id);
 
 
 }

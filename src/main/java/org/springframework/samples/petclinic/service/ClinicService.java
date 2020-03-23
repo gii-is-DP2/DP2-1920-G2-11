@@ -24,6 +24,7 @@ import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
@@ -55,6 +56,17 @@ public class ClinicService {
 	@Transactional(readOnly = true)	
 	public Collection<Clinic> findClinics() throws DataAccessException {
 		return clinicRepository.findAll();
+	}
+		
+	@Transactional(readOnly = true)	
+		public Collection<Product> findClinicProducts(int clinicId) throws DataAccessException {
+			return clinicRepository.findClinicProducts(clinicId);
 	}	
 
-}
+	@Transactional(readOnly = true)	
+	public Collection<Vet> findClinicVets(int clinicId) throws DataAccessException {
+		return clinicRepository.findClinicVets(clinicId);
+}	
+
+}	
+

@@ -33,37 +33,13 @@ import org.springframework.samples.petclinic.model.Clinic;
  * @author Aureliano Piqueras
  */
 public interface ClinicRepository {
-	
 
-	/**
-	 * Retrieve all <code>Clinic</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Clinic</code>s
-	 */
 	Collection<Clinic> findAll() throws DataAccessException;
 
-	/**
-	 * Retrieve all <code>Product</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Product</code>s
-	 */
-	List<Product> findClinicProducts(int id) throws DataAccessException;
-	/**
-	 * Retrieve all <code>Vet</code>s from the data store.
-	 * @return a <code>Collection</code> of <code>Vet</code>s
-	 */
-	List<Vet> findClinicVets(int id) throws DataAccessException;
-	/**
-	 * Retrieve a <code>Clinic</code> from the data store by id.
-	 * @param id the id to search for
-	 * @return the <code>Clinic</code> if found
-	 * @throws org.springframework.dao.DataRetrievalFailureException if not found
-	 */
-	Clinic findById(int id) throws DataAccessException;
+	Collection<Product> findClinicProducts(int id) throws DataAccessException;
 
-	/**
-	 * Save a <code>Clinic</code> to the data store, either inserting or updating it.
-	 * @param pet the <code>Clinic</code> to save
-	 * @see BaseEntity#isNew
-	 */
-	void save(Clinic clinic) throws DataAccessException;
+	Collection<Vet> findClinicVets(int id) throws DataAccessException;
+
+	Clinic findById(int id) throws DataAccessException;
 
 }
