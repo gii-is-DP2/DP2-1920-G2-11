@@ -24,7 +24,10 @@ public class SicknessServiceTest {
 	@Test
 	void shouldFindSicknessWithCorrectId() {
 		Sickness sickness3 = this.sicknessRepository.findById(3);
-		Assertions.assertTrue(sickness3.getName().equals("Coronavirus"));
-		Assertions.assertTrue(sickness3.getType().getName().equals("snake"));
+		Assertions.assertTrue(sickness3.getName().equals("Rabia"));
+		Assertions.assertTrue(sickness3.getSymptom().equals("Exceso de salivación"));
+		Assertions.assertTrue(sickness3.getSeverity().equals(1));
+		Assertions.assertTrue(sickness3.getType().getName().equals("cat"));
 	}
+
 }
