@@ -32,4 +32,12 @@ public class SicknessService {
 
 		return res;
 	}
+
+	@Transactional
+	public Sickness findSicknessesById(final int sicknessId) {
+
+		Sickness sickness = this.sicknessRepository.findById(sicknessId);
+
+		return sickness;
+	}
 }

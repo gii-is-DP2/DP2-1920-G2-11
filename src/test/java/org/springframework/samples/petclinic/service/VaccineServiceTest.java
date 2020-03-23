@@ -1,6 +1,8 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class VaccineServiceTest {
 	void shouldFindVaccinesWithCorrectId() {
 		Vaccine vaccine4 = this.vaccineRepository.findById(4);
 		Assertions.assertTrue(vaccine4.getName().equals("Vacuna D"));
-		Assertions.assertTrue(vaccine4.getSickness().getName().equals("Hepatitis"));
+		Assertions.assertTrue(vaccine4.getSickness().getName().equals("Leucemia felina"));
+	}
+
+	@Test
+	void shouldNotFoundVaccinesWithCorrectId() {
+		List<Vaccine> vaccines = this.vaccineRepository.findVaccinesBySicknessId(28);
+		Assertions.assertTrue(vaccines.isEmpty());
 	}
 }

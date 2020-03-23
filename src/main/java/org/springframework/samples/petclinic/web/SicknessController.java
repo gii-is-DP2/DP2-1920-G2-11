@@ -22,7 +22,17 @@ public class SicknessController {
 
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses")
 	public String showSicknesses(@PathVariable final int petId, final Map<String, Object> model) {
-		model.put("sicknesses", this.sicknessService.findSicknessesByPetId(petId));
-		return "sicknesses/sicknessList";
+		if (this.sicknessService.findSicknessesByPetId(petId).isEmpty()) {
+			return "sicknesses/sicknessError";
+		} else {
+			model.put("sicknesses", this.sicknessService.findSicknessesByPetId(petId));
+			return "sicknesses/sicknessList";
+		}
+	}
+
+	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/{sicknessId}")
+	public String showSickness(@PathVariable final int sicknessId, final Map<String, Object> model) {
+		model.put("sickness", this.sicknessService.findSicknessesById(sicknessId));
+		return "sicknesses/sicknessShow";
 	}
 }

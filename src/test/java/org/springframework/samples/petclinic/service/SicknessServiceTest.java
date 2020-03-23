@@ -1,6 +1,8 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +32,9 @@ public class SicknessServiceTest {
 		Assertions.assertTrue(sickness3.getType().getName().equals("cat"));
 	}
 
+	@Test
+	void shouldNotFoundSicknessWithCorrectId() {
+		List<Sickness> sicknesses = this.sicknessRepository.findSicknessesByTypeId(7);
+		Assertions.assertTrue(sicknesses.isEmpty());
+	}
 }
