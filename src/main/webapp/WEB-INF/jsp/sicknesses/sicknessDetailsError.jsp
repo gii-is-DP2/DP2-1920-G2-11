@@ -5,7 +5,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<petclinic:layout pageName="vaccineError">
-   <p>Tu enfermedad es algo rara, por lo tanto no disponemos de un listado de vacunas para su enfermedad.</p>
-   <a href="mailto:petclinicDP2@hotmail.com">Para mas información haz click aquí</a>
+<petclinic:layout pageName="sicknessDetailsError">
+   <p>La enfermedad aún no ha sido detallada en la web</p>
+   <a href="mailto:petclinicDP2@hotmail.com">Para más información haz click aquí</a>
 </petclinic:layout>

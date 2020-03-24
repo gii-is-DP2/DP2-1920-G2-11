@@ -28,7 +28,7 @@ public class SicknessService {
 
 		Pet pet1 = this.petRepository.findById(petId);
 		int type_id = pet1.getType().getId();
-		List<Sickness> res = this.sicknessRepository.findSicknessesByTypeId(type_id);
+		List<Sickness> res = this.sicknessRepository.findByTypeId(type_id);
 
 		return res;
 	}

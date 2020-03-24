@@ -43,6 +43,7 @@ INSERT INTO owners VALUES (7, 'Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085
 INSERT INTO owners VALUES (8, 'Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683', 'owner1');
 INSERT INTO owners VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435', 'owner1');
 INSERT INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487', 'owner1');
+INSERT INTO owners VALUES (11, 'Frank', 'De La Jungla', 'Av. Cuesta´s Shelter', 'Tailandia', '6266755877', 'owner1');
 
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (1, 'Leo', '2010-09-07', 1, 1);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (2, 'Basil', '2012-08-06', 6, 2);
@@ -57,6 +58,7 @@ INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (10, 'Mulligan', '2
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (11, 'Freddy', '2010-03-09', 5, 9);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (12, 'Lucky', '2010-06-24', 2, 10);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (13, 'Sly', '2012-06-08', 1, 10);
+INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (14, 'Frankomodo', '2012-07-19', 7, 11);
 
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (1, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02', 'rabies shot');
@@ -91,6 +93,7 @@ INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (25, 'Hepatitis'
 INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (26, 'Coronavirus', 'fiebre,tos,problemas respiratorios,no da vueltas en la rueda', 1, 3);
 INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (27, 'Aspergilosis', 'Dificultad al respirar,dejar de comer', 1, 5);
 INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (28, 'SIDA', 'Esputa muchas babas,está muy rabioso', 2, 3);
+INSERT INTO sicknesses(id,name,symptom,severity,type_id) VALUES (29, 'Prueba', '', 0, 2);
 
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (1, 'Vacuna A', 'A,S,D,F', 4, 3);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (2, 'Vacuna B', 'Q,W,E,R', 6, 1);
@@ -98,3 +101,5 @@ INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (3, 'Vacuna C
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (4, 'Vacuna D', 'T,Y,U,I', 2, 4);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (5, 'Vacuna E', 'G,H,J,K', 11, 5);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (6, 'Vacunote', 'V,B,N,M', 14, 6);
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (7, 'Vacunote', 'V,B,N,M', 19, 6);
+INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (8, 'Vacunote', '', 0, 6);

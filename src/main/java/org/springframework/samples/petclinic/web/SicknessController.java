@@ -4,6 +4,7 @@ package org.springframework.samples.petclinic.web;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,12 @@ public class SicknessController {
 
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/{sicknessId}")
 	public String showSickness(@PathVariable final int sicknessId, final Map<String, Object> model) {
-		model.put("sickness", this.sicknessService.findSicknessesById(sicknessId));
-		return "sicknesses/sicknessShow";
+		Sickness sickness = this.sicknessService.findSicknessesById(sicknessId);
+		if (sickness.getSymptom().isEmpty() || sickness.getSeverity().equals(0)) {
+			return "sicknesses/sicknessDetailsError";
+		} else {
+			model.put("sickness", this.sicknessService.findSicknessesById(sicknessId));
+			return "sicknesses/sicknessShow";
+		}
 	}
 }

@@ -3,29 +3,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<petclinic:layout pageName="sicknesses">
+<petclinic:layout pageName="vaccines">
     <h2>Vaccines</h2>
 
     <table id="vaccinesTable" class="table table-striped">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Components</th>
-            <th>Months of age</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${vaccines}" var="vaccine">
             <tr>
                 <td>
-                    <c:out value="${vaccine.name}"/>
-                </td>
-                <td>
-                    <c:out value="${vaccine.components}"/>
-                </td>
-                <td>
-                    <c:out value="${vaccine.months}"/>
+                    <spring:url value="/owners/*/pets/*/sicknesses/{sicknessId}/vaccines/{vaccineId}" var="vaccineUrl">
+                        <spring:param name="vaccineId" value="${vaccine.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(vaccineUrl)}">${vaccine.name}</a>
                 </td>
             </tr>
         </c:forEach>

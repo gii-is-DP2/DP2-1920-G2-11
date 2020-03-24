@@ -28,8 +28,16 @@ public class VaccineService {
 
 		Sickness sickness = this.sicknessRepository.findById(sicknessId);
 		int sickness_id = sickness.getId();
-		List<Vaccine> res = this.vaccineRepository.findVaccinesBySicknessId(sickness_id);
+		List<Vaccine> res = this.vaccineRepository.findBySicknessId(sickness_id);
 
 		return res;
+	}
+
+	@Transactional
+	public Vaccine findVaccineById(final int vaccineId) {
+
+		Vaccine vaccine = this.vaccineRepository.findById(vaccineId);
+
+		return vaccine;
 	}
 }

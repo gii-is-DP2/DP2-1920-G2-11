@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -18,11 +19,11 @@ public class Vaccine extends NamedEntity {
 	@Column(name = "name")
 	private String		name;
 
-	@NotBlank
 	@Column(name = "components")
 	private String		components;
 
 	@NotNull
+	@Min(0)
 	@Column(name = "months")
 	private Integer		months;
 
