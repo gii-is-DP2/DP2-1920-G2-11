@@ -35,13 +35,13 @@ import org.springframework.samples.petclinic.repository.PetRepository;
  */
 public interface SpringDataClinicRepository extends ClinicRepository, Repository<Clinic, Integer> {
 	
-	@Override
-	@Query("SELECT c.products FROM Clinic c WHERE c.id =:id")
-	public Collection<Product> findClinicProducts(@Param("id") int id);
-	
-	@Override
-	@Query("SELECT c.vets FROM Clinic c WHERE c.id =:id")
-	public Collection<Vet> findClinicVets(@Param("id") int id);
-
+//	@Override
+//	@Query("SELECT c.products FROM Clinic c WHERE c.id =:id")
+//	public Collection<Product> findClinicProducts(@Param("id") int id);
+//	
+//	@Override
+//	@Query("SELECT c.vets FROM Clinic c WHERE c.id =:id")
+//	public Collection<Vet> findClinicVets(@Param("id") int id);
+//
 
 }

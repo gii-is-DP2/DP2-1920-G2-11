@@ -40,22 +40,9 @@ import org.springframework.beans.support.PropertyComparator;
 @Table(name = "productTypes")
 public class ProductType extends NamedEntity {
 	
-	@Column(name = "description")
-	@NotEmpty
-	private String description;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productType")
 	private Set<Product> products;
-	
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	
-	public String getDescription() {
-		return this.description;
-	}
 	
 
 	protected Set<Product> getProductsInternal() {

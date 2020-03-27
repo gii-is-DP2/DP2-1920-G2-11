@@ -32,6 +32,8 @@ import javax.validation.constraints.NotEmpty;
  *
  * @author Aureliano Piqueras
  */
+
+
 @Entity
 @Table(name = "products")
 public class Product extends NamedEntity {
@@ -55,6 +57,11 @@ public class Product extends NamedEntity {
 	@ManyToOne
 	@JoinColumn(name = "productType_id")
 	private ProductType productType;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="clinic_id")
+	private Clinic clinic;
 	
 	public void setPrice(Double price) {
 		this.price = price;

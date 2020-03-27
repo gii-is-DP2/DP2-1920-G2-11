@@ -30,7 +30,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.persistence.OneToMany;
 
@@ -46,6 +48,24 @@ import org.springframework.beans.support.PropertyComparator;
 @Entity
 @Table(name = "clinics")
 public class Clinic extends NamedEntity {
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
 
 	@Column(name = "address")
 	@NotEmpty
@@ -59,14 +79,22 @@ public class Clinic extends NamedEntity {
 	@Column(name = "email")
 	@Email
 	private String email;
+	
+	@Column(name= "name")
+	@NotBlank
+	private String name;
+	
+	@Column(name="ciudad")
+	@NotNull
+	private String ciudad;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "clinic_products", joinColumns = @JoinColumn(name = "clinic_id"),
-			inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private Set<Product> products;
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	@JoinTable(name = "clinic_products", joinColumns = @JoinColumn(name = "clinic_id"),
+//			inverseJoinColumns = @JoinColumn(name = "product_id"))
+//	private Set<Product> products;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Vet> vets;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private Set<Vet> vets;
 
 
 	public String getAddress() {
@@ -94,56 +122,56 @@ public class Clinic extends NamedEntity {
 	}
 
 
-	protected Set<Product> getProductsInternal() {
-		if (this.products == null) {
-			this.products = new HashSet<>();
-		}
-		return this.products;
-	}
+//	protected Set<Product> getProductsInternal() {
+//		if (this.products == null) {
+//			this.products = new HashSet<>();
+//		}
+//		return this.products;
+//	}
+//
+//	protected void setProductsInternal(final Set<Product> products) {
+//		this.products = products;
+//	}
 
-	protected void setProductsInternal(final Set<Product> products) {
-		this.products = products;
-	}
+//	@XmlElement
+//	public List<Product> getProducts() {
+//		final List<Product> sortedProds = new ArrayList<>(getProductsInternal());
+//		PropertyComparator.sort(sortedProds, new MutableSortDefinition("name", true, true));
+//		return Collections.unmodifiableList(sortedProds);
+//	}
 
-	@XmlElement
-	public List<Product> getProducts() {
-		final List<Product> sortedProds = new ArrayList<>(getProductsInternal());
-		PropertyComparator.sort(sortedProds, new MutableSortDefinition("name", true, true));
-		return Collections.unmodifiableList(sortedProds);
-	}
+//	public int getNrOfProducts() {
+//		return getProducts().size();
+//	}
 
-	public int getNrOfProducts() {
-		return getProducts().size();
-	}
+//	public void addProduct(final Product product) {
+//		getProductsInternal().add(product);
+//	}
 
-	public void addProduct(final Product product) {
-		getProductsInternal().add(product);
-	}
+//	protected Set<Vet> getVetsInternal() {
+//		if (this.vets == null) {
+//			this.vets = new HashSet<>();
+//		}
+//		return this.vets;
+//	}
+//
+//	protected void setVetsInternal(final Set<Vet> vets) {
+//		this.vets = vets;
+//	}
 
-	protected Set<Vet> getVetsInternal() {
-		if (this.vets == null) {
-			this.vets = new HashSet<>();
-		}
-		return this.vets;
-	}
-
-	protected void setVetsInternal(final Set<Vet> vets) {
-		this.vets = vets;
-	}
-
-	@XmlElement
-	public List<Vet> getVets() {
-		final List<Vet> sortedVets = new ArrayList<>(getVetsInternal());
-		PropertyComparator.sort(sortedVets, new MutableSortDefinition("name", true, true));
-		return Collections.unmodifiableList(sortedVets);
-	}
-
-	public int getNrOfVets() {
-		return getVets().size();
-	}
-
-	public void addVet(final Vet vet) {
-		getVetsInternal().add(vet);
-	}
+//	@XmlElement
+//	public List<Vet> getVets() {
+//		final List<Vet> sortedVets = new ArrayList<>(getVetsInternal());
+//		PropertyComparator.sort(sortedVets, new MutableSortDefinition("name", true, true));
+//		return Collections.unmodifiableList(sortedVets);
+//	}
+//
+//	public int getNrOfVets() {
+//		return getVets().size();
+//	}
+//
+//	public void addVet(final Vet vet) {
+//		getVetsInternal().add(vet);
+//	}
 
 }

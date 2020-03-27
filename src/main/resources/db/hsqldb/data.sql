@@ -76,3 +76,8 @@ INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (3, 'Vacuna C
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (4, 'Vacuna D', 'T,Y,U,I', 2, 4);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (5, 'Vacuna E', 'G,H,J,K', 11, 5);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (6, 'Vacunote', 'V,B,N,M', 14, 6);
+
+
+INSERT INTO clinics(id,name,address,ciudad,email,telephone) VALUES (1, 'Winston Pet Cares','Evergreen Av. 4' ,'Pitsburg','charles@mail.com', '600033472');
+INSERT INTO product_types(id, name) VALUES (1, 'Champú');
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (1,'chámpu hidratante','para pelo seco',4.00,3,1,1);

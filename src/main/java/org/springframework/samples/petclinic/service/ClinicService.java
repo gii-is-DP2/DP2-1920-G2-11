@@ -53,20 +53,20 @@ public class ClinicService {
 		this.clinicRepository = clinicRepository;
 	}		
 
-	@Transactional(readOnly = true)	
+	@Transactional//(readOnly = true)	
 	public Collection<Clinic> findClinics() throws DataAccessException {
 		return clinicRepository.findAll();
 	}
 		
-	@Transactional(readOnly = true)	
-		public Collection<Product> findClinicProducts(int clinicId) throws DataAccessException {
-			return clinicRepository.findClinicProducts(clinicId);
-	}	
-
-	@Transactional(readOnly = true)	
-	public Collection<Vet> findClinicVets(int clinicId) throws DataAccessException {
-		return clinicRepository.findClinicVets(clinicId);
-}	
+//	@Transactional//(readOnly = true)	
+//		public Collection<Product> findClinicProducts(int clinicId) throws DataAccessException {
+//			return clinicRepository.findClinicProducts(clinicId);
+//	}	
+//
+//	@Transactional(readOnly = true)	
+//	public Collection<Vet> findClinicVets(int clinicId) throws DataAccessException {
+//		return clinicRepository.findClinicVets(clinicId);
+//}	
 
 }	
 
