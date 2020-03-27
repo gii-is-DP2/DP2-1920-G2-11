@@ -20,6 +20,9 @@ public class Sickness extends NamedEntity {
 	@Column(name = "name")
 	private String	name;
 
+	@Column(name = "cause")
+	private String	cause;
+
 	@Column(name = "symptom")
 	private String	symptom;
 
@@ -66,4 +69,13 @@ public class Sickness extends NamedEntity {
 	public void setType(final PetType type) {
 		this.type = type;
 	}
+
+	public String getCause() {
+		return this.cause;
+	}
+
+	public void setCause(final String cause) {
+		this.cause = cause;
+	}
+
 }

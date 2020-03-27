@@ -23,7 +23,7 @@ public class HU2Test {
 	@Test
 	void shouldFindVaccinesWithCorrectSicknessId() {
 		List<Vaccine> vaccines = this.vaccineRepository.findBySicknessId(6);
-		Assertions.assertTrue(vaccines.size() == 2 && vaccines.get(0).getName().equals("Vacunote") && vaccines.get(0).getMonths().equals(14));
+		Assertions.assertTrue(vaccines.size() == 3 && vaccines.get(1).getName().equals("Vacuna F2"));
 	}
 
 	//Caso negativo

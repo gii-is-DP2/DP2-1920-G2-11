@@ -12,6 +12,10 @@
             <td><b><c:out value="${sickness.name}"/></b></td>
         </tr>
         <tr>
+            <th>Cause</th>
+            <td><c:out value="${sickness.cause}"/></td>
+        </tr>
+        <tr>
             <th>Severity</th>
             <td><c:out value="${sickness.severity}"/></td>
         </tr>

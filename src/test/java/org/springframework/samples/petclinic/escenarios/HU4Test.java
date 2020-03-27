@@ -21,7 +21,7 @@ public class HU4Test {
 	@Test
 	void shouldFindVaccineWithCorrectId() {
 		Vaccine vaccine = this.vaccineRepository.findById(2);
-		Assertions.assertTrue(vaccine.getName().equals("Vacuna B") && vaccine.getComponents().equals("Q,W,E,R") && vaccine.getMonths().equals(6) && vaccine.getSickness().getName().equals("Otitis"));
+		Assertions.assertTrue(vaccine.getName().equals("Vacuna B") && vaccine.getComponents().equals("A,S,D,F") && vaccine.getMonths().equals(6) && vaccine.getSickness().getName().equals("Conjuntivitis"));
 	}
 
 	//Caso negativo

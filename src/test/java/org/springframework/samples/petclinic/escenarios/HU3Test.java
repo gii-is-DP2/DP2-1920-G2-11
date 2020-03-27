@@ -21,13 +21,14 @@ public class HU3Test {
 	@Test
 	void shouldFindSicknessWithCorrectId() {
 		Sickness sickness = this.sicknessRepository.findById(16);
-		Assertions.assertTrue(sickness.getName().equals("Coronavirus") && sickness.getSymptom().equals("Vómitos, diarrea") && sickness.getSeverity().equals(1) && sickness.getType().getName().equals("dog"));
+		Assertions.assertTrue(sickness.getName().equals("Coronavirus") && sickness.getCause().equals("Contacto con secreciones orales y fecales infectadas") && sickness.getSymptom().equals("Deshidratación, vómitos, diarrea")
+			&& sickness.getSeverity().equals(1) && sickness.getType().getName().equals("dog"));
 	}
 
 	//Caso negativo
 	@Test
 	void shouldSicknessesWithoutDetails() {
-		Sickness sickness = this.sicknessRepository.findById(29);
-		Assertions.assertTrue(sickness.getName().equals("Prueba") && sickness.getSymptom().isEmpty() && sickness.getSeverity().equals(0));
+		Sickness sickness = this.sicknessRepository.findById(30);
+		Assertions.assertTrue(sickness.getName().equals("Pájaro Loco") && sickness.getCause().isEmpty() && sickness.getSymptom().isEmpty() && sickness.getSeverity().equals(0));
 	}
 }

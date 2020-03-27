@@ -34,7 +34,7 @@ public class SicknessController {
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/{sicknessId}")
 	public String showSickness(@PathVariable final int sicknessId, final Map<String, Object> model) {
 		Sickness sickness = this.sicknessService.findSicknessesById(sicknessId);
-		if (sickness.getSymptom().isEmpty() || sickness.getSeverity().equals(0)) {
+		if (sickness.getCause().isEmpty() || sickness.getSymptom().isEmpty() || sickness.getSeverity().equals(0)) {
 			return "sicknesses/sicknessDetailsError";
 		} else {
 			model.put("sickness", this.sicknessService.findSicknessesById(sicknessId));
