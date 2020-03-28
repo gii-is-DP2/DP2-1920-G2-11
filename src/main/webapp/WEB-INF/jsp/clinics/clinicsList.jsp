@@ -12,7 +12,8 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Address</th>
+     <!--        <th>Address</th> -->
+            <th>City</th>
             <th>Phone</th>
             <th>Products</th>
             
@@ -20,12 +21,13 @@
         </thead>
         <tbody>
         <c:forEach items="${clinics}" var="clinic">
+        
             <tr>
                 <td>
                     <c:out value="${clinic.name}"/>
                 </td>
                 <td>
-                    <c:out value="${clinic.address}"/>
+                    <c:out value="${clinic.city}"/>
                 </td>
                 <td>
                     <c:out value="${clinic.telephone}"/>

@@ -78,8 +78,8 @@ INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (5, 'Vacuna E
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (6, 'Vacunote', 'V,B,N,M', 14, 6);
 
 
-INSERT INTO clinics(id,name,address,ciudad,email,telephone) VALUES (1, 'Winston Pet Cares','Evergreen Av. 4' ,'Pitsburg','charles@mail.com', '600033472');
-INSERT INTO clinics(id,name,address,ciudad,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan nº10' ,'Sevilla','vetnervion@mail.com', '685123477');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (1, 'Winston Pet Cares','Evergreen Av. 4' ,'Pitsburg','charles@mail.com', '600033472');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan nº10' ,'Sevilla','vetnervion@mail.com', '685123477');
 
 
 INSERT INTO product_types(id, name) VALUES (1, 'Higiene');
