@@ -12,9 +12,8 @@
         <thead>
         <tr>
             <th>Name</th>
-     <!--        <th>Address</th> -->
-            <th>City</th>
-            <th>Phone</th>
+        <!--     <th>City</th>
+            <th>Phone</th> -->
             <th>Products</th>
             
         </tr>
@@ -24,14 +23,19 @@
         
             <tr>
                 <td>
-                    <c:out value="${clinic.name}"/>
+                   <%--  <c:out value="${clinic.name}"/> --%>
+                     <spring:url value="/clinics/{clinicId}" var="clinicUrl">
+                        <spring:param name="clinicId" value="${clinic.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(clinicUrl)}">${clinic.name}</a>
+         
                 </td>
-                <td>
+              <%--   <td>
                     <c:out value="${clinic.city}"/>
                 </td>
                 <td>
                     <c:out value="${clinic.telephone}"/>
-                </td>
+                </td> --%>
                 <td>
                     <spring:url value="/clinics/{clinicId}/products" var="productUrl">
                         <spring:param name="clinicId" value="${clinic.id}"/>

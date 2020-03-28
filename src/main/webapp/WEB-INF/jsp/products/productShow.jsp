@@ -9,20 +9,20 @@
     <table class="table table-striped">
         <tr>
             <th>Name</th>
-            <td><b><c:out value="${product.name}"/></b></td>
+            <td><b><c:out value="${products.name}"/></b></td>
         </tr>
         <tr>
             <th>Price</th>
-            <td><c:out value="${product.price}"/></td>
+            <td><c:out value="${products.price}"/></td>
         </tr>
         <tr>
             <th>Stock</th>
-            <td><c:out value="${product.stock}"/></td>
+            <td><c:out value="${products.stock}"/></td>
         </tr>
         
         <tr>
             <th>Description</th>
-            <td><c:out value="${product.description}"/></td>
+            <td><c:out value="${products.description}"/></td>
         </tr>
        
         
