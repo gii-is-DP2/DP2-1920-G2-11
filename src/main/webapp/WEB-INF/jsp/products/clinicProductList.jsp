@@ -36,12 +36,12 @@
         </tbody>
     </table>
     
-     <form:form modelAttribute="productType"
+<%--      <form:form modelAttribute="productType"
                    class="form-horizontal">
                      <div class="control-group">
                     <petclinic:selectField name="type" label="Type " names="${ProductType}" size="5"/>
-                </div>
+                </div> 
            
                    
-                   </form:form>
+                   </form:form>--%>
 </petclinic:layout>
