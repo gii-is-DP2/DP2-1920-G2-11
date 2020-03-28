@@ -9,4 +9,6 @@ public interface ProductTypeRepository {
 	
 	ProductType findProductType(Integer productTypeId);
 
+	
+	List<ProductType> findAll();
 }

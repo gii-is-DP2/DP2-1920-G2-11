@@ -19,5 +19,12 @@
             <th>Stock</th>
             <td><c:out value="${product.stock}"/></td>
         </tr>
+        
+        <tr>
+            <th>Description</th>
+            <td><c:out value="${product.description}"/></td>
+        </tr>
+       
+        
     </table>
 </petclinic:layout>

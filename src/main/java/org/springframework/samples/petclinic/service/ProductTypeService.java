@@ -41,7 +41,7 @@ import org.springframework.util.StringUtils;
 @Service
 public class ProductTypeService {
 
-	private ProductTypeRepository productRepository;
+	private ProductTypeRepository productTypeRepository;
 
 //
 //	@Autowired
@@ -69,11 +69,18 @@ public class ProductTypeService {
 	@Transactional
 	public Collection<Product> findByProductTypeId(int productId){
 	
-		List<Product> res = this.productRepository.findProductType(productId).getProducts();
+		List<Product> res = this.productTypeRepository.findProductType(productId).getProducts();
 //		int type_id = product.getProductType().getId();
 		return res;
 	}
 	
+	
+	
+	@Transactional 
+	public List<ProductType> findAllProductTypes(){
+		List<ProductType> res = this.productTypeRepository.findAll();
+		return res;
+	}
 
 }
 

@@ -43,43 +43,33 @@ public class ProductService {
 
 	private ProductRepository productRepository;
 
-
-
 	@Autowired
 	public ProductService(ProductRepository productRepository) {
 		this.productRepository = productRepository;
-	}		
+	}
 
-	@Transactional(readOnly = true)	
+	@Transactional(readOnly = true)
 	public Collection<Product> findProducts() throws DataAccessException {
 		return productRepository.findAll();
-	}	
-	
-	
+	}
 
 	@Transactional
-	public Collection<Product> findProductsByProductTypeId(final int productTypeId){
-		
-		
+	public Collection<Product> findProductsByProductTypeId(final int productTypeId) {
+
 		List<Product> res = this.productRepository.findByProductTypeId(productTypeId);
 		return res;
 	}
-	
+
 	@Transactional
 	public Product findProductsById(final int productId) {
-		Product res = this.productRepository.findProductById(productId);
+		Product res = this.productRepository.findById(productId);
 		return res;
 	}
-	
+
 	@Transactional
 	public List<Product> findProductByClinicId(final int clinicId) {
 		List<Product> res = this.productRepository.findByClinicId(clinicId);
 		return res;
 	}
-	
-	
 
 }
-
-
-

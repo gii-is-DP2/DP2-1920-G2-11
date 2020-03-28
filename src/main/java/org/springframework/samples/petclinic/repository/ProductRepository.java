@@ -24,6 +24,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.stereotype.Repository;
 
 /**
  * Repository class for <code>Visit</code> domain objects All method names are compliant
@@ -36,6 +37,8 @@ import org.springframework.samples.petclinic.model.Product;
  * @author Sam Brannen
  * @author Michael Isvy
  */
+
+@Repository
 public interface ProductRepository  extends CrudRepository<Product,Integer>{
 
 	//void save(Product product) throws DataAccessException;
@@ -45,10 +48,17 @@ public interface ProductRepository  extends CrudRepository<Product,Integer>{
 	Collection<Product> findAll() throws DataAccessException;
 
 	
-	@Query("select p from Product p where p.id=?1")
-	Product findProductById(Integer id);
+	//@Query("select p from Product p where p.id=?1")
+	Product findById(int id);
 	
 	
 	List<Product> findByClinicId(Integer id);
+	
+	@Query("select p from Product p where p.clinic.id = ?1 and p.productType.id = ?1")
+	List<Product> findProductsByClinicAndProductId(int clinicId, int productTypeId);
+
+	
+	
+	
 
 }

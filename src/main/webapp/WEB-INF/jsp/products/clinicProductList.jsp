@@ -21,9 +21,9 @@
         <c:forEach items="${products}" var="product">
             <tr>
                 <td>
-                    <spring:url value="clinics/{clinicId}/products" var="productUrl">
-                        <spring:param name="clinicId" value="${clinic.id}"/>
-                          
+                    <spring:url value="/products/{productId}" var="productUrl">
+                       
+                          <spring:param name="productId" value="${product.id}"/>
                        
                     </spring:url>
                     <a href="${fn:escapeXml(productUrl)}">${product.name}</a>
@@ -35,4 +35,13 @@
         </c:forEach>
         </tbody>
     </table>
+    
+     <form:form modelAttribute="productType"
+                   class="form-horizontal">
+                     <div class="control-group">
+                    <petclinic:selectField name="type" label="Type " names="${ProductType}" size="5"/>
+                </div>
+           
+                   
+                   </form:form>
 </petclinic:layout>

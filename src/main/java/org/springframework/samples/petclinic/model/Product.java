@@ -50,10 +50,20 @@ public class Product extends NamedEntity {
 	private Integer stock;
 	
 	
+	
+	
 	@Column(name = "description")
 	@NotEmpty
 	private String description;
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "productType_id")
 	private ProductType productType;
