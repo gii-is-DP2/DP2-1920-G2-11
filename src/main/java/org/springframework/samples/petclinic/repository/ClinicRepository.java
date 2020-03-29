@@ -21,6 +21,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Clinic;
 
@@ -41,5 +42,7 @@ public interface ClinicRepository {
 	Collection<Vet> findClinicVets(int id) throws DataAccessException;
 
 	Clinic findById(int id) throws DataAccessException;
+
+	Collection<Clinic> findClinicsByProductType(int id);
 
 }

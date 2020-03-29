@@ -24,6 +24,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.repository.ClinicRepository;
 import org.springframework.samples.petclinic.repository.PetRepository;
@@ -38,6 +39,10 @@ public interface SpringDataClinicRepository extends ClinicRepository, Repository
 	@Override
 	@Query("SELECT c.products FROM Clinic c WHERE c.id =:id")
 	public Collection<Product> findClinicProducts(@Param("id") int id);
+	
+	@Override
+	@Query("SELECT DISTINCT C FROM Clinic C INNER JOIN Product P WHERE P.clinic.id = C.id AND P.productType.id =:id")
+	public Collection<Clinic> findClinicsByProductType(@Param("id") int id);
 	
 	@Override
 	@Query("SELECT c.vets FROM Clinic c WHERE c.id =:id")

@@ -62,10 +62,21 @@ public class ClinicService {
 		public Collection<Product> findClinicProducts(int clinicId) throws DataAccessException {
 			return clinicRepository.findClinicProducts(clinicId);
 	}	
+	
+	@Transactional(readOnly = true)	
+	public Clinic findClinicById(int clinicId) throws DataAccessException {
+		return clinicRepository.findById(clinicId);
+}	
+
 
 	@Transactional(readOnly = true)	
 	public Collection<Vet> findClinicVets(int clinicId) throws DataAccessException {
 		return clinicRepository.findClinicVets(clinicId);
+	} 
+	
+	@Transactional(readOnly = true)	
+	public Collection<Clinic> findClinicsByProductTypeId(int productTypeId) throws DataAccessException {
+		return clinicRepository.findClinicsByProductType(productTypeId);
 }	
 
 }	

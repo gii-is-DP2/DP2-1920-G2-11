@@ -56,6 +56,10 @@ public class Product extends NamedEntity {
 	@JoinColumn(name = "productType_id")
 	private ProductType productType;
 	
+	@ManyToOne
+	@JoinColumn(name = "clinic_id")
+	private Clinic clinic;
+	
 	public void setPrice(Double price) {
 		this.price = price;
 	}
@@ -67,6 +71,10 @@ public class Product extends NamedEntity {
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
 	}
+	
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
 
 	
 	public Double getPrice() {
@@ -75,6 +83,10 @@ public class Product extends NamedEntity {
 	
 	public Integer getStock() {
 		return this.stock;
+	}
+	
+	public Clinic getClinic() {
+		return this.clinic;
 	}
 	
 	public ProductType getProductType() {
