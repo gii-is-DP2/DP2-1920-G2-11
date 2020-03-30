@@ -42,12 +42,7 @@ public class ProductTypeController {
 
 	@GetMapping(value = { "/productTypes" })
 	public String showProductTypeList(Map<String, Object> model) {
-		// Here we are returning an object of type 'ProductTypes' rather than a collection of ProductType
-		// objects
-		// so it is simpler for Object-Xml mapping
-		ProductTypes productTypes = new ProductTypes();
-		productTypes.getProductTypeList().addAll(this.productTypeService.findProductTypes());
-		model.put("productTypes", productTypes);
+		model.put("productTypes", this.productTypeService.findProductTypes());
 		return "productTypes/productTypeList";
 	}
 

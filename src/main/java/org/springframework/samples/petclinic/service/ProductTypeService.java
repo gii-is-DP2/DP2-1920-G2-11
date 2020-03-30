@@ -41,7 +41,7 @@ public class ProductTypeService {
 
 
 	@Autowired
-	public ProductTypeService(ProductRepository productRepository) {
+	public ProductTypeService(ProductTypeRepository productTypeRepository) {
 		this.productTypeRepository = productTypeRepository;
 	}		
 
