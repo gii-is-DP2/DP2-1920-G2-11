@@ -1,7 +1,6 @@
 
 package org.springframework.samples.petclinic.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -24,12 +23,20 @@ public class SicknessService {
 
 
 	@Transactional
-	public Collection<Sickness> findSicknessesByPetId(final int petId) {
+	public List<Sickness> findSicknessesByPetId(final int petId) {
 
 		Pet pet1 = this.petRepository.findById(petId);
 		int type_id = pet1.getType().getId();
-		List<Sickness> res = this.sicknessRepository.findSicknessesByTypeId(type_id);
+		List<Sickness> res = this.sicknessRepository.findByTypeId(type_id);
 
 		return res;
+	}
+
+	@Transactional
+	public Sickness findSicknessesById(final int sicknessId) {
+
+		Sickness sickness = this.sicknessRepository.findById(sicknessId);
+
+		return sickness;
 	}
 }

@@ -12,23 +12,17 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Sympton</th>
-            <th>Severity</th>
             <th>Vaccines</th>
-            
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${sicknesses}" var="sickness">
             <tr>
                 <td>
-                    <c:out value="${sickness.name}"/>
-                </td>
-                <td>
-                    <c:out value="${sickness.symptom}"/>
-                </td>
-                <td>
-                    <c:out value="${sickness.severity}"/>
+                    <spring:url value="/owners/*/pets/*/sicknesses/{sicknessId}" var="sicknessUrl">
+                        <spring:param name="sicknessId" value="${sickness.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(sicknessUrl)}">${sickness.name}</a>
                 </td>
                 <td>
                     <spring:url value="/owners/*/pets/*/sicknesses/{sicknessId}/vaccines" var="vaccineUrl">

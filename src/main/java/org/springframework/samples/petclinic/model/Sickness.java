@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
@@ -16,15 +16,17 @@ import org.hibernate.validator.constraints.Range;
 @Table(name = "sicknesses")
 public class Sickness extends NamedEntity {
 
-	@NotEmpty
+	@NotBlank
 	@Column(name = "name")
 	private String	name;
 
-	@NotEmpty
+	@Column(name = "cause")
+	private String	cause;
+
 	@Column(name = "symptom")
 	private String	symptom;
 
-	@Range(min = 1, max = 3)
+	@Range(min = 0, max = 3)
 	@NotNull
 	private Integer	severity;
 
@@ -67,4 +69,13 @@ public class Sickness extends NamedEntity {
 	public void setType(final PetType type) {
 		this.type = type;
 	}
+
+	public String getCause() {
+		return this.cause;
+	}
+
+	public void setCause(final String cause) {
+		this.cause = cause;
+	}
+
 }
