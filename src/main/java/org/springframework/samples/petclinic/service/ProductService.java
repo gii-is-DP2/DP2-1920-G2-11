@@ -47,5 +47,10 @@ public class ProductService {
 	public Collection<Product> findProducts() throws DataAccessException {
 		return productRepository.findAll();
 	}	
+	
+	@Transactional(readOnly = true)	
+	public Collection<Product> findProducts(int productTypeId) throws DataAccessException {
+		return productRepository.findByProductTypeId(productTypeId);
+	}
 
 }
