@@ -20,29 +20,25 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.BaseEntity;
-import org.springframework.samples.petclinic.model.Product;
-import org.springframework.samples.petclinic.model.ProductType;
-import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Clinic;
+import org.springframework.samples.petclinic.model.ProductType;
 
 /**
- * Repository class for <code>Pet</code> domain objects All method names are compliant
+ * Repository class for <code>Visit</code> domain objects All method names are compliant
  * with Spring Data naming conventions so this interface can easily be extended for Spring
  * Data See here:
  * http://static.springsource.org/spring-data/jpa/docs/current/reference/html/jpa.repositories.html#jpa.query-methods.query-creation
  *
- * @author Aureliano Piqueras
+ * @author Ken Krebs
+ * @author Juergen Hoeller
+ * @author Sam Brannen
+ * @author Michael Isvy
  */
-public interface ClinicRepository {
+public interface ProductTypeRepository {
 
-	Collection<Clinic> findAll() throws DataAccessException;
+	void save(ProductType productType) throws DataAccessException;
 
-	Collection<Product> findClinicProducts(int id) throws DataAccessException;
+	Collection<ProductType> findAll() throws DataAccessException;
 
-	Collection<Vet> findClinicVets(int id) throws DataAccessException;
-
-	Clinic findById(int id) throws DataAccessException;
-
-	Collection<Clinic> findClinicsByProductType(int id);
 
 }

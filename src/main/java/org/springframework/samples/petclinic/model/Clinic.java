@@ -60,9 +60,7 @@ public class Clinic extends NamedEntity {
 	@Email
 	private String email;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "clinic_products", joinColumns = @JoinColumn(name = "clinic_id"),
-			inverseJoinColumns = @JoinColumn(name = "product_id"))
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Product> products;
 
 	@OneToMany(cascade = CascadeType.ALL)

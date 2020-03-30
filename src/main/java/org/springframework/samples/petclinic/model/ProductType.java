@@ -44,10 +44,26 @@ public class ProductType extends NamedEntity {
 	@NotEmpty
 	private String description;
 	
+
+	@Column(name = "name")
+	@NotEmpty
+	private String name;
+	
+
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productType")
 	private Set<Product> products;
 	
+	public void setName(String name) {
+		this.name = name;
+	}
 	
+	
+	public String getName() {
+		return this.name;
+	}
+	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}

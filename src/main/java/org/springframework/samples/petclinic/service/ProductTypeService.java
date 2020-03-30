@@ -21,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.repository.ProductRepository;
+import org.springframework.samples.petclinic.repository.ProductTypeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -30,27 +32,22 @@ import org.springframework.util.StringUtils;
  * Mostly used as a facade for all Petproduct controllers Also a placeholder
  * for @Transactional and @Cacheable annotations
  *
- * @author Aureliano Piqueras
+ * @author Felipe Trinidad
  */
 @Service
-public class ProductService {
+public class ProductTypeService {
 
-	private ProductRepository productRepository;
+	private ProductTypeRepository productTypeRepository;
 
 
 	@Autowired
-	public ProductService(ProductRepository productRepository) {
-		this.productRepository = productRepository;
+	public ProductTypeService(ProductTypeRepository productTypeRepository) {
+		this.productTypeRepository = productTypeRepository;
 	}		
 
 	@Transactional(readOnly = true)	
-	public Collection<Product> findProducts() throws DataAccessException {
-		return productRepository.findAll();
+	public Collection<ProductType> findProductTypes() throws DataAccessException {
+		return productTypeRepository.findAll();
 	}	
-	
-	@Transactional(readOnly = true)	
-	public Collection<Product> findProducts(int productTypeId) throws DataAccessException {
-		return productRepository.findByProductTypeId(productTypeId);
-	}
 
 }

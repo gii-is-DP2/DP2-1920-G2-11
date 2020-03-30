@@ -119,3 +119,6 @@ INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (20, 'Vacuna 
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (21, 'Vacuna BRON', 'O,G,T,Y', 4, 20);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (22, 'Vacuna D', 'G,H,J,K', 10, 24);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (23, 'Vacuna S', 'Componente S', 6, 25);
+
+INSERT INTO clinics(id,name,address,telephone,email) VALUES (1, 'Vacunote Clinic', 'C/Reina Mercedes,25','666666666','vacunote@clinic.com');
+
