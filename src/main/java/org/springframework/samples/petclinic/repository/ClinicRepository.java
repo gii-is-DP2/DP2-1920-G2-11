@@ -49,6 +49,10 @@ public interface ClinicRepository extends CrudRepository<Clinic, Integer> {
 	
 	
 
-	Collection<Clinic> findClinicsByProductType(int id);
+	Collection<Clinic> findClinicsByProductType(int id) throws DataAccessException;
+
+	Collection<Product> findClinicProducts(int id) throws DataAccessException;
+
+	Collection<Vet> findClinicVets(int id) throws DataAccessException;
 
 }

@@ -46,6 +46,10 @@ public class ProductType extends NamedEntity {
 	@NotEmpty
 	private String name;
 	
+	@Column(name = "description")
+	@NotEmpty
+	private String description;
+	
 
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productType")

@@ -1,8 +1,11 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.ProductService;
 import org.springframework.samples.petclinic.service.ProductTypeService;
@@ -41,7 +44,7 @@ public class ClinicController {
 
 	@GetMapping(value = "/productTypes")
 	public void showProductTypes(final Map<String, Object> model) {
-		model.put("productTypes", this.productTypeService.findAllProductTypes());
+		model.put("productTypes", this.productTypeService.findProductTypes());
 	}
 
 	@GetMapping(value = "/clinics/{clinicId}")
