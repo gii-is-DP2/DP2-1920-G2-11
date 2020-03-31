@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.BaseEntity;
-import org.springframework.samples.petclinic.model.Clinic;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.stereotype.Repository;
 
 /**
  * Repository class for <code>Visit</code> domain objects All method names are compliant
@@ -34,13 +36,23 @@ import org.springframework.samples.petclinic.model.Product;
  * @author Sam Brannen
  * @author Michael Isvy
  */
-public interface ProductRepository {
 
-	void save(Product product) throws DataAccessException;
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Integer> {
 
+	//void save(Product product) throws DataAccessException;
+	//@Query("select p from Product p where s.type.id = ?1")
 	List<Product> findByProductTypeId(Integer productTypeId);
 
+	@Override
 	Collection<Product> findAll() throws DataAccessException;
 
+	//@Query("select p from Product p where p.id=?1")
+	Product findById(int id);
+
+	List<Product> findByClinicId(Integer id);
+
+	@Query("select p from Product p where p.clinic.id = ?1 and p.productType.id = ?1")
+	List<Product> findProductsByClinicAndProductId(int clinicId, int productTypeId);
 
 }
