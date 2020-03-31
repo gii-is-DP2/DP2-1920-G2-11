@@ -16,14 +16,18 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.model.ProductType;
+import org.springframework.samples.petclinic.model.Sickness;
+import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.repository.ProductRepository;
-import org.springframework.samples.petclinic.repository.ProductTypeRepository;
+import org.springframework.samples.petclinic.repository.springdatajpa.ProductTypeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -32,13 +36,14 @@ import org.springframework.util.StringUtils;
  * Mostly used as a facade for all Petproduct controllers Also a placeholder
  * for @Transactional and @Cacheable annotations
  *
+
  * @author Felipe Trinidad
+
  */
 @Service
 public class ProductTypeService {
 
 	private ProductTypeRepository productTypeRepository;
-
 
 	@Autowired
 	public ProductTypeService(ProductTypeRepository productTypeRepository) {
@@ -51,3 +56,4 @@ public class ProductTypeService {
 	}	
 
 }
+

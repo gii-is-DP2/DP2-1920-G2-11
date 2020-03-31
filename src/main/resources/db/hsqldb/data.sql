@@ -121,4 +121,14 @@ INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (22, 'Vacuna 
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (23, 'Vacuna S', 'Componente S', 6, 25);
 
 INSERT INTO clinics(id,name,address,telephone,email) VALUES (1, 'Vacunote Clinic', 'C/Reina Mercedes,25','666666666','vacunote@clinic.com');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan nº10' ,'Sevilla','vetnervion@mail.com', '685123477');
+
+
+INSERT INTO product_types(id, name) VALUES (1, 'Higiene');
+INSERT INTO product_types(id, name) VALUES (2, 'Juguetes');
+INSERT INTO product_types(id, name) VALUES (3, 'Alimentación');
+
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (1,'chámpu hidratante','para pelo seco',4.00,3,1,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (2,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,1,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (3,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,2,1);
 

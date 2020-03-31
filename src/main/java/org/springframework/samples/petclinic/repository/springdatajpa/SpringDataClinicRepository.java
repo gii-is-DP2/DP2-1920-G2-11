@@ -48,5 +48,4 @@ public interface SpringDataClinicRepository extends ClinicRepository, Repository
 	@Query("SELECT c.vets FROM Clinic c WHERE c.id =:id")
 	public Collection<Vet> findClinicVets(@Param("id") int id);
 
-
 }

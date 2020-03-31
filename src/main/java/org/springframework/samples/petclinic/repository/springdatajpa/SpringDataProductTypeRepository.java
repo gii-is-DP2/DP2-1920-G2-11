@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2002-2013 the original author or authors.
  *
@@ -29,3 +30,4 @@ import org.springframework.samples.petclinic.repository.ProductTypeRepository;
 public interface SpringDataProductTypeRepository extends ProductTypeRepository, Repository<ProductType, Integer> {
 
 }
+

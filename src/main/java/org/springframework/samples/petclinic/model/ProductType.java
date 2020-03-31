@@ -40,9 +40,6 @@ import org.springframework.beans.support.PropertyComparator;
 @Table(name = "productTypes")
 public class ProductType extends NamedEntity {
 	
-	@Column(name = "description")
-	@NotEmpty
-	private String description;
 	
 
 	@Column(name = "name")
@@ -72,7 +69,6 @@ public class ProductType extends NamedEntity {
 	public String getDescription() {
 		return this.description;
 	}
-	
 
 	protected Set<Product> getProductsInternal() {
 		if (this.products == null) {

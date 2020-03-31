@@ -1,51 +1,51 @@
-/*
- * Copyright 2002-2013 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.springframework.samples.petclinic.web;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.service.ProductService;
-import org.springframework.samples.petclinic.service.ProductTypeService;
-import org.springframework.samples.petclinic.model.ProductTypes;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
-/**
- * @author Juergen Hoeller
- * @author Mark Fisher
- * @author Ken Krebs
- * @author Arjen Poutsma
- */
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.service.ProductService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 @Controller
 public class ProductController {
 
 	private final ProductService productService;
 
+
 	@Autowired
-	public ProductController(ProductService productService) {
+	public ProductController(final ProductService productService) {
 		this.productService = productService;
 	}
 
-	@GetMapping(value = { "/products/{productTypeId}/list" })
-	public String showProductByType(@PathVariable final int productTypeId, Map<String, Object> model) {
-		model.put("products", this.productService.findProducts(productTypeId));
+	// devuelve productos filtrados por tipo
+	@GetMapping(value = "/products/productType/{productTypeId}")
+	public String showProducts(@PathVariable final int productTypeId, final Map<String, Object> model) {
+		model.put("products", this.productService.findProductsByProductTypeId(productTypeId));
 		return "products/productList";
 	}
+
+	// devuelve producto filtrados ya clinicas y tipo producto
+	@GetMapping(value = "/products/{productId}")
+	public String showProduct(@PathVariable final int productId, final Map<String, Object> model) {
+		model.put("products", this.productService.findProductsById(productId));
+		return "products/productShow";
+
+	}
+
+	// devuelve los productos filtrado por clinica
+	@GetMapping(value = "/clinics/{clinicId}/products")
+	public String showClinicProducts(final Map<String, Object> model, @PathVariable final int clinicId) {
+		model.put("products", this.productService.findProductByClinicId(clinicId));
+		return "products/clinicProductList";
+	}
+
+	// controlador para el filtro y cuando ya se ha escogido una clinica: TODO
+	//	@GetMapping(value = "/clinics/{clinicId}/products")
+	//	public String showClinicProductFiltered(final Map<String, Object> model, @PathVariable final int clinicId) {
+	//		model.put("products", this.productService.findProductByClinicId(clinicId));
+	//		return "products/clinicProductList";
+	//	}
 
 }
