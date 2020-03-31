@@ -16,18 +16,12 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Product;
-import org.springframework.samples.petclinic.model.ProductType;
-import org.springframework.samples.petclinic.model.Sickness;
-import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.repository.ProductRepository;
-import org.springframework.samples.petclinic.repository.springdatajpa.ProductTypeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -43,34 +37,15 @@ public class ProductService {
 
 	private ProductRepository productRepository;
 
+
 	@Autowired
 	public ProductService(ProductRepository productRepository) {
 		this.productRepository = productRepository;
-	}
+	}		
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = true)	
 	public Collection<Product> findProducts() throws DataAccessException {
 		return productRepository.findAll();
-	}
-
-	@Transactional
-	public Collection<Product> findProductsByProductTypeId(final int productTypeId) {
-
-		List<Product> res = this.productRepository.findByProductTypeId(productTypeId);
-		return res;
-	}
-
-	@Transactional
-	public Product findProductsById(final int productId) {
-		Product res = this.productRepository.findById(productId);
-		return res;
-	}
-
-	@Transactional
-	public List<Product> findProductByClinicId(final int clinicId) {
-		List<Product> res = this.productRepository.findByClinicId(clinicId);
-		return res;
-
-	}
+	}	
 
 }

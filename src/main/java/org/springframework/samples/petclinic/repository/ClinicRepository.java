@@ -19,12 +19,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Product;
-import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.stereotype.Repository;
 import org.springframework.samples.petclinic.model.Clinic;
 
 /**
@@ -35,24 +32,14 @@ import org.springframework.samples.petclinic.model.Clinic;
  *
  * @author Aureliano Piqueras
  */
-
-@Repository
-public interface ClinicRepository extends CrudRepository<Clinic, Integer> {
+public interface ClinicRepository {
 
 	Collection<Clinic> findAll() throws DataAccessException;
-
-//	Collection<Product> findClinicProducts(int id) throws DataAccessException;
-
-//	Collection<Vet> findClinicVets(int id) throws DataAccessException;
-
-	Clinic findById(int id) throws DataAccessException;
-	
-	
-
-	Collection<Clinic> findClinicsByProductType(int id) throws DataAccessException;
 
 	Collection<Product> findClinicProducts(int id) throws DataAccessException;
 
 	Collection<Vet> findClinicVets(int id) throws DataAccessException;
+
+	Clinic findById(int id) throws DataAccessException;
 
 }
