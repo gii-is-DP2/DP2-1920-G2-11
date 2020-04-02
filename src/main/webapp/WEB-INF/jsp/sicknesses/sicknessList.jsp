@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 
 <petclinic:layout pageName="sicknesses">
     <h2>Sicknesses</h2>
@@ -34,4 +36,9 @@
         </c:forEach>
         </tbody>
     </table>
+    
+    <security:authorize access="hasRole('veterinarian')">
+    	<spring:url value="/owners/*/pets/*/sicknesses/new" var="createSicknessUrl"></spring:url>
+    	<a href="${fn:escapeXml(createSicknessUrl)}">Create a Sickness</a>
+    </security:authorize>
 </petclinic:layout>
