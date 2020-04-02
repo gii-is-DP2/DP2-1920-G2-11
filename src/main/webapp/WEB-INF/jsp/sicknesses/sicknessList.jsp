@@ -15,6 +15,7 @@
         <tr>
             <th>Name</th>
             <th>Vaccines</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +32,12 @@
                         <spring:param name="sicknessId" value="${sickness.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(vaccineUrl)}">See vaccines</a>
+                </td>
+                <td>
+                    <spring:url value="/owners/*/pets/*/sicknesses/delete/{sicknessId}" var="sicknessDeleteUrl">
+                        <spring:param name="sicknessId" value="${sickness.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(sicknessDeleteUrl)}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

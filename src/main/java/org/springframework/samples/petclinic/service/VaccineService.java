@@ -32,4 +32,5 @@ public class VaccineService {
 
 		return vaccine;
 	}
+
 }
