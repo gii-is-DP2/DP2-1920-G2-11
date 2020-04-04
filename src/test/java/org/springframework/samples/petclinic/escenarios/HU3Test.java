@@ -1,6 +1,8 @@
 
 package org.springframework.samples.petclinic.escenarios;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,8 @@ public class HU3Test {
 	//Caso positivo
 	@Test
 	void shouldFindSicknessWithCorrectId() {
-		Sickness sickness = this.sicknessRepository.findById(16);
+		Optional<Sickness> findSickness = this.sicknessRepository.findById(16);
+		Sickness sickness = findSickness.get();
 		Assertions.assertTrue(sickness.getName().equals("Coronavirus") && sickness.getCause().equals("Contacto con secreciones orales y fecales infectadas") && sickness.getSymptom().equals("Deshidratación, vómitos, diarrea")
 			&& sickness.getSeverity().equals(1) && sickness.getType().getName().equals("dog"));
 	}
@@ -28,7 +31,8 @@ public class HU3Test {
 	//Caso negativo
 	@Test
 	void shouldSicknessesWithoutDetails() {
-		Sickness sickness = this.sicknessRepository.findById(30);
+		Optional<Sickness> findSickness = this.sicknessRepository.findById(30);
+		Sickness sickness = findSickness.get();
 		Assertions.assertTrue(sickness.getName().equals("Pájaro Loco") && sickness.getCause().isEmpty() && sickness.getSymptom().isEmpty() && sickness.getSeverity().equals(0));
 	}
 }
