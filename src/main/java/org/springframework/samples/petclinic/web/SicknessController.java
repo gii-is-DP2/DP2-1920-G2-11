@@ -47,14 +47,14 @@ public class SicknessController {
 		}
 	}
 
-	@GetMapping(path = "/owners/*/pets/{petId}/sicknesses/new")
+	@GetMapping(path = "/vets/new")
 	public String crearEnfermedad(final ModelMap modelMap) {
 		String view = "sicknesses/editSickness";
 		modelMap.addAttribute("sickness", new Sickness());
 		return view;
 	}
 
-	@PostMapping(path = "/owners/*/pets/{petId}/sicknesses/save")
+	@PostMapping(path = "/vets/save")
 	public String salvarEnfermedad(@Valid final Sickness sickness, final BindingResult result, final ModelMap modelMap) {
 		String view = "sicknesses/sicknessList";
 		if (result.hasErrors()) {

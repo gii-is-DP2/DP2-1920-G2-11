@@ -93,13 +93,7 @@
                                 </spring:url>
                                 <a href="${fn:escapeXml(sicknessUrl)}">See Sicknesses</a>
                             </td>
-                            <td>
-                                <spring:url value="/owners/*/pets/{petId}/sicknesses/new" var="sicknessNewUrl">
-                                    <spring:param name="ownerId" value="${owner.id}"/>
-                                    <spring:param name="petId" value="${pet.id}"/>
-                                </spring:url>
-                                <a href="${fn:escapeXml(sicknessNewUrl)}">Create a sickness for this pet type</a>
-                            </td>
+                            
                         </tr>
                     </table>
                 </td>

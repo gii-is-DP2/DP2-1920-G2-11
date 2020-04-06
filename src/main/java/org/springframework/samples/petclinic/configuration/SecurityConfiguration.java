@@ -34,8 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**", "/webjars/**", "/h2-console/**").permitAll().antMatchers(HttpMethod.GET, "/", "/oups").permitAll().antMatchers("/users/new").permitAll().antMatchers("/admin/**").hasAnyAuthority("admin")
-			.antMatchers("/owners/**").authenticated().antMatchers("/vets/**").authenticated().antMatchers("/sicknesses/delete/**").hasRole("veterinarian").antMatchers("/clinics/**").authenticated().antMatchers("/products/**").authenticated().anyRequest()
-			.denyAll().and().formLogin()
+			.antMatchers("/owners/*/pets/{petId}/sicknesses/delete/**").hasAnyAuthority("veterinarian").antMatchers("/owners/**").authenticated().antMatchers("/vets/new").hasAnyAuthority("veterinarian").antMatchers("/vets/**").authenticated()
+			.antMatchers("/sicknesses/delete/**").hasRole("veterinarian").antMatchers("/clinics/**").authenticated().antMatchers("/products/**").authenticated().anyRequest().denyAll().and().formLogin()
 			/* .loginPage("/login") */
 			.failureUrl("/login-error").and().logout().logoutSuccessUrl("/");
 		// Configuración para que funcione la consola de administración
