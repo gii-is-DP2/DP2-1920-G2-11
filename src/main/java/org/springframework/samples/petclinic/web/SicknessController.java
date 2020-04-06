@@ -47,22 +47,24 @@ public class SicknessController {
 		}
 	}
 
-	@GetMapping(value = "/sickness/new")
-	public String initCreationForm(final ModelMap model) {
-		model.addAttribute("sickness", new Sickness());
-		return "sickness/sicknessCreate";
+	@GetMapping(path = "/owners/*/pets/{petId}/sicknesses/new")
+	public String crearEnfermedad(final ModelMap modelMap) {
+		String view = "sicknesses/editSickness";
+		modelMap.addAttribute("sickness", new Sickness());
+		return view;
 	}
 
-	@PostMapping(value = "/owners/*/pets/{petId}/sicknesses/sickness/save")
-	public String processCreationForm(@Valid final Sickness sickness, final BindingResult result, final ModelMap model) {
+	@PostMapping(path = "/owners/*/pets/{petId}/sicknesses/save")
+	public String salvarEnfermedad(@Valid final Sickness sickness, final BindingResult result, final ModelMap modelMap) {
+		String view = "sicknesses/sicknessList";
 		if (result.hasErrors()) {
-			model.put("sickness", sickness);
-			return "sickness/sicknessCreate";
+			modelMap.addAttribute("sickness", sickness);
+			return "sicknesses/editSickness";
 		} else {
 			this.sicknessService.saveSickness(sickness);
-			model.addAttribute("message", "Sickness succesfully saved!");
+			modelMap.addAttribute("message", "Sickness succesfully saved!");
 		}
-		return "sicknesses/sicknessList";
+		return view;
 	}
 
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/delete/{sicknessId}")

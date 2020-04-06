@@ -2,6 +2,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,8 +40,10 @@ public class SicknessControllerTest {
 
 	@BeforeEach
 	void setup() {
-
-		BDDMockito.given(this.sicknessService.findSicknessesByPetId(SicknessControllerTest.TEST_PET_ID)).willReturn(new ArrayList<Sickness>());
+		List<Sickness> sicknesses = new ArrayList<Sickness>();
+		Sickness sickness = new Sickness();
+		sicknesses.add(sickness);
+		BDDMockito.given(this.sicknessService.findSicknessesByPetId(SicknessControllerTest.TEST_PET_ID)).willReturn(sicknesses);
 	}
 
 	@WithMockUser(value = "spring")

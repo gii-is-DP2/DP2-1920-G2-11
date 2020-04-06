@@ -39,6 +39,7 @@ public class HU6Test {
 	}
 
 	//Caso negativo
+	//TODO: probar intentando borrar algo que no existe
 	@Test
 	void deleteSicknessNotCorrectly() {
 

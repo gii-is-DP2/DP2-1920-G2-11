@@ -43,6 +43,7 @@ public class HU5Test {
 	}
 
 	//Caso negativo
+	//TODO: probar con las contraints mal, para probarlo assertThrow.....
 	@Test
 	void createSicknessNotCorrectly() {
 
