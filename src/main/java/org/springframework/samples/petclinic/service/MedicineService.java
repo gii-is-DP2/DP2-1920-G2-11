@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Medicine;
+import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.repository.MedicineRepository;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,9 @@ public class MedicineService {
 	public Medicine findById(final int id) throws DataAccessException {
 		return this.medicineRepository.findById(id);
 	}
-
+	
+	public Collection<Medicine> findMedicinesBySicknessIdAndPetTypeId(final int sicknessId, final int petTypeId) {
+		return this.medicineRepository.findBySicknessIdAndPetTypeId(sicknessId, petTypeId);
+	}
 
 }

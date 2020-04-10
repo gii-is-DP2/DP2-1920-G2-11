@@ -15,21 +15,15 @@
  */
 package org.springframework.samples.petclinic.repository.springdatajpa;
 
-
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.samples.petclinic.model.Medicine;
 import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.repository.MedicineRepository;
+import org.springframework.samples.petclinic.repository.PetTypeRepository;
 
+/**
+ * Spring Data JPA specialization of the {@link VisitRepository} interface
+ *
+ * @author Aureliano Piqueras
+ */
+public interface SpringDataPetTypeRepository extends PetTypeRepository, Repository<PetType, Integer> {
 
-public interface SpringDataMedicineRepository extends MedicineRepository, Repository<Medicine, Integer> {
-	
-	@Query("SELECT DISTINCT M FROM Medicine M WHERE M.sickness.id=:sicknessId AND M.petType.id=:typeId")
-	Collection<Medicine> findBySicknessAndPetType(@Param("sicknessId") int sicknessId,@Param("typeId")  int typeId) throws DataAccessException;
 }

@@ -1,16 +1,19 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Pet;
+import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.repository.PetRepository;
 import org.springframework.samples.petclinic.repository.SicknessRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SicknessService {
@@ -38,5 +41,10 @@ public class SicknessService {
 		Sickness sickness = this.sicknessRepository.findById(sicknessId);
 
 		return sickness;
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Sickness> findSicknesses() throws DataAccessException {
+		return this.sicknessRepository.findAll();
 	}
 }

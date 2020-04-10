@@ -1,6 +1,7 @@
 
 package org.springframework.samples.petclinic.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -14,4 +15,7 @@ public interface SicknessRepository extends CrudRepository<Sickness, Integer> {
 	List<Sickness> findByTypeId(Integer type_id) throws DataAccessException;
 
 	Sickness findById(int id) throws DataAccessException;
+	
+	@Override
+	Collection<Sickness> findAll() throws DataAccessException;
 }
