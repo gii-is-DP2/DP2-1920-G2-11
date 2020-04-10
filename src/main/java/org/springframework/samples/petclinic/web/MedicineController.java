@@ -55,25 +55,20 @@ public class MedicineController {
 		return "medicines/medicineList";
 	}
 	
-	@GetMapping(value = { "/medicines/owner/" })
-	public String showMedicineOwner(Map<String, Object> model) {
+	@GetMapping(value = "/medicines/owner/petType/{petTypeId}/sickness/{sicknessId}/")
+	public String showMedicinesBySicknessAndPetType(final Map<String, Object> model, @PathVariable final int sicknessId, @PathVariable final int petTypeId) {
 		List<Sickness> sickness = new ArrayList<Sickness>();
 		sickness.addAll(this.sicknessService.findSicknesses());
-		model.put("sickness", sickness);
+		model.put("sicknesses", sickness);
 		List<PetType> petTypes = new ArrayList<PetType>();
 		petTypes.addAll(this.petTypeService.findPetTypes());
 		model.put("petTypes", petTypes);
-		return "medicines/medicineList";
-	}
-	
-	@GetMapping(value = "/medicines/owner/sickness/{sicknessId}/petType/{petTypeId}/")
-	public String showMedicinesBySicknessAndPetType(final Map<String, Object> model, @PathVariable final int sicknessId, @PathVariable final int petTypeId) {
 		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(sicknessId, petTypeId);
 		if (medicines.isEmpty()) {
 			medicines = this.medicineService.findMedicines();
 		}
 		model.put("medicines", medicines);
-		return "medicines/medicineList";
+		return "medicines/filterMedicines";
 
 	}
 }
