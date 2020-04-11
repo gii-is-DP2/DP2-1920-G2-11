@@ -52,11 +52,11 @@
 					<span>Clinics</span>
 				</petclinic:menuItem>
  
-				<petclinic:menuItem active="${name eq 'medicines'}" url="/medicines"
-					title="clinics">
+<%-- 				<petclinic:menuItem active="${name eq 'medicines'}" url="/medicines"
+					title="medicines">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Medicines</span>
-				</petclinic:menuItem>
+				</petclinic:menuItem> --%>
 				
 			</ul>
 

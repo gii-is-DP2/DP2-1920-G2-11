@@ -8,13 +8,13 @@
     <h2>Medicines</h2>
 		<form id="medicinesform">
 			<label for="petTypes">Choose a Type:</label>
-			<select id="petType" name="petType" form="medicinesform">
+			<select id="petTypeId" name="petTypeId" form="medicinesform">
 				<c:forEach items="${petTypes}" var="petType">
 			  			<option value="${petType.id}">${petType.name}</option>
 			 	</c:forEach>
 			</select>
 			<label for="sickness">Choose a sickness:</label>
-			<select id="sickness" name="sickness" form="medicinesform">
+			<select id="sicknessId" name="sicknessId" form="medicinesform">
 				<c:forEach items="${sicknesses}" var="sickness">
 			  			<option value="${sickness.id}">${sickness.name}</option>
 			 	</c:forEach>

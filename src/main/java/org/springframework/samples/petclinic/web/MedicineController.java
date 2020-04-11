@@ -25,6 +25,7 @@ import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -55,8 +56,8 @@ public class MedicineController {
 		return "medicines/medicineList";
 	}
 	
-	@GetMapping(value = "/medicines/owner/petType/{petTypeId}/sickness/{sicknessId}/")
-	public String showMedicinesBySicknessAndPetType(final Map<String, Object> model, @PathVariable final int sicknessId, @PathVariable final int petTypeId) {
+	@GetMapping(value = "/medicines/owner/")
+	public String showMedicinesBySicknessAndPetType(final Map<String, Object> model, @RequestParam final int sicknessId, @RequestParam final int petTypeId) {
 		List<Sickness> sickness = new ArrayList<Sickness>();
 		sickness.addAll(this.sicknessService.findSicknesses());
 		model.put("sicknesses", sickness);
