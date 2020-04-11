@@ -42,7 +42,7 @@ public class ProductControllerTests {
 
 	@BeforeEach
 	void setup() {
-		List<Product> products= new ArrayList<>();
+		List<Product> products= new ArrayList<Product>();
 		Product product = new Product();
 		products.add(product);
 		//BDDMockito.given(this.productService.findSicknessesByPetId(SicknessControllerTest.TEST_PET_ID)).willReturn(sicknesses);
@@ -52,7 +52,8 @@ public class ProductControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProductsListHtml() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}/products",  ProductControllerTests.TEST_CLINIC_ID))
+		.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
 			.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
 

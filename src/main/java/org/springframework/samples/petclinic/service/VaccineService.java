@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.repository.VaccineRepository;
 import org.springframework.stereotype.Service;
@@ -32,4 +33,16 @@ public class VaccineService {
 
 		return vaccine;
 	}
+	
+	@Transactional
+	public void saveVaccine(final Vaccine vaccine) throws DataAccessException {
+		this.vaccineRepository.save(vaccine);
+	}
+
+	@Transactional
+	public void deleteVaccine(final Vaccine vaccine) throws DataAccessException {
+		this.vaccineRepository.deleteById(vaccine.getId());
+	}
+	
+	
 }

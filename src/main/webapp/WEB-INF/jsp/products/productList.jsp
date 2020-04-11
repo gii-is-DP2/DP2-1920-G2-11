@@ -1,3 +1,4 @@
+
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -21,7 +22,7 @@
         <c:forEach items="${products}" var="product">
             <tr>
                 <td>
-                    <spring:url value="/owners/products/{productId}" var="productUrl">
+                  <spring:url value="/owners/products/{productId}" var="productUrl"> 
                         <spring:param name="productId" value="${product.id}"/>
                        
                     </spring:url>
