@@ -9,13 +9,15 @@
         New Vaccine
     </h2>
     
-    <form:form modelAttribute="vaccines" action="save" class="form-horizontal" id="add-vaccine-form">
+    <form:form modelAttribute="vaccines" action="saveVaccines" class="form-horizontal" id="add-vaccine-form">
         <div class="form-group has-feedback">
             <petclinic:inputField label="Name" name="name"/>
             <petclinic:inputField label="Components" name="components"/>
             <petclinic:inputField label="Months" name="months"/>
-            <petclinic:inputField label="Sickness" name="sickness"/>
-             <div class="form-group ">
+            <div class="control-group">
+                    <petclinic:selectField name="sickness.name" label="Sickness" names="${sickness}" size="5"/>
+                </div>
+            
        
 
       

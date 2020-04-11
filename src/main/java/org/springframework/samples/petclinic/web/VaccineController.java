@@ -1,11 +1,13 @@
 
 package org.springframework.samples.petclinic.web;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.samples.petclinic.service.VaccineService;
@@ -55,7 +57,7 @@ public class VaccineController {
 	
 	/* Crear nueva vacuna */
 	
-	@GetMapping(path = "/vets/vaccine/new")
+	@GetMapping(path = "/vets/newVaccines")
 	public String createVaccine(final ModelMap modelMap) {
 		String view = "vaccines/editVaccine";
 		modelMap.addAttribute("vaccines", new Vaccine());
@@ -63,11 +65,11 @@ public class VaccineController {
 		return view;
 	}
 
-	@PostMapping(path = "/vets/vaccine/save")
+	@PostMapping(path = "/vets/saveVaccines")
 	public String saveVaccine(@Valid final Vaccine vaccine, final BindingResult result, final ModelMap modelMap) {
 		String view = "vaccines/vaccineList";
 		if (result.hasErrors()) {
-			modelMap.addAttribute("vaccine", vaccine);
+			modelMap.addAttribute("vaccines", vaccine);
 			return "vaccines/editVaccine";
 		} else {
 			this.vaccineService.saveVaccine(vaccine);
