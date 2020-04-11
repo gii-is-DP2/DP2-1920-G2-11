@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,7 @@ public class MedicineController {
 		this.sicknessService = sicknessService;
 	}
 
-	@GetMapping(value = { "/medicines/admin/" })
+	@GetMapping(value = { "/admin/medicines/" })
 	public String showMedicineList(Map<String, Object> model) {
 		List<Medicine> medicines = new ArrayList<Medicine>();
 		medicines.addAll(this.medicineService.findMedicines());
@@ -56,15 +57,21 @@ public class MedicineController {
 		return "medicines/medicineList";
 	}
 	
-	@GetMapping(value = "/medicines/owner/")
-	public String showMedicinesBySicknessAndPetType(final Map<String, Object> model, @RequestParam final int sicknessId, @RequestParam final int petTypeId) {
+	@GetMapping(value = "/owner/medicines/")
+	public String showMedicinesBySicknessAndPetType(final Map<String, Object> model, @RequestParam(value="sicknessId",required=false) final Integer sicknessId, @RequestParam(value="petTypeId",required=false) final Integer petTypeId) {
 		List<Sickness> sickness = new ArrayList<Sickness>();
-		sickness.addAll(this.sicknessService.findSicknesses());
-		model.put("sicknesses", sickness);
 		List<PetType> petTypes = new ArrayList<PetType>();
+		Collection<Medicine> medicines = new HashSet<Medicine>();
+		sickness.addAll(this.sicknessService.findSicknesses());
 		petTypes.addAll(this.petTypeService.findPetTypes());
 		model.put("petTypes", petTypes);
-		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(sicknessId, petTypeId);
+		model.put("sicknesses", sickness);
+		
+		if(sicknessId!=null && petTypeId!=null) {
+			model.put("petTypeId", petTypeId);
+			model.put("sicknessId", sicknessId);
+			medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(sicknessId, petTypeId);
+		}
 		if (medicines.isEmpty()) {
 			medicines = this.medicineService.findMedicines();
 		}
@@ -72,4 +79,14 @@ public class MedicineController {
 		return "medicines/filterMedicines";
 
 	}
+	
+	@GetMapping(value = { "/owner/medicine/{medicineId}" })
+	public String showMedicine(Map<String, Object> model, @PathVariable("medicineId") int medicineId) {
+		Medicine medicine = this.medicineService.findById(medicineId);
+		model.put("medicine", medicine);
+		return "medicines/medicineDetails";
+	}
+	
+	
+	
 }

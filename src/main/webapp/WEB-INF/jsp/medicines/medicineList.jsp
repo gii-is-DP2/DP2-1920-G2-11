@@ -11,10 +11,9 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Components</th>
-            <th>Treatment</th>
             <th>Pet Type</th>
             <th>Sickness</th>
+            <th>View</th>
         </tr>
         </thead>
         <tbody>
@@ -22,12 +21,6 @@
             <tr>
                <td>
                     <c:out value="${medicine.name}"/>
-                </td>
-                <td>
-                    <c:out value="${medicine.components}"/>
-                </td>
-                <td>
-                    <c:out value="${medicine.treatment}"/>
                 </td>
                	<td>
                     <c:out value="${medicine.petType}"/>
