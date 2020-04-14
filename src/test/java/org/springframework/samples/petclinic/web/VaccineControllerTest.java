@@ -35,9 +35,21 @@ public class VaccineControllerTest {
 	@Autowired
 	private MockMvc				mockMvc;
 
-	private static final int	TEST_PET_ID			= 1;
-	private static final int	TEST_SICKNESS_ID	= 1;
-	private static final int	TEST_VACCINE_ID		= 1;
+	private static final int	TEST_PET_ID					= 1;
+
+	private static final int	TEST_PET_ERROR_ID			= 3;
+
+	private static final int	TEST_SICKNESS_ID			= 1;
+
+	private static final int	TEST_SICKNESS_ERROR_ID		= 7;
+
+	private static final int	TEST_VACCINE_ID				= 1;
+
+	private static final int	TEST_PET_SHOW_ERROR_ID		= 1;
+
+	private static final int	TEST_SICKNESS_SHOW_ERROR_ID	= 6;
+
+	private static final int	TEST_VACCINE_ERROR_ID		= 8;
 
 
 	@BeforeEach
@@ -84,8 +96,21 @@ public class VaccineControllerTest {
 		sickness.setType(cat);
 		vaccine.setSickness(sickness);
 
+		//LIST ERROR
+		List<Vaccine> vaccinesError = new ArrayList<Vaccine>();
+
+		//SHOW ERROR
+		Vaccine vaccineError = new Vaccine();
+		vaccineError.setId(8);
+		vaccineError.setName("Vacunote");
+		vaccineError.setComponents("");
+		vaccineError.setMonths(0);
+		vaccineError.setSickness(iF);
+
 		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ID)).willReturn(vaccines);
 		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ID)).willReturn(vaccine);
+		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ERROR_ID)).willReturn(vaccinesError);
+		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ERROR_ID)).willReturn(vaccineError);
 	}
 
 	@WithMockUser(value = "spring")
@@ -99,8 +124,8 @@ public class VaccineControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowVaccineErrorHtml() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines", VaccineControllerTest.TEST_PET_ID, VaccineControllerTest.TEST_SICKNESS_ID)).andExpect(MockMvcResultMatchers.status().isOk())
-			.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccines")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineError"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines", VaccineControllerTest.TEST_PET_ERROR_ID, VaccineControllerTest.TEST_SICKNESS_ERROR_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccinesError")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineError"));
 
 	}
 
@@ -110,6 +135,15 @@ public class VaccineControllerTest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}", VaccineControllerTest.TEST_PET_ID, VaccineControllerTest.TEST_SICKNESS_ID, VaccineControllerTest.TEST_VACCINE_ID))
 			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("vaccine")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineShow"));
 
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowVaccineShowErrorHtml() throws Exception {
+		this.mockMvc
+			.perform(
+				MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}", VaccineControllerTest.TEST_PET_SHOW_ERROR_ID, VaccineControllerTest.TEST_SICKNESS_SHOW_ERROR_ID, VaccineControllerTest.TEST_VACCINE_ERROR_ID))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccineError")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineDetailsError"));
 	}
 
 }

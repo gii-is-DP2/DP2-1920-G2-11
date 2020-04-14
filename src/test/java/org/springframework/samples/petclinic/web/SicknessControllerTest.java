@@ -40,9 +40,9 @@ public class SicknessControllerTest {
 
 	private static final int	TEST_SICKNESS_ID		= 1;
 
-	private static final int	TEST_SICKNESS_ERROR_ID	= 30;
+	private static final int	TEST_PET_SHOW_ERROR_ID	= 11;
 
-	private static final int	TEST_PET_SHOW_ERROR_ID	= 14;
+	private static final int	TEST_SICKNESS_ERROR_ID	= 30;
 
 
 	@BeforeEach
@@ -73,20 +73,21 @@ public class SicknessControllerTest {
 		List<Sickness> sicknessesError = new ArrayList<Sickness>();
 
 		//SHOW ERROR
-		//		Sickness sicknessError = new Sickness();
-		//		sicknessError.setId(30);
-		//		sicknessError.setName("Pájaro Loco");
-		//		sicknessError.setSeverity(0);
-		//		PetType bird = new PetType();
-		//		bird.setId(5);
-		//		bird.setName("bird");
-		//		sicknessError.setType(bird);
+		Sickness sicknessError = new Sickness();
+		sicknessError.setId(30);
+		sicknessError.setName("Pájaro Loco");
+		sicknessError.setCause("");
+		sicknessError.setSymptom("");
+		sicknessError.setSeverity(0);
+		PetType bird = new PetType();
+		bird.setId(5);
+		bird.setName("bird");
+		sicknessError.setType(bird);
 
 		BDDMockito.given(this.sicknessService.findSicknessesByPetId(SicknessControllerTest.TEST_PET_ID)).willReturn(sicknesses);
 		BDDMockito.given(this.sicknessService.findSicknessesById(SicknessControllerTest.TEST_SICKNESS_ID)).willReturn(sickness);
 		BDDMockito.given(this.sicknessService.findSicknessesByPetId(SicknessControllerTest.TEST_PET_ERROR_ID)).willReturn(sicknessesError);
-		//BDDMockito.given(this.sicknessService.findSicknessesById(SicknessControllerTest.TEST_SICKNESS_ERROR_ID)).willReturn(sicknessError);
-		//PRUEBA COMMITS
+		BDDMockito.given(this.sicknessService.findSicknessesById(SicknessControllerTest.TEST_SICKNESS_ERROR_ID)).willReturn(sicknessError);
 
 	}
 
@@ -111,11 +112,11 @@ public class SicknessControllerTest {
 			.andExpect(MockMvcResultMatchers.model().attributeExists("sickness")).andExpect(MockMvcResultMatchers.view().name("sicknesses/sicknessShow"));
 	}
 
-	//	@WithMockUser(value = "spring")
-	//	@Test
-	//	void testShowSicknessesShowErrorHtml() throws Exception {
-	//		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}", SicknessControllerTest.TEST_PET_SHOW_ERROR_ID, SicknessControllerTest.TEST_SICKNESS_ERROR_ID)).andExpect(MockMvcResultMatchers.status().isOk())
-	//			.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("sicknessError")).andExpect(MockMvcResultMatchers.view().name("sicknesses/sicknessDetailsError"));
-	//	}
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowSicknessesShowErrorHtml() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}", SicknessControllerTest.TEST_PET_SHOW_ERROR_ID, SicknessControllerTest.TEST_SICKNESS_ERROR_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("sicknessError")).andExpect(MockMvcResultMatchers.view().name("sicknesses/sicknessDetailsError"));
+	}
 
 }
