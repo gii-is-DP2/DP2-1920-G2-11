@@ -15,7 +15,8 @@
             <petclinic:inputField label="Components" name="components"/>
             <petclinic:inputField label="Months" name="months"/>
             <div class="control-group">
-                    <petclinic:selectField name="sickness.name" label="Sickness" names="${sickness}" size="5"/>
+            		<label>Sickness:</label>
+                    <form:select name="sicknessId" path="sickness" items="${sickness}" itemLabel="name" itemValue="id"/>                                         
                 </div>
             
        
