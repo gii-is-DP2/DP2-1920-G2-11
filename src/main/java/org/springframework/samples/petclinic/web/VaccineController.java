@@ -77,10 +77,12 @@ public class VaccineController {
 		if (vaccine.isPresent()) {
 			vaccineService.delete(vaccine.get());
 			modelMap.addAttribute("message", "Event sucessfullly deleted!");
-			view = listVaccine(modelMap);
+			
 			
 		}else {
+
 			modelMap.addAttribute("message", "Event not found!");
+			view = listVaccine(modelMap);
 		}
 				return view;
 		
