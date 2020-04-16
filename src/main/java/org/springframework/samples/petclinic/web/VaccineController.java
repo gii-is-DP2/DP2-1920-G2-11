@@ -70,7 +70,7 @@ public class VaccineController {
 	
 	
 	@GetMapping(path="vets/delete/{vaccineId}")
-	public String deleteVaccine(@PathParam("vaccineId") int vaccineId,
+	public String deleteVaccine(@PathVariable("vaccineId") int vaccineId,
 			ModelMap modelMap) {
 		String view = "vaccines/vaccinesList";
 		Optional<Vaccine> vaccine = vaccineService.findVaccineById(vaccineId);

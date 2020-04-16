@@ -25,7 +25,7 @@
                     <a href="${fn:escapeXml(vaccineUrl)}">${vaccine.name}</a>
                 </td>
                 <td>
-                    <spring:url value="vets/delete/{vaccineId}" var="vaccineDel">
+                    <spring:url value="/vets/delete/{vaccineId}" var="vaccineDel">
                         <spring:param name="vaccineId" value="${vaccine.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(vaccineDel)}">Delete</a>
