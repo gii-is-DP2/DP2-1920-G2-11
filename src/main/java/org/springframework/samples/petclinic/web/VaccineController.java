@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Vaccine;
@@ -57,7 +57,7 @@ public class VaccineController {
 
 	/* Crear nueva vacuna */
 
-	@GetMapping()
+	@GetMapping(value="/vets/listVaccine")
 	public String listVaccine(final ModelMap modelMap) {
 		String view = "vaccines/vaccinesList";
 		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
@@ -70,11 +70,11 @@ public class VaccineController {
 	@GetMapping(path="vets/delete/{vaccineId}")
 	public String deleteVaccine(@PathVariable("vaccineId") int vaccineId,
 			ModelMap modelMap) {
-		String view = "vaccines/vaccinesList";
+		String view = "redirect:/vets/listVaccine";
 		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(vaccineId);
 		if (vaccine.isPresent()) {
 			this.vaccineService.delete(vaccine.get());
-			modelMap.addAttribute("message", "Event sucessfullly deleted!");
+			modelMap.addAttribute("message", "Event sucessfully deleted!");
 
 		} else {
 
