@@ -4,7 +4,7 @@ package org.springframework.samples.petclinic.escenarios;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -35,13 +35,20 @@ public class HU6Test {
 		this.sicknessRepository.delete(sickness);
 		Optional<Sickness> findSickness2 = this.sicknessRepository.findById(13);
 		List<Sickness> sicknesses = this.sicknessRepository.findAll();
-		Assertions.assertTrue(!findSickness2.isPresent() && sicknesses.size() == 29);
+		Assertions.assertThat(!findSickness2.isPresent() && sicknesses.size() == 29);
 	}
 
 	//Caso negativo
 	//TODO: probar intentando borrar algo que no existe
 	@Test
 	void deleteSicknessNotCorrectly() {
+		Optional<Sickness> findSickness = this.sicknessRepository.findById(40);
+		Sickness sickness = findSickness.get();
+
+		List<Vaccine> vaccines = this.vaccineRepository.findBySicknessId(sickness.getId());
+		this.vaccineRepository.deleteAll(vaccines);
+		this.sicknessRepository.delete(sickness);
+		List<Sickness> sicknesses = this.sicknessRepository.findAll();
 
 	}
 }
