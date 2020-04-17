@@ -1,6 +1,7 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -38,5 +39,11 @@ public class SicknessService {
 		Sickness sickness = this.sicknessRepository.findById(sicknessId);
 
 		return sickness;
+	}
+	
+	@Transactional
+	public Iterable<Sickness> findAll() {
+		return  sicknessRepository.findAll();
+		
 	}
 }

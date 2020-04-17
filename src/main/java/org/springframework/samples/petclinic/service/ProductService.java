@@ -66,5 +66,7 @@ public class ProductService {
 		List<Product> res = this.productRepository.findByClinicId(clinicId);
 		return res;
 	}
+	
+	
 
 }
