@@ -9,7 +9,7 @@
         New Sickness
     </h2>
     
-    <form:form modelAttribute="sickness" action="save" class="form-horizontal" id="add-sickness-form">
+    <form:form modelAttribute="sickness" action="saveSickness" class="form-horizontal" id="add-sickness-form">
         <div class="form-group has-feedback">
             <petclinic:inputField label="Name" name="name"/>
             <petclinic:inputField label="Cause" name="cause"/>

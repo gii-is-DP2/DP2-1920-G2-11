@@ -37,7 +37,7 @@
 
     <table class="table-buttons">
         <tr>
-			<td><spring:url value="/vets/new" var="sicknessNewUrl">
+			<td><spring:url value="/vets/newSickness" var="sicknessNewUrl">
 				</spring:url> <a href="${fn:escapeXml(sicknessNewUrl)}">Create a sickness for this pet type</a></td>
 		</tr>
     </table>
