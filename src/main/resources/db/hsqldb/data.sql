@@ -120,6 +120,16 @@ INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (21, 'Vacuna 
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (22, 'Vacuna D', 'G,H,J,K', 10, 24);
 INSERT INTO vaccines(id,name,components,months,sickness_id) VALUES (23, 'Vacuna S', 'Componente S', 6, 25);
 
+
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (1, 'Medicina A', 'Componente A', '1 cada 8 horas', 1, 1);
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (2, 'Medicina B', 'Componente B', '1 cada 24 horas', 1, 2);
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (3, 'Medicina C', 'Componente A', '1 cada 8 horas', 2, 1);
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (4, 'Medicina D', 'Componente B', '1 cada 24 horas', 2, 2);
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (5, 'Medicina E', 'Componente A', '1 cada 8 horas', 3, 1);
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (6, 'Medicina F', 'Componente B', '1 cada 24 horas', 3, 2);
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (7, 'Medicina G', 'Componente A', '1 cada 8 horas', 4, 1);
+INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (8, 'Medicina H', 'Componente B', '1 cada 24 horas', 4, 2);
+
 INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (1, 'Winston Pet Cares','Evergreen Av. 4' ,'Pitsburg','charles@mail.com', '600033472');
 INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan nº10' ,'Sevilla','vetnervion@mail.com', '685123477');
 
