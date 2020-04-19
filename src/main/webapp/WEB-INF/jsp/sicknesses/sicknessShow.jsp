@@ -9,7 +9,7 @@
     <table class="table table-striped">
         <tr>
             <th>Name</th>
-            <td><b><c:out value="${sickness.name}"/></b></td>
+            <td><c:out value="${sickness.name}"/></td>
         </tr>
         <tr>
             <th>Cause</th>
@@ -22,6 +22,10 @@
         <tr>
             <th>Symptom</th>
             <td><c:out value="${sickness.symptom}"/></td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td><c:out value="${sickness.type}"/></td>
         </tr>
     </table>
 </petclinic:layout>
