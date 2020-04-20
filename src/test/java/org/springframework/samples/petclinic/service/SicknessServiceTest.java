@@ -2,6 +2,9 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,10 +37,23 @@ public class SicknessServiceTest {
 	}
 
 	@Test
+	void findAllSicknessesTest() {
+		List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
+		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 30);
+	}
+
+	@Test
 	void findSicknessesByIdTest() {
 		Sickness sickness = this.sicknessService.findSicknessesById(25);
 		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Ácaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
 
+	}
+
+	@Transactional
+	void optionalFindSicknessesByIdTest() {
+		Optional<Sickness> findSickness = this.sicknessService.optionalFindSicknessesById(25);
+		Sickness sickness = findSickness.get();
+		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Ácaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
 	}
 
 	@Test

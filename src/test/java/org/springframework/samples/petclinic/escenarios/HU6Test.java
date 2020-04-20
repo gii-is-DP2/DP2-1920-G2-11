@@ -28,7 +28,7 @@ public class HU6Test {
 		this.sicknessService.deleteVaccineFromSickness(sickness);
 		this.sicknessService.deleteSickness(sickness);
 		Optional<Sickness> findSickness = this.sicknessService.optionalFindSicknessesById(13);
-		List<Sickness> sicknesses = this.sicknessService.findAll();
+		List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
 		Assertions.assertTrue(!findSickness.isPresent() && sicknesses.size() == 29);
 	}
 
