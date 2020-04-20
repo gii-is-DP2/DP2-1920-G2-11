@@ -1,6 +1,8 @@
 
 package org.springframework.samples.petclinic.web;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -8,7 +10,11 @@ import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.samples.petclinic.model.ProductType;
+import org.springframework.samples.petclinic.service.ClinicService;
+import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,8 +27,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ProductController {
 
 	private final ProductService productService;
+    private final ClinicService clinicService;
+    private final ProductTypeService productTypeService;
 
-
+	
 	@Autowired
 	public ProductController(final ProductService productService) {
 		this.productService = productService;
@@ -59,7 +67,9 @@ public class ProductController {
 	
 	@GetMapping(value="products/new")
 	public String createProduct(ModelMap modelMap) {
+		Collection<Clinic> Clinic=clinicService.findClinics();
 		String view= "products/editProduct";
+		
 		modelMap.addAttribute("product", new Product());
 		return view;
 		
