@@ -90,5 +90,9 @@ public class Product extends NamedEntity {
 	public ProductType getProductType() {
 		return this.productType;
 	}
+	
+	public Clinic getClinic() {
+		return this.clinic;
+	}
 
 }

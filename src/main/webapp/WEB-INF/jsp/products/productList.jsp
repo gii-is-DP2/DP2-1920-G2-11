@@ -25,7 +25,7 @@
                         <spring:param name="productId" value="${product.id}"/>
                        
                     </spring:url>
-                    <a href="${fn:escapeXml(productUrl)}">${product.name}</a>
+                    <a href="${fn:escapeXml(productUrl)}">${product.description}</a>
                 </td>
                 <td>
                 <c:out value="${product.price}" />

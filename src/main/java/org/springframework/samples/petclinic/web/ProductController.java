@@ -16,6 +16,7 @@ import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.ProductService;
+import org.springframework.samples.petclinic.service.ProductTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -32,8 +33,10 @@ public class ProductController {
 
 	
 	@Autowired
-	public ProductController(final ProductService productService) {
+	public ProductController(final ProductService productService, final ClinicService clinicService, final ProductTypeService productTypeService) {
+		this.productTypeService = productTypeService;
 		this.productService = productService;
+		this.clinicService=clinicService;
 	}
 
 	// devuelve productos filtrados por tipo
@@ -67,10 +70,13 @@ public class ProductController {
 	
 	@GetMapping(value="products/new")
 	public String createProduct(ModelMap modelMap) {
-		Collection<Clinic> Clinic=clinicService.findClinics();
+		Collection<Clinic> clinics=clinicService.findClinics();
+		Collection<ProductType> productTypes=productTypeService.findProductTypes();
 		String view= "products/editProduct";
 		
 		modelMap.addAttribute("product", new Product());
+		modelMap.addAttribute("Clinics", clinics);
+		modelMap.addAttribute("ProductTypes", productTypes);
 		return view;
 		
 	}
