@@ -37,6 +37,13 @@ public class SicknessService {
 	}
 
 	@Transactional
+	public List<Sickness> findAll() {
+		List<Sickness> res = this.sicknessRepository.findAll();
+
+		return res;
+	}
+
+	@Transactional
 	public List<Sickness> findSicknessesByPetId(final int petId) {
 
 		Pet pet = this.petRepository.findById(petId);
@@ -53,6 +60,14 @@ public class SicknessService {
 		Sickness sickness = findSickness.get();
 
 		return sickness;
+	}
+
+	@Transactional
+	public Optional<Sickness> optionalFindSicknessesById(final int sicknessId) {
+
+		Optional<Sickness> findSickness = this.sicknessRepository.findById(sicknessId);
+
+		return findSickness;
 	}
 
 	@Transactional

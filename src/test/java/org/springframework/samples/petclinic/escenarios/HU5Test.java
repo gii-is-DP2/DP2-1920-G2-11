@@ -12,8 +12,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.SicknessValidator;
-import org.springframework.samples.petclinic.repository.PetRepository;
-import org.springframework.samples.petclinic.repository.SicknessRepository;
+import org.springframework.samples.petclinic.service.PetService;
+import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
@@ -22,10 +22,10 @@ import org.springframework.validation.Errors;
 public class HU5Test {
 
 	@Autowired
-	private SicknessRepository	sicknessRepository;
+	private SicknessService	sicknessService;
 
 	@Autowired
-	private PetRepository		petRepository;
+	private PetService		petService;
 
 
 	private SicknessValidator createValidator() {
@@ -38,7 +38,7 @@ public class HU5Test {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = new Sickness();
-		Pet pet = this.petRepository.findById(3);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("Enfermedad 1");
 		sickness.setCause("Causa 1");
 		sickness.setSymptom("Sintoma 1");
@@ -50,11 +50,11 @@ public class HU5Test {
 		validator.validate(sickness, errors);
 		Assertions.assertThat(errors.getAllErrors()).isEmpty();
 
-		this.sicknessRepository.save(sickness);
+		this.sicknessService.saveSickness(sickness);
 
 	}
 
-	//Casos negativo
+	//Casos negativos
 	@Test
 	void createSicknessNameNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
