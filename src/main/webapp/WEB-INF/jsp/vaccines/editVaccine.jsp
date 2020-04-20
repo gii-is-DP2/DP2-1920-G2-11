@@ -10,7 +10,7 @@
         Vaccine
     </h2>
     
-    <form:form modelAttribute="vaccines" action="saveVaccines" class="form-horizontal" id="add-vaccine-form">
+    <form:form modelAttribute="vaccines"  class="form-horizontal" id="add-vaccine-form">
         <div class="form-group has-feedback">
             <petclinic:inputField label="Name" name="name"/>
             <petclinic:inputField label="Components" name="components"/>
