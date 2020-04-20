@@ -108,9 +108,9 @@ public class VaccineControllerTest {
 		vaccineError.setSickness(iF);
 
 		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ID)).willReturn(vaccines);
-		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ID)).willReturn(vaccine);
+		BDDMockito.given(this.vaccineService.vaccineById(VaccineControllerTest.TEST_VACCINE_ID)).willReturn(vaccine);
 		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ERROR_ID)).willReturn(vaccinesError);
-		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ERROR_ID)).willReturn(vaccineError);
+		BDDMockito.given(this.vaccineService.vaccineById(VaccineControllerTest.TEST_VACCINE_ERROR_ID)).willReturn(vaccineError);
 	}
 
 	@WithMockUser(value = "spring")

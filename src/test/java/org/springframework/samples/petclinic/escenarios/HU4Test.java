@@ -1,8 +1,6 @@
 
 package org.springframework.samples.petclinic.escenarios;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +20,14 @@ public class HU4Test {
 	//Caso positivo
 	@Test
 	void shouldFindVaccineWithCorrectId() {
-		Vaccine vaccine = this.vaccineService.findVaccineById(2);
+		Vaccine vaccine = this.vaccineService.vaccineById(2);
 		Assertions.assertTrue(vaccine.getName().equals("Vacuna B") && vaccine.getComponents().equals("A,S,D,F") && vaccine.getMonths().equals(6) && vaccine.getSickness().getName().equals("Conjuntivitis"));
 	}
 
 	//Caso negativo
 	@Test
 	void shouldVaccineWithoutDetails() {
-		Vaccine vaccine = this.vaccineService.findVaccineById(8);
+		Vaccine vaccine = this.vaccineService.vaccineById(8);
 		Assertions.assertTrue(vaccine.getName().equals("Vacunote") && vaccine.getComponents().isEmpty() && vaccine.getMonths().equals(0));
 	}
 }

@@ -20,6 +20,15 @@ public class VaccineService {
 
 
 	@Transactional
+	public Vaccine vaccineById(final int vaccineId) {
+
+		Optional<Vaccine> findVaccine = this.vaccineRepository.findById(vaccineId);
+		Vaccine vaccine = findVaccine.get();
+
+		return vaccine;
+	}
+
+	@Transactional
 	public List<Vaccine> findVaccinesBySicknessId(final int sicknessId) {
 
 		List<Vaccine> res = this.vaccineRepository.findBySicknessId(sicknessId);
@@ -34,7 +43,7 @@ public class VaccineService {
 
 		return vaccine;
 	}
-	
+
 	@Transactional
 	public void saveVaccine(final Vaccine vaccine) throws DataAccessException {
 		this.vaccineRepository.save(vaccine);
@@ -44,9 +53,9 @@ public class VaccineService {
 	public void deleteVaccine(final Vaccine vaccine) throws DataAccessException {
 		this.vaccineRepository.deleteById(vaccine.getId());
 	}
-	
-	public void delete(Vaccine vaccine) {
-		vaccineRepository.delete(vaccine);
+
+	public void delete(final Vaccine vaccine) {
+		this.vaccineRepository.delete(vaccine);
 	}
 
 	public Iterable<Vaccine> findAll() {

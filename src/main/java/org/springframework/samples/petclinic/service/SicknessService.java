@@ -2,7 +2,6 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +40,7 @@ public class SicknessService {
 	}
 
 	@Transactional
-	public List<Sickness> findAll() {
+	public List<Sickness> findAllSicknesses() {
 		List<Sickness> res = this.sicknessRepository.findAll();
 
 		return res;
@@ -92,14 +91,15 @@ public class SicknessService {
 				this.vaccineRepository.deleteById(v.getId());
 			}
 		}
-	
+	}
+
 	@Transactional
 	public Iterable<Sickness> findAll() {
-		return  sicknessRepository.findAll();
-		
+		return this.sicknessRepository.findAll();
+
 	}
 
 	public Collection<Sickness> findSicknesses() {
-		return StreamSupport.stream(this.findAll().spliterator(), false).collect(Collectors.toSet());		
+		return StreamSupport.stream(this.findAll().spliterator(), false).collect(Collectors.toSet());
 	}
 }

@@ -1,11 +1,11 @@
 
 package org.springframework.samples.petclinic.web;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Vaccine;
@@ -35,21 +35,22 @@ public class VaccineController {
 
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines")
 	public String showVaccines(@PathVariable final int sicknessId, final Map<String, Object> model) {
-		if (this.vaccineService.findVaccinesBySicknessId(sicknessId).isEmpty()) {
+		List<Vaccine> vaccines = this.vaccineService.findVaccinesBySicknessId(sicknessId);
+		if (vaccines.isEmpty()) {
 			return "vaccines/vaccineError";
 		} else {
-			model.put("vaccines", this.vaccineService.findVaccinesBySicknessId(sicknessId));
+			model.put("vaccines", vaccines);
 			return "vaccines/vaccinesList";
 		}
 	}
 
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}")
 	public String showVaccine(@PathVariable final int vaccineId, final Map<String, Object> model) {
-		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(vaccineId);
-		if (vaccine.get().getComponents().isEmpty() || vaccine.get().getMonths().equals(0)) {
+		Vaccine vaccine = this.vaccineService.vaccineById(vaccineId);
+		if (vaccine.getComponents().isEmpty() || vaccine.getMonths().equals(0)) {
 			return "vaccines/vaccineDetailsError";
 		} else {
-			model.put("vaccine", this.vaccineService.findVaccineById(vaccineId));
+			model.put("vaccine", vaccine);
 			return "vaccines/vaccineShow";
 
 		}
@@ -57,7 +58,7 @@ public class VaccineController {
 
 	/* Crear nueva vacuna */
 
-	@GetMapping(value="/vets/listVaccine")
+	@GetMapping(value = "/vets/listVaccine")
 	public String listVaccine(final ModelMap modelMap) {
 		String view = "vaccines/vaccinesList";
 		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
@@ -65,11 +66,8 @@ public class VaccineController {
 		return view;
 	}
 
-	
-	
-	@GetMapping(path="vets/delete/{vaccineId}")
-	public String deleteVaccine(@PathVariable("vaccineId") int vaccineId,
-			ModelMap modelMap) {
+	@GetMapping(path = "vets/delete/{vaccineId}")
+	public String deleteVaccine(@PathVariable("vaccineId") final int vaccineId, final ModelMap modelMap) {
 		String view = "redirect:/vets/listVaccine";
 		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(vaccineId);
 		if (vaccine.isPresent()) {
