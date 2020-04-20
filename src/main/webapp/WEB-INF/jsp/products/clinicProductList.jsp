@@ -31,6 +31,14 @@
                 <td>
                 <c:out value="${product.price}" />
                 </td>
+                
+                     <td>
+                    <spring:url value="/products/delete/{productId}" var="productUrl">
+                        <spring:param name="productId" value="${product.id}"/>
+                       
+                    </spring:url>
+                    <a href="${fn:escapeXml(productUrl)}">Delete</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

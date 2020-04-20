@@ -67,6 +67,14 @@ public class ProductService {
 		return res;
 	}
 	
+	@Transactional
+	public void save(Product product) {
+		productRepository.save(product);
+	}
 	
+	public void delete(Product product) {
+		productRepository.delete(product);
+	}
+
 
 }
