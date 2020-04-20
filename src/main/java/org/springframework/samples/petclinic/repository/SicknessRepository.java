@@ -13,5 +13,6 @@ public interface SicknessRepository extends CrudRepository<Sickness, Integer> {
 
 	List<Sickness> findByTypeId(Integer type_id) throws DataAccessException;
 
-	Sickness findById(int id) throws DataAccessException;
+	@Override
+	List<Sickness> findAll() throws DataAccessException;
 }

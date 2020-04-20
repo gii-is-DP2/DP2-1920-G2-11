@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
@@ -18,12 +19,15 @@ public class Sickness extends NamedEntity {
 
 	@NotBlank
 	@Column(name = "name")
+	@Length(max = 70)
 	private String	name;
 
 	@Column(name = "cause")
+	@Length(max = 150)
 	private String	cause;
 
 	@Column(name = "symptom")
+	@Length(max = 150)
 	private String	symptom;
 
 	@Range(min = 0, max = 3)

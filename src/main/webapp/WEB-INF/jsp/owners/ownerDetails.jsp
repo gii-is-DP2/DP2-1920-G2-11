@@ -93,6 +93,7 @@
                                 </spring:url>
                                 <a href="${fn:escapeXml(sicknessUrl)}">See Sicknesses</a>
                             </td>
+                            
                         </tr>
                     </table>
                 </td>

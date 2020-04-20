@@ -3,12 +3,17 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SicknessController {
@@ -40,5 +45,34 @@ public class SicknessController {
 			model.put("sickness", this.sicknessService.findSicknessesById(sicknessId));
 			return "sicknesses/sicknessShow";
 		}
+	}
+
+	@GetMapping(path = "/vets/newSickness")
+	public String crearEnfermedad(final ModelMap modelMap) {
+		String view = "sicknesses/editSickness";
+		modelMap.addAttribute("sickness", new Sickness());
+		return view;
+	}
+
+	@PostMapping(path = "/vets/saveSickness")
+	public String salvarEnfermedad(@Valid final Sickness sickness, final BindingResult result, final ModelMap modelMap) {
+		if (result.hasErrors()) {
+			modelMap.addAttribute("sickness", sickness);
+			return "sicknesses/editSickness";
+		} else {
+			this.sicknessService.saveSickness(sickness);
+			modelMap.addAttribute("message", "Sickness succesfully saved!");
+		}
+		return "welcome";
+	}
+
+	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/delete/{sicknessId}")
+	public String deleteSickness(@PathVariable("sicknessId") final int sicknessId, final ModelMap model) {
+		Sickness sickness = this.sicknessService.findSicknessesById(sicknessId);
+		this.sicknessService.deleteVaccineFromSickness(sickness);
+		this.sicknessService.deleteSickness(sickness);
+		model.addAttribute("message", "Sickness succesfully deleted!");
+
+		return "welcome";
 	}
 }

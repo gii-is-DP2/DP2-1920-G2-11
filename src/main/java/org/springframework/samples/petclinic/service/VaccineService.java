@@ -53,6 +53,4 @@ public class VaccineService {
 		// TODO Auto-generated method stub
 		return this.vaccineRepository.findAll();
 	}
-	
-	
 }
