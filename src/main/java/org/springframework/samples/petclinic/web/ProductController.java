@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ProductController {
 
 	private final ProductService productService;
-    private final ClinicService clinicService;
-    private final ProductTypeService productTypeService;
+   // private final ProductTypeService productTypeService;
 
 	
 	@Autowired
@@ -67,7 +66,7 @@ public class ProductController {
 	
 	@GetMapping(value="products/new")
 	public String createProduct(ModelMap modelMap) {
-		Collection<Clinic> Clinic=clinicService.findClinics();
+	//	Collection<Clinic> Clinic=clinicService.findClinics();
 		String view= "products/editProduct";
 		
 		modelMap.addAttribute("product", new Product());
