@@ -84,6 +84,31 @@ public class VaccineController {
 		return view;
 
 	}
+	
+	// Editar vacuna 
+	
+	@GetMapping(value = "/vets/edit/{vaccineId}")
+	public String editVaccine(@PathVariable("vaccineId") int vaccineId, ModelMap modelMap) {
+		Optional<Vaccine> vaccines = this.vaccineService.findVaccineById(vaccineId);
+		modelMap.addAttribute(vaccines);
+		return "vaccines/editVaccine";
+	}
+	
+	@PostMapping(value="/vets/edit/{vaccineId}")
+	public String editingVaccine(@Valid Vaccine vaccines,
+			@PathVariable("vaccineId") int vaccineId, BindingResult result, ModelMap modelMap) {
+		String view;
+		if(result.hasErrors()) {
+			modelMap.addAttribute("message", "Operation failed!");
+			view = "vaccines/editVaccine";
+		}else {
+			vaccines.setId(vaccineId);
+			this.vaccineService.saveVaccine(vaccines);
+			view = "redirect:/vets/listVaccine";
+		}
+		return view;
+	}
+	
 
 	//creación de una vacuna
 	@GetMapping(path = "/vets/newVaccines")
