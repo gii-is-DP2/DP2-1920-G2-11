@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.samples.petclinic.repository.PetTypeRepository;
 import org.springframework.samples.petclinic.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,48 +35,21 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Aureliano Piqueras
  */
 @Service
-public class ProductService {
+public class PetTypeService {
 
-	private ProductRepository productRepository;
+	private PetTypeRepository petTypeRepository;
 
 
 	@Autowired
-	public ProductService(final ProductRepository productRepository) {
-		this.productRepository = productRepository;
+	public PetTypeService(final PetTypeRepository petTypeRepository) {
+		this.petTypeRepository = petTypeRepository;
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Product> findProducts() throws DataAccessException {
-		return this.productRepository.findAll();
+	public Collection<PetType> findPetTypes() throws DataAccessException {
+		return this.petTypeRepository.findAll();
 	}
 
-	@Transactional
-	public Collection<Product> findProductsByProductTypeId(final int productTypeId) {
-
-		List<Product> res = this.productRepository.findByProductTypeId(productTypeId);
-		return res;
-	}
-
-	@Transactional
-	public Product findProductsById(final int productId) {
-		Product res = this.productRepository.findById(productId);
-		return res;
-	}
-
-	@Transactional
-	public List<Product> findProductByClinicId(final int clinicId) {
-		List<Product> res = this.productRepository.findByClinicId(clinicId);
-		return res;
-	}
-	
-	@Transactional
-	public void save(Product product) {
-		productRepository.save(product);
-	}
-	
-	public void delete(Product product) {
-		productRepository.delete(product);
-	}
 
 
 }

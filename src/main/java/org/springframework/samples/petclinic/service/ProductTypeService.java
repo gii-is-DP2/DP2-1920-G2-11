@@ -22,7 +22,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Product;
+import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.repository.ProductRepository;
+import org.springframework.samples.petclinic.repository.ProductTypeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,48 +35,26 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Aureliano Piqueras
  */
 @Service
-public class ProductService {
+public class ProductTypeService {
 
-	private ProductRepository productRepository;
+	private ProductTypeRepository productTypeRepository;
 
 
 	@Autowired
-	public ProductService(final ProductRepository productRepository) {
-		this.productRepository = productRepository;
+	public ProductTypeService(final ProductTypeRepository productTypeRepository) {
+		this.productTypeRepository = productTypeRepository;
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Product> findProducts() throws DataAccessException {
-		return this.productRepository.findAll();
+	public Collection<ProductType> findProductTypes() throws DataAccessException {
+		return this.productTypeRepository.findAll();
 	}
 
-	@Transactional
-	public Collection<Product> findProductsByProductTypeId(final int productTypeId) {
 
-		List<Product> res = this.productRepository.findByProductTypeId(productTypeId);
+	@Transactional
+	public ProductType findProductsById(final int productId) {
+		ProductType res = this.productTypeRepository.findById(productId);
 		return res;
 	}
-
-	@Transactional
-	public Product findProductsById(final int productId) {
-		Product res = this.productRepository.findById(productId);
-		return res;
-	}
-
-	@Transactional
-	public List<Product> findProductByClinicId(final int clinicId) {
-		List<Product> res = this.productRepository.findByClinicId(clinicId);
-		return res;
-	}
-	
-	@Transactional
-	public void save(Product product) {
-		productRepository.save(product);
-	}
-	
-	public void delete(Product product) {
-		productRepository.delete(product);
-	}
-
 
 }

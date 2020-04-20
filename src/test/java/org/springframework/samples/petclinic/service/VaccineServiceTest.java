@@ -2,6 +2,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class VaccineServiceTest {
 
 	@Test
 	void findVaccineByIdTest() {
-		Vaccine vaccine = this.vaccineService.findVaccineById(1);
-		Assertions.assertTrue(vaccine.getName().equals("Vacuna A") && vaccine.getMonths().equals(4) && vaccine.getComponents().equals("Q,W,E,R") && vaccine.getSickness().getName().equals("Otitis"));
+		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(1);
+		Assertions.assertTrue(vaccine.get().getName().equals("Vacuna A") && vaccine.get().getMonths().equals(4) && vaccine.get().getComponents().equals("Q,W,E,R") && vaccine.get().getSickness().getName().equals("Otitis"));
 	}
 }
