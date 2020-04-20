@@ -17,7 +17,7 @@
             <c:if test="${product['new']}">New </c:if> Product
         </h2>
         <form:form modelAttribute="product"
-                   class="form-horizontal" action="products/save">
+                   class="form-horizontal" action="save">
             <input type="hidden" name="id" value="${product.id}"/>
             <div class="form-group has-feedback">
                 <petclinic:inputField label="Description" name="description"/>
@@ -25,11 +25,11 @@
                 <petclinic:inputField label="Stock" name="stock"/>
                 </div>
                 <div class="control-group">
-                    <petclinic:selectField name="type" label="Type " names="${ProductTypes}" size="5"/>
+                    <petclinic:selectField name="ProductType" label="ProductType" names="${ProductTypes}" size="5"/>
                 </div>
                 
                  <div class="control-group">
-                    <petclinic:selectField name="clinic" label="Clinic " names="${Clinics}" size="5"/>
+                    <petclinic:selectField name="clinic" label="Clinic" names="${Clinics}" size="5"/>
                 </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
