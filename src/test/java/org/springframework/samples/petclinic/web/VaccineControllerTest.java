@@ -16,6 +16,7 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
+import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.samples.petclinic.service.VaccineService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -31,6 +32,9 @@ public class VaccineControllerTest {
 
 	@MockBean
 	private VaccineService		vaccineService;
+
+	@MockBean
+	private SicknessService		sicknessService;
 
 	@Autowired
 	private MockMvc				mockMvc;
@@ -70,7 +74,7 @@ public class VaccineControllerTest {
 		iF.setId(6);
 		iF.setName("Inmunodeficiencia felina");
 		iF.setCause("Lentivirus");
-		iF.setSymptom("Infecciones bucales, patologías respiratorias, infecciones intestinales");
+		iF.setSymptom("Infecciones bucales, patologÃ­as respiratorias, infecciones intestinales");
 		iF.setSeverity(3);
 		PetType cat = new PetType();
 		cat.setId(1);
@@ -90,8 +94,8 @@ public class VaccineControllerTest {
 		Sickness sickness = new Sickness();
 		sickness.setId(1);
 		sickness.setName("Otitis");
-		sickness.setCause("Parásitos(ácaros), hongos, bacterias");
-		sickness.setSymptom("Inflamación del conjunto auditivo, dolor, pérdida de audición");
+		sickness.setCause("ParÃ¡sitos(Ã¡caros), hongos, bacterias");
+		sickness.setSymptom("InflamaciÃ³n del conjunto auditivo, dolor, pÃ©rdida de audiciÃ³n");
 		sickness.setSeverity(2);
 		sickness.setType(cat);
 		vaccine.setSickness(sickness);
