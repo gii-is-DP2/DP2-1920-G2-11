@@ -2,9 +2,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -26,9 +23,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @WebMvcTest(controllers = ProductController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class ProductControllerTests {
@@ -48,10 +42,10 @@ public class ProductControllerTests {
 	@Autowired
 	private MockMvc				mockMvc;
 
-	private static final int	TEST_PRODUCT_ID	= 1;
+	private static final int	TEST_PRODUCT_ID			= 1;
 
-	private static final int	TEST_CLINIC_ID	= 1;
-	
+	private static final int	TEST_CLINIC_ID			= 1;
+
 	private static final int	TEST_PRODUCT_TYPE_ID	= 1;
 
 
@@ -78,21 +72,15 @@ public class ProductControllerTests {
 		productType2.setName("Higiene");
 		product2.setProductType(productType);
 		product2.setStock(100);
-		
-		
+
 		products.add(product);
 		products.add(product2);
-		
-		
-		
-		
-		
-		
+
 		BDDMockito.given(this.productService.findProductByClinicId(ProductControllerTests.TEST_CLINIC_ID)).willReturn(products);
 		BDDMockito.given(this.productService.findProductsByProductTypeId(ProductControllerTests.TEST_PRODUCT_TYPE_ID)).willReturn(products);
 		BDDMockito.given(this.productService.findProductsById(ProductControllerTests.TEST_PRODUCT_ID)).willReturn(product);
-		
-		
+		//		BDDMockito.given(this.productService.findProducts().contains(products));
+
 	}
 
 	@WithMockUser(value = "spring")
@@ -105,19 +93,25 @@ public class ProductControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProduct() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/{productId}", ProductControllerTests.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("product"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/{productId}", ProductControllerTests.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
 			.andExpect(MockMvcResultMatchers.view().name("products/productShow"));
 
 	}
 
-
-	
 	// devuelve productos filtrados por tipo
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProducts() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/productType/{productTypeId}", ProductControllerTests.TEST_PRODUCT_TYPE_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/productType/{productTypeId}", ProductControllerTests.TEST_PRODUCT_TYPE_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeExists("products")).andExpect(MockMvcResultMatchers.view().name("products/productList"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testProducts() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products", ProductControllerTests.TEST_PRODUCT_TYPE_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
 			.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
+
 }
