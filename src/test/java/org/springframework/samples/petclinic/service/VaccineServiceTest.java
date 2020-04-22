@@ -33,15 +33,15 @@ public class VaccineServiceTest {
 
 	@Test
 	void findVaccineByIdTest() {
-		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(1);
-		Assertions.assertTrue(vaccine.get().getName().equals("Vacuna A") && vaccine.get().getMonths().equals(4) && vaccine.get().getComponents().equals("Q,W,E,R") && vaccine.get().getSickness().getName().equals("Otitis"));
+		Vaccine vaccine = this.vaccineService.findVaccineById(1);
+		Assertions.assertTrue(vaccine.getName().equals("Vacuna A") && vaccine.getMonths().equals(4) && vaccine.getComponents().equals("Q,W,E,R") && vaccine.getSickness().getName().equals("Otitis"));
 	}
 	
 	
 	@Test
 	void deleteTest() {
 		
-		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(1);
+		Vaccine vaccine = this.vaccineService.findVaccineById(1);
 		Iterable<Vaccine> vaccines = this.vaccineService.findAll(); 
 		
 		int n = 0;
@@ -49,8 +49,7 @@ public class VaccineServiceTest {
 		      n++;
 		}
 		
-		this.vaccineService.delete(vaccine.get());
-		
+		this.vaccineService.delete(vaccine);		
 		
 		vaccines = this.vaccineService.findAll();
 		int i = 0;
@@ -78,7 +77,7 @@ public class VaccineServiceTest {
 		vaccine.setName("Vacunón");
 		Sickness sickness = new Sickness();
 		sickness.setCause("ninguna");
-		sickness.setId(33);
+		sickness.setId(3);
 		sickness.setName("Inventado");
 		sickness.setSeverity(2);
 		sickness.setSymptom("Cuentitis");

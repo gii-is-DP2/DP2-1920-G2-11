@@ -28,9 +28,9 @@ public class VaccineService {
 	}
 
 	@Transactional
-	public Optional<Vaccine> findVaccineById(final int vaccineId) {
+	public Vaccine findVaccineById(final int vaccineId) {
 
-		Optional<Vaccine> vaccine = this.vaccineRepository.findById(vaccineId);
+		Vaccine vaccine = this.vaccineRepository.findById(vaccineId);
 
 		return vaccine;
 	}

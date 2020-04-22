@@ -22,14 +22,14 @@ public class HU4Test {
 	//Caso positivo
 	@Test
 	void shouldFindVaccineWithCorrectId() {
-		Optional<Vaccine> vaccine = this.vaccineRepository.findById(2);
-		Assertions.assertTrue(vaccine.get().getName().equals("Vacuna B") && vaccine.get().getComponents().equals("A,S,D,F") && vaccine.get().getMonths().equals(6) && vaccine.get().getSickness().getName().equals("Conjuntivitis"));
+		Vaccine vaccine = this.vaccineRepository.findById(2);
+		Assertions.assertTrue(vaccine.getName().equals("Vacuna B") && vaccine.getComponents().equals("A,S,D,F") && vaccine.getMonths().equals(6) && vaccine.getSickness().getName().equals("Conjuntivitis"));
 	}
 
 	//Caso negativo
 	@Test
 	void shouldVaccineWithoutDetails() {
-		Optional<Vaccine> vaccine = this.vaccineRepository.findById(8);
-		Assertions.assertTrue(vaccine.get().getName().equals("Vacunote") && vaccine.get().getComponents().isEmpty() && vaccine.get().getMonths().equals(0));
+		Vaccine vaccine = this.vaccineRepository.findById(8);
+		Assertions.assertTrue(vaccine.getName().equals("Vacunote") && vaccine.getComponents().isEmpty() && vaccine.getMonths().equals(0));
 	}
 }

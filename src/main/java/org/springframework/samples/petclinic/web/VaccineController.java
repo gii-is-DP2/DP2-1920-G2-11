@@ -45,8 +45,8 @@ public class VaccineController {
 
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}")
 	public String showVaccine(@PathVariable final int vaccineId, final Map<String, Object> model) {
-		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(vaccineId);
-		if (vaccine.get().getComponents().isEmpty() || vaccine.get().getMonths().equals(0)) {
+		Vaccine vaccine = this.vaccineService.findVaccineById(vaccineId);
+		if (vaccine.getComponents().isEmpty() || vaccine.getMonths().equals(0)) {
 			return "vaccines/vaccineDetailsError";
 		} else {
 			model.put("vaccine", this.vaccineService.findVaccineById(vaccineId));
@@ -71,16 +71,16 @@ public class VaccineController {
 	public String deleteVaccine(@PathVariable("vaccineId") int vaccineId,
 			ModelMap modelMap) {
 		String view = "redirect:/vets/listVaccine";
-		Optional<Vaccine> vaccine = this.vaccineService.findVaccineById(vaccineId);
-		if (vaccine.isPresent()) {
-			this.vaccineService.delete(vaccine.get());
+		Vaccine vaccine = this.vaccineService.findVaccineById(vaccineId);
+		//if (vaccine.)) {
+			this.vaccineService.delete(vaccine);
 			modelMap.addAttribute("message", "Event sucessfully deleted!");
-
-		} else {
-
-			modelMap.addAttribute("message", "Event not found!");
-			view = this.listVaccine(modelMap);
-		}
+//
+//		} else {
+//
+//			modelMap.addAttribute("message", "Event not found!");
+//			view = this.listVaccine(modelMap);
+//		}
 		return view;
 
 	}
@@ -89,9 +89,9 @@ public class VaccineController {
 	
 	@GetMapping(value = "/vets/edit/{vaccineId}")
 	public String editVaccine(@PathVariable("vaccineId") int vaccineId, ModelMap modelMap) {
-		Optional<Vaccine> vaccines = this.vaccineService.findVaccineById(vaccineId);
+		Vaccine vaccines = this.vaccineService.findVaccineById(vaccineId);
 		modelMap.addAttribute("sickness", this.sicknessService.findAll());
-		modelMap.addAttribute( "vaccines" ,vaccines.get());
+		modelMap.addAttribute( "vaccines" ,vaccines);
 		return "vaccines/editVaccine";
 	}
 	
