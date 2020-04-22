@@ -110,7 +110,7 @@ public class ProductControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testProducts() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products", ProductControllerTests.TEST_PRODUCT_TYPE_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
 			.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
 
