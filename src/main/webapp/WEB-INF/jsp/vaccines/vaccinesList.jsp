@@ -29,6 +29,13 @@
                         <spring:param name="vaccineId" value="${vaccine.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(vaccineDel)}">Delete</a>
+                    
+                    
+                    <spring:url value="/vets/edit/{vaccineId}" var="vaccineEdit">
+                        <spring:param name="vaccineId" value="${vaccine.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(vaccineEdit)}">Edit</a>
+                    
                 </td>
                 
             </tr>

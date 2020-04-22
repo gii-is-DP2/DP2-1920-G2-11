@@ -1,4 +1,5 @@
 
+
 package org.springframework.samples.petclinic.service;
 
 import java.util.List;
@@ -20,15 +21,6 @@ public class VaccineService {
 
 
 	@Transactional
-	public Vaccine vaccineById(final int vaccineId) {
-
-		Optional<Vaccine> findVaccine = this.vaccineRepository.findById(vaccineId);
-		Vaccine vaccine = findVaccine.get();
-
-		return vaccine;
-	}
-
-	@Transactional
 	public List<Vaccine> findVaccinesBySicknessId(final int sicknessId) {
 
 		List<Vaccine> res = this.vaccineRepository.findBySicknessId(sicknessId);
@@ -37,13 +29,13 @@ public class VaccineService {
 	}
 
 	@Transactional
-	public Optional<Vaccine> findVaccineById(final int vaccineId) {
+	public Vaccine findVaccineById(final int vaccineId) {
 
-		Optional<Vaccine> vaccine = this.vaccineRepository.findById(vaccineId);
+		Vaccine vaccine = this.vaccineRepository.findById(vaccineId);
 
 		return vaccine;
 	}
-
+	
 	@Transactional
 	public void saveVaccine(final Vaccine vaccine) throws DataAccessException {
 		this.vaccineRepository.save(vaccine);
@@ -53,13 +45,16 @@ public class VaccineService {
 	public void deleteVaccine(final Vaccine vaccine) throws DataAccessException {
 		this.vaccineRepository.deleteById(vaccine.getId());
 	}
-
-	public void delete(final Vaccine vaccine) {
-		this.vaccineRepository.delete(vaccine);
+	
+	public void delete(Vaccine vaccine) {
+		vaccineRepository.delete(vaccine);
 	}
 
 	public Iterable<Vaccine> findAll() {
 		// TODO Auto-generated method stub
 		return this.vaccineRepository.findAll();
 	}
+	
+	
 }
+

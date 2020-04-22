@@ -15,4 +15,5 @@ public interface VaccineRepository extends CrudRepository<Vaccine, Integer> {
 	List<Vaccine> findBySicknessId(Integer sickness_id) throws DataAccessException;
 
 	//Optional<Vaccine> findById(int id) throws DataAccessException;
+	Vaccine findById(int id) throws DataAccessException;
 }
