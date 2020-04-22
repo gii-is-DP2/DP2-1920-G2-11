@@ -23,7 +23,7 @@ public class Medicine extends NamedEntity {
 	private String		components;
 
 	@NotBlank
-	@Column(name = "tratment")
+	@Column(name = "treatment")
 	private String		treatment;
 
 	@OneToOne

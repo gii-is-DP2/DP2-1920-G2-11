@@ -14,8 +14,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Product;
-import org.springframework.samples.petclinic.model.Sickness;
+import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.ProductService;
+import org.springframework.samples.petclinic.service.ProductTypeService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,18 +32,23 @@ public class ProductControllerTests {
 	@MockBean
 	private ProductService		productService;
 
+	@MockBean
+	private ProductTypeService	productTypeService;
+
+	@MockBean
+	private ClinicService		clinicService;
+
 	@Autowired
 	private MockMvc				mockMvc;
 
-	private static final int	TEST_PRODUCT_ID			= 1;
-	
-	private static final int TEST_CLINIC_ID = 1;
+	private static final int	TEST_PRODUCT_ID	= 1;
 
+	private static final int	TEST_CLINIC_ID	= 1;
 
 
 	@BeforeEach
 	void setup() {
-		List<Product> products= new ArrayList<Product>();
+		List<Product> products = new ArrayList<Product>();
 		Product product = new Product();
 		products.add(product);
 		//BDDMockito.given(this.productService.findSicknessesByPetId(SicknessControllerTest.TEST_PET_ID)).willReturn(sicknesses);
@@ -52,8 +58,7 @@ public class ProductControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProductsListHtml() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}/products",  ProductControllerTests.TEST_CLINIC_ID))
-		.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}/products", ProductControllerTests.TEST_CLINIC_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
 			.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
 
@@ -68,9 +73,8 @@ public class ProductControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProductsHtml() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/{productId}/", ProductControllerTests.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk())
-			.andExpect(MockMvcResultMatchers.model().attributeExists("product")).andExpect(MockMvcResultMatchers.view().name("products/productShow"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/{productId}/", ProductControllerTests.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("product"))
+			.andExpect(MockMvcResultMatchers.view().name("products/productShow"));
 	}
 
 }
-

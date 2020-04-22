@@ -3,7 +3,6 @@ package org.springframework.samples.petclinic.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.assertj.core.internal.Lists;
 import org.junit.jupiter.api.Assertions;
@@ -33,7 +32,9 @@ public class VaccineServiceTest {
 
 	@Test
 	void findVaccineByIdTest() {
+
 		Vaccine vaccine = this.vaccineService.findVaccineById(1);
+
 		Assertions.assertTrue(vaccine.getName().equals("Vacuna A") && vaccine.getMonths().equals(4) && vaccine.getComponents().equals("Q,W,E,R") && vaccine.getSickness().getName().equals("Otitis"));
 	}
 	

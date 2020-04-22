@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <petclinic:layout pageName="vets">
     <h2>Veterinarians</h2>
@@ -30,12 +32,13 @@
         </c:forEach>
         </tbody>
     </table>
+    
+    
 
     <table class="table-buttons">
         <tr>
-            <td>
-                <a href="<spring:url value="/vets.xml" htmlEscape="true" />">View as XML</a>
-            </td>            
-        </tr>
+			<td><spring:url value="/vets/newSickness" var="sicknessNewUrl">
+				</spring:url> <a href="${fn:escapeXml(sicknessNewUrl)}">Create a sickness for a pet type</a></td>
+		</tr>
     </table>
 </petclinic:layout>

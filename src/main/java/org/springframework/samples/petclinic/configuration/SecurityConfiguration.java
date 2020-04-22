@@ -34,10 +34,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**", "/webjars/**", "/h2-console/**").permitAll().antMatchers(HttpMethod.GET, "/", "/oups").permitAll().antMatchers("/users/new").permitAll().antMatchers("/admin/**").hasAnyAuthority("admin")
-			.antMatchers("/owners/**").hasAnyAuthority("owner", "admin").antMatchers("/vets/**").authenticated().antMatchers("/clinics/**").authenticated().antMatchers("/products/**").authenticated().anyRequest().denyAll().and().formLogin()
+			.antMatchers("/owners/*/pets/{petId}/sicknesses/delete/**").hasAnyAuthority("veterinarian").antMatchers("/owners/**").authenticated().antMatchers("/vets/newSickness").hasAnyAuthority("veterinarian").antMatchers("/vets/**").authenticated()
+      .antMatchers("/sicknesses/delete/**").hasAnyAuthority("veterinarian").antMatchers("/admin/medicines/**").hasAnyAuthority("admin").antMatchers("/owner/medicines/**").hasAnyAuthority("owner").antMatchers("/owner/medicine/**").hasAnyAuthority("owner").antMatchers("/clinics/**").authenticated().antMatchers("/products/**").authenticated()
+			.anyRequest().denyAll().and().formLogin()
 			/* .loginPage("/login") */
 			.failureUrl("/login-error").and().logout().logoutSuccessUrl("/");
-		// Configuración para que funcione la consola de administración 
+		// Configuración para que funcione la consola de administración
 		// de la BD H2 (deshabilitar las cabeceras de protección contra
 		// ataques de tipo csrf y habilitar los framesets si su contenido
 		// se sirve desde esta misma página.
