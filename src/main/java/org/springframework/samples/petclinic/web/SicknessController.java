@@ -69,6 +69,7 @@ public class SicknessController {
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/delete/{sicknessId}")
 	public String deleteSickness(@PathVariable("sicknessId") final int sicknessId, final ModelMap model) {
 		Sickness sickness = this.sicknessService.findSicknessesById(sicknessId);
+		this.sicknessService.deleteMedicineFromSickness(sickness);
 		this.sicknessService.deleteVaccineFromSickness(sickness);
 		this.sicknessService.deleteSickness(sickness);
 		model.addAttribute("message", "Sickness succesfully deleted!");

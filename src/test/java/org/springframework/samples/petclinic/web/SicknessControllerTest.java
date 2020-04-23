@@ -132,13 +132,16 @@ public class SicknessControllerTest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newSickness")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("sicknesses/editSickness"));
 	}
 
+	//Error, no funciona si le metes type pero si no lo mets va bien
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Gastroenteritis").param("cause", "Causa 1").param("symptom", "Sintoma 1").param("type", "cat"))
-			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+		this.mockMvc
+			.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Gastroenteritis").param("cause", "Causa 1").param("symptom", "Sintoma 1").param("severity", "1").param("type", "cat"))
+			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}
 
+	//Error, no peta si no le meto type
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormHasErrors1() throws Exception {
@@ -147,6 +150,7 @@ public class SicknessControllerTest {
 			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "severity")).andExpect(MockMvcResultMatchers.view().name("sicknesses/editSickness"));
 	}
 
+	//Error, no peta si no le meto type
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormHasErrors2() throws Exception {
