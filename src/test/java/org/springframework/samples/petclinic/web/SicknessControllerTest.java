@@ -132,12 +132,12 @@ public class SicknessControllerTest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newSickness")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("sicknesses/editSickness"));
 	}
 
-	//Error, no funciona si le metes type pero si no lo mets va bien
+	//Error, tiene que ser algo del type
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
 		this.mockMvc
-			.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Gastroenteritis").param("cause", "Causa 1").param("symptom", "Sintoma 1").param("severity", "1").param("type", "cat"))
+			.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Gastroenteritis").param("cause", "Causa 1").param("symptom", "Sintoma 1").param("severity", "1").param("type", "1"))
 			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}
 
@@ -145,8 +145,8 @@ public class SicknessControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormHasErrors1() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("cause", "Cause 1").param("symptom", "Sintoma 1")).andExpect(MockMvcResultMatchers.status().isOk())
-			.andExpect(MockMvcResultMatchers.model().attributeHasErrors("sickness")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "name"))
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("cause", "Cause 1").param("cause", "Cause 1").param("symptom", "Sintoma 1"))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("sickness")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "name"))
 			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "severity")).andExpect(MockMvcResultMatchers.view().name("sicknesses/editSickness"));
 	}
 

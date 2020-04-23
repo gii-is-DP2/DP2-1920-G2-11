@@ -58,7 +58,7 @@ public class SicknessControllerIntegrationTest {
 		sickness.setCause("Cause X");
 		sickness.setSymptom("Symptom X");
 		sickness.setSeverity(2);
-		//sickness.setType(petType);
+		sickness.setType(petType);
 		BindingResult bindingResult = new MapBindingResult(Collections.emptyMap(), "");
 
 		String view = this.sicknessController.salvarEnfermedad(sickness, bindingResult, model);
@@ -67,7 +67,7 @@ public class SicknessControllerIntegrationTest {
 		Assert.assertNotNull(model.get("message"));
 	}
 
-	//Va bien si ponemos algo mal
+	//Esto da error
 	@Test
 	void testSalvarEnfermedadError() throws Exception {
 		ModelMap model = new ModelMap();
@@ -79,7 +79,7 @@ public class SicknessControllerIntegrationTest {
 		sickness.setSeverity(2);
 		sickness.setType(petType);
 		BindingResult bindingResult = new MapBindingResult(Collections.emptyMap(), "");
-		bindingResult.reject("name", "Required!");
+		bindingResult.reject("name", "Required!"); //Puede que sea por esto que haya algo que este mal escrito
 
 		String view = this.sicknessController.salvarEnfermedad(sickness, bindingResult, model);
 
