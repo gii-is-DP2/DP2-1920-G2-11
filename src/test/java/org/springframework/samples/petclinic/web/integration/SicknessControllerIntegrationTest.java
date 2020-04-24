@@ -48,7 +48,6 @@ public class SicknessControllerIntegrationTest {
 		Assert.assertNotNull(model.get("sickness"));
 	}
 
-	//TODO Se traga el que no pongamos un type
 	@Test
 	void testSalvarEnfermedad() throws Exception {
 		ModelMap model = new ModelMap();
