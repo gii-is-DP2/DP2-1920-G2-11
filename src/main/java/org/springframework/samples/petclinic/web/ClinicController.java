@@ -15,7 +15,6 @@ public class ClinicController {
 
 	private final ClinicService		clinicService;
 	private final ProductService	productService;
-	//	private final ProductTypeService	productTypeService;
 
 
 	@Autowired
@@ -31,6 +30,13 @@ public class ClinicController {
 		return "clinics/clinicsList";
 	}
 
+	@GetMapping(value = "/clinics/{clinicId}")
+	public String showClinic(final Map<String, Object> model, @PathVariable final int clinicId) {
+		model.put("clinics", this.clinicService.findById(clinicId));
+		return "clinics/clinicsShow";
+
+	}
+
 	//	@GetMapping(value="/clinics/{clinicId}/productType/{productTypeId}")
 	//	public String showProductsByClinicAndType(final Map<String, Object> model,
 	//			@PathVariable final int clinicId, @PathVariable final int productTypeId ) {
@@ -41,12 +47,5 @@ public class ClinicController {
 	//	public void showProductTypes(final Map<String, Object> model) {
 	//		model.put("productTypes", this.productTypeService.findAllProductTypes());
 	//	}
-
-	@GetMapping(value = "/clinics/{clinicId}")
-	public String showClinic(final Map<String, Object> model, @PathVariable final int clinicId) {
-		model.put("clinics", this.clinicService.findById(clinicId));
-		return "clinics/clinicsShow";
-
-	}
 
 }

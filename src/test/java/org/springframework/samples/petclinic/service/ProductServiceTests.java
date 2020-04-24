@@ -1,3 +1,4 @@
+
 package org.springframework.samples.petclinic.service;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,13 +10,12 @@ import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-
-
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class ProductServiceTests {
 
 	@Autowired
-	private ProductRepository	productRepository;
+	private ProductRepository productRepository;
+
 
 	@Test
 	void shouldFindProductWithCorrectId() {
@@ -24,8 +24,7 @@ public class ProductServiceTests {
 		Assertions.assertTrue(product.getPrice().equals(4.00));
 		Assertions.assertTrue(product.getDescription().equals("para pelo seco"));
 		Assertions.assertTrue(product.getProductType().getId().equals(1));
-		//Assertions.assertTrue(product.getId().equals(1));
 		Assertions.assertTrue(product.getStock().equals(3));
-		
+
 	}
 }
