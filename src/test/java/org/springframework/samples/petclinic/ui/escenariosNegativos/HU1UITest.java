@@ -25,6 +25,7 @@ public class HU1UITest {
 	@LocalServerPort
 	private int				port;
 
+	private String			username;
 	private WebDriver		driver;
 	private String			baseUrl;
 	private boolean			acceptNextAlert		= true;
@@ -40,7 +41,12 @@ public class HU1UITest {
 	}
 
 	@Test
-	public void testPruebaCasosPositivosCreateListYShow() throws Exception {
+	public void testPruebaCasoNegativoSicknessList() throws Exception {
+		this.as("vet1").whenIamLoggedIntheSystemAsVet().thenICantListSicknesses();
+	}
+
+	private HU1UITest as(final String username) {
+		this.username = username;
 		this.driver.get("http://localhost:" + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
 		this.driver.findElement(By.id("username")).click();
@@ -50,8 +56,16 @@ public class HU1UITest {
 		this.driver.findElement(By.id("password")).clear();
 		this.driver.findElement(By.id("password")).sendKeys("v3t");
 		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
+		return this;
+	}
+
+	private HU1UITest whenIamLoggedIntheSystemAsVet() {
 		this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).click();
 		Assert.assertEquals("vet1", this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/ul/li/div/div/div[2]/p/strong")).getText());
+		return this;
+	}
+
+	private void thenICantListSicknesses() {
 		this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul/li[2]/a/span[2]")).click();
 		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
 		this.driver.findElement(By.linkText("Frank De La Jungla")).click();

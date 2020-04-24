@@ -26,6 +26,7 @@ public class HU1HU3HU5UITest {
 	@LocalServerPort
 	private int				port;
 
+	private String			username;
 	private WebDriver		driver;
 	private String			baseUrl;
 	private boolean			acceptNextAlert		= true;
@@ -41,7 +42,12 @@ public class HU1HU3HU5UITest {
 	}
 
 	@Test
-	public void testPruebaCasosPositivosCreateListYShow() throws Exception {
+	public void testCreateShowAndListAsVet() throws Exception {
+		this.as("vet1").whenIamLoggedIntheSystemAsVet().thenICanCreateASickness().thenICanListASickness().thenICanShowASickness();
+	}
+
+	private HU1HU3HU5UITest as(final String username) {
+		this.username = username;
 		this.driver.get("http://localhost:" + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
 		this.driver.findElement(By.id("username")).click();
@@ -51,8 +57,16 @@ public class HU1HU3HU5UITest {
 		this.driver.findElement(By.id("password")).clear();
 		this.driver.findElement(By.id("password")).sendKeys("v3t");
 		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
+		return this;
+	}
+
+	private HU1HU3HU5UITest whenIamLoggedIntheSystemAsVet() {
 		this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).click();
 		Assert.assertEquals("vet1", this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/ul/li/div/div/div[2]/p/strong")).getText());
+		return this;
+	}
+
+	private HU1HU3HU5UITest thenICanCreateASickness() {
 		this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul/li[3]/a/span[2]")).click();
 		this.driver.findElement(By.linkText("Create a sickness for a pet type")).click();
 		this.driver.findElement(By.id("name")).click();
@@ -70,11 +84,19 @@ public class HU1HU3HU5UITest {
 		new Select(this.driver.findElement(By.id("type"))).selectByVisibleText("cat");
 		this.driver.findElement(By.xpath("//option[@value='cat']")).click();
 		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
+		return this;
+	}
+
+	private HU1HU3HU5UITest thenICanListASickness() {
 		this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul/li[2]/a/span[2]")).click();
 		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
 		this.driver.findElement(By.linkText("George Franklin")).click();
 		Assert.assertEquals("cat", this.driver.findElement(By.xpath("//dd[3]")).getText());
 		this.driver.findElement(By.linkText("See Sicknesses")).click();
+		return this;
+	}
+
+	private void thenICanShowASickness() {
 		this.driver.findElement(By.linkText("Name 1")).click();
 		Assert.assertEquals("Name 1", this.driver.findElement(By.xpath("//td")).getText());
 		Assert.assertEquals("Cause 1", this.driver.findElement(By.xpath("//tr[2]/td")).getText());
