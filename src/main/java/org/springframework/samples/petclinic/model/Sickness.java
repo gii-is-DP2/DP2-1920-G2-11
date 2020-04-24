@@ -36,6 +36,7 @@ public class Sickness extends NamedEntity {
 
 	@ManyToOne
 	@Valid
+	@NotNull
 	@JoinColumn(name = "type_id")
 	private PetType	type;
 

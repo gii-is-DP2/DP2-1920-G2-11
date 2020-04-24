@@ -11,9 +11,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Medicine;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
+import org.springframework.samples.petclinic.repository.MedicineRepository;
 import org.springframework.samples.petclinic.repository.PetRepository;
 import org.springframework.samples.petclinic.repository.SicknessRepository;
 import org.springframework.samples.petclinic.repository.VaccineRepository;
@@ -30,6 +32,9 @@ public class SicknessService {
 
 	@Autowired
 	private VaccineRepository	vaccineRepository;
+
+	@Autowired
+	private MedicineRepository	medicineRepository;
 
 
 	@Autowired
@@ -89,6 +94,16 @@ public class SicknessService {
 		for (Vaccine v : vaccines) {
 			if (v.getSickness().getId().equals(sickness.getId())) {
 				this.vaccineRepository.deleteById(v.getId());
+			}
+		}
+	}
+
+	@Transactional
+	public void deleteMedicineFromSickness(final Sickness sickness) throws DataAccessException {
+		Iterable<Medicine> medicines = this.medicineRepository.findAll();
+		for (Medicine m : medicines) {
+			if (m.getSickness().getId().equals(sickness.getId())) {
+				this.medicineRepository.deleteById(m.getId());
 			}
 		}
 	}
