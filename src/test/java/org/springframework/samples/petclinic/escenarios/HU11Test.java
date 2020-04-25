@@ -13,27 +13,28 @@ import org.springframework.stereotype.Service;
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class HU11Test {
 
-	//	@Autowired
-	//	private ProductRepository productRepository;
+	// @Autowired
+	// private ProductRepository productRepository;
 
 	@Autowired
 	private ProductService productService;
 
-
-	//Caso positivo
+	// Caso positivo
 	@Test
 	void shouldFindProductWithCorrectId() {
 		Product product = this.productService.findProductsById(1);
-		Assertions.assertTrue(product.getName().equals("champú hidratante") && product.getDescription().equals("para pelo seco") && product.getPrice().equals(4.00) && product.getStock().equals(3) && product.getClinic().getId().equals(1)
-			&& product.getProductType().getId().equals(1));
+		Assertions.assertTrue(
+				product.getName().equals("chámpu hidratante") && product.getDescription().equals("para pelo seco")
+						&& product.getPrice().equals(4.00) && product.getStock().equals(3)
+						&& product.getClinic().getId().equals(1) && product.getProductType().getId().equals(1));
 	}
 
-	//Caso negativo
+	// Caso negativo
 	@Test
 	void shouldProductEmpty() {
 		Product product1 = this.productService.findProductsById(4);
 		Assertions.assertTrue(product1.getName().equals("champú para gato") && product1.getDescription().isEmpty()
-		//&& product.getPrice().equals(null)
+		// && product.getPrice().equals(null)
 		);
 	}
 }

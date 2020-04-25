@@ -26,12 +26,12 @@ public class HU8Test {
 		Assertions.assertTrue(!clinics.isEmpty());
 	}
 
-	// hay un único caso
+	
 
-	//	//Caso negativo
-	//	@Test
-	//	void shouldClinicsEmpty() {
-	//		Collection<Clinic> clinics = this.clinicRepository.findAll();
-	//		Assertions.assertTrue(clinics.isEmpty());
-	//	}
+		//Caso negativo
+//		@Test
+//		void shouldClinicsNull() {
+//			Collection<Clinic> clinics = this.clinicService.findClinics()
+//			Assertions.assertTrue(clinics.isEmpty());
+//		}
 }
