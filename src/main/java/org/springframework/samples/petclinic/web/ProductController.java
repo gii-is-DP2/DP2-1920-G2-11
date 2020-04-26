@@ -95,13 +95,27 @@ public class ProductController {
 		}
 		return view;
 	}
+
+	@GetMapping(value = "products/edit/{productId}")
+	public String editProduct(@PathVariable("productId") int productId, final ModelMap modelMap) {
+		Product p= productService.findProductsById(productId);
+		Collection<Clinic> clinics = this.clinicService.findClinics();
+		Collection<ProductType> productTypes = this.productTypeService.findProductTypes();
+		String view = "products/editProduct";
+
+		modelMap.addAttribute("product", p);
+		modelMap.addAttribute("Clinics", clinics);
+		modelMap.addAttribute("ProductTypes", productTypes);
+		return view;
+
+	}
 	
-	@GetMapping(value="products/delete/{productId}")
-	public String deleteProduct(@PathVariable("productId") int productId,ModelMap modelMap) {
-		String view="products/productList";
-		Product product=productService.findProductsById(productId);
-		if(product!=null) {
-			productService.delete(product);
+	@GetMapping(value = "products/delete/{productId}")
+	public String deleteProduct(@PathVariable("productId") final int productId, final ModelMap modelMap) {
+		String view = "products/productList";
+		Product product = this.productService.findProductsById(productId);
+		if (product != null) {
+			this.productService.delete(product);
 			modelMap.addAttribute("message", "Product deleted!");
 			view=listProducts(modelMap);
 		}else {
