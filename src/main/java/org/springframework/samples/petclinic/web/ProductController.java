@@ -95,6 +95,21 @@ public class ProductController {
 		}
 		return view;
 	}
+	
+	@PostMapping(value="products/edit/save")
+	public String editSaveProduct(@Valid Product product, BindingResult result,ModelMap modelMap) {
+		String view="products/listProducts";
+		if(result.hasErrors())
+		{
+			modelMap.addAttribute("product", product);
+			return "products/editProduct";
+		}else {
+			productService.save(product);
+			modelMap.addAttribute("message", "Product saved!");
+			view=listProducts(modelMap);
+		}
+		return view;
+	}
 
 	@GetMapping(value = "products/edit/{productId}")
 	public String editProduct(@PathVariable("productId") int productId, final ModelMap modelMap) {
