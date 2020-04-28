@@ -23,8 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest(controllers = SicknessController.class, includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = PetTypeFormatter.class),
-	excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
+@WebMvcTest(controllers = SicknessController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class SicknessControllerTest {
 
 	@Autowired
@@ -142,7 +141,6 @@ public class SicknessControllerTest {
 			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}
 
-	//Error, no peta si no le meto type
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormHasErrors1() throws Exception {
@@ -152,7 +150,6 @@ public class SicknessControllerTest {
 			.andExpect(MockMvcResultMatchers.view().name("sicknesses/editSickness"));
 	}
 
-	//Error, no peta si no le meto type
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormHasErrors2() throws Exception {
