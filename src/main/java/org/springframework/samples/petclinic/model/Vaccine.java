@@ -18,7 +18,8 @@ public class Vaccine extends NamedEntity {
 	@NotBlank
 	@Column(name = "name")
 	private String		name;
-
+	
+	@NotBlank
 	@Column(name = "components")
 	private String		components;
 

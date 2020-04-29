@@ -86,10 +86,10 @@ public class HU12Test {
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be blank");
 	}
 	
-	
+	//TODO: Preguntar el martes al profesor
 	
 //	@Test
-//	void createVaccineMonthNotCorrectly() {
+//	void createVaccineMonthEmpty() {
 //		LocaleContextHolder.setLocale(Locale.ENGLISH);
 //		Vaccine vaccine = new Vaccine();
 //		Sickness sickness = new Sickness();
@@ -102,7 +102,7 @@ public class HU12Test {
 //		vaccine.setName("Vacune test");
 //		vaccine.setSickness(sickness);
 //		vaccine.setComponents("h1");
-//
+//		
 //		VaccineValidator validator = this.createValidator();
 //		Errors errors = new BeanPropertyBindingResult(vaccine, "vaccine");
 //		validator.validate(vaccine, errors);

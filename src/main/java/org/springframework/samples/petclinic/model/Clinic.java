@@ -25,6 +25,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Simple JavaBean domain object representing a clinic.
  *
@@ -34,23 +37,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "clinics")
 public class Clinic extends NamedEntity {
 
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public void setName(final String name) {
-		this.name = name;
-	}
-
-	public String getCity() {
-		return this.city;
-	}
-
-	public void setCity(final String ciudad) {
-		this.city = ciudad;
-	}
+	
 
 
 	@Column(name = "address")
@@ -66,6 +53,7 @@ public class Clinic extends NamedEntity {
 	@Email
 	private String	email;
 
+	
 	@Column(name = "name")
 	@NotBlank
 	private String	name;
@@ -105,6 +93,24 @@ public class Clinic extends NamedEntity {
 
 	public void setEmail(final String email) {
 		this.email = email;
+	}
+	
+	
+	public String getName() {
+		return this.name;
+	}
+
+	
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(final String ciudad) {
+		this.city = ciudad;
 	}
 
 	//	protected Set<Product> getProductsInternal() {

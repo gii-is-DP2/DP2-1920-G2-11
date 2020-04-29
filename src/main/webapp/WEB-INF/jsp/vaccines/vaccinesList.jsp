@@ -42,4 +42,7 @@
         </c:forEach>
         </tbody>
     </table>
+     <sec:authorize access="hasAuthority('admin')">
+		<a class="btn btn-default" href='<spring:url value="/vets/newVaccines" htmlEscape="true"/>'>Add Vaccine</a>
+	</sec:authorize>
 </petclinic:layout>

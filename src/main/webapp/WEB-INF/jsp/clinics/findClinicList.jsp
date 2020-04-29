@@ -10,16 +10,16 @@
 
     <table id="ownersTable" class="table table-striped">
         <thead>
-        <tr>
-            <th style="width: 150px;">Name</th>
-            <th style="width: 200px;">Address</th>
-            <th>City</th>
-            <th style="width: 120px">Telephone</th>
-            <th>Pets</th>
-        </tr>
-        </thead>
+			<tr>
+				<th>Name</th>
+				<!--     <th>City</th>
+            <th>Phone</th> -->
+				<th>Products</th>
+
+			</tr>
+		</thead>
         <tbody>
-        <c:forEach items="${selections}" var="owner">
+        <c:forEach items="${selections}" var="clinic">
             <tr>
 					<td>
 						<%--  <c:out value="${clinic.name}"/> --%> <spring:url

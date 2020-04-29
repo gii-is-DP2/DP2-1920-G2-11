@@ -61,4 +61,8 @@ public class ClinicService {
 		return this.clinicRepository.findById(id);
 	}
 
+	public Collection<Clinic> findByName(final String name) throws DataAccessException{
+		return this.clinicRepository.findByName(name);
+	}
+
 }
