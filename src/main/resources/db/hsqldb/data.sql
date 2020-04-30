@@ -131,8 +131,18 @@ INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (
 INSERT INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (8, 'Medicina H', 'Componente B', '1 cada 24 horas', 4, 2);
 
 INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (1, 'Winston Pet Cares','Evergreen Av. 4' ,'Pitsburg','charles@mail.com', '600033472');
-INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan nº10' ,'Sevilla','vetnervion@mail.com', '685123477');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan 10' ,'Sevilla','vetnervion@mail.com', '685123477');
 INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (3, 'Clínica Los Arcos','' ,'','', '');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (4, 'Veterinaria AliPet','Calle Paloma 1' ,'Sevilla','alipet@mail.com', '684559612');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (5, 'Veterinaria Pablo Millan','Calle Estrella Vega 5' ,'Granada','pmillan@mail.com', '963789654');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (6, 'Veterinaria Macarena','Calle Amor 8' ,'Córdoba','vetmac@mail.com', '693258145');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (7, 'Veterinaria Los Remedios','Calle Locura 6' ,'Málaga','vetrem@,mail.com', '652369741');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (8, 'Veterinaria Santiponce','Calle Cueva 3' ,'Jaén','vetsanti@mail.com', '654123789');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (9, 'Vetpinoli','Av Gracia 9' ,'Almeria','vetpinoli@mail.com', '663214852');
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (10, 'Clínica Hispalis','Calle Paloma 12' ,'Sevilla','hispavet@mail.com', '954231852');
+
+
+
 
 INSERT INTO product_types(id, name) VALUES (1, 'Higiene');
 INSERT INTO product_types(id, name) VALUES (2, 'Juguetes');
@@ -142,3 +152,11 @@ INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id)
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (2,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,1,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (3,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,2,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (4,'champú para gato','',8.00,100,1,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (5,'chámpu hidratante','para pelo seco',4.00,34,4,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (6,'chámpu hidratante','para pelo seco',4.00,39,5,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (7,'cepillo','para peinar a perros y gatos.',5.00,30,6,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (8,'Stomodine 30 mls.','Stomodine gel para perros y gatos.Limpieza bucal, reduce la formación de placa y sarro. Infecciones cavidad bucal.',6.00,48,1,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (9,'chámpu hidratante','para pelo seco',4.00,3,7,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (10,'chámpu hidratante','para pelo seco',4.00,3,8,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (11,'chámpu hidratante','para pelo seco',4.00,3,9,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (12,'chámpu hidratante','para pelo seco',4.00,3,10,1);
