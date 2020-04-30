@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Clinic;
-import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.ProductService;
 import org.springframework.stereotype.Controller;
@@ -17,12 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class ClinicController {
 
-	private final ClinicService clinicService;
-	private final ProductService productService;
+	private final ClinicService		clinicService;
+	private final ProductService	productService;
+
 
 	@Autowired
-	public ClinicController(final ClinicService clinicService,
-			final ProductService productService/* , final ProductTypeService productTypeService */) {
+	public ClinicController(final ClinicService clinicService, final ProductService productService/* , final ProductTypeService productTypeService */) {
 		this.clinicService = clinicService;
 		this.productService = productService;
 		// this.productTypeService = productTypeService;
@@ -53,13 +52,13 @@ public class ClinicController {
 	// }
 
 	@GetMapping(value = "/clinics/find")
-	public String initFindForm(Map<String, Object> model) {
+	public String initFindForm(final Map<String, Object> model) {
 		model.put("clinic", new Clinic());
 		return "clinics/findClinics";
 	}
 
 	@GetMapping(value = "/findClinic")
-	public String processFindForm(Clinic clinic, BindingResult result, Map<String, Object> model) {
+	public String processFindForm(Clinic clinic, final BindingResult result, final Map<String, Object> model) {
 
 		// allow parameterless GET request for /owners to return all records
 		if (clinic.getName() == null) {
@@ -79,7 +78,7 @@ public class ClinicController {
 		} else {
 			// multiple owners found
 			model.put("selections", results);
-			return "clinics/clinicsList";
+			return "clinics/findclinicsList";
 		}
 	}
 
