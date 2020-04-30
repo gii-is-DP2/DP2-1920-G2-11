@@ -150,4 +150,11 @@ public class VaccineControllerTest {
 			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccineError")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineDetailsError"));
 	}
 
+	@WithMockUser(value = "spring")
+	@Test
+	void testDeleteVaccine() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("vets/delete/{vaccineId}", VaccineControllerTest.TEST_VACCINE_ID)).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+			.andExpect(MockMvcResultMatchers.view().name("redirect:/vets/listVaccine"));
+	}
+
 }

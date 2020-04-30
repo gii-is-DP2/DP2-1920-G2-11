@@ -39,8 +39,6 @@ public class ClinicControllerTests {
 
 	private static final int	TEST_CLINIC_ID	= 1;
 
-	//	private static final int	TEST_PRODUCT_TYPE_ID	= 1;
-
 
 	@BeforeEach
 	void setup() {
