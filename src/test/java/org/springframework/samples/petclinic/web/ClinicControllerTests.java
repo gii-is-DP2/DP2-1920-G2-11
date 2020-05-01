@@ -63,7 +63,7 @@ public class ClinicControllerTests {
 		clinics.add(clinic2);
 
 		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ID)).willReturn(clinic1);
-		//
+		
 
 	}
 
