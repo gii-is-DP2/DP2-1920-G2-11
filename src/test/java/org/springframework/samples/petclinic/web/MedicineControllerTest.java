@@ -28,6 +28,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(controllers = MedicineController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
+
+
 public class MedicineControllerTest {
 
 	@Autowired
@@ -111,16 +113,23 @@ public class MedicineControllerTest {
 		medicines.add(m2);
 
 		BDDMockito.given(this.medicineService.findMedicinesBySicknessIdAndPetTypeId(MedicineControllerTest.TEST_SICKNESS_ID, MedicineControllerTest.TEST_PETTYPE_ID)).willReturn(medicines);
-		BDDMockito.given(this.medicineService.findById(TEST_MEDICINE_ID)).willReturn(m1);
+		BDDMockito.given(this.medicineService.findById(MedicineControllerTest.TEST_MEDICINE_ID)).willReturn(m1);
 		BDDMockito.given(this.medicineService.findMedicines()).willReturn(medicines);
 
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testShowMedicineListHtml() throws Exception {
+	void testShowMedicinesListHtml() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/admin/medicines/")).andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.model().attributeExists("medicines")).andExpect(MockMvcResultMatchers.view().name("medicines/medicineList"));
+
+	}
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowMedicine() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owner/medicine/{medicineId}",MedicineControllerTest.TEST_MEDICINE_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeExists("medicine")).andExpect(MockMvcResultMatchers.view().name("medicines/medicineDetails"));
 
 	}
 
