@@ -132,6 +132,12 @@ public class MedicineControllerTest {
 			.andExpect(MockMvcResultMatchers.model().attributeExists("medicine")).andExpect(MockMvcResultMatchers.view().name("medicines/medicineDetails"));
 
 	}
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowMedicinesListBySicknessAndPetType() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owner/medicines/",MedicineControllerTest.TEST_SICKNESS_ID,MedicineControllerTest.TEST_PETTYPE_ID )).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeExists("medicines")).andExpect(MockMvcResultMatchers.view().name("medicines/filterMedicines"));
 
+	}
 
 }
