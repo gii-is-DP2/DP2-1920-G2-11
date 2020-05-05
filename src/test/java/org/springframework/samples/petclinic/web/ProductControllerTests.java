@@ -28,26 +28,25 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class ProductControllerTests {
 
 	@Autowired
-	private ProductController	productController;
+	private ProductController productController;
 
 	@MockBean
-	private ProductService		productService;
+	private ProductService productService;
 
 	@MockBean
-	private ProductTypeService	productTypeService;
+	private ProductTypeService productTypeService;
 
 	@MockBean
-	private ClinicService		clinicService;
+	private ClinicService clinicService;
 
 	@Autowired
-	private MockMvc				mockMvc;
+	private MockMvc mockMvc;
 
-	private static final int	TEST_PRODUCT_ID			= 1;
+	private static final int TEST_PRODUCT_ID = 1;
 
-	private static final int	TEST_CLINIC_ID			= 1;
+	private static final int TEST_CLINIC_ID = 1;
 
-	private static final int	TEST_PRODUCT_TYPE_ID	= 1;
-
+	private static final int TEST_PRODUCT_TYPE_ID = 1;
 
 	@BeforeEach
 	void setup() {
@@ -76,25 +75,35 @@ public class ProductControllerTests {
 		products.add(product);
 		products.add(product2);
 
-		BDDMockito.given(this.productService.findProductByClinicId(ProductControllerTests.TEST_CLINIC_ID)).willReturn(products);
-		BDDMockito.given(this.productService.findProductsByProductTypeId(ProductControllerTests.TEST_PRODUCT_TYPE_ID)).willReturn(products);
-		BDDMockito.given(this.productService.findProductsById(ProductControllerTests.TEST_PRODUCT_ID)).willReturn(product);
-		//		BDDMockito.given(this.productService.findProducts().contains(products));
+		BDDMockito.given(this.productService.findProductByClinicId(ProductControllerTests.TEST_CLINIC_ID))
+				.willReturn(products);
+		BDDMockito.given(this.productService.findProductsByProductTypeId(ProductControllerTests.TEST_PRODUCT_TYPE_ID))
+				.willReturn(products);
+		BDDMockito.given(this.productService.findProductsById(ProductControllerTests.TEST_PRODUCT_ID))
+				.willReturn(product);
+		// BDDMockito.given(this.productService.findProducts().contains(products));
 
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProductsList() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}/products", ProductControllerTests.TEST_CLINIC_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
-			.andExpect(MockMvcResultMatchers.view().name("products/clinicProductList"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}/products",
+						ProductControllerTests.TEST_CLINIC_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+				.andExpect(MockMvcResultMatchers.view().name("products/clinicProductList"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProduct() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/{productId}", ProductControllerTests.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
-			.andExpect(MockMvcResultMatchers.view().name("products/productShow"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/products/{productId}", ProductControllerTests.TEST_PRODUCT_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+				.andExpect(MockMvcResultMatchers.view().name("products/productShow"));
 
 	}
 
@@ -103,15 +112,20 @@ public class ProductControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowProducts() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/productType/{productTypeId}", ProductControllerTests.TEST_PRODUCT_TYPE_ID)).andExpect(MockMvcResultMatchers.status().isOk())
-			.andExpect(MockMvcResultMatchers.model().attributeExists("products")).andExpect(MockMvcResultMatchers.view().name("products/productList"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/products/productType/{productTypeId}",
+						ProductControllerTests.TEST_PRODUCT_TYPE_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+				.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testProducts() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
-			.andExpect(MockMvcResultMatchers.view().name("products/productList"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("products"))
+				.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
 
 }
