@@ -89,7 +89,36 @@ public class ProductController {
 		}
 		return view;
 	}
+	
+	@PostMapping(value="products/edit/save")
+	public String editSaveProduct(@Valid Product product, BindingResult result,ModelMap modelMap) {
+		String view="products/listProducts";
+		if(result.hasErrors())
+		{
+			modelMap.addAttribute("product", product);
+			return "products/editProduct";
+		}else {
+			productService.save(product);
+			modelMap.addAttribute("message", "Product saved!");
+			view=listProducts(modelMap);
+		}
+		return view;
+	}
 
+	@GetMapping(value = "products/edit/{productId}")
+	public String editProduct(@PathVariable("productId") int productId, final ModelMap modelMap) {
+		Product p= productService.findProductsById(productId);
+		Collection<Clinic> clinics = this.clinicService.findClinics();
+		Collection<ProductType> productTypes = this.productTypeService.findProductTypes();
+		String view = "products/editProduct";
+
+		modelMap.addAttribute("product", p);
+		modelMap.addAttribute("Clinics", clinics);
+		modelMap.addAttribute("ProductTypes", productTypes);
+		return view;
+
+	}
+	
 	@GetMapping(value = "products/delete/{productId}")
 	public String deleteProduct(@PathVariable("productId") final int productId, final ModelMap modelMap) {
 		String view = "products/productList";
