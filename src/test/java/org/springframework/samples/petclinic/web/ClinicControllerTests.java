@@ -80,5 +80,7 @@ public class ClinicControllerTests {
 			.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsShow"));
 
 	}
+	
+	//TODO: casos negativos, crear clinica con error
 
 }

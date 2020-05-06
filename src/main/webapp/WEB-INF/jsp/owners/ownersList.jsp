@@ -21,24 +21,38 @@
         <tbody>
         <c:forEach items="${selections}" var="owner">
             <tr>
-					<td>
-						<%--  <c:out value="${clinic.name}"/> --%> <spring:url
-							value="/clinics/{clinicId}" var="clinicUrl">
-							<spring:param name="clinicId" value="${clinic.id}" />
-						</spring:url> <a href="${fn:escapeXml(clinicUrl)}">${clinic.name}</a>
-
-					</td>
-					<%--   <td>
-                    <c:out value="${clinic.city}"/>
+                <td>
+                    <spring:url value="/owners/{ownerId}" var="ownerUrl">
+                        <spring:param name="ownerId" value="${owner.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(ownerUrl)}"><c:out value="${owner.firstName} ${owner.lastName}"/></a>
                 </td>
                 <td>
-                    <c:out value="${clinic.telephone}"/>
-                </td> --%>
-					<td><spring:url value="/clinics/{clinicId}/products"
-							var="productUrl">
-							<spring:param name="clinicId" value="${clinic.id}" />
-						</spring:url> <a href="${fn:escapeXml(productUrl)}">See products</a></td>
-				</tr>
+                    <c:out value="${owner.address}"/>
+                </td>
+                <td>
+                    <c:out value="${owner.city}"/>
+                </td>
+                <td>
+                    <c:out value="${owner.telephone}"/>
+                </td>
+                <td>
+                    <c:forEach var="pet" items="${owner.pets}">
+                        <c:out value="${pet.name} "/>
+                    </c:forEach>
+                </td>
+                
+      
+<!--
+                <td> 
+                    <c:out value="${owner.user.username}"/> 
+                </td>
+                <td> 
+                   <c:out value="${owner.user.password}"/> 
+                </td> 
+-->
+                
+            </tr>
         </c:forEach>
         </tbody>
     </table>

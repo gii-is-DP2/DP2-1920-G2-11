@@ -127,5 +127,8 @@ public class ProductControllerTests {
 				.andExpect(MockMvcResultMatchers.model().attributeExists("products"))
 				.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
+	
+	
+	// TODO: casos negativos, meter redireccion a vista de error en controller
 
 }

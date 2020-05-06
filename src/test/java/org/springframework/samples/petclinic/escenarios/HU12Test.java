@@ -102,7 +102,7 @@ public class HU12Test {
 		vaccine.setName("Vacune test");
 		vaccine.setSickness(sickness);
 		vaccine.setComponents("h1");
-		//vaccine.setMonths(months);
+		
 		
 		VaccineValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(vaccine, "vaccine");

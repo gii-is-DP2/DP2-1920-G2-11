@@ -59,7 +59,10 @@ public class VaccineController {
 		}
 	}
 
-	/* Crear nueva vacuna */
+	
+	
+	
+	/* listar tooodas las vucanas */
 
 	@GetMapping(value = "/vets/listVaccine")
 	public String listVaccine(final ModelMap modelMap) {
@@ -69,6 +72,10 @@ public class VaccineController {
 		return view;
 	}
 
+	
+	/* eliminar una vacuna */
+	
+	/* */
 	@GetMapping(path = "vets/delete/{vaccineId}")
 	public String deleteVaccine(@PathVariable("vaccineId") final int vaccineId, final ModelMap modelMap) {
 		String view = "redirect:/vets/listVaccine";
@@ -97,16 +104,17 @@ public class VaccineController {
 	}
 	
 	@PostMapping(value="/vets/edit/{vaccineId}")
-	public String editingVaccine(@RequestParam("sickness") final int sicknessId,@PathVariable("vaccineId") int vaccineId,@Valid Vaccine vaccines,
+	public String editingVaccine(@RequestParam("sickness") final int sicknessId,@PathVariable("vaccineId") int vaccineId,@Valid Vaccine vaccine,
 			 BindingResult result, ModelMap modelMap) {
 		String view;
 		if(result.hasErrors()) {
 			modelMap.addAttribute("message", "Operation failed!");
+			modelMap.addAttribute("vaccines", vaccine);
 			view = "vaccines/editVaccine";
 		}else {
 			
-			vaccines.setId(vaccineId);
-			this.vaccineService.saveVaccine(vaccines);
+			vaccine.setId(vaccineId);
+			this.vaccineService.saveVaccine(vaccine);
 			view = "redirect:/vets/listVaccine";
 		}
 		return view;

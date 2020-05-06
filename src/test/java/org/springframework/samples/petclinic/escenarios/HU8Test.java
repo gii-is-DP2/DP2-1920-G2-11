@@ -28,10 +28,10 @@ public class HU8Test {
 
 	
 
-		//Caso negativo
-//		@Test
-//		void shouldClinicsNull() {
-//			Collection<Clinic> clinics = this.clinicService.findClinics()
-//			Assertions.assertTrue(clinics.isEmpty());
-//		}
+		//Caso negativo: TODO
+		@Test
+		void shouldClinicsNull() {
+			Collection<Clinic> clinics = this.clinicService.findClinics();
+			Assertions.assertTrue(clinics.isEmpty());
+		}
 }

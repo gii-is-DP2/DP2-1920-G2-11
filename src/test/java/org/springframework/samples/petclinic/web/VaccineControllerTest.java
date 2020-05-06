@@ -191,7 +191,7 @@ public class VaccineControllerTest {
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
 
-	// errores
+	// errores: TODO casos negativos
 
 //	@WithMockUser(value = "spring")
 //	@Test

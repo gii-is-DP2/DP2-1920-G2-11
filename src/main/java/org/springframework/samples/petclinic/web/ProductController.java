@@ -51,9 +51,14 @@ public class ProductController {
 	// devuelve producto filtrados ya clinicas y tipo producto
 	@GetMapping(value = "/products/{productId}")
 	public String showProduct(@PathVariable final int productId, final Map<String, Object> model) {
+		Product product = this.productService.findProductsById(productId);
+		if(product.getDescription().isEmpty() || product.getPrice().equals(null) || product.getStock().equals(null)) {
+			return "products/productDetailsError";
+		}else {
 		model.put("products", this.productService.findProductsById(productId));
+		
 		return "products/productShow";
-
+		}
 	}
 
 	// devuelve los productos filtrado por clinica

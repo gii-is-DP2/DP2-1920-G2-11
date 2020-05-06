@@ -28,9 +28,9 @@ public class HU9UITest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		String pathToGeckoDriver="C:\\Users\\jaime\\Downloads";
-		System.setProperty("webdriver.gecko.driver", pathToGeckoDriver+ "\\geckodriver.exe");
-		//System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
+//		String pathToGeckoDriver="C:\\Users\\jaime\\Downloads";
+//		System.setProperty("webdriver.gecko.driver", pathToGeckoDriver+ "\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
 		
 		driver = new FirefoxDriver();
 		baseUrl = "https://www.google.com/";

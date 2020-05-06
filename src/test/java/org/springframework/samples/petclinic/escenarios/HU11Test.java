@@ -29,12 +29,12 @@ public class HU11Test {
 						&& product.getClinic().getId().equals(1) && product.getProductType().getId().equals(1));
 	}
 
-	// Caso negativo
+	// Caso negativo: TODO todos los detalles y cambiar en bd
 	@Test
 	void shouldProductEmpty() {
 		Product product1 = this.productService.findProductsById(4);
 		Assertions.assertTrue(product1.getName().equals("champú para gato") && product1.getDescription().isEmpty()
-		// && product.getPrice().equals(null)
+		
 		);
 	}
 }
