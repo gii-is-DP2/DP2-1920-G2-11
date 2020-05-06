@@ -43,14 +43,7 @@ public class VaccineControllerIntegrationTests {
 	@Autowired
 	private SicknessService sicknessService;
 	
-//	
-//	@GetMapping(path = "/vets/newVaccines")
-//	public String createVaccine(final ModelMap modelMap) {
-//		String view = "vaccines/editVaccine";
-//		modelMap.addAttribute("vaccines", new Vaccine());
-//		modelMap.addAttribute("sickness", this.sicknessService.findAll());
-//		return view;
-//	}
+
 	
 	@Test
 	void testInitCreationForm() throws Exception {

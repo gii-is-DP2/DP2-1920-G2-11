@@ -86,31 +86,32 @@ public class HU12Test {
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be blank");
 	}
 	
-	//TODO: Preguntar el martes al profesor
 	
-//	@Test
-//	void createVaccineMonthEmpty() {
-//		LocaleContextHolder.setLocale(Locale.ENGLISH);
-//		Vaccine vaccine = new Vaccine();
-//		Sickness sickness = new Sickness();
-//		Pet pet = this.petService.findPetById(3);
-//		sickness.setName("Listeriosis");
-//		sickness.setCause("Carne podrida");
-//		sickness.setSymptom("Dolor de estomago");
-//		sickness.setSeverity(2);
-//		sickness.setType(pet.getType());
-//		vaccine.setName("Vacune test");
-//		vaccine.setSickness(sickness);
-//		vaccine.setComponents("h1");
-//		
-//		VaccineValidator validator = this.createValidator();
-//		Errors errors = new BeanPropertyBindingResult(vaccine, "vaccine");
-//		validator.validate(vaccine, errors);
-//
-//		Assertions.assertThat(errors.getErrorCount()).isEqualTo(1);
-//		Assertions.assertThat(errors.hasFieldErrors("months")).isTrue();
-//		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be null");
-//	}
+	
+	@Test
+	void createVaccineMonthEmpty() {
+		LocaleContextHolder.setLocale(Locale.ENGLISH);
+		Vaccine vaccine = new Vaccine();
+		Sickness sickness = new Sickness();
+		Pet pet = this.petService.findPetById(3);
+		sickness.setName("Listeriosis");
+		sickness.setCause("Carne podrida");
+		sickness.setSymptom("Dolor de estomago");
+		sickness.setSeverity(2);
+		sickness.setType(pet.getType());
+		vaccine.setName("Vacune test");
+		vaccine.setSickness(sickness);
+		vaccine.setComponents("h1");
+		//vaccine.setMonths(months);
+		
+		VaccineValidator validator = this.createValidator();
+		Errors errors = new BeanPropertyBindingResult(vaccine, "vaccine");
+		validator.validate(vaccine, errors);
+
+		Assertions.assertThat(errors.getErrorCount()).isEqualTo(1);
+		Assertions.assertThat(errors.hasFieldErrors("months")).isTrue();
+		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be null");
+	}
 	
 	
 	@Test
