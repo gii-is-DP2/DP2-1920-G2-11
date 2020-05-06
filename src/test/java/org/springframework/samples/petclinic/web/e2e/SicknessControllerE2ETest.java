@@ -32,8 +32,8 @@ public class SicknessControllerE2ETest {
 	private static final int	TEST_SICKNESS_ERROR_ID	= 30;
 
 
-	@WithMockUser(username = "vet1", authorities = {
-		"authenticated"
+	@WithMockUser(username = "owner1", authorities = {
+		"owner"
 	})
 	@Test
 	void testShowSicknessesListHtml() throws Exception {
@@ -42,7 +42,7 @@ public class SicknessControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"authenticated"
+		"veterianrian"
 	})
 	@Test
 	void testShowSicknessesErrorHtml() throws Exception {
@@ -50,8 +50,8 @@ public class SicknessControllerE2ETest {
 			.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("sicknessesError")).andExpect(MockMvcResultMatchers.view().name("sicknesses/sicknessError"));
 	}
 
-	@WithMockUser(username = "vet1", authorities = {
-		"authenticated"
+	@WithMockUser(username = "admin1", authorities = {
+		"admin"
 	})
 	@Test
 	void testShowSicknessesShowHtml() throws Exception {
@@ -59,8 +59,8 @@ public class SicknessControllerE2ETest {
 			.andExpect(MockMvcResultMatchers.model().attributeExists("sickness")).andExpect(MockMvcResultMatchers.view().name("sicknesses/sicknessShow"));
 	}
 
-	@WithMockUser(username = "vet1", authorities = {
-		"authenticated"
+	@WithMockUser(username = "owner1", authorities = {
+		"owner"
 	})
 	@Test
 	void testShowSicknessesShowErrorHtml() throws Exception {
@@ -86,7 +86,7 @@ public class SicknessControllerE2ETest {
 	}
 
 	@WithMockUser(username = "owner1", authorities = {
-		"owner"
+		"veterinarian"
 	})
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
