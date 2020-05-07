@@ -26,6 +26,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 @WebMvcTest(controllers = MedicineController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 
@@ -49,15 +51,15 @@ public class MedicineControllerTest {
 
 	private static final int	TEST_MEDICINE_ID				= 1;
 
-	private static final int	TEST_MEDICINE_ERROR_ID			= 3;
+	private static final int	TEST_MEDICINE_ERROR_ID			= 33;
 	
 	private static final int	TEST_PETTYPE_ID			= 1;
 	
-	private static final int	TEST_PETTYPE_ERROR_ID			= 3;
+	private static final int	TEST_PETTYPE_ERROR_ID			= 33;
 	
 	private static final int	TEST_SICKNESS_ID			= 1;
 	
-	private static final int	TEST_SICKNESS_ERROR_ID			= 3;
+	private static final int	TEST_SICKNESS_ERROR_ID			= 33;
 	
 	
 
@@ -111,9 +113,14 @@ public class MedicineControllerTest {
 		
 		medicines.add(m1);
 		medicines.add(m2);
+		
+		List<Medicine> voidMedicines = new ArrayList<Medicine>();
+		Medicine voidMedicine = new Medicine();
 
 		BDDMockito.given(this.medicineService.findMedicinesBySicknessIdAndPetTypeId(MedicineControllerTest.TEST_SICKNESS_ID, MedicineControllerTest.TEST_PETTYPE_ID)).willReturn(medicines);
-		BDDMockito.given(this.medicineService.findById(MedicineControllerTest.TEST_MEDICINE_ID)).willReturn(m1);
+		BDDMockito.given(this.medicineService.findMedicinesBySicknessIdAndPetTypeId(MedicineControllerTest.TEST_SICKNESS_ERROR_ID, MedicineControllerTest.TEST_PETTYPE_ERROR_ID)).willReturn(voidMedicines);
+		BDDMockito.given(this.medicineService.findMedicineById(MedicineControllerTest.TEST_MEDICINE_ID)).willReturn(m1);
+		BDDMockito.given(this.medicineService.findMedicineById(MedicineControllerTest.TEST_MEDICINE_ERROR_ID)).willReturn(voidMedicine);
 		BDDMockito.given(this.medicineService.findMedicines()).willReturn(medicines);
 
 	}
@@ -132,12 +139,37 @@ public class MedicineControllerTest {
 			.andExpect(MockMvcResultMatchers.model().attributeExists("medicine")).andExpect(MockMvcResultMatchers.view().name("medicines/medicineDetails"));
 
 	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowMedicineError() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owner/medicine/{medicineId}",MedicineControllerTest.TEST_MEDICINE_ERROR_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("medicine")).andExpect(MockMvcResultMatchers.view().name("medicines/medicineDetailsError"));
+
+	}
+	
+	
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowMedicinesListBySicknessAndPetType() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/owner/medicines/",MedicineControllerTest.TEST_SICKNESS_ID,MedicineControllerTest.TEST_PETTYPE_ID )).andExpect(MockMvcResultMatchers.status().isOk())
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<String,String>();
+		params.add("petTypeId", Integer.toString(MedicineControllerTest.TEST_PETTYPE_ID));
+		params.add("sicknessId", Integer.toString(MedicineControllerTest.TEST_SICKNESS_ID));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owner/medicines/").queryParams(params)).andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.model().attributeExists("medicines")).andExpect(MockMvcResultMatchers.view().name("medicines/filterMedicines"));
 
 	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowMedicinesListBySicknessAndPetTypeError() throws Exception {
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<String,String>();
+		params.add("petTypeId", Integer.toString(MedicineControllerTest.TEST_PETTYPE_ERROR_ID));
+		params.add("sicknessId", Integer.toString(MedicineControllerTest.TEST_SICKNESS_ERROR_ID));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owner/medicines/").queryParams(params)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeExists("medicines")).andExpect(MockMvcResultMatchers.view().name("medicines/filterMedicinesError"));
+
+	}
+
 
 }

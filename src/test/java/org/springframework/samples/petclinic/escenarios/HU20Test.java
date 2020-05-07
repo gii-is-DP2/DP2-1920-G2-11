@@ -27,7 +27,7 @@ public class HU20Test {
 	@Test
 	void shouldFindCorrectMedicinesDetailsWithId() {
 		Collection<Medicine> meds = this.medicineService.findMedicines();
-		Medicine medicine = this.medicineService.findById(1);
+		Medicine medicine = this.medicineService.findMedicineById(1);
 		Assertions.assertTrue(meds.contains(medicine)
 				&&	medicine.getName().equals("Medicina A")
 				&& medicine.getComponents().equals("Componente A")
@@ -40,7 +40,8 @@ public class HU20Test {
 	@Test
 	void shouldNotFindMedicinesDetailsWithIncorrectId() {
 		Collection<Medicine> meds = this.medicineService.findMedicines();
-		Medicine medicine = this.medicineService.findById(50);
+		Medicine medicine = this.medicineService.findMedicineById(50);
+		Assertions.assertTrue(medicine.isNew());
 		Assertions.assertFalse(meds.contains(medicine));
 	}
 
