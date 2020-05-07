@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Mostly used as a facade for all Petproduct controllers Also a placeholder
  * for @Transactional and @Cacheable annotations
  *
- * @author Aureliano Piqueras
+ *
  */
 @Service
 public class ProductService {
@@ -66,15 +66,14 @@ public class ProductService {
 		List<Product> res = this.productRepository.findByClinicId(clinicId);
 		return res;
 	}
-	
+
 	@Transactional
-	public void save(Product product) {
-		productRepository.save(product);
-	}
-	
-	public void delete(Product product) {
-		productRepository.delete(product);
+	public void save(final Product product) {
+		this.productRepository.save(product);
 	}
 
+	public void delete(final Product product) {
+		this.productRepository.delete(product);
+	}
 
 }

@@ -38,12 +38,22 @@ public class ProductController {
 	// devuelve productos filtrados por tipo
 	@GetMapping(value = "/products/productType/{productTypeId}")
 	public String showProducts(@PathVariable final int productTypeId, final Map<String, Object> model) {
-		model.put("products", this.productService.findProductsByProductTypeId(productTypeId));
-		return "products/productList";
+		Collection<Product> products = this.productService.findProductsByProductTypeId(productTypeId);
+		if (products.isEmpty()) {
+			return "products/productDetailsError";
+		} else {
+			return "products/productList";
+		}
+
+		//		model.put("products", this.productService.findProductsByProductTypeId(productTypeId));
+		//		return "products/productList";
 	}
 
 	@GetMapping(value = "/products")
 	public String listProducts(final Map<String, Object> model) {
+		if (this.productService.findProducts().isEmpty()) {
+			return "products/productDetailsError";
+		}
 		model.put("products", this.productService.findProducts());
 		return "products/productList";
 	}
@@ -52,20 +62,24 @@ public class ProductController {
 	@GetMapping(value = "/products/{productId}")
 	public String showProduct(@PathVariable final int productId, final Map<String, Object> model) {
 		Product product = this.productService.findProductsById(productId);
-		if(product.getDescription().isEmpty() || product.getPrice().equals(null) || product.getStock().equals(null)) {
+		if (product.getDescription().isEmpty() || product.getPrice().equals(null) || product.getStock().equals(null)) {
 			return "products/productDetailsError";
-		}else {
-		model.put("products", this.productService.findProductsById(productId));
-		
-		return "products/productShow";
+		} else {
+			model.put("products", this.productService.findProductsById(productId));
+
+			return "products/productShow";
 		}
 	}
 
 	// devuelve los productos filtrado por clinica
 	@GetMapping(value = "/clinics/{clinicId}/products")
 	public String showClinicProducts(final Map<String, Object> model, @PathVariable final int clinicId) {
-		model.put("products", this.productService.findProductByClinicId(clinicId));
-		return "products/clinicProductList";
+		if (this.productService.findProductByClinicId(clinicId).isEmpty()) {
+			return "products/productDetailsError";
+		} else {
+			model.put("products", this.productService.findProductByClinicId(clinicId));
+			return "products/clinicProductList";
+		}
 	}
 
 	@GetMapping(value = "products/new")
@@ -109,12 +123,5 @@ public class ProductController {
 		return view;
 
 	}
-
-	// controlador para el filtro y cuando ya se ha escogido una clinica: TODO
-	//	@GetMapping(value = "/clinics/{clinicId}/products")
-	//	public String showClinicProductFiltered(final Map<String, Object> model, @PathVariable final int clinicId) {
-	//		model.put("products", this.productService.findProductByClinicId(clinicId));
-	//		return "products/clinicProductList";
-	//	}
 
 }

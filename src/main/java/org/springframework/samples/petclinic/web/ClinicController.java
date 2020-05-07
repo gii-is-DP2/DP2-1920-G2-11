@@ -24,7 +24,6 @@ public class ClinicController {
 	public ClinicController(final ClinicService clinicService, final ProductService productService/* , final ProductTypeService productTypeService */) {
 		this.clinicService = clinicService;
 		this.productService = productService;
-		// this.productTypeService = productTypeService;
 	}
 
 	@GetMapping(value = "/clinics")
@@ -35,6 +34,7 @@ public class ClinicController {
 
 	@GetMapping(value = "/clinics/{clinicId}")
 	public String showClinic(final Map<String, Object> model, @PathVariable final int clinicId) {
+
 		model.put("clinics", this.clinicService.findById(clinicId));
 		return "clinics/clinicsShow";
 
