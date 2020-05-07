@@ -38,6 +38,10 @@ public class ClinicControllerTests {
 	private MockMvc				mockMvc;
 
 	private static final int	TEST_CLINIC_ID	= 1;
+	
+	private static final int    TEST_CLINIC_ERROR_ID = 3;
+	
+	
 
 
 	@BeforeEach
@@ -61,6 +65,27 @@ public class ClinicControllerTests {
 
 		clinics.add(clinic1);
 		clinics.add(clinic2);
+		
+		
+		//SHOW
+		Clinic c = new Clinic();
+		c.setId(2);
+		c.setName("Veterinaria Nervión");
+		c.setAddress("Calle Juan 10");
+		c.setCity("Sevilla");
+		c.setEmail("vetnervion@mail.com");
+		c.setTelephone("685123477");
+		
+		//SHOW ERROR
+		Clinic c1 = new Clinic();
+		c1.setId(3);
+		c1.setName("Clínica Los Arcos");
+		c1.setAddress("");
+		c1.setCity("");
+		c1.setEmail("");
+		c1.setTelephone("");
+		
+		
 
 		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ID)).willReturn(clinic1);
 		
