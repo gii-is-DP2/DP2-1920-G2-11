@@ -16,6 +16,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
+
+//@TestPropertySource(locations = "classpath:application-mysql.properties")
+
 public class SicknessControllerE2ETest {
 
 	@Autowired
@@ -42,7 +45,7 @@ public class SicknessControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterianrian"
+		"veterinarian"
 	})
 	@Test
 	void testShowSicknessesErrorHtml() throws Exception {
