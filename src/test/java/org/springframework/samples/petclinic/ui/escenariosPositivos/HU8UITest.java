@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HU10UITest {
+public class HU8UITest {
 	@LocalServerPort
 	private int port;
 	private WebDriver driver;
@@ -28,10 +28,7 @@ public class HU10UITest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-//		String pathToGeckoDriver="C:\\Users\\jaime\\Downloads";
-//		System.setProperty("webdriver.gecko.driver", pathToGeckoDriver+ "\\geckodriver.exe");
-		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
-		
+	  System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
 		
 		driver = new FirefoxDriver();
 		baseUrl = "https://www.google.com/";
@@ -48,7 +45,7 @@ public class HU10UITest {
 	    driver.findElement(By.id("password")).sendKeys("0wn3r");
 	    driver.findElement(By.xpath("//button[@type='submit']")).click();
 	    driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/clinics/2/products')]")).click();
+	    driver.findElement(By.xpath("//a[contains(text(),'Veterinaria Nervión')]")).click();
 	}
 
 	@AfterEach
