@@ -20,7 +20,7 @@ import org.openqa.selenium.support.ui.Select;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HU12UITest {
+public class HU11UITest {
 
 	@LocalServerPort
 	private int port;
@@ -31,9 +31,7 @@ public class HU12UITest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		String pathToGeckoDriver="C:\\Users\\jaime\\Downloads";
-		System.setProperty("webdriver.gecko.driver", pathToGeckoDriver+ "\\geckodriver.exe");
-		//System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
+		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
 		driver = new FirefoxDriver();
 		baseUrl = "https://www.google.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

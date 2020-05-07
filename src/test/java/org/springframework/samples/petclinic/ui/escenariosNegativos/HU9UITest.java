@@ -28,8 +28,7 @@ public class HU9UITest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-//		String pathToGeckoDriver="C:\\Users\\jaime\\Downloads";
-//		System.setProperty("webdriver.gecko.driver", pathToGeckoDriver+ "\\geckodriver.exe");
+		
 		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
 		
 		driver = new FirefoxDriver();
@@ -47,7 +46,7 @@ public class HU9UITest {
 	    driver.findElement(By.id("password")).sendKeys("0wn3r");
 	    driver.findElement(By.xpath("//button[@type='submit']")).click();
 	    driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-	    driver.findElement(By.xpath("//a[contains(text(),'Clínica Los Arcos')]")).click();
+	    driver.findElement(By.xpath("//a[contains(@href, '/clinics/3/products')]")).click();
 	}
 
 	@AfterEach
