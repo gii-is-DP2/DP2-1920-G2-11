@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.ProductService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +61,11 @@ public class ClinicController {
 
 	@GetMapping(value = "/findClinic")
 	public String processFindForm(Clinic clinic, final BindingResult result, final Map<String, Object> model) {
-
+		
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		boolean authenticated = authentication.isAuthenticated();
+//		if(authenticated) {
+		
 		// allow parameterless GET request for /owners to return all records
 		if (clinic.getName() == null) {
 			clinic.setName(""); // empty string signifies broadest possible search
@@ -80,6 +86,9 @@ public class ClinicController {
 			model.put("selections", results);
 			return "clinics/findclinicsList";
 		}
+//		}else {
+//			return "clinics/clinicDetailsError";
+//		}
 	}
 
 }

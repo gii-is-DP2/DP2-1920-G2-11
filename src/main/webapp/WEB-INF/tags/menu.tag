@@ -52,11 +52,7 @@
 					<span>Clinics</span>
 				</petclinic:menuItem>
 				
-				<petclinic:menuItem active="${name eq 'vaccines'}" url="/vets/listVaccine"
-					title="vaccines">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Vaccines</span>
-				</petclinic:menuItem>
+				
 
 			</ul>
 
