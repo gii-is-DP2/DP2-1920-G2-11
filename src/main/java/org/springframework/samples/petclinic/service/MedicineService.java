@@ -16,6 +16,9 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -41,9 +44,16 @@ public class MedicineService {
 	public Collection<Medicine> findMedicines() {
 		return this.medicineRepository.findAll();
 	}
-
-	public Medicine findById(final int id) throws DataAccessException {
-		return this.medicineRepository.findById(id);
+	
+	@Transactional
+	public Medicine findMedicineById(final int id){
+		
+		Optional<Medicine> medicine = this.medicineRepository.findMedicineById(id);
+		if (medicine.isPresent()) {
+			return medicine.get();
+		} else {
+			return new Medicine();
+		}
 	}
 	
 	public Collection<Medicine> findMedicinesBySicknessIdAndPetTypeId(final int sicknessId, final int petTypeId) {

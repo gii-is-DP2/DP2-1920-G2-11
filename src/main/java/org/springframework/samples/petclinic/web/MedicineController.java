@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @Controller
@@ -73,18 +74,25 @@ public class MedicineController {
 			medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(sicknessId, petTypeId);
 		}
 		if (medicines.isEmpty()) {
-			medicines = this.medicineService.findMedicines();
+			Collection<Medicine> allMedicines = this.medicineService.findMedicines();
+			model.put("medicines", allMedicines);
+			return "medicines/filterMedicinesError";
+		}else {
+			model.put("medicines", medicines);
+			return "medicines/filterMedicines";
 		}
-		model.put("medicines", medicines);
-		return "medicines/filterMedicines";
 
 	}
 	
 	@GetMapping(value = { "/owner/medicine/{medicineId}" })
 	public String showMedicine(Map<String, Object> model, @PathVariable("medicineId") int medicineId) {
-		Medicine medicine = this.medicineService.findById(medicineId);
-		model.put("medicine", medicine);
-		return "medicines/medicineDetails";
+		Medicine medicine = this.medicineService.findMedicineById(medicineId);
+		if(!medicine.isNew()) {
+			model.put("medicine", medicine);
+			return "medicines/medicineDetails";
+		}else {
+			return "medicines/medicineDetailsError";
+		}
 	}
 	
 	
