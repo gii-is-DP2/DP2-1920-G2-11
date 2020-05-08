@@ -22,6 +22,7 @@ public class VaccineValidator implements Validator {
 			errors.rejectValue("months", "must not be null", "must not be null");
 		}else {
 			
+			
 			if (vaccine.getMonths()<0) {
 				errors.rejectValue("months", "must be positive number", "must be positive number");
 			}

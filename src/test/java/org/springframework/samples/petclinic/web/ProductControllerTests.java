@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -47,7 +48,13 @@ public class ProductControllerTests {
 	private static final int TEST_CLINIC_ID = 1;
 
 	private static final int TEST_PRODUCT_TYPE_ID = 1;
-
+	
+	private static final int    TEST_CLINIC_ERROR_ID = 3;
+	
+	private static final int TEST_PRODUCT_ERROR_ID = 4;
+	
+	
+//TODO HACER EL SETCLINIC EN PRODUCT MODEL
 	@BeforeEach
 	void setup() {
 		List<Product> products = new ArrayList<Product>();
@@ -61,6 +68,16 @@ public class ProductControllerTests {
 		productType.setName("Higiene");
 		product.setProductType(productType);
 		product.setStock(3);
+		Clinic clinic =new Clinic();
+		clinic.setId(1);
+		clinic.setName("Winston Pet Cares");
+		clinic.setAddress("Evergreen Av. 4");
+		clinic.setCity("Pitsburg");
+		clinic.setEmail("charles@mail.com");
+		clinic.setTelephone("600033472");
+		product.setClinic(clinic);
+		
+		
 		Product product2 = new Product();
 		product2.setDescription("contiene láminas masticables para mantener limpia la dentadura del perro");
 		product2.setId(2);
@@ -69,25 +86,84 @@ public class ProductControllerTests {
 		ProductType productType2 = new ProductType();
 		productType2.setId(1);
 		productType2.setName("Higiene");
-		product2.setProductType(productType);
+		product2.setProductType(productType2);
 		product2.setStock(100);
+		Clinic clinic2 =new Clinic();
+		clinic2.setId(1);
+		clinic2.setName("Winston Pet Cares");
+		clinic2.setAddress("Evergreen Av. 4");
+		clinic2.setCity("Pitsburg");
+		clinic2.setEmail("charles@mail.com");
+		clinic2.setTelephone("600033472");
+		product2.setClinic(clinic2);
 
+		
 		products.add(product);
 		products.add(product2);
+		
+		//SHOW PRODUCT
+		
+		//1,'chámpu hidratante','para pelo seco',4.00,3,1,1
+		Product p = new Product();
+		p.setId(1);
+		p.setName("chámpu hidratante");
+		p.setDescription("para pelo seco");
+		p.setPrice(4.00);
+		p.setStock(3);
+		ProductType pt =new ProductType();
+		pt.setId(1);
+		pt.setName("Higiene");
+		p.setProductType(pt);
+		Clinic c =new Clinic();
+		c.setId(1);
+		c.setName("Winston Pet Cares");
+		c.setAddress("Evergreen Av. 4");
+		c.setCity("Pitsburg");
+		c.setEmail("charles@mail.com");
+		c.setTelephone("600033472");
+		p.setClinic(c);
+		
+		//LIST ERROR
+	List<Product> productsError = new ArrayList<Product>();
+		 
+		//SHOW PRODUCT ERROR
+		//4,'champú para gato','',null,null,1,1
+		Product productError = new Product();
+		productError.setId(4);
+		productError.setName("champú para gato");
+		productError.setDescription("");
+//		p2.setPrice();
+//		p2.setStock();
+		ProductType pt2 =new ProductType();
+		pt2.setId(1);
+		pt2.setName("Higiene");
+		productError.setProductType(pt2);
+		Clinic c2 =new Clinic();
+		c2.setId(1);
+		c2.setName("Winston Pet Cares");
+		c2.setAddress("Evergreen Av. 4");
+		c2.setCity("Pitsburg");
+		c2.setEmail("charles@mail.com");
+		c2.setTelephone("600033472");
+		productError.setClinic(c);
+		
 
-		BDDMockito.given(this.productService.findProductByClinicId(ProductControllerTests.TEST_CLINIC_ID))
+		BDDMockito.given(this.productService.findProductsByClinicId(ProductControllerTests.TEST_CLINIC_ID))
 				.willReturn(products);
-		BDDMockito.given(this.productService.findProductsByProductTypeId(ProductControllerTests.TEST_PRODUCT_TYPE_ID))
-				.willReturn(products);
-		BDDMockito.given(this.productService.findProductsById(ProductControllerTests.TEST_PRODUCT_ID))
-				.willReturn(product);
-		// BDDMockito.given(this.productService.findProducts().contains(products));
 
+		BDDMockito.given(this.productService.findProductById(ProductControllerTests.TEST_PRODUCT_ID))
+		.willReturn(p);
+		BDDMockito.given(this.productService.findProductsByClinicId(ProductControllerTests.TEST_CLINIC_ERROR_ID))
+		        .willReturn(productsError);
+		BDDMockito.given(this.productService.findProductById(ProductControllerTests.TEST_PRODUCT_ERROR_ID))
+		.willReturn(productError);
+	
+		
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testShowProductsList() throws Exception {
+	void testShowProductsClinicIdList() throws Exception {
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}/products",
 						ProductControllerTests.TEST_CLINIC_ID))
@@ -95,6 +171,7 @@ public class ProductControllerTests {
 				.andExpect(MockMvcResultMatchers.model().attributeExists("products"))
 				.andExpect(MockMvcResultMatchers.view().name("products/clinicProductList"));
 	}
+	
 
 	@WithMockUser(value = "spring")
 	@Test
@@ -107,18 +184,7 @@ public class ProductControllerTests {
 
 	}
 
-	// devuelve productos filtrados por tipo
 
-	@WithMockUser(value = "spring")
-	@Test
-	void testShowProducts() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/products/productType/{productTypeId}",
-						ProductControllerTests.TEST_PRODUCT_TYPE_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeExists("products"))
-				.andExpect(MockMvcResultMatchers.view().name("products/productList"));
-	}
 
 	@WithMockUser(value = "spring")
 	@Test
@@ -128,7 +194,28 @@ public class ProductControllerTests {
 				.andExpect(MockMvcResultMatchers.view().name("products/productList"));
 	}
 	
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowProductsClinicIdListError() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}/products",
+						ProductControllerTests.TEST_CLINIC_ERROR_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("productsError"))
+				.andExpect(MockMvcResultMatchers.view().name("products/productDetailsError"));
+	}
 	
-	// TODO: casos negativos, meter redireccion a vista de error en controller
-
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowProductClinicIdListError() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/products/{productId}",
+						ProductControllerTests.TEST_PRODUCT_ERROR_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("productError"))
+				.andExpect(MockMvcResultMatchers.view().name("products/productDetailsError"));
+	}
+	
+	
 }
+
