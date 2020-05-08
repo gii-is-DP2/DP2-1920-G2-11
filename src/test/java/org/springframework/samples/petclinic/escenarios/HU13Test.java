@@ -1,16 +1,11 @@
 package org.springframework.samples.petclinic.escenarios;
 
-import java.util.Locale;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.samples.petclinic.model.Pet;
-import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.model.VaccineValidator;
 import org.springframework.samples.petclinic.service.VaccineService;

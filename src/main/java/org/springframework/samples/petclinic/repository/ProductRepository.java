@@ -45,7 +45,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 	
 	Product findById(int id) throws DataAccessException;
 
-	List<Product> findByClinicId(Integer id) throws DataAccessException;
+//	List<Product> findByClinicId(Integer id) throws DataAccessException;
 
 	List<Product> findProductsByClinicId(int clinicId) throws DataAccessException;
 }

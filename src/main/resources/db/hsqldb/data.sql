@@ -140,7 +140,7 @@ INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (7, 'Veterinari
 INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (8, 'Veterinaria Santiponce','Calle Cueva 3' ,'Jaén','vetsanti@mail.com', '654123789');
 INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (9, 'Vetpinoli','Av Gracia 9' ,'Almeria','vetpinoli@mail.com', '663214852');
 INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (10, 'Clínica Hispalis','Calle Paloma 12' ,'Sevilla','hispavet@mail.com', '954231852');
-
+INSERT INTO clinics(id,name,address,city,email,telephone) VALUES (11, 'Clínica lalita','Calle Pino 3' ,'Sevilla','lalita@mail.com', '954231852');
 
 
 
@@ -160,3 +160,4 @@ INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id)
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (10,'chámpu hidratante','para pelo seco',4.00,3,8,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (11,'chámpu hidratante','para pelo seco',4.00,3,9,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (12,'chámpu hidratante','para pelo seco',4.00,3,10,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (13,'','',null,null,11,1);
