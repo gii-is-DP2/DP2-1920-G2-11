@@ -1,15 +1,15 @@
+package org.springframework.samples.petclinic.escenarios;
 
 package org.springframework.samples.petclinic.escenarios;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.samples.petclinic.model.Sickness;
+import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.service.VaccineService;
 import org.springframework.stereotype.Service;
@@ -17,32 +17,27 @@ import org.springframework.stereotype.Service;
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class HU13Test {
 
+	//TODO MODIFICAR VACUNA
 	@Autowired
 	private VaccineService vaccineService;
-	
-	// Caso positivo
+
+
+	//Caso positivo
 	@Test
-	void deleteVaccineCorrectly() {
-		Vaccine vaccine = this.vaccineService.findVaccineById(1);
-		this.vaccineService.deleteVaccine(vaccine);
-		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
-		int i = 0;
-		for(Vaccine b : vaccines) {
-		      i++;
-		}
+	void EditVaccineCorrect() {
 		
-		Assertions.assertTrue(i == 22);
+		Vaccine vaccine = this.vaccineService.findVaccineById(2);
+		this.vaccineService.
+		
+		
 	}
 
-	//Caso negativo
 	
-	@Test
-	void deleteVaccineNotCorrectly() {
-		Vaccine vaccine = new Vaccine();
-		vaccine.setId(50);
-		Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
-			this.vaccineService.deleteVaccine(vaccine);
-		});
-	}
 
+		//Caso negativo
+		@Test
+		void EditVaccineWhitError() {
+			
+		}
 }
+

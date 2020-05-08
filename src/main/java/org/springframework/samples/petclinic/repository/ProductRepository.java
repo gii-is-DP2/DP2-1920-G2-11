@@ -40,19 +40,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
-	//void save(Product product) throws DataAccessException;
-	//@Query("select p from Product p where s.type.id = ?1")
-	List<Product> findByProductTypeId(Integer productTypeId);
-
-	@Override
+	
 	Collection<Product> findAll() throws DataAccessException;
+	
+	Product findById(int id) throws DataAccessException;
 
-	//@Query("select p from Product p where p.id=?1")
-	Product findById(int id);
+	List<Product> findByClinicId(Integer id) throws DataAccessException;
 
-	List<Product> findByClinicId(Integer id);
-
-	@Query("select p from Product p where p.clinic.id = ?1 and p.productType.id = ?1")
-	List<Product> findProductsByClinicAndProductId(int clinicId, int productTypeId);
-
+	List<Product> findProductsByClinicId(int clinicId) throws DataAccessException;
 }

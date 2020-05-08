@@ -41,6 +41,6 @@ public interface ProductTypeRepository extends CrudRepository<ProductType, Integ
 	@Override
 	Collection<ProductType> findAll() throws DataAccessException;
 
-	ProductType findById(int id);
+	ProductType findById(int id)throws DataAccessException;
 
 }

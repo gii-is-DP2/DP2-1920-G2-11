@@ -32,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  *
  */
+
 @Service
 public class ProductService {
 
@@ -49,21 +50,14 @@ public class ProductService {
 	}
 
 	@Transactional
-	public Collection<Product> findProductsByProductTypeId(final int productTypeId) {
-
-		List<Product> res = this.productRepository.findByProductTypeId(productTypeId);
-		return res;
-	}
-
-	@Transactional
-	public Product findProductsById(final int productId) {
+	public Product findProductById(final int productId) {
 		Product res = this.productRepository.findById(productId);
 		return res;
 	}
 
 	@Transactional
-	public List<Product> findProductByClinicId(final int clinicId) {
-		List<Product> res = this.productRepository.findByClinicId(clinicId);
+	public List<Product> findProductsByClinicId(final int clinicId) {
+		List<Product> res = this.productRepository.findProductsByClinicId(clinicId);
 		return res;
 	}
 

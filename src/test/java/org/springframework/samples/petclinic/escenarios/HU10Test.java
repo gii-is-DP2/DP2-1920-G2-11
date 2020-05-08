@@ -1,8 +1,6 @@
 
 package org.springframework.samples.petclinic.escenarios;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +13,28 @@ import org.springframework.stereotype.Service;
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class HU10Test {
 
+	// @Autowired
+	// private ProductRepository productRepository;
+
 	@Autowired
 	private ProductService productService;
 
-
-	//Caso positivo
+	// Caso positivo
 	@Test
-	void shouldFindProductWithCorrectClinicId() {
-		List<Product> products = this.productService.findProductByClinicId(2);
-		Assertions.assertTrue(!products.isEmpty());
+	void shouldFindProductWithCorrectId() {
+		Product product = this.productService.findProductById(1);
+		Assertions.assertTrue(
+				product.getName().equals("chámpu hidratante") && product.getDescription().equals("para pelo seco")
+						&& product.getPrice().equals(4.00) && product.getStock().equals(3)
+						&& product.getClinic().getId().equals(1) && product.getProductType().getId().equals(1));
 	}
 
-	//Caso negativo
+	// Caso negativo: TODO todos los detalles y cambiar en bd
 	@Test
-	void shouldProductsEmpty() {
-		List<Product> product = this.productService.findProductByClinicId(3);
-		Assertions.assertTrue(product.isEmpty());
+	void shouldProductEmpty() {
+		Product product1 = this.productService.findProductById(4);
+		Assertions.assertTrue(product1.getName().equals("champú para gato") && product1.getDescription().isEmpty()
+		
+		);
 	}
 }

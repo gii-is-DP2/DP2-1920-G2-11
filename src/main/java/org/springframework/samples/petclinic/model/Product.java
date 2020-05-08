@@ -95,5 +95,8 @@ public class Product extends NamedEntity {
 	public Clinic getClinic() {
 		return this.clinic;
 	}
-
+    
+	public void setClinic(final Clinic clinic) {
+		this.clinic = clinic;
+	}
 }
