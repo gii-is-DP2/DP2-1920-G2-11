@@ -3,7 +3,6 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -58,7 +57,7 @@ public class VaccineController {
 		}
 	}
 
-	/* listar tooodas las vucanas */
+
 
 //	@GetMapping(value = "/vets/listVaccine")
 //	public String listVaccine(final ModelMap modelMap) {
@@ -78,29 +77,35 @@ public class VaccineController {
 		
 		Vaccine vaccine = this.vaccineService.findVaccineById(vaccineId);
 
+
 		this.vaccineService.delete(vaccine);
 		modelMap.addAttribute("message", "Event sucessfully deleted!");
 
 		modelMap.addAttribute("message", "Event not found!");
 		//view = this.showVaccines(sicknessId, modelMap);
 
+
 		return view;
 
 	}
+
 
 	// Editar vacuna
 
 	@GetMapping(value = "/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit")
 	public String editVaccine(@PathVariable("vaccineId") int vaccineId, ModelMap modelMap) {
+
 		Vaccine vaccines = this.vaccineService.findVaccineById(vaccineId);
 		modelMap.addAttribute("sickness", this.sicknessService.findAll());
 		modelMap.addAttribute("vaccines", vaccines);
 		return "vaccines/editVaccine";
 	}
 
+
 	@PostMapping(value = "/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit")
 	public String editingVaccine(@RequestParam("sickness") final int sicknessId,
 			@PathVariable("vaccineId") int vaccineId, @Valid Vaccine vaccine, BindingResult result, ModelMap modelMap) {
+
 		String view;
 		if (result.hasErrors()) {
 			modelMap.addAttribute("message", "Operation failed!");

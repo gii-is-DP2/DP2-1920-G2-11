@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Mostly used as a facade for all Petclinic controllers Also a placeholder
  * for @Transactional and @Cacheable annotations
  *
- * @author Aureliano Piqueras
+ *
  */
 @Service
 public class ClinicService {
@@ -42,26 +42,16 @@ public class ClinicService {
 		this.clinicRepository = clinicRepository;
 	}
 
-	@Transactional//(readOnly = true)
+	@Transactional
 	public Collection<Clinic> findClinics() throws DataAccessException {
 		return this.clinicRepository.findAll();
 	}
-
-	//	@Transactional//(readOnly = true)
-	//		public Collection<Product> findClinicProducts(int clinicId) throws DataAccessException {
-	//			return clinicRepository.findClinicProducts(clinicId);
-	//	}
-	//
-	//	@Transactional(readOnly = true)
-	//	public Collection<Vet> findClinicVets(int clinicId) throws DataAccessException {
-	//		return clinicRepository.findClinicVets(clinicId);
-	//}
 
 	public Clinic findById(final int id) throws DataAccessException {
 		return this.clinicRepository.findById(id);
 	}
 
-	public Collection<Clinic> findByName(final String name) throws DataAccessException{
+	public Collection<Clinic> findByName(final String name) throws DataAccessException {
 		return this.clinicRepository.findByName(name);
 	}
 
