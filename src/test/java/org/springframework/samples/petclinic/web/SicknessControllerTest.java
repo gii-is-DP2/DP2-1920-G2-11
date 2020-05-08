@@ -4,6 +4,7 @@ package org.springframework.samples.petclinic.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -15,19 +16,31 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Sickness;
+import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest(controllers = SicknessController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
+@WebMvcTest(controllers = SicknessController.class, includeFilters = @ComponentScan.Filter(value = PetTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE),
+	excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
+
+@TestPropertySource(locations = "classpath:application-mysql.properties")
+
 public class SicknessControllerTest {
 
 	@Autowired
 	private SicknessController	sicknessController;
+
+	@Autowired
+	private PetTypeFormatter	petTypeFormatter;
+
+	@MockBean
+	private PetService			petService;
 
 	@MockBean
 	private SicknessService		sicknessService;
@@ -89,6 +102,7 @@ public class SicknessControllerTest {
 		BDDMockito.given(this.sicknessService.findSicknessesById(SicknessControllerTest.TEST_SICKNESS_ID)).willReturn(sickness);
 		BDDMockito.given(this.sicknessService.findSicknessesByPetId(SicknessControllerTest.TEST_PET_ERROR_ID)).willReturn(sicknessesError);
 		BDDMockito.given(this.sicknessService.findSicknessesById(SicknessControllerTest.TEST_SICKNESS_ERROR_ID)).willReturn(sicknessError);
+		BDDMockito.given(this.petService.findPetTypes()).willReturn(Lists.newArrayList(cat));
 	}
 
 	@WithMockUser(value = "spring")
@@ -132,12 +146,10 @@ public class SicknessControllerTest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newSickness")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("sicknesses/editSickness"));
 	}
 
-	//Error, tiene que ser algo del type
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		this.mockMvc
-			.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Gastroenteritis").param("cause", "Causa 1").param("symptom", "Sintoma 1").param("severity", "1").param("type", "cat"))
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/vets/saveSickness").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Betty").param("cause", "Cause 1").param("symptom", "Symptom 1").param("severity", "1").param("type", "cat"))
 			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}
 
