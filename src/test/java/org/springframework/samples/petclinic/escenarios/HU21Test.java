@@ -28,7 +28,7 @@ public class HU21Test {
 		Collection<Medicine> meds = medicineService.findMedicines();
 		Assertions.assertTrue(!meds.isEmpty()
 		&& meds.size()==8);
-		Medicine medicine = medicineService.findById(1);
+		Medicine medicine = medicineService.findMedicineById(1);
 		Assertions.assertTrue(meds.contains(medicine));
 	}
 
@@ -36,8 +36,8 @@ public class HU21Test {
 	@Test
 	void shouldNotFindWrongMedicines() {
 		Collection<Medicine> meds = medicineService.findMedicines();
-		Assertions.assertFalse(meds.isEmpty());
-		Medicine medicine = medicineService.findById(50);
+		Medicine medicine = medicineService.findMedicineById(50);
 		Assertions.assertFalse(meds.contains(medicine));
+		Assertions.assertTrue(medicine.isNew());
 	}
 }

@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,7 +53,7 @@ class MedicineServiceTests {
 
 	@Test
 	void findById() {
-		Medicine medicine = this.medicineService.findById(1);
+		Medicine medicine = this.medicineService.findMedicineById(1);
 		assertThat(medicine.getName().equals("Medicina A")
 		&& medicine.getComponents().equals("Componente A")
 		&& medicine.getPetType().getId().equals(1)&&medicine.getPetType().getName().equals("cat")
@@ -60,10 +61,8 @@ class MedicineServiceTests {
 		&& medicine.getTreatment().equals("1 cada 8 horas"));
 			
 		//Prueba negativa
-		Medicine wrongMedicine = this.medicineService.findById(50);
-		Collection<Medicine> meds = new HashSet<Medicine>();
-		meds.add(wrongMedicine);
-		assertThat(meds.isEmpty());
+		Medicine wrongMedicine = this.medicineService.findMedicineById(50);
+		assertThat(wrongMedicine.isNew());
 	}
 
 	@Test
