@@ -46,9 +46,11 @@ public class VaccineService {
 		this.vaccineRepository.deleteById(vaccine.getId());
 	}
 	
+	
 	public void delete(Vaccine vaccine) {
 		vaccineRepository.delete(vaccine);
 	}
+
 
 	public Iterable<Vaccine> findAll() {
 		// TODO Auto-generated method stub

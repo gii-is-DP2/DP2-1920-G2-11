@@ -17,14 +17,11 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.repository.PetTypeRepository;
-import org.springframework.samples.petclinic.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Mostly used as a facade for all Petproduct controllers Also a placeholder
  * for @Transactional and @Cacheable annotations
  *
- * @author Aureliano Piqueras
+ * 
  */
 @Service
 public class PetTypeService {
@@ -49,7 +46,5 @@ public class PetTypeService {
 	public Collection<PetType> findPetTypes() throws DataAccessException {
 		return this.petTypeRepository.findAll();
 	}
-
-
 
 }

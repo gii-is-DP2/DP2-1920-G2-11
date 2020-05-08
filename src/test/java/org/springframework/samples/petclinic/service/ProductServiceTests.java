@@ -1,6 +1,8 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,14 @@ import org.springframework.stereotype.Service;
 public class ProductServiceTests {
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
+	
+	private ClinicService clinicService;
 
 
 	@Test
 	void shouldFindProductWithCorrectId() {
-		Product product = this.productRepository.findById(1);
+		Product product = this.productService.findProductById(1);
 		Assertions.assertTrue(product.getName().equals("chámpu hidratante"));
 		Assertions.assertTrue(product.getPrice().equals(4.00));
 		Assertions.assertTrue(product.getDescription().equals("para pelo seco"));
@@ -27,4 +31,25 @@ public class ProductServiceTests {
 		Assertions.assertTrue(product.getStock().equals(3));
 
 	}
+	
+	@Test
+	void shouldFindProductsCorrect() {
+		Collection<Product> products = this.productService.findProducts();
+		Assertions.assertTrue(!products.isEmpty());
+		
+		
+	}
+//	@Test
+//	void shouldFindProductsByClinicError() {
+//		Collection<Product> products1 = this.productService.findProductsByClinicId(11);
+//		Assertions.assertTrue(products1.isEmpty());
+//	}
+//	
+	@Test
+	void shouldFindProductsByClinicCorrect() {
+		Collection<Product> products2 = this.productService.findProductsByClinicId(1);
+		Assertions.assertTrue(!products2.isEmpty());
+	}
+	
+	
 }

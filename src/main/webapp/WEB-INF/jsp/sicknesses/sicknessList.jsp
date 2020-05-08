@@ -44,6 +44,10 @@
         </tbody>
     </table>
     
+     <spring:url value="/owners/*/pets/*/sicknesses/newVaccine" var="createVaccineUrl"></spring:url>
+		<a class="btn btn-default" href="${fn:escapeXml(createVaccineUrl)}" >Add Vaccine</a>
+	
+	
     <security:authorize access="hasRole('veterinarian')">
     	<spring:url value="/owners/*/pets/*/sicknesses/new" var="createSicknessUrl"></spring:url>
     	<a href="${fn:escapeXml(createSicknessUrl)}">Create a Sickness</a>

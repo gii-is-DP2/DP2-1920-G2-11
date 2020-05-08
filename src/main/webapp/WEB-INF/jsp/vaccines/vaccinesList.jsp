@@ -25,13 +25,13 @@
                     <a href="${fn:escapeXml(vaccineUrl)}">${vaccine.name}</a>
                 </td>
                 <td>
-                    <spring:url value="/vets/delete/{vaccineId}" var="vaccineDel">
+                    <spring:url value="/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/delete" var="vaccineDel">
                         <spring:param name="vaccineId" value="${vaccine.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(vaccineDel)}">Delete</a>
                     
                     
-                    <spring:url value="/vets/edit/{vaccineId}" var="vaccineEdit">
+                    <spring:url value="/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit" var="vaccineEdit">
                         <spring:param name="vaccineId" value="${vaccine.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(vaccineEdit)}">Edit</a>
@@ -42,4 +42,5 @@
         </c:forEach>
         </tbody>
     </table>
+    
 </petclinic:layout>

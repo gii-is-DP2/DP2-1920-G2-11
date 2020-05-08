@@ -1,8 +1,6 @@
 
 package org.springframework.samples.petclinic.escenarios;
 
-import java.util.Collection;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +19,17 @@ public class HU8Test {
 
 	//Caso positivo
 	@Test
-	void shouldFindAllClinics() {
-		Collection<Clinic> clinics = this.clinicService.findClinics();
-		Assertions.assertTrue(!clinics.isEmpty());
+	void shouldFindClinicWithCorrectId() {
+		Clinic clinic = this.clinicService.findById(2);
+		Assertions.assertTrue(clinic.getName().equals("Veterinaria Nervión"));
 	}
 
-	// hay un único caso
-
-	//	//Caso negativo
-	//	@Test
-	//	void shouldClinicsEmpty() {
-	//		Collection<Clinic> clinics = this.clinicRepository.findAll();
-	//		Assertions.assertTrue(clinics.isEmpty());
-	//	}
+	//Caso negativo
+	@Test
+	void shouldClinicsEmpty() {
+		Clinic clinics = this.clinicService.findById(3);
+		Assertions.assertTrue(clinics.getName().equals("Clínica Los Arcos"));
+		Assertions.assertTrue(clinics.getAddress().isEmpty() && clinics.getTelephone().isEmpty() && clinics.getEmail().isEmpty() && clinics.getCity().isEmpty());
+	}
 }
+

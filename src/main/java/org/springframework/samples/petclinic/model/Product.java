@@ -23,7 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 /**
  * Simple JavaBean domain object representing an person.
@@ -37,7 +37,8 @@ public class Product extends NamedEntity {
 
 	@Column(name = "price")
 	@Digits(fraction = 2, integer = 10)
-	@Min(value = 1)
+	@Min(value = 1) 
+	 
 	private Double	price;
 
 	@Column(name = "stock")
@@ -45,7 +46,7 @@ public class Product extends NamedEntity {
 	private Integer	stock;
 
 	@Column(name = "description")
-	@NotEmpty
+	@NotBlank
 	private String	description;
 
 
@@ -94,5 +95,8 @@ public class Product extends NamedEntity {
 	public Clinic getClinic() {
 		return this.clinic;
 	}
-
+    
+	public void setClinic(final Clinic clinic) {
+		this.clinic = clinic;
+	}
 }

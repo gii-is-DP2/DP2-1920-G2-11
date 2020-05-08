@@ -35,12 +35,6 @@ public class ProductController {
 		this.clinicService = clinicService;
 	}
 
-	// devuelve productos filtrados por tipo
-	@GetMapping(value = "/products/productType/{productTypeId}")
-	public String showProducts(@PathVariable final int productTypeId, final Map<String, Object> model) {
-		model.put("products", this.productService.findProductsByProductTypeId(productTypeId));
-		return "products/productList";
-	}
 
 	@GetMapping(value = "/products")
 	public String listProducts(final Map<String, Object> model) {
@@ -51,16 +45,25 @@ public class ProductController {
 	// devuelve producto filtrados ya clinicas y tipo producto
 	@GetMapping(value = "/products/{productId}")
 	public String showProduct(@PathVariable final int productId, final Map<String, Object> model) {
-		model.put("products", this.productService.findProductsById(productId));
-		return "products/productShow";
+		Product product = this.productService.findProductById(productId);
+		if (product.getDescription().isEmpty() || product.getPrice().equals(null) || product.getStock().equals(null)) {
+			return "products/productDetailsError";
+		} else {
+			model.put("products", this.productService.findProductById(productId));
 
+			return "products/productShow";
+		}
 	}
 
 	// devuelve los productos filtrado por clinica
 	@GetMapping(value = "/clinics/{clinicId}/products")
 	public String showClinicProducts(final Map<String, Object> model, @PathVariable final int clinicId) {
-		model.put("products", this.productService.findProductByClinicId(clinicId));
-		return "products/clinicProductList";
+		if (this.productService.findProductsByClinicId(clinicId).isEmpty()) {
+			return "products/productDetailsError";
+		} else {
+			model.put("products", this.productService.findProductsByClinicId(clinicId));
+			return "products/clinicProductList";
+		}
 	}
 
 	@GetMapping(value = "products/new")
@@ -122,7 +125,7 @@ public class ProductController {
 	@GetMapping(value = "products/delete/{productId}")
 	public String deleteProduct(@PathVariable("productId") final int productId, final ModelMap modelMap) {
 		String view = "products/productList";
-		Product product = this.productService.findProductsById(productId);
+		Product product = this.productService.findProductById(productId);
 		if (product != null) {
 			this.productService.delete(product);
 			modelMap.addAttribute("message", "Product deleted!");
@@ -134,11 +137,5 @@ public class ProductController {
 
 	}
 
-	// controlador para el filtro y cuando ya se ha escogido una clinica: TODO
-	//	@GetMapping(value = "/clinics/{clinicId}/products")
-	//	public String showClinicProductFiltered(final Map<String, Object> model, @PathVariable final int clinicId) {
-	//		model.put("products", this.productService.findProductByClinicId(clinicId));
-	//		return "products/clinicProductList";
-	//	}
-
 }
+

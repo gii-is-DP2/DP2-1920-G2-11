@@ -38,10 +38,8 @@ public interface ClinicRepository extends CrudRepository<Clinic, Integer> {
 	@Override
 	Collection<Clinic> findAll() throws DataAccessException;
 
-	//	Collection<Product> findClinicProducts(int id) throws DataAccessException;
-
-	//	Collection<Vet> findClinicVets(int id) throws DataAccessException;
-
 	Clinic findById(int id) throws DataAccessException;
+
+	Collection<Clinic> findByName(String name) throws DataAccessException;
 
 }
