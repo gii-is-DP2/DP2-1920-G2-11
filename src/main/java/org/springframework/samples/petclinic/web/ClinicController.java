@@ -36,7 +36,11 @@ public class ClinicController {
 
 	@GetMapping(value = "/clinics/{clinicId}")
 	public String showClinic(final Map<String, Object> model, @PathVariable final int clinicId) {
-
+		Clinic clinic = this.clinicService.findById(clinicId);
+		if(clinic.getTelephone().isEmpty() && clinic.getAddress().isEmpty()
+				&& clinic.getCity().isEmpty() && clinic.getEmail().isEmpty()) {
+			return "clinics/clinicDetailsError";
+		}
 		model.put("clinics", this.clinicService.findById(clinicId));
 		return "clinics/clinicsShow";
 
@@ -86,9 +90,7 @@ public class ClinicController {
 			model.put("selections", results);
 			return "clinics/findclinicsList";
 		}
-//		}else {
-//			return "clinics/clinicDetailsError";
-//		}
+
 	}
 
 }
