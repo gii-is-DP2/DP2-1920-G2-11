@@ -84,6 +84,17 @@ public class SicknessService {
 	}
 
 	@Transactional
+	public Boolean sameNameAndPetType(final Sickness sickness, final List<Sickness> sicknesses) {
+		Boolean res = false;
+		for (Sickness s : sicknesses) {
+			if (s.getName().equals(sickness.getName()) && s.getType().equals(sickness.getType())) {
+				res = true;
+			}
+		}
+		return res;
+	}
+
+	@Transactional
 	public void deleteSickness(final Sickness sickness) throws DataAccessException {
 		this.sicknessRepository.deleteById(sickness.getId());
 	}
@@ -117,4 +128,5 @@ public class SicknessService {
 	public Collection<Sickness> findSicknesses() {
 		return StreamSupport.stream(this.findAll().spliterator(), false).collect(Collectors.toSet());
 	}
+
 }

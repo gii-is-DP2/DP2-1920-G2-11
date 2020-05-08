@@ -95,4 +95,14 @@ public class SicknessServiceTest {
 
 	}
 
+	@Test
+	void sameNameAndPetTypeTest() {
+		List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
+		Sickness sickness = new Sickness();
+		sickness.setName("Otitis");
+		sickness.setType(this.petService.findPetById(1).getType());
+		Boolean res = this.sicknessService.sameNameAndPetType(sickness, sicknesses);
+		Assertions.assertTrue(res == true);
+	}
+
 }
