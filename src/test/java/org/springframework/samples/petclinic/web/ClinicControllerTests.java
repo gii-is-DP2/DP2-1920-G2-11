@@ -18,6 +18,7 @@ import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.ProductService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -26,23 +27,20 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class ClinicControllerTests {
 
 	@Autowired
-	private ClinicController	clinicController;
+	private ClinicController clinicController;
 
 	@MockBean
-	private ProductService		productService;
+	private ProductService productService;
 
 	@MockBean
-	private ClinicService		clinicService;
+	private ClinicService clinicService;
 
 	@Autowired
-	private MockMvc				mockMvc;
+	private MockMvc mockMvc;
 
-	private static final int	TEST_CLINIC_ID	= 1;
-	
-	private static final int    TEST_CLINIC_ERROR_ID = 3;
-	
-	
+	private static final int TEST_CLINIC_ID = 1;
 
+	private static final int TEST_CLINIC_ERROR_ID = 3;
 
 	@BeforeEach
 	void setup() {
@@ -65,9 +63,8 @@ public class ClinicControllerTests {
 
 		clinics.add(clinic1);
 		clinics.add(clinic2);
-		
-		
-		//SHOW
+
+		// SHOW
 		Clinic c = new Clinic();
 		c.setId(2);
 		c.setName("Veterinaria Nervión");
@@ -75,8 +72,8 @@ public class ClinicControllerTests {
 		c.setCity("Sevilla");
 		c.setEmail("vetnervion@mail.com");
 		c.setTelephone("685123477");
-		
-		//SHOW ERROR
+
+		// SHOW ERROR
 		Clinic c1 = new Clinic();
 		c1.setId(3);
 		c1.setName("Clínica Los Arcos");
@@ -84,28 +81,43 @@ public class ClinicControllerTests {
 		c1.setCity("");
 		c1.setEmail("");
 		c1.setTelephone("");
-		
-		
 
 		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ID)).willReturn(clinic1);
-		
+		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ERROR_ID)).willReturn(c1);
 
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowClinics() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("clinics")).andExpect(MockMvcResultMatchers.view().name("clinics/clinicsList"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics")).andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsList"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testShowProduct() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerTests.TEST_CLINIC_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
-			.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsShow"));
+	void testShowClinic() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerTests.TEST_CLINIC_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsShow"));
 
 	}
-	
-	//TODO: casos negativos, crear clinica con error
 
+	
+	
+
+	
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testShowClinicErrorHtml() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}",
+						ClinicControllerTests.TEST_CLINIC_ERROR_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("c1"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicDetailsError"));
+	}
 }

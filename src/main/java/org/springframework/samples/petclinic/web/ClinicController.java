@@ -57,40 +57,8 @@ public class ClinicController {
 	// model.put("productTypes", this.productTypeService.findAllProductTypes());
 	// }
 
-	@GetMapping(value = "/clinics/find")
-	public String initFindForm(final Map<String, Object> model) {
-		model.put("clinic", new Clinic());
-		return "clinics/findClinics";
-	}
+	
 
-	@GetMapping(value = "/findClinic")
-	public String processFindForm(Clinic clinic, final BindingResult result, final Map<String, Object> model) {
-		
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		boolean authenticated = authentication.isAuthenticated();
-//		if(authenticated) {
-		
-		// allow parameterless GET request for /owners to return all records
-		if (clinic.getName() == null) {
-			clinic.setName(""); // empty string signifies broadest possible search
-		}
 
-		// find owners by last name
-		Collection<Clinic> results = this.clinicService.findByName(clinic.getName());
-		if (results.isEmpty()) {
-			// no owners found
-			result.rejectValue("name", "notFound", "not found");
-			return "clinics/findClinics";
-		} else if (results.size() == 1) {
-			// 1 owner found
-			clinic = results.iterator().next();
-			return "redirect:/findClinic/" + clinic.getId();
-		} else {
-			// multiple owners found
-			model.put("selections", results);
-			return "clinics/findclinicsList";
-		}
-
-	}
 
 }

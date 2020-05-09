@@ -15,14 +15,19 @@ import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.stereotype.Service;
 
+//TODO: revisar
+
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class VaccineServiceTest {
 
 	@Autowired
-	private VaccineService	vaccineService;
 
-	private SicknessService	sicknessService;
+	private VaccineService vaccineService;
+	
+	@Autowired
+	private SicknessService sicknessService;
+
 
 
 	@Test
@@ -62,8 +67,10 @@ public class VaccineServiceTest {
 	}
 
 	@Test
-	void createTest() {
-		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
+
+	void saveVaccineTest() {
+		Iterable<Vaccine> vaccines = this.vaccineService.findAll(); 
+		
 
 		int n = 0;
 		for (Vaccine v : vaccines) {
