@@ -12,8 +12,6 @@
         <thead>
         <tr>
                  <th>Name</th>
-           <th>Delete</th>
-             <th>Edit</th>
             
             
         </tr>
@@ -28,27 +26,9 @@
                     </spring:url>
                     <a href="${fn:escapeXml(productUrl)}">${product.name}</a>
                 </td>
-                <td>
-                    <spring:url value="/products/delete/{productId}" var="productUrl">
-                        <spring:param name="productId" value="${product.id}"/>
-                       
-                    </spring:url>
-                    <a href="${fn:escapeXml(productUrl)}">Delete</a>
-                </td>
-                <td>
-                    <spring:url value="/products/edit/{productId}" var="productUrl">
-                        <spring:param name="productId" value="${product.id}"/>
-                       
-                    </spring:url>
-                    <a href="${fn:escapeXml(productUrl)}">Edit</a>
-                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    
-    <spring:url value="/products/new" var="productUrl">
-                    </spring:url>
-                    <a href="${fn:escapeXml(productUrl)}">Create</a>
-    
+       
 </petclinic:layout>
