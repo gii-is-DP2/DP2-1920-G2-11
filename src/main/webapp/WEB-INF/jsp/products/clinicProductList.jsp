@@ -12,7 +12,7 @@
         <thead>
         <tr>
             <th>Name</th>
-          
+         
             
             
         </tr>
@@ -21,7 +21,7 @@
         <c:forEach items="${products}" var="product">
             <tr>
                 <td>
-                    <spring:url value="/owners/products/{productId}" var="productUrl">
+                    <spring:url value="/products/{productId}" var="productUrl">
                         <spring:param name="productId" value="${product.id}"/>
                        
                     </spring:url>
@@ -32,7 +32,5 @@
         </c:forEach>
         </tbody>
     </table>
-    
-  
-    
+
 </petclinic:layout>
