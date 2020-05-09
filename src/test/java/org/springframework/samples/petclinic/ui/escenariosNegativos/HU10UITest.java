@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.ui.escenariosNegativos;
 
+import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
@@ -15,10 +16,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.openqa.selenium.support.ui.Select;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HU10UITest {
+
 	@LocalServerPort
 	private int port;
 	private WebDriver driver;
@@ -28,10 +31,8 @@ public class HU10UITest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		String pathToGeckoDriver="C:\\Users\\jaime\\Downloads";
-		System.setProperty("webdriver.gecko.driver", pathToGeckoDriver+ "\\geckodriver.exe");
-		//System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
-		
+
+		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
 		driver = new FirefoxDriver();
 		baseUrl = "https://www.google.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -39,15 +40,16 @@ public class HU10UITest {
 
 	@Test
 	public void testUntitledTestCase() throws Exception {
-		this.driver.get("http://localhost:" + this.port + "/");
-		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
-		driver.findElement(By.id("username")).clear();
-	    driver.findElement(By.id("username")).sendKeys("owner1");
+		driver.get("http://localhost:8080/");
+		driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
 	    driver.findElement(By.id("password")).clear();
 	    driver.findElement(By.id("password")).sendKeys("0wn3r");
+	    driver.findElement(By.id("username")).clear();
+	    driver.findElement(By.id("username")).sendKeys("owner1");
 	    driver.findElement(By.xpath("//button[@type='submit']")).click();
 	    driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/clinics/3/products')]")).click();
+	    driver.findElement(By.xpath("//a[contains(@href, '/clinics/1/products')]")).click();
+	    driver.findElement(By.xpath("//a[contains(@href, '/products/4')]")).click();
 	}
 
 	@AfterEach

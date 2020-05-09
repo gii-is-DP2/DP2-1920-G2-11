@@ -24,14 +24,19 @@ public class HU12Test {
 	@Test
 	void deleteVaccineCorrectly() {
 		Vaccine vaccine = this.vaccineService.findVaccineById(1);
+		Iterable<Vaccine> vaccines1 = this.vaccineService.findAll();
+		int n = 0;
+		for(Vaccine a : vaccines1) {
+		      n++;
+		}
 		this.vaccineService.deleteVaccine(vaccine);
-		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
+		Iterable<Vaccine> vaccines2 = this.vaccineService.findAll();
 		int i = 0;
-		for(Vaccine b : vaccines) {
+		for(Vaccine b : vaccines2) {
 		      i++;
 		}
 		
-		Assertions.assertTrue(i == 22);
+		Assertions.assertTrue(i == n-1);
 	}
 
 	//Caso negativo
