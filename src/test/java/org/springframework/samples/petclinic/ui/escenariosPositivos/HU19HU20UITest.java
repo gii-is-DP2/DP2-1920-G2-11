@@ -76,18 +76,18 @@ public class HU19HU20UITest {
 		    this.driver.findElement(By.id("petTypeId")).click();
 		    this.driver.findElement(By.xpath("//option[@value='2']")).click();
 		    this.driver.findElement(By.id("sicknessId")).click();
-		    this.driver.findElement(By.xpath("(//option[@value='1'])[2]")).click();
+		    this.driver.findElement(By.xpath("(//option[@value='2'])[2]")).click();
 		    this.driver.findElement(By.xpath("//input[@type='submit']")).click();
 			Assert.assertEquals("Medicines", this.driver.findElement(By.xpath("//h2")).getText());
 			Assert.assertTrue(this.driver.findElement(By.xpath("//table[contains(@id, 'medicinesTable')]")).isDisplayed());
-			Assert.assertTrue(driver.findElement(By.cssSelector("td")).getText().matches("Medicina C"));
+			Assert.assertTrue(driver.findElement(By.cssSelector("td")).getText().matches("Medicina D"));
 			return this;
 	}
 	
 	private void thenICanOpenMedicines() {
 			this.driver.findElement(By.linkText("Go")).click();
 			Assert.assertTrue(driver.findElement(By.cssSelector("th")).getText().matches("Name"));
-			Assert.assertTrue(driver.findElement(By.cssSelector("td")).getText().matches("Medicina C"));
+			Assert.assertTrue(driver.findElement(By.cssSelector("td")).getText().matches("Medicina D"));
 	}
 	
 	
