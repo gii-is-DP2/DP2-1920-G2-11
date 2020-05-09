@@ -15,9 +15,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "vaccines")
 public class Vaccine extends NamedEntity {
 
-	@NotBlank
-	@Column(name = "name")
-	private String		name;
+	
+	
 	
 	@NotBlank
 	@Column(name = "components")
@@ -34,15 +33,7 @@ public class Vaccine extends NamedEntity {
 	private Sickness	sickness;
 
 
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public void setName(final String name) {
-		this.name = name;
-	}
+	
 
 	public String getComponents() {
 		return this.components;

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 //TODO: revisar
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-@AutoConfigureTestDatabase(replace = Replace.NONE)
+//@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class VaccineServiceTest {
 
 	@Autowired

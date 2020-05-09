@@ -172,7 +172,7 @@ public class HU13Test {
 	void editVaccineMonthBigEnough() {
 		Vaccine vaccine = this.vaccineService.findVaccineById(2);
 	    vaccine.setName("lalala");
-	    vaccine.setComponents("");
+	    vaccine.setComponents("H2O");
 	    vaccine.setMonths(120);
 
 		VaccineValidator validator = this.createValidator();

@@ -67,7 +67,7 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04',
 
 INSERT INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (1, 'Otitis', 'Parásitos(ácaros), hongos, bacterias', 'Inflamación del conjunto auditivo, dolor, pérdida de audición', 2, 1);
 INSERT INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (2, 'Conjuntivitis', 'Infecciones oculares, alergias, problemas genéticos', 'Inflamación de la mucosa del ojo, pérdida de visión, lagrimeo', 2, 1);
-INSERT INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (3, 'Lengua azul', 'Virus', 'Irritabilidad, exceso de salivación, espuma en boca', 1, 1);
+INSERT INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (3, 'Rabia', 'Virus', 'Irritabilidad, exceso de salivación, fiebre, vómitos', 1, 1);
 INSERT INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (4, 'Leucemia felina', 'Contacto de los fluidos corporales', 'Falta de apetito, somnolencia, anemia, debilidad', 3, 1);
 INSERT INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (5, 'Panleucopenia felina', 'Parvovirus', 'Fiebre, hipotermia, vómitos, diarrea, debilidad, deshidratación, anorexia', 3, 1);
 INSERT INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (6, 'Inmunodeficiencia felina', 'Lentivirus', 'Infecciones bucales, patologías respiratorias, infecciones intestinales', 3, 1);

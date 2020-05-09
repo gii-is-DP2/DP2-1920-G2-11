@@ -30,7 +30,7 @@ public class ClinicServiceTests {
 	@Test
 	void findClinicsTest() {
 		Collection<Clinic> clinics  = this.clinicService.findClinics();
-		Assertions.assertTrue(!clinics.isEmpty() && clinics.size()==10);
+		Assertions.assertTrue(!clinics.isEmpty() && clinics.size()==11);
 	}
 	
 	@Test 

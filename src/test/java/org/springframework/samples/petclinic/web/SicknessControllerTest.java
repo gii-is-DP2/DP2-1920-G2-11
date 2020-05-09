@@ -106,6 +106,7 @@ public class SicknessControllerTest {
 				.willReturn(sicknessesError);
 		BDDMockito.given(this.sicknessService.findSicknessesById(SicknessControllerTest.TEST_SICKNESS_ERROR_ID))
 				.willReturn(sicknessError);
+		BDDMockito.given(this.petService.findPetTypes()).willReturn(Lists.newArrayList(cat));
 
 	}
 
