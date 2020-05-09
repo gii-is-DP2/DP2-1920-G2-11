@@ -25,7 +25,7 @@ public class ProductControllerE2ETest {
 
 	private static final int	TEST_CLINIC_ID			= 1;
 
-	private static final int	TEST_PRODUCT_TYPE_ID	= 1;
+
 
 	
 	@WithMockUser(username = "owner1", authorities = {
