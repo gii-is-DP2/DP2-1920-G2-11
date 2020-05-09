@@ -39,12 +39,12 @@ public class ProductServiceTests {
 		
 		
 	}
-//	@Test
-//	void shouldFindProductsByClinicError() {
-//		Collection<Product> products1 = this.productService.findProductsByClinicId(11);
-//		Assertions.assertTrue(products1.isEmpty());
-//	}
-//	
+	@Test
+	void shouldFindProductsByClinicError() {
+		Collection<Product> products1 = this.productService.findProductsByClinicId(0);
+		Assertions.assertTrue(products1.isEmpty());
+	}
+	
 	@Test
 	void shouldFindProductsByClinicCorrect() {
 		Collection<Product> products2 = this.productService.findProductsByClinicId(1);

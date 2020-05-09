@@ -15,10 +15,10 @@
             <petclinic:inputField label="Name" name="name"/>
             <petclinic:inputField label="Components" name="components"/>
             <petclinic:inputField label="Months" name="months"/>
-            <div class="control-group">
+           <%--  <div class="control-group">
             		<label>Sickness:</label>
                     <form:select name="sicknessId" path="sickness" items="${sickness}" itemLabel="name" itemValue="id"/>                                         
-                </div>
+                </div> --%>
             
        
 
