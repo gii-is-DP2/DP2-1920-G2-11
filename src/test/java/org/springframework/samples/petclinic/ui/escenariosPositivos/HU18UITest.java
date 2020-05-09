@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HU19UITest {
+public class HU18UITest {
 
 	@LocalServerPort
 	private int				port;
@@ -45,7 +45,7 @@ public class HU19UITest {
 		this.as("admin1").whenIamLoggedIntheSystemAsAdmin().thenICanListMedicines();
 	}
 
-	private HU19UITest as(final String username) {
+	private HU18UITest as(final String username) {
 		this.username = username;
 		this.driver.get("http://localhost:" + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
@@ -59,7 +59,7 @@ public class HU19UITest {
 		return this;
 	}
 
-	private HU19UITest whenIamLoggedIntheSystemAsAdmin() {
+	private HU18UITest whenIamLoggedIntheSystemAsAdmin() {
 		this.driver.findElement(By.xpath("//a[contains(@href, '/admin/medicines/')]")).click();
 		return this;
 	}

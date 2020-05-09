@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HU2021UITest {
+public class HU19HU20UITest {
 
 	@LocalServerPort
 	private int				port;
@@ -45,7 +45,7 @@ public class HU2021UITest {
 		this.as("owner1").whenIamLoggedIntheSystemAsOwner().thenICanListMedicines().thenICanFilterMedicines().thenICanOpenMedicines();
 	}
 
-	private HU2021UITest as(final String username) {
+	private HU19HU20UITest as(final String username) {
 		this.username = username;
 		this.driver.get("http://localhost:" + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
@@ -59,18 +59,18 @@ public class HU2021UITest {
 		return this;
 	}
 
-	private HU2021UITest whenIamLoggedIntheSystemAsOwner() {
+	private HU19HU20UITest whenIamLoggedIntheSystemAsOwner() {
 		this.driver.findElement(By.xpath("//a[contains(@href, '/owner/medicines/')]")).click();
 		return this;
 	}
 
-	private HU2021UITest thenICanListMedicines() {
+	private HU19HU20UITest thenICanListMedicines() {
 		Assert.assertEquals("Medicines", this.driver.findElement(By.xpath("//h2")).getText());
 		Assert.assertTrue(this.driver.findElement(By.xpath("//table[contains(@id, 'medicinesTable')]")).isDisplayed());
 		return this;
 	}
 
-	private HU2021UITest thenICanFilterMedicines() {
+	private HU19HU20UITest thenICanFilterMedicines() {
 
 		 this.driver.findElement(By.id("medicinesform")).click();
 		    this.driver.findElement(By.id("petTypeId")).click();
