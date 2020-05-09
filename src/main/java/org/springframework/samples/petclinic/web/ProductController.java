@@ -110,7 +110,7 @@ public class ProductController {
 
 	@GetMapping(value = "products/edit/{productId}")
 	public String editProduct(@PathVariable("productId") int productId, final ModelMap modelMap) {
-		Product p= productService.findProductsById(productId);
+		Product p= productService.findProductById(productId);
 		Collection<Clinic> clinics = this.clinicService.findClinics();
 		Collection<ProductType> productTypes = this.productTypeService.findProductTypes();
 		String view = "products/editProduct";
