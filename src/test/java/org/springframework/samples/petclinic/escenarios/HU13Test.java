@@ -88,7 +88,7 @@ public class HU13Test {
 		Vaccine vaccine = this.vaccineService.findVaccineById(4);
 	    vaccine.setName("lalala");
 	    vaccine.setComponents("todos");
-//	    vaccine.setMonths(12);
+	    vaccine.setMonths(null);
 		
 		VaccineValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(vaccine, "vaccine");

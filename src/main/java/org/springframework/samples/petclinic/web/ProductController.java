@@ -42,7 +42,7 @@ public class ProductController {
 		return "products/productList";
 	}
 
-	// devuelve producto filtrados ya clinicas y tipo producto
+	// devuelve producto filtrados ya clinicas
 	@GetMapping(value = "/products/{productId}")
 	public String showProduct(@PathVariable final int productId, final Map<String, Object> model) {
 		Product product = this.productService.findProductById(productId);

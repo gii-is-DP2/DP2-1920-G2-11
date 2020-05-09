@@ -25,7 +25,7 @@ public class ProductControllerE2ETest {
 
 	private static final int	TEST_CLINIC_ID			= 1;
 
-	private static final int	TEST_PRODUCT_TYPE_ID	= 1;
+
 
 	
 	@WithMockUser(username = "owner1", authorities = {
@@ -47,20 +47,11 @@ public class ProductControllerE2ETest {
 
 	}
 
-	// devuelve productos filtrados por tipo
 
 	@WithMockUser(username = "owner1", authorities = {
 			"veterinarian", "admin"
 		})
-	@Test
-	void testShowProducts() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/productType/{productTypeId}", ProductControllerE2ETest.TEST_PRODUCT_TYPE_ID)).andExpect(MockMvcResultMatchers.status().isOk())
-			.andExpect(MockMvcResultMatchers.model().attributeExists("products")).andExpect(MockMvcResultMatchers.view().name("products/productList"));
-	}
 
-	@WithMockUser(username = "owner1", authorities = {
-			"veterinarian", "admin"
-		})
 	@Test
 	void testProducts() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("products"))
