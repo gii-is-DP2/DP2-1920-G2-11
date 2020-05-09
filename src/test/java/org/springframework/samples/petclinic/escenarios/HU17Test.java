@@ -31,7 +31,7 @@ public class HU17Test {
 	void deleteProductCorrectly() {
 		Collection<Product> products = productService.findProducts();
 		int size= products.size();
-		Product product = this.productService.findProductsById(1);
+		Product product = this.productService.findProductById(1);
 		this.productService.delete(product);
 		Assertions.assertTrue(size>productService.findProducts().size());
 	}
@@ -41,7 +41,7 @@ public class HU17Test {
 	@Test
 	void deleteProductNotCorrectly() {
 		Assertions.assertThrows(InvalidDataAccessApiUsageException.class, () -> {
-			this.productService.delete(productService.findProductsById(111));
+			this.productService.delete(productService.findProductById(111));
 		});
 	}
 }

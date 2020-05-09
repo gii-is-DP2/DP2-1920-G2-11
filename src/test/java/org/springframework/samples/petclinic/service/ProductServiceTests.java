@@ -73,7 +73,7 @@ public class ProductServiceTests {
 	void deleteProductTest() {
 		Collection<Product> products = productService.findProducts();
 		int size= products.size();
-		Product product = this.productService.findProductsById(1);
+		Product product = this.productService.findProductById(1);
 		this.productService.delete(product);
 		Assertions.assertTrue(size>productService.findProducts().size());
 	}

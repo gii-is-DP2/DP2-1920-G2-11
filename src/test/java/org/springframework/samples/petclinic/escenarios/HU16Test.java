@@ -40,7 +40,7 @@ public class HU16Test {
 	}
 	//Caso positivo
 	@Test
-	void createSicknessCorrectly() {
+	void createProductCorrectly() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Product product = new Product();
@@ -55,7 +55,7 @@ public class HU16Test {
 
 	//Casos negativos
 	@Test
-	void createSicknessNameNotCorrectly() {
+	void createProductNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Product product = new Product();
 		product.setId(31);
