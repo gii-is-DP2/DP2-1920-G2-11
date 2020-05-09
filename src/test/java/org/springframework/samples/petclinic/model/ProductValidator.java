@@ -21,6 +21,13 @@ public class ProductValidator implements Validator {
 			errors.rejectValue("name", "must not be blank", "must not be blank");
 		}
 
+		if (product.getStock()== null) {
+			errors.rejectValue("stock", "must not be null", "must not be null");
+		}
+		if (product.getPrice() == null) {
+			errors.rejectValue("price", "must not be null", "must not be null");
+		}
+		
 		if (product.getStock() < 0) {
 			errors.rejectValue("stock", "must be at least 0", "must be at least 0");
 		}

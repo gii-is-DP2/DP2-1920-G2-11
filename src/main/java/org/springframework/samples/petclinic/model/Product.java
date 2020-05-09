@@ -25,6 +25,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * Simple JavaBean domain object representing an person.
@@ -37,14 +38,14 @@ import javax.validation.constraints.NotEmpty;
 public class Product extends NamedEntity {
 
 	@Column(name = "price")
+	@NotNull
 	@Digits(fraction = 2, integer = 10)
 	@Min(value = 1)
-	@NotEmpty
 	private Double	price;
 
 	@Column(name = "stock")
+	@NotNull
 	@Min(value = 0)
-	@NotEmpty
 	private Integer	stock;
 
 	@Column(name = "description")

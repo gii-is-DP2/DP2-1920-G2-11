@@ -44,9 +44,10 @@ public class HU16Test {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Product product = new Product();
-		product.setId(31);
+		product.setId(20);
 		product.setName("Producto X");
 		product.setDescription("Descripcion X");
+		product.setStock(2);
 		product.setPrice(2.0);
 		product.setStock(2);
 		this.productService.save(product);
@@ -58,7 +59,7 @@ public class HU16Test {
 	void createProductNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Product product = new Product();
-		product.setId(31);
+		product.setId(20);
 		product.setName("Producto X");
 		product.setDescription("Descripcion X");
 		product.setPrice(2.0);
