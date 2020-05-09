@@ -33,7 +33,6 @@ public class HU6Test {
 	}
 
 	//Caso negativo
-	//TODO: Sale bien pero preguntar por si acaso
 	@Test
 	void deleteSicknessNotCorrectly() {
 		Sickness sickness = new Sickness();

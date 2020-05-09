@@ -1,6 +1,7 @@
 
 package org.springframework.samples.petclinic.web;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -56,6 +57,13 @@ public class SicknessController {
 
 	@PostMapping(path = "/vets/saveSickness")
 	public String salvarEnfermedad(@Valid final Sickness sickness, final BindingResult result, final ModelMap modelMap) {
+		List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
+		Boolean duplicated = this.sicknessService.sameNameAndPetType(sickness, sicknesses);
+		if (duplicated) {
+			modelMap.addAttribute("sickness", sickness);
+			result.rejectValue("name", "duplicate");
+			return "sicknesses/editSickness";
+		}
 		if (result.hasErrors()) {
 			modelMap.addAttribute("sickness", sickness);
 			return "sicknesses/editSickness";
@@ -69,6 +77,7 @@ public class SicknessController {
 	@GetMapping(value = "/owners/*/pets/{petId}/sicknesses/delete/{sicknessId}")
 	public String deleteSickness(@PathVariable("sicknessId") final int sicknessId, final ModelMap model) {
 		Sickness sickness = this.sicknessService.findSicknessesById(sicknessId);
+		this.sicknessService.deleteMedicineFromSickness(sickness);
 		this.sicknessService.deleteVaccineFromSickness(sickness);
 		this.sicknessService.deleteSickness(sickness);
 		model.addAttribute("message", "Sickness succesfully deleted!");

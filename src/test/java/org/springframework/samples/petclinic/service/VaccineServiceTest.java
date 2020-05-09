@@ -1,13 +1,13 @@
 
 package org.springframework.samples.petclinic.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.internal.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.PetType;
@@ -18,13 +18,16 @@ import org.springframework.stereotype.Service;
 //TODO: revisar
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class VaccineServiceTest {
 
 	@Autowired
+
 	private VaccineService vaccineService;
 	
 	@Autowired
 	private SicknessService sicknessService;
+
 
 
 	@Test
@@ -40,40 +43,40 @@ public class VaccineServiceTest {
 
 		Assertions.assertTrue(vaccine.getName().equals("Vacuna A") && vaccine.getMonths().equals(4) && vaccine.getComponents().equals("Q,W,E,R") && vaccine.getSickness().getName().equals("Otitis"));
 	}
-	
-	
+
 	@Test
 	void deleteTest() {
-		
+
 		Vaccine vaccine = this.vaccineService.findVaccineById(1);
-		Iterable<Vaccine> vaccines = this.vaccineService.findAll(); 
-		
+		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
+
 		int n = 0;
-		for(Vaccine v : vaccines) {
-		      n++;
+		for (Vaccine v : vaccines) {
+			n++;
 		}
-		
-		this.vaccineService.delete(vaccine);		
-		
+
+		this.vaccineService.delete(vaccine);
+
 		vaccines = this.vaccineService.findAll();
 		int i = 0;
-		for(Vaccine b : vaccines) {
-		      i++;
+		for (Vaccine b : vaccines) {
+			i++;
 		}
-		
-		Assertions.assertTrue(n==i+1);
+
+		Assertions.assertTrue(n == i + 1);
 	}
-	
-	
+
 	@Test
+
 	void saveVaccineTest() {
 		Iterable<Vaccine> vaccines = this.vaccineService.findAll(); 
 		
+
 		int n = 0;
-		for(Vaccine v : vaccines) {
-		      n++;
+		for (Vaccine v : vaccines) {
+			n++;
 		}
-		
+
 		Vaccine vaccine = new Vaccine();
 		vaccine.setComponents("H2O");
 		vaccine.setId(27);
@@ -90,20 +93,16 @@ public class VaccineServiceTest {
 		type.setName("dragón");
 		sickness.setType(type);
 		vaccine.setSickness(sickness);
-		
-		
-		
+
 		this.vaccineService.saveVaccine(vaccine);
-		
-		
+
 		vaccines = this.vaccineService.findAll();
 		int i = 0;
-		for(Vaccine b : vaccines) {
-		      i++;
+		for (Vaccine b : vaccines) {
+			i++;
 		}
-		
-		Assertions.assertTrue(i==n+1 && vaccine.getId()>0);
+
+		Assertions.assertTrue(i == n + 1 && vaccine.getId() > 0);
 	}
-	
-	
+
 }

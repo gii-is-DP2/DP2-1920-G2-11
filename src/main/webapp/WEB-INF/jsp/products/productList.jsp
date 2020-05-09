@@ -38,6 +38,13 @@
                     </spring:url>
                     <a href="${fn:escapeXml(productUrl)}">Delete</a>
                 </td>
+                <td>
+                    <spring:url value="/products/edit/{productId}" var="productUrl">
+                        <spring:param name="productId" value="${product.id}"/>
+                       
+                    </spring:url>
+                    <a href="${fn:escapeXml(productUrl)}">Edit</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

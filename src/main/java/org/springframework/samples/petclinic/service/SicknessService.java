@@ -11,9 +11,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Medicine;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
+import org.springframework.samples.petclinic.repository.MedicineRepository;
 import org.springframework.samples.petclinic.repository.PetRepository;
 import org.springframework.samples.petclinic.repository.SicknessRepository;
 import org.springframework.samples.petclinic.repository.VaccineRepository;
@@ -30,6 +32,9 @@ public class SicknessService {
 
 	@Autowired
 	private VaccineRepository	vaccineRepository;
+
+	@Autowired
+	private MedicineRepository	medicineRepository;
 
 
 	@Autowired
@@ -79,6 +84,17 @@ public class SicknessService {
 	}
 
 	@Transactional
+	public Boolean sameNameAndPetType(final Sickness sickness, final List<Sickness> sicknesses) {
+		Boolean res = false;
+		for (Sickness s : sicknesses) {
+			if (s.getName().equals(sickness.getName()) && s.getType().equals(sickness.getType())) {
+				res = true;
+			}
+		}
+		return res;
+	}
+
+	@Transactional
 	public void deleteSickness(final Sickness sickness) throws DataAccessException {
 		this.sicknessRepository.deleteById(sickness.getId());
 	}
@@ -94,6 +110,16 @@ public class SicknessService {
 	}
 
 	@Transactional
+	public void deleteMedicineFromSickness(final Sickness sickness) throws DataAccessException {
+		Iterable<Medicine> medicines = this.medicineRepository.findAll();
+		for (Medicine m : medicines) {
+			if (m.getSickness().getId().equals(sickness.getId())) {
+				this.medicineRepository.deleteById(m.getId());
+			}
+		}
+	}
+
+	@Transactional
 	public Iterable<Sickness> findAll() {
 		return this.sicknessRepository.findAll();
 
@@ -102,4 +128,5 @@ public class SicknessService {
 	public Collection<Sickness> findSicknesses() {
 		return StreamSupport.stream(this.findAll().spliterator(), false).collect(Collectors.toSet());
 	}
+
 }

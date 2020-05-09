@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Pet;
@@ -17,6 +19,8 @@ import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+
 public class SicknessServiceTest {
 
 	@Autowired
@@ -89,6 +93,16 @@ public class SicknessServiceTest {
 		List<Vaccine> vaccines = this.vaccineService.findVaccinesBySicknessId(sickness.getId());
 		Assertions.assertTrue(vaccines.isEmpty());
 
+	}
+
+	@Test
+	void sameNameAndPetTypeTest() {
+		List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
+		Sickness sickness = new Sickness();
+		sickness.setName("Otitis");
+		sickness.setType(this.petService.findPetById(1).getType());
+		Boolean res = this.sicknessService.sameNameAndPetType(sickness, sicknesses);
+		Assertions.assertTrue(res == true);
 	}
 
 }
