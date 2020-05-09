@@ -38,10 +38,12 @@ public class Product extends NamedEntity {
 	@Column(name = "price")
 	@Digits(fraction = 2, integer = 10)
 	@Min(value = 1)
+	@NotEmpty
 	private Double	price;
 
 	@Column(name = "stock")
 	@Min(value = 0)
+	@NotEmpty
 	private Integer	stock;
 
 	@Column(name = "description")
