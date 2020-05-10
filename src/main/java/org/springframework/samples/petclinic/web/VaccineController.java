@@ -138,7 +138,7 @@ public class VaccineController {
 		String view = "welcome";
 		//System.out.println(sicknessId);
 		if (result.hasErrors()) {
-			modelMap.addAttribute("vaccines", vaccine);
+			modelMap.addAttribute("vaccine", vaccine);
 			modelMap.addAttribute("sicknesses", this.sicknessService.findAll());
 			return "vaccines/editVaccine";
 		} else {
