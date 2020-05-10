@@ -24,6 +24,7 @@ public class HU10UITest {
 
 	@LocalServerPort
 	private int port;
+	private String username;
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -39,17 +40,33 @@ public class HU10UITest {
 	}
 
 	@Test
-	public void testUntitledTestCase() throws Exception {
-		driver.get("http://localhost:8080/");
-		driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
-	    driver.findElement(By.id("password")).clear();
-	    driver.findElement(By.id("password")).sendKeys("0wn3r");
-	    driver.findElement(By.id("username")).clear();
-	    driver.findElement(By.id("username")).sendKeys("owner1");
-	    driver.findElement(By.xpath("//button[@type='submit']")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/clinics/1/products')]")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/products/4')]")).click();
+	public void testShowAClinicProductCasoNegativo() throws Exception {
+
+		
+		this.as("owner1").whenIamLoggedIntheSystemAsOwner().thenICantShowAProduct();
+	}
+	
+	private HU10UITest as(final String username) {
+		this.username = username;
+		this.driver.get("http://localhost:" + this.port + "/");
+		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
+		driver.findElement(By.id("username")).clear();
+		driver.findElement(By.id("username")).sendKeys("owner1");
+		driver.findElement(By.id("password")).clear();
+		driver.findElement(By.id("password")).sendKeys("0wn3r");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		return this;
+	}
+	
+	private HU10UITest whenIamLoggedIntheSystemAsOwner() {
+		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
+		driver.findElement(By.xpath("//a[contains(@href, '/clinics/1/products')]")).click();
+		return this;
+	}
+	
+	private HU10UITest thenICantShowAProduct() {
+		driver.findElement(By.xpath("//a[contains(@href, '/products/4')]")).click();
+		return this;
 	}
 
 	@AfterEach

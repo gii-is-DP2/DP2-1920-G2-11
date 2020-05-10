@@ -21,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class HU8UITest {
 	@LocalServerPort
 	private int port;
+	private String username;
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -30,23 +31,39 @@ public class HU8UITest {
 	public void setUp() throws Exception {
 
 		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
-		
+
 		driver = new FirefoxDriver();
 		baseUrl = "https://www.google.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
-	public void testUntitledTestCase() throws Exception {
+	public void testPruebaCasoNegativoShow() throws Exception {
+
+		this.as("owner1").whenIamLoggedIntheSystemAsOwner().thenICantShowAClinic();
+
+	}
+
+	private HU8UITest as(final String username) {
+		this.username = username;
 		this.driver.get("http://localhost:" + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
 		driver.findElement(By.id("username")).clear();
-	    driver.findElement(By.id("username")).sendKeys("owner1");
-	    driver.findElement(By.id("password")).clear();
-	    driver.findElement(By.id("password")).sendKeys("0wn3r");
-	    driver.findElement(By.xpath("//button[@type='submit']")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-	    driver.findElement(By.xpath("//a[contains(text(),'Clínica Los Arcos')]")).click();
+		driver.findElement(By.id("username")).sendKeys("owner1");
+		driver.findElement(By.id("password")).clear();
+		driver.findElement(By.id("password")).sendKeys("0wn3r");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		return this;
+	}
+
+	private HU8UITest whenIamLoggedIntheSystemAsOwner() {
+		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
+		return this;
+	}
+
+	private HU8UITest thenICantShowAClinic() {
+		this.driver.findElement(By.xpath("//a[contains(text(),'Clínica Los Arcos')]")).click();
+		return this;
 	}
 
 	@AfterEach

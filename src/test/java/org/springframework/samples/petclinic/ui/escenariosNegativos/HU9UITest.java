@@ -21,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class HU9UITest {
 	@LocalServerPort
 	private int port;
+	private String username;
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -30,23 +31,38 @@ public class HU9UITest {
 	public void setUp() throws Exception {
 
 		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
-		
+
 		driver = new FirefoxDriver();
 		baseUrl = "https://www.google.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
-	public void testUntitledTestCase() throws Exception {
+	public void testListProductsClinicCasoNegativo() throws Exception {
+
+		this.as("owner1").whenIamLoggedIntheSystemAsOwner().thenICantListProductsClinic();
+	}
+
+	private HU9UITest as(final String username) {
+		this.username = username;
 		this.driver.get("http://localhost:" + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
 		driver.findElement(By.id("username")).clear();
-	    driver.findElement(By.id("username")).sendKeys("owner1");
-	    driver.findElement(By.id("password")).clear();
-	    driver.findElement(By.id("password")).sendKeys("0wn3r");
-	    driver.findElement(By.xpath("//button[@type='submit']")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-	    driver.findElement(By.xpath("//a[contains(@href, '/clinics/3/products')]")).click();
+		driver.findElement(By.id("username")).sendKeys("owner1");
+		driver.findElement(By.id("password")).clear();
+		driver.findElement(By.id("password")).sendKeys("0wn3r");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		return this;
+	}
+
+	private HU9UITest whenIamLoggedIntheSystemAsOwner() {
+		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
+		return this;
+	}
+
+	private HU9UITest thenICantListProductsClinic() {
+		driver.findElement(By.xpath("//a[contains(@href, '/clinics/3/products')]")).click();
+		return this;
 	}
 
 	@AfterEach
