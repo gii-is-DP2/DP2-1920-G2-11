@@ -2,7 +2,6 @@
 package org.springframework.samples.petclinic.escenarios;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -25,25 +24,20 @@ public class HU20Test {
 
 	//Caso positivo
 	@Test
-	void shouldFindCorrectMedicinesDetailsWithId() {
-		Collection<Medicine> meds = this.medicineService.findMedicines();
-		Medicine medicine = this.medicineService.findMedicineById(1);
-		Assertions.assertTrue(meds.contains(medicine)
-				&&	medicine.getName().equals("Medicina A")
-				&& medicine.getComponents().equals("Componente A")
-				&& medicine.getPetType().getId().equals(1)&&medicine.getPetType().getName().equals("cat")
-				&& medicine.getSickness().getId().equals(1)&&medicine.getSickness().getName().equals("Otitis")
-				&& medicine.getTreatment().equals("1 cada 8 horas"));
+	void shouldFindAllMedicines() {
+		Collection<Medicine> meds = medicineService.findMedicines();
+		Assertions.assertTrue(!meds.isEmpty()
+		&& meds.size()==8);
+		Medicine medicine = medicineService.findMedicineById(1);
+		Assertions.assertTrue(meds.contains(medicine));
 	}
 
 	//Caso negativo
 	@Test
-	void shouldNotFindMedicinesDetailsWithIncorrectId() {
-		Collection<Medicine> meds = this.medicineService.findMedicines();
-		Medicine medicine = this.medicineService.findMedicineById(50);
-		Assertions.assertTrue(medicine.isNew());
+	void shouldNotFindWrongMedicines() {
+		Collection<Medicine> meds = medicineService.findMedicines();
+		Medicine medicine = medicineService.findMedicineById(50);
 		Assertions.assertFalse(meds.contains(medicine));
+		Assertions.assertTrue(medicine.isNew());
 	}
-
-
 }

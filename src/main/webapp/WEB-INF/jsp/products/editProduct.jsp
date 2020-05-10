@@ -20,6 +20,7 @@
                    class="form-horizontal" action="save">
             <input type="hidden" name="id" value="${product.id}"/>
             <div class="form-group has-feedback">
+                <petclinic:inputField label="Name" name="name"/>
                 <petclinic:inputField label="Description" name="description"/>
                 <petclinic:inputField label="Price" name="price"/>
                 <petclinic:inputField label="Stock" name="stock"/>

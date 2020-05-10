@@ -17,22 +17,20 @@ import org.springframework.util.MultiValueMap;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 
-//@TestPropertySource(locations = "classpath:application-mysql.properties")
-
 public class MedicineControllerE2ETest {
 
 	@Autowired
 	private MockMvc				mockMvc;
 
-	private static final int	TEST_MEDICINE_ID				= 1;
+	private static final int	TEST_MEDICINE_ID				= 2;
 
 	private static final int	TEST_MEDICINE_ERROR_ID			= 33;
 	
-	private static final int	TEST_PETTYPE_ID			= 1;
+	private static final int	TEST_PETTYPE_ID			= 2;
 	
 	private static final int	TEST_PETTYPE_ERROR_ID			= 33;
 	
-	private static final int	TEST_SICKNESS_ID			= 1;
+	private static final int	TEST_SICKNESS_ID			= 2;
 	
 	private static final int	TEST_SICKNESS_ERROR_ID			= 33;
 

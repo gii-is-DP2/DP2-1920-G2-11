@@ -151,7 +151,7 @@ INSERT INTO product_types(id, name) VALUES (3, 'Alimentación');
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (1,'chámpu hidratante','para pelo seco',4.00,3,1,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (2,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,1,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (3,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,2,1);
-INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (4,'champú para gato','',null,null,1,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (4,'champú para gato','',20.00,1,1,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (5,'chámpu hidratante','para pelo seco',4.00,34,4,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (6,'chámpu hidratante','para pelo seco',4.00,39,5,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (7,'cepillo','para peinar a perros y gatos.',5.00,30,6,1);
@@ -160,4 +160,4 @@ INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id)
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (10,'chámpu hidratante','para pelo seco',4.00,3,8,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (11,'chámpu hidratante','para pelo seco',4.00,3,9,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (12,'chámpu hidratante','para pelo seco',4.00,3,10,1);
-INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (13,'','',null,null,11,1);
+INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (13,'','',1.00,1,11,1);

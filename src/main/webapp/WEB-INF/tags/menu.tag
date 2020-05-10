@@ -40,19 +40,42 @@
 					<span>Veterinarians</span>
 				</petclinic:menuItem>
 
-		<!-- 		<petclinic:menuItem active="${name eq 'error'}" url="/oups"
+<!--  
+				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
-				</petclinic:menuItem>   -->
+				</petclinic:menuItem> --%>
+				
+				-->
 				
 				<petclinic:menuItem active="${name eq 'clinics'}" url="/clinics"
 					title="clinics">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Clinics</span>
 				</petclinic:menuItem>
+
+				<sec:authorize access="hasAuthority('owner')">
+				<petclinic:menuItem active="${name eq 'medicines'}" url="/owner/medicines/"
+					title="medicines">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Medicines</span>
+				</petclinic:menuItem>
+				</sec:authorize>
 				
+				<sec:authorize access="hasAuthority('admin')">
+				<petclinic:menuItem active="${name eq 'medicines'}" url="/admin/medicines/"
+					title="medicines">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Medicines</span>
+				</petclinic:menuItem>
+				</sec:authorize>
 				
+				<petclinic:menuItem active="${name eq 'products'}" url="/products"
+					title="products">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Products</span>
+				</petclinic:menuItem>
 
 			</ul>
 

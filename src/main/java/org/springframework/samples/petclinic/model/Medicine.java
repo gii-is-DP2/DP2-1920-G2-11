@@ -15,10 +15,6 @@ import javax.validation.constraints.NotBlank;
 public class Medicine extends NamedEntity {
 
 	@NotBlank
-	@Column(name = "name")
-	private String		name;
-
-	@NotBlank
 	@Column(name = "components")
 	private String		components;
 
@@ -36,16 +32,6 @@ public class Medicine extends NamedEntity {
 	@JoinColumn(name = "sickness_id")
 	private Sickness	sickness;
 
-
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public void setName(final String name) {
-		this.name = name;
-	}
 
 	public String getComponents() {
 		return this.components;

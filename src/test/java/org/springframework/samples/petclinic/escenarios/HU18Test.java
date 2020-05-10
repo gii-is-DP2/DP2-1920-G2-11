@@ -16,7 +16,7 @@ import org.springframework.samples.petclinic.service.VaccineService;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class HU21Test {
+public class HU18Test {
 
 	@Autowired
 	private MedicineService medicineService;
@@ -24,20 +24,22 @@ public class HU21Test {
 
 	//Caso positivo
 	@Test
-	void shouldFindAllMedicines() {
-		Collection<Medicine> meds = medicineService.findMedicines();
-		Assertions.assertTrue(!meds.isEmpty()
-		&& meds.size()==8);
-		Medicine medicine = medicineService.findMedicineById(1);
-		Assertions.assertTrue(meds.contains(medicine));
+	void shouldFindMedicinesWithCorrectSicknessAndPetTypeId() {
+		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(1, 1);
+		Integer size = medicines.size();
+		Medicine medicine = medicines.stream().findFirst().get();
+		Assertions.assertTrue(size==1 && medicine.getName().equals("Medicina A")
+				&& medicine.getComponents().equals("Componente A")
+				&& medicine.getPetType().getId().equals(1)&&medicine.getPetType().getName().equals("cat")
+				&& medicine.getSickness().getId().equals(1)&&medicine.getSickness().getName().equals("Otitis")
+				&& medicine.getTreatment().equals("1 cada 8 horas"));
 	}
 
 	//Caso negativo
 	@Test
-	void shouldNotFindWrongMedicines() {
-		Collection<Medicine> meds = medicineService.findMedicines();
-		Medicine medicine = medicineService.findMedicineById(50);
-		Assertions.assertFalse(meds.contains(medicine));
-		Assertions.assertTrue(medicine.isNew());
+	void shouldNotFindMedicinesWithInCorrectSicknessAndPetTypeId() {
+		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(43, 12);
+		Assertions.assertTrue(medicines.isEmpty());
 	}
+
 }

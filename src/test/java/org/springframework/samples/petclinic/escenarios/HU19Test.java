@@ -2,6 +2,7 @@
 package org.springframework.samples.petclinic.escenarios;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -24,11 +25,11 @@ public class HU19Test {
 
 	//Caso positivo
 	@Test
-	void shouldFindMedicinesWithCorrectSicknessAndPetTypeId() {
-		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(1, 1);
-		Integer size = medicines.size();
-		Medicine medicine = medicines.stream().findFirst().get();
-		Assertions.assertTrue(size==1 && medicine.getName().equals("Medicina A")
+	void shouldFindCorrectMedicinesDetailsWithId() {
+		Collection<Medicine> meds = this.medicineService.findMedicines();
+		Medicine medicine = this.medicineService.findMedicineById(1);
+		Assertions.assertTrue(meds.contains(medicine)
+				&&	medicine.getName().equals("Medicina A")
 				&& medicine.getComponents().equals("Componente A")
 				&& medicine.getPetType().getId().equals(1)&&medicine.getPetType().getName().equals("cat")
 				&& medicine.getSickness().getId().equals(1)&&medicine.getSickness().getName().equals("Otitis")
@@ -37,9 +38,12 @@ public class HU19Test {
 
 	//Caso negativo
 	@Test
-	void shouldNotFindMedicinesWithInCorrectSicknessAndPetTypeId() {
-		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(43, 12);
-		Assertions.assertTrue(medicines.isEmpty());
+	void shouldNotFindMedicinesDetailsWithIncorrectId() {
+		Collection<Medicine> meds = this.medicineService.findMedicines();
+		Medicine medicine = this.medicineService.findMedicineById(50);
+		Assertions.assertTrue(medicine.isNew());
+		Assertions.assertFalse(meds.contains(medicine));
 	}
+
 
 }

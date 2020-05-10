@@ -22,7 +22,7 @@ public class ClinicControllerE2ETest {
 	@Autowired
 	private MockMvc				mockMvc;
 
-	private static final int	TEST_CLINIC_ID	= 1;
+	private static final int	TEST_CLINIC_ID	= 2;
 	
 	
 	@WithMockUser(username = "owner1", authorities = {

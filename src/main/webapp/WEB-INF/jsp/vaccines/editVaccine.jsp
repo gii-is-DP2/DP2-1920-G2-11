@@ -30,6 +30,7 @@ function validateForm()
       return false;
     } 
     
+
     else if(isNaN(document.frm.months.value))
     {
       alert("Months must be a number");
@@ -91,6 +92,7 @@ function validateForm()
 
 
 				<c:choose>
+
 					<c:when test="${vaccines['new']}">
 						<button class="btn btn-default" type="submit">Add Vaccine</button>
 						<input class="btn btn-default" type="button"

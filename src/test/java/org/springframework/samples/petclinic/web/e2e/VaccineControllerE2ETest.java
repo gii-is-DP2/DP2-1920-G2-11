@@ -38,14 +38,6 @@ public class VaccineControllerE2ETest {
 	private static final int TEST_VACCINE_ERROR_ID = 8;
 
 
-//	@WithMockUser(username = "vet1", authorities = {
-//		"veterinarian"
-//	})
-//	@Test
-//	void testShowSicknessesListHtml() throws Exception {
-//		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses", VaccineControllerE2ETest.TEST_PET_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("sicknesses"))
-//			.andExpect(MockMvcResultMatchers.view().name("sicknesses/sicknessList"));
-//	}
 
 	@WithMockUser(username = "owner1", authorities = {
 			"veterinarian", "owner", "admin"
