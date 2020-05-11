@@ -12,35 +12,46 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 public class ClinicControllerE2ETest {
-	
-	
-	@Autowired
-	private MockMvc				mockMvc;
 
-	private static final int	TEST_CLINIC_ID	= 2;
-	
-	
-	@WithMockUser(username = "owner1", authorities = {
-			"veterinarian", "admin"
-		})
+	@Autowired
+	private MockMvc mockMvc;
+
+	private static final int TEST_CLINIC_ID = 2;
+	private static final int TEST_CLINIC_ID_ERROR = 3;
+
+	@WithMockUser(username = "owner1", authorities = { "owner" })
 	@Test
 	void testShowClinics() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("clinics")).andExpect(MockMvcResultMatchers.view().name("clinics/clinicsList"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics")).andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsList"));
 	}
 
-	@WithMockUser(username = "owner1", authorities = {
-			"veterinarian", "admin"
-		})
+	@WithMockUser(username = "owner1", authorities = { "owner" })
 	@Test
-	void testShowProduct() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerE2ETest.TEST_CLINIC_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
-			.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsShow"));
+	void testShowClinic() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerE2ETest.TEST_CLINIC_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsShow"));
 
 	}
+
+
+
+	@WithMockUser(username = "owner1", authorities = { "owner" })
+	@Test
+	void testShowClinicError() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerE2ETest.TEST_CLINIC_ID_ERROR))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("clinics"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicDetailsError"));
+
+	}
+
 
 }

@@ -98,16 +98,17 @@ public class VaccineControllerE2ETest {
 				.andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineDetailsError"));
 	}
 
-	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
-		})
+	@WithMockUser(username = "vet1", authorities = { "veterinarian", "admin" })
 	@Test
 	void testDeleteVaccine() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/vets/delete/{vaccineId}", VaccineControllerE2ETest.TEST_VACCINE_ID))
-				.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-				.andExpect(MockMvcResultMatchers.view().name("redirect:/vets/listVaccine"));
+				.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/delete",
+						VaccineControllerE2ETest.TEST_VACCINE_ID))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}
+	
+	
 
 	@WithMockUser(username = "vet1", authorities = {
 			"veterinarian" , "admin"
@@ -115,11 +116,14 @@ public class VaccineControllerE2ETest {
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/vets/newVaccines")
+				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
 						.with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR")
 						.param("sickness", "Otitis").param("months", "9").param("components", "H20"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
+	
+	
+	
 
 
 }
