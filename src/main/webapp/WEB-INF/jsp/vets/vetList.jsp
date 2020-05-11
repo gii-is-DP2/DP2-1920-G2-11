@@ -39,8 +39,11 @@
         <tr>
 			<td><spring:url value="/vets/newSickness" var="sicknessNewUrl">
 				</spring:url> <a href="${fn:escapeXml(sicknessNewUrl)}">Create a sickness for a pet type</a></td>
+				 <sec:authorize access="hasAuthority('vet')">
 				 <spring:url value="/vets/newVaccine" var="createVaccineUrl"></spring:url>
+				
 		<a class="btn btn-default" href="${fn:escapeXml(createVaccineUrl)}" >Add Vaccine</a>
+		 </sec:authorize>
 		</tr>
     </table>
 </petclinic:layout>
