@@ -5,15 +5,22 @@ import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HU16UITest {
+	
 	@LocalServerPort
 	private int				port;
 
@@ -33,24 +40,26 @@ public class HU16UITest {
 	}
 
 	@Test
-	public void testPruebaCasoPositivoCreate() throws Exception {
-		this.afterILogAsAdmin().thenICanCreateAProduct();
+	public void testPruebaCasoNegativoCreate() throws Exception {
+		this.afterILogAsAdmin().thenICantCreateAProduct();
 	}
 	
   @Test
   public HU16UITest afterILogAsAdmin() throws Exception {
-    driver.get("http://localhost:8080/");
-    driver.findElement(By.linkText("Login")).click();
+    driver.get("http://localhost:" + this.port + "/");
+    this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
     driver.findElement(By.id("username")).click();
+    driver.findElement(By.id("username")).sendKeys("admin1"); 
     driver.findElement(By.xpath("//div")).click();
     driver.findElement(By.id("password")).click();
+    driver.findElement(By.id("password")).sendKeys("4dm1n"); 
     driver.findElement(By.xpath("//button[@type='submit']")).click();
     return this;
   }
   @Test
-  public HU16UITest thenICanCreateAProduct() throws Exception {
-    driver.findElement(By.linkText("Products")).click();
-    driver.findElement(By.linkText("Create")).click();
+  public HU16UITest thenICantCreateAProduct() throws Exception {
+	  this.driver.findElement(By.xpath("//a[contains(@href, '/products')]")).click(); 
+	  this.driver.findElement(By.xpath("//a[contains(@href, '/products/new')]")).click();
     driver.findElement(By.id("name")).click();
     driver.findElement(By.id("name")).clear();
     driver.findElement(By.id("name")).sendKeys("Producto 1");
