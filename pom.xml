@@ -272,6 +272,7 @@
 					<excludes>
 						<exclude>**/*UITest.java</exclude>
 						<exclude>**/*APITest.java</exclude>
+						<exclude>**/*MySQLTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

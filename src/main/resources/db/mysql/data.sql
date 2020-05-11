@@ -1,3 +1,13 @@
+-- One admin user, named admin1 with passwor 4dm1n and authority admin
+INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
+INSERT INTO authorities VALUES ('admin1','admin');
+-- One owner user, named owner1 with passwor 0wn3r
+INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
+INSERT INTO authorities VALUES ('owner1','owner');
+-- One vet user, named vet1 with passwor v3t
+INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
+INSERT INTO authorities VALUES ('vet1','veterinarian');
+
 INSERT IGNORE INTO vets VALUES (1, 'James', 'Carter');
 INSERT IGNORE INTO vets VALUES (2, 'Helen', 'Leary');
 INSERT IGNORE INTO vets VALUES (3, 'Linda', 'Douglas');
@@ -22,35 +32,38 @@ INSERT IGNORE INTO types VALUES (4, 'snake');
 INSERT IGNORE INTO types VALUES (5, 'bird');
 INSERT IGNORE INTO types VALUES (6, 'hamster');
 
-INSERT IGNORE INTO owners VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023');
-INSERT IGNORE INTO owners VALUES (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749');
-INSERT IGNORE INTO owners VALUES (3, 'Eduardo', 'Rodriquez', '2693 Commerce St.', 'McFarland', '6085558763');
-INSERT IGNORE INTO owners VALUES (4, 'Harold', 'Davis', '563 Friendly St.', 'Windsor', '6085553198');
-INSERT IGNORE INTO owners VALUES (5, 'Peter', 'McTavish', '2387 S. Fair Way', 'Madison', '6085552765');
-INSERT IGNORE INTO owners VALUES (6, 'Jean', 'Coleman', '105 N. Lake St.', 'Monona', '6085552654');
-INSERT IGNORE INTO owners VALUES (7, 'Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085555387');
-INSERT IGNORE INTO owners VALUES (8, 'Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683');
-INSERT IGNORE INTO owners VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435');
-INSERT IGNORE INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487');
 
-INSERT IGNORE INTO pets VALUES (1, 'Leo', '2000-09-07', 1, 1);
-INSERT IGNORE INTO pets VALUES (2, 'Basil', '2002-08-06', 6, 2);
-INSERT IGNORE INTO pets VALUES (3, 'Rosy', '2001-04-17', 2, 3);
-INSERT IGNORE INTO pets VALUES (4, 'Jewel', '2000-03-07', 2, 3);
-INSERT IGNORE INTO pets VALUES (5, 'Iggy', '2000-11-30', 3, 4);
-INSERT IGNORE INTO pets VALUES (6, 'George', '2000-01-20', 4, 5);
-INSERT IGNORE INTO pets VALUES (7, 'Samantha', '1995-09-04', 1, 6);
-INSERT IGNORE INTO pets VALUES (8, 'Max', '1995-09-04', 1, 6);
-INSERT IGNORE INTO pets VALUES (9, 'Lucky', '1999-08-06', 5, 7);
-INSERT IGNORE INTO pets VALUES (10, 'Mulligan', '1997-02-24', 2, 8);
-INSERT IGNORE INTO pets VALUES (11, 'Freddy', '2000-03-09', 5, 9);
-INSERT IGNORE INTO pets VALUES (12, 'Lucky', '2000-06-24', 2, 10);
-INSERT IGNORE INTO pets VALUES (13, 'Sly', '2002-06-08', 1, 10);
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (3, 'Eduardo', 'Rodriquez', '2693 Commerce St.', 'McFarland', '6085558763', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (4, 'Harold', 'Davis', '563 Friendly St.', 'Windsor', '6085553198', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (5, 'Peter', 'McTavish', '2387 S. Fair Way', 'Madison', '6085552765', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (6, 'Jean', 'Coleman', '105 N. Lake St.', 'Monona', '6085552654', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (7, 'Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085555387', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (8, 'Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487', 'owner1');
+INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (11, 'Frank', 'De La Jungla', 'Av. Cuesta´s Shelter', 'Tailandia', '666666666', 'owner1');
 
-INSERT IGNORE INTO visits VALUES (1, 7, '2010-03-04', 'rabies shot');
-INSERT IGNORE INTO visits VALUES (2, 8, '2011-03-04', 'rabies shot');
-INSERT IGNORE INTO visits VALUES (3, 8, '2009-06-04', 'neutered');
-INSERT IGNORE INTO visits VALUES (4, 7, '2008-09-04', 'spayed');
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (1, 'Leo', '2010-09-07', 1, 1);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (2, 'Basil', '2012-08-06', 6, 2);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (3, 'Rosy', '2011-04-17', 2, 3);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (4, 'Jewel', '2010-03-07', 2, 3);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (5, 'Iggy', '2010-11-30', 3, 4);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (6, 'George', '2010-01-20', 4, 5);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (7, 'Samantha', '2012-09-04', 1, 6);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (8, 'Max', '2012-09-04', 1, 6);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (9, 'Lucky', '2011-08-06', 5, 7);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (10, 'Mulligan', '2007-02-24', 2, 8);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (11, 'Freddy', '2010-03-09', 5, 9);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (12, 'Lucky', '2010-06-24', 2, 10);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (13, 'Sly', '2012-06-08', 1, 10);
+INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (14, 'Frankomodo', '2003-02-24', 7, 11);
+
+INSERT IGNORE INTO visits(id,pet_id,visit_date,description) VALUES (1, 7, '2013-01-01', 'rabies shot');
+INSERT IGNORE INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02', 'rabies shot');
+INSERT IGNORE INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
+INSERT IGNORE INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
 INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (1, 'Otitis', 'Parásitos(ácaros), hongos, bacterias', 'Inflamación del conjunto auditivo, dolor, pérdida de audición', 2, 1);
 INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (2, 'Conjuntivitis', 'Infecciones oculares, alergias, problemas genéticos', 'Inflamación de la mucosa del ojo, pérdida de visión, lagrimeo', 2, 1);
@@ -106,3 +119,45 @@ INSERT IGNORE INTO vaccines(id,name,components,months,sickness_id) VALUES (20, '
 INSERT IGNORE INTO vaccines(id,name,components,months,sickness_id) VALUES (21, 'Vacuna BRON', 'O,G,T,Y', 4, 20);
 INSERT IGNORE INTO vaccines(id,name,components,months,sickness_id) VALUES (22, 'Vacuna D', 'G,H,J,K', 10, 24);
 INSERT IGNORE INTO vaccines(id,name,components,months,sickness_id) VALUES (23, 'Vacuna S', 'Componente S', 6, 25);
+
+
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (1, 'Medicina A', 'Componente A', '1 cada 8 horas', 1, 1);
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (2, 'Medicina B', 'Componente B', '1 cada 24 horas', 1, 2);
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (3, 'Medicina C', 'Componente A', '1 cada 8 horas', 2, 1);
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (4, 'Medicina D', 'Componente B', '1 cada 24 horas', 2, 2);
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (5, 'Medicina E', 'Componente A', '1 cada 8 horas', 3, 1);
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (6, 'Medicina F', 'Componente B', '1 cada 24 horas', 3, 2);
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (7, 'Medicina G', 'Componente A', '1 cada 8 horas', 4, 1);
+INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (8, 'Medicina H', 'Componente B', '1 cada 24 horas', 4, 2);
+
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (1, 'Winston Pet Cares','Evergreen Av. 4' ,'Pitsburg','charles@mail.com', '600033472');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan 10' ,'Sevilla','vetnervion@mail.com', '685123477');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (3, 'Clínica Los Arcos','' ,'','', '');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (4, 'Veterinaria AliPet','Calle Paloma 1' ,'Sevilla','alipet@mail.com', '684559612');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (5, 'Veterinaria Pablo Millan','Calle Estrella Vega 5' ,'Granada','pmillan@mail.com', '963789654');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (6, 'Veterinaria Macarena','Calle Amor 8' ,'Córdoba','vetmac@mail.com', '693258145');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (7, 'Veterinaria Los Remedios','Calle Locura 6' ,'Málaga','vetrem@,mail.com', '652369741');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (8, 'Veterinaria Santiponce','Calle Cueva 3' ,'Jaén','vetsanti@mail.com', '654123789');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (9, 'Vetpinoli','Av Gracia 9' ,'Almeria','vetpinoli@mail.com', '663214852');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (10, 'Clínica Hispalis','Calle Paloma 12' ,'Sevilla','hispavet@mail.com', '954231852');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (11, 'Clínica lalita','Calle Pino 3' ,'Sevilla','lalita@mail.com', '954231852');
+
+
+
+INSERT IGNORE INTO product_types(id, name) VALUES (1, 'Higiene');
+INSERT IGNORE INTO product_types(id, name) VALUES (2, 'Juguetes');
+INSERT IGNORE INTO product_types(id, name) VALUES (3, 'Alimentación');
+
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (1,'chámpu hidratante','para pelo seco',4.00,3,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (2,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (3,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,2,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (4,'champú para gato','',20.00,1,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (5,'chámpu hidratante','para pelo seco',4.00,34,4,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (6,'chámpu hidratante','para pelo seco',4.00,39,5,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (7,'cepillo','para peinar a perros y gatos.',5.00,30,6,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (8,'Stomodine 30 mls.','Stomodine gel para perros y gatos.Limpieza bucal, reduce la formación de placa y sarro. Infecciones cavidad bucal.',6.00,48,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (9,'chámpu hidratante','para pelo seco',4.00,3,7,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (10,'chámpu hidratante','para pelo seco',4.00,3,8,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (11,'chámpu hidratante','para pelo seco',4.00,3,9,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (12,'chámpu hidratante','para pelo seco',4.00,3,10,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (13,'','',1.00,1,11,1);
