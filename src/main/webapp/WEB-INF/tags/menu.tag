@@ -48,12 +48,13 @@
 				</petclinic:menuItem> --%>
 				
 				-->
-				
+				<sec:authorize access="hasAuthority('owner')">
 				<petclinic:menuItem active="${name eq 'clinics'}" url="/clinics"
 					title="clinics">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Clinics</span>
 				</petclinic:menuItem>
+				</sec:authorize>
 
 				<sec:authorize access="hasAuthority('owner')">
 				<petclinic:menuItem active="${name eq 'medicines'}" url="/owner/medicines/"
