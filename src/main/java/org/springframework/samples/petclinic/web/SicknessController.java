@@ -84,4 +84,30 @@ public class SicknessController {
 
 		return "welcome";
 	}
+
+	@GetMapping(value = "/owners/*/pets/*/sicknesses/{sicknessId}/editSickness")
+	public String editSickness(@PathVariable("sicknessId") final int sicknessId, final ModelMap modelMap) {
+		Sickness sickness = this.sicknessService.findSicknessesById(sicknessId);
+		modelMap.addAttribute("sickness", sickness);
+		return "sicknesses/updateSickness";
+	}
+
+	@PostMapping(value = "/owners/*/pets/*/sicknesses/{sicknessId}/updateSickness")
+	public String editingSickness(@Valid final Sickness sickness, final BindingResult result, final ModelMap modelMap) {
+		List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
+		Boolean duplicated = this.sicknessService.sameNameAndPetType(sickness, sicknesses);
+		if (duplicated) {
+			modelMap.addAttribute("sickness", sickness);
+			result.rejectValue("name", "duplicate");
+			return "sicknesses/updateSickness";
+		}
+		if (result.hasErrors()) {
+			modelMap.addAttribute("sickness", sickness);
+			return "sicknesses/updateSickness";
+		} else {
+			this.sicknessService.saveSickness(sickness);
+			modelMap.addAttribute("message", "Sickness succesfully saved!");
+		}
+		return "welcome";
+	}
 }

@@ -71,6 +71,7 @@ public class HU1UITest {
 		this.driver.findElement(By.linkText("Frank De La Jungla")).click();
 		Assert.assertEquals("komodo dragon", this.driver.findElement(By.xpath("//dd[3]")).getText());
 		this.driver.findElement(By.linkText("See Sicknesses")).click();
+		Assert.assertTrue(this.driver.findElement(By.xpath("//p[contains(text(), 'Tu mascota es algo exótica, por lo tanto no disponemos de un listado de enfermedades para su especie.')]")).isDisplayed());
 	}
 
 	@AfterEach

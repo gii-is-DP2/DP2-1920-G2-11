@@ -86,6 +86,7 @@ public class HU3UITest {
 		Assert.assertEquals("cat", this.driver.findElement(By.xpath("//dd[3]")).getText());
 		this.driver.findElement(By.linkText("See Sicknesses")).click();
 		this.driver.findElement(By.linkText("Name X")).click();
+		Assert.assertTrue(this.driver.findElement(By.xpath("//p[contains(text(), 'La enfermedad aún no ha sido detallada en la web')]")).isDisplayed());
 	}
 
 	@AfterEach
