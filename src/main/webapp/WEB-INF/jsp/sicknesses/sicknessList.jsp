@@ -30,7 +30,7 @@
                     </spring:url>
                     <a href="${fn:escapeXml(sicknessUrl)}">${sickness.name}</a>
                 </td>
-                 <sec:authorize access="hasAuthority('vet')">
+             
                 <td>
                     <spring:url value="/owners/*/pets/*/sicknesses/{sicknessId}/vaccines" var="vaccineUrl">
                         <spring:param name="sicknessId" value="${sickness.id}"/>
@@ -38,13 +38,15 @@
                     <a
                      href="${fn:escapeXml(vaccineUrl)}">See vaccines</a>
                 </td>
-                </sec:authorize>
+             
+                 <sec:authorize access="hasAuthority('veterinarian')">
                 <td>
                     <spring:url value="/owners/*/pets/*/sicknesses/delete/{sicknessId}" var="sicknessDeleteUrl">
                         <spring:param name="sicknessId" value="${sickness.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(sicknessDeleteUrl)}">Delete</a>
                 </td>
+                 </sec:authorize>
             </tr>
         </c:forEach>
         </tbody>
