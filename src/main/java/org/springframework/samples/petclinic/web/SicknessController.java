@@ -94,13 +94,15 @@ public class SicknessController {
 
 	@PostMapping(value = "/owners/*/pets/*/sicknesses/{sicknessId}/updateSickness")
 	public String editingSickness(@Valid final Sickness sickness, final BindingResult result, final ModelMap modelMap) {
-		List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
-		Boolean duplicated = this.sicknessService.sameNameAndPetType(sickness, sicknesses);
-		if (duplicated) {
-			modelMap.addAttribute("sickness", sickness);
-			result.rejectValue("name", "duplicate");
-			return "sicknesses/updateSickness";
-		}
+		//List<Sickness> sicknesses = this.sicknessService.findAllSicknesses();
+		//Boolean duplicated = this.sicknessService.sameNameAndPetType(sickness, sicknesses);
+		/*
+		 * if (duplicated) {
+		 * modelMap.addAttribute("sickness", sickness);
+		 * result.rejectValue("name", "duplicate");
+		 * return "sicknesses/updateSickness";
+		 * }
+		 */
 		if (result.hasErrors()) {
 			modelMap.addAttribute("sickness", sickness);
 			return "sicknesses/updateSickness";

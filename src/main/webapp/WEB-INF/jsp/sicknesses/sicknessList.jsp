@@ -16,7 +16,9 @@
         <tr>
             <th>Name</th>
             <th>Vaccines</th>
+            <sec:authorize access="hasAuthority('veterinarian')">
             <th>Actions</th>
+            </sec:authorize>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +37,7 @@
                     <a
                      href="${fn:escapeXml(vaccineUrl)}">See vaccines</a>
                 </td>
+                <sec:authorize access="hasAuthority('veterinarian')">
                 <td>
                 	<spring:url value="/owners/*/pets/*/sicknesses/{sicknessId}/editSickness" var="sicknessEditUrl">
                         <spring:param name="sicknessId" value="${sickness.id}"/>
@@ -46,6 +49,7 @@
                     </spring:url>
                     <a href="${fn:escapeXml(sicknessDeleteUrl)}">Delete</a>
                 </td>
+                 </sec:authorize>
             </tr>
         </c:forEach>
         </tbody>
