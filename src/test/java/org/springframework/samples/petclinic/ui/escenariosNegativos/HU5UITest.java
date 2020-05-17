@@ -43,7 +43,7 @@ public class HU5UITest {
 
 	@Test
 	public void testPruebaCasosPositivosCreateListYShow() throws Exception {
-		this.as("vet1").whenIamLoggedIntheSystemAsVet().thenICantCreateASickness();
+		this.as("vet1").whenIamLoggedIntheSystemAsVet().thenICantCreateASickness().thenThereIsntANewSicknessInTheList();
 	}
 
 	private HU5UITest as(final String username) {
@@ -66,7 +66,7 @@ public class HU5UITest {
 		return this;
 	}
 
-	private void thenICantCreateASickness() {
+	private HU5UITest thenICantCreateASickness() {
 		this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul/li[3]/a/span[2]")).click();
 		this.driver.findElement(By.linkText("Create a sickness for a pet type")).click();
 		this.driver.findElement(By.id("name")).click();
@@ -79,9 +79,19 @@ public class HU5UITest {
 		this.driver.findElement(By.id("severity")).click();
 		this.driver.findElement(By.id("severity")).clear();
 		this.driver.findElement(By.id("severity")).sendKeys("5");
-		new Select(this.driver.findElement(By.id("type"))).selectByVisibleText("cat");
-		this.driver.findElement(By.xpath("//option[@value='cat']")).click();
+		new Select(this.driver.findElement(By.id("type"))).selectByVisibleText("komodo dragon");
+		this.driver.findElement(By.xpath("//option[@value='komodo dragon']")).click();
 		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
+		return this;
+	}
+
+	private void thenThereIsntANewSicknessInTheList() {
+		this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul/li[2]/a/span[2]")).click();
+		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
+		this.driver.findElement(By.linkText("Frank De La Jungla")).click();
+		Assert.assertEquals("komodo dragon", this.driver.findElement(By.xpath("//dd[3]")).getText());
+		this.driver.findElement(By.linkText("See Sicknesses")).click();
+		Assert.assertTrue(this.driver.findElement(By.xpath("//p[contains(text(), 'Tu mascota es algo exótica, por lo tanto no disponemos de un listado de enfermedades para su especie.')]")).isDisplayed());
 	}
 
 	@AfterEach
