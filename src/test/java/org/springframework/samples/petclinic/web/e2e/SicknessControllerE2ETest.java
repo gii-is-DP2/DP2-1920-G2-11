@@ -34,6 +34,10 @@ public class SicknessControllerE2ETest {
 
 	private static final int	TEST_SICKNESS_ERROR_ID	= 30;
 
+	private static final int	TEST_SICKNESS_UPDATE_ID	= 25;
+
+	private static final int	TEST_SICKNESS_UPDATE_ERROR_ID	= 26;
+
 
 	@WithMockUser(username = "owner1", authorities = {
 		"owner"
@@ -122,6 +126,53 @@ public class SicknessControllerE2ETest {
 			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "cause")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "symptom"))
 			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "severity")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "type"))
 			.andExpect(MockMvcResultMatchers.view().name("sicknesses/editSickness"));
+	}
+
+	@WithMockUser(username = "vet1", authorities = {
+		"veterinarian"
+	})
+	@Test
+	void testInitUpdateForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/{sicknessId}/editSickness", SicknessControllerE2ETest.TEST_SICKNESS_UPDATE_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.view().name("sicknesses/updateSickness"));
+	}
+
+	@WithMockUser(username = "owner1", authorities = {
+		"veterinarian"
+	})
+	@Test
+	void testProcessUpdateFormSuccess() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/{sicknessId}/updateSickness", SicknessControllerE2ETest.TEST_SICKNESS_UPDATE_ID).with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Gastroenteritis")
+			.param("cause", "Causa 1").param("symptom", "Sintoma 1").param("severity", "1").param("type", "cat")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.view().name("welcome"));
+	}
+
+	@WithMockUser(username = "vet1", authorities = {
+		"veterinarian"
+	})
+	@Test
+	void testProcessUpdateFormHasErrors1() throws Exception {
+		this.mockMvc
+			.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/{sicknessId}/updateSickness", SicknessControllerE2ETest.TEST_SICKNESS_UPDATE_ERROR_ID).with(SecurityMockMvcRequestPostProcessors.csrf()).param("cause", "Cause 1")
+				.param("symptom", "Sintoma 1"))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("sickness")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "name"))
+			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "severity")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "type"))
+			.andExpect(MockMvcResultMatchers.view().name("sicknesses/updateSickness"));
+	}
+
+	@WithMockUser(username = "vet1", authorities = {
+		"veterinarian"
+	})
+	@Test
+	void testProcessUpdateFormHasErrors2() throws Exception {
+		this.mockMvc
+			.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/{sicknessId}/updateSickness", SicknessControllerE2ETest.TEST_SICKNESS_UPDATE_ERROR_ID).with(SecurityMockMvcRequestPostProcessors.csrf())
+				.param("name", "12345678901234567890123456789012345678901234567890123456789012345678901234567890")
+				.param("cause", "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890")
+				.param("symptom", "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890").param("severity", "5"))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("sickness")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "name"))
+			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "cause")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "symptom"))
+			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "severity")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("sickness", "type"))
+			.andExpect(MockMvcResultMatchers.view().name("sicknesses/updateSickness"));
 	}
 
 }
