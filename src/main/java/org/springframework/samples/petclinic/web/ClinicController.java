@@ -1,16 +1,17 @@
 
 package org.springframework.samples.petclinic.web;
 
-import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Clinic;
+import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.ProductService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +28,8 @@ public class ClinicController {
 		this.clinicService = clinicService;
 		this.productService = productService;
 	}
-
-	@GetMapping(value = "/clinics")
+ //lista de clinicas
+	@GetMapping(value = "/clinics") 
 	public String showClinics(final Map<String, Object> model) {
 		model.put("clinics", this.clinicService.findClinics());
 		return "clinics/clinicsList";
@@ -46,16 +47,20 @@ public class ClinicController {
 
 	}
 
-	// @GetMapping(value="/clinics/{clinicId}/productType/{productTypeId}")
-	// public String showProductsByClinicAndType(final Map<String, Object> model,
-	// @PathVariable final int clinicId, @PathVariable final int productTypeId ) {
-	//
-	// }
-	//
-	// @GetMapping(value = "/productTypes")
-	// public void showProductTypes(final Map<String, Object> model) {
-	// model.put("productTypes", this.productTypeService.findAllProductTypes());
-	// }
+	@GetMapping(value = "clinics/{clinicId}/delete")
+	public String deleteClinic(@PathVariable("clinicId") final int clinicId, final ModelMap modelMap) {
+		String view = "clinics/clinicList";
+		Clinic clinic = this.clinicService.findById(clinicId);
+		if (clinic != null) {
+			this.clinicService.delete(clinic);
+			modelMap.addAttribute("message", "Clinic deleted!");
+			view = this.showClinics(modelMap);
+		} else {
+			modelMap.addAttribute("message", "ERROR!");
+		}
+		return view;
+
+	}
 
 	
 

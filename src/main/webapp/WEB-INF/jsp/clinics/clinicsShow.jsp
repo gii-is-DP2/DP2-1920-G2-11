@@ -24,7 +24,8 @@
             <th>E-mail</th>
             <td><c:out value="${clinics.email}"/></td>
         </tr> 
-       
+        
+     
         
     </table>
 </petclinic:layout>

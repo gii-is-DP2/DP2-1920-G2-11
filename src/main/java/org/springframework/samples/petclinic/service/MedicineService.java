@@ -55,7 +55,7 @@ public class MedicineService {
 			return new Medicine();
 		}
 	}
-	
+	@Transactional
 	public Collection<Medicine> findMedicinesBySicknessIdAndPetTypeId(final int sicknessId, final int petTypeId) {
 		return this.medicineRepository.findBySicknessIdAndPetTypeId(sicknessId, petTypeId);
 	}

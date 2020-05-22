@@ -46,7 +46,7 @@ public class VaccineService {
 		this.vaccineRepository.deleteById(vaccine.getId());
 	}
 	
-	
+	@Transactional
 	public void delete(Vaccine vaccine) {
 		vaccineRepository.delete(vaccine);
 	}
