@@ -90,7 +90,7 @@ public class VaccineServiceTest {
 		sickness.setSymptom("Cuentitis");
 		PetType type = new PetType();
 		type.setId(33);
-		type.setName("dragón");
+		type.setName("dragon");
 		sickness.setType(type);
 		vaccine.setSickness(sickness);
 

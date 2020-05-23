@@ -21,14 +21,14 @@ public class HU8Test {
 	@Test
 	void shouldFindClinicWithCorrectId() {
 		Clinic clinic = this.clinicService.findById(2);
-		Assertions.assertTrue(clinic.getName().equals("Veterinaria Nervión"));
+		Assertions.assertTrue(clinic.getName().equals("Veterinaria Nervion"));
 	}
 
 	//Caso negativo
 	@Test
 	void shouldClinicsEmpty() {
 		Clinic clinics = this.clinicService.findById(3);
-		Assertions.assertTrue(clinics.getName().equals("Clínica Los Arcos"));
+		Assertions.assertTrue(clinics.getName().equals("Clinica Los Arcos"));
 		Assertions.assertTrue(clinics.getAddress().isEmpty() && clinics.getTelephone().isEmpty() && clinics.getEmail().isEmpty() && clinics.getCity().isEmpty());
 	}
 }

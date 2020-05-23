@@ -24,7 +24,7 @@ public class HU10Test {
 	void shouldFindProductWithCorrectId() {
 		Product product = this.productService.findProductById(1);
 		Assertions.assertTrue(
-				product.getName().equals("chámpu hidratante") && product.getDescription().equals("para pelo seco")
+				product.getName().equals("champu hidratante") && product.getDescription().equals("para pelo seco")
 						&& product.getPrice().equals(4.00) && product.getStock().equals(3)
 						&& product.getClinic().getId().equals(1) && product.getProductType().getId().equals(1));
 	}
@@ -33,7 +33,7 @@ public class HU10Test {
 	@Test
 	void shouldProductEmpty() {
 		Product product1 = this.productService.findProductById(4);
-		Assertions.assertTrue(product1.getName().equals("champú para gato") && product1.getDescription().isEmpty()
+		Assertions.assertTrue(product1.getName().equals("champu para gato") && product1.getDescription().isEmpty()
 		
 		);
 	}

@@ -23,7 +23,7 @@ public class HU1Test {
 	@Test
 	void shouldFindSicknessWithCorrectPetId() {
 		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(2);
-		Assertions.assertTrue(sicknesses.size() == 5 && sicknesses.get(0).getName().equals("Ácaros y hongos"));
+		Assertions.assertTrue(sicknesses.size() == 5 && sicknesses.get(0).getName().equals("Acaros y hongos"));
 	}
 
 	//Caso negativo

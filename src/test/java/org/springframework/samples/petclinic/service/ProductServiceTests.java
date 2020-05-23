@@ -28,7 +28,7 @@ public class ProductServiceTests {
 	@Test
 	void shouldFindProductWithCorrectId() {
 		Product product = this.productService.findProductById(1);
-		Assertions.assertTrue(product.getName().equals("chámpu hidratante"));
+		Assertions.assertTrue(product.getName().equals("champu hidratante"));
 		Assertions.assertTrue(product.getPrice().equals(4.00));
 		Assertions.assertTrue(product.getDescription().equals("para pelo seco"));
 		Assertions.assertTrue(product.getProductType().getId().equals(1));

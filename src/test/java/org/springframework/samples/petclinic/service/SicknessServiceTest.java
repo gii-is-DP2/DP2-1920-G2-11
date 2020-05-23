@@ -36,8 +36,8 @@ public class SicknessServiceTest {
 	@Test
 	void findSicknessesByPetIdTest() {
 		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(2);
-		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 5 && sicknesses.get(0).getName().equals("Ácaros y hongos") && sicknesses.get(1).getSeverity().equals(2) && sicknesses.get(2).getSymptom().equals("Diarrea, deshidratación")
-			&& sicknesses.get(3).getCause().equals("Mala alimentación"));
+		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 5 && sicknesses.get(0).getName().equals("Acaros y hongos") && sicknesses.get(1).getSeverity().equals(2) && sicknesses.get(2).getSymptom().equals("Diarrea, deshidratacion")
+			&& sicknesses.get(3).getCause().equals("Mala alimentacion"));
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class SicknessServiceTest {
 	@Test
 	void findSicknessesByIdTest() {
 		Sickness sickness = this.sicknessService.findSicknessesById(25);
-		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Ácaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
+		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Acaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
 
 	}
 
@@ -57,7 +57,7 @@ public class SicknessServiceTest {
 	void optionalFindSicknessesByIdTest() {
 		Optional<Sickness> findSickness = this.sicknessService.optionalFindSicknessesById(25);
 		Sickness sickness = findSickness.get();
-		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Ácaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
+		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Acaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
 	}
 
 	@Test

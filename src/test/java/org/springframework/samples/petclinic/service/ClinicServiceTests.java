@@ -43,7 +43,7 @@ public class ClinicServiceTests {
 	
 	@Test 
 	void findByNameTest(){
-		Collection<Clinic>clinic = this.clinicService.findByName("Veterinaria Nervión");
+		Collection<Clinic>clinic = this.clinicService.findByName("Veterinaria Nervion");
 		Assertions.assertTrue(clinic.size()==1);
 	}
 	

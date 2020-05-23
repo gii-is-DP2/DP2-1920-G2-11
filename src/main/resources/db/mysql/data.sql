@@ -1,12 +1,12 @@
 -- One admin user, named admin1 with passwor 4dm1n and authority admin
-INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
-INSERT INTO authorities VALUES ('admin1','admin');
+INSERT IGNORE INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
+INSERT IGNORE INTO authorities VALUES ('admin1','admin');
 -- One owner user, named owner1 with passwor 0wn3r
-INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
-INSERT INTO authorities VALUES ('owner1','owner');
+INSERT IGNORE INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
+INSERT IGNORE INTO authorities VALUES ('owner1','owner');
 -- One vet user, named vet1 with passwor v3t
-INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
-INSERT INTO authorities VALUES ('vet1','veterinarian');
+INSERT IGNORE INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
+INSERT IGNORE INTO authorities VALUES ('vet1','veterinarian');
 
 INSERT IGNORE INTO vets VALUES (1, 'James', 'Carter');
 INSERT IGNORE INTO vets VALUES (2, 'Helen', 'Leary');
@@ -31,19 +31,19 @@ INSERT IGNORE INTO types VALUES (3, 'lizard');
 INSERT IGNORE INTO types VALUES (4, 'snake');
 INSERT IGNORE INTO types VALUES (5, 'bird');
 INSERT IGNORE INTO types VALUES (6, 'hamster');
+INSERT IGNORE INTO types VALUES (7, 'komodo dragon');
 
-
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (3, 'Eduardo', 'Rodriquez', '2693 Commerce St.', 'McFarland', '6085558763', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (4, 'Harold', 'Davis', '563 Friendly St.', 'Windsor', '6085553198', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (5, 'Peter', 'McTavish', '2387 S. Fair Way', 'Madison', '6085552765', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (6, 'Jean', 'Coleman', '105 N. Lake St.', 'Monona', '6085552654', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (7, 'Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085555387', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (8, 'Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487', 'owner1');
-INSERT IGNORE INTO owners(id,first_name,last_name,address,city,telephone,username) VALUES (11, 'Frank', 'De La Jungla', 'Av. Cuesta´s Shelter', 'Tailandia', '666666666', 'owner1');
+INSERT IGNORE INTO owners VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');
+INSERT IGNORE INTO owners VALUES (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749', 'owner1');
+INSERT IGNORE INTO owners VALUES (3, 'Eduardo', 'Rodriquez', '2693 Commerce St.', 'McFarland', '6085558763', 'owner1');
+INSERT IGNORE INTO owners VALUES (4, 'Harold', 'Davis', '563 Friendly St.', 'Windsor', '6085553198', 'owner1');
+INSERT IGNORE INTO owners VALUES (5, 'Peter', 'McTavish', '2387 S. Fair Way', 'Madison', '6085552765', 'owner1');
+INSERT IGNORE INTO owners VALUES (6, 'Jean', 'Coleman', '105 N. Lake St.', 'Monona', '6085552654', 'owner1');
+INSERT IGNORE INTO owners VALUES (7, 'Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085555387', 'owner1');
+INSERT IGNORE INTO owners VALUES (8, 'Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683', 'owner1');
+INSERT IGNORE INTO owners VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435', 'owner1');
+INSERT IGNORE INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487', 'owner1');
+INSERT IGNORE INTO owners VALUES (11, 'Frank', 'De La Jungla', 'Av. Cuesta´s Shelter', 'Tailandia', '666666666', 'owner1');
 
 INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (1, 'Leo', '2010-09-07', 1, 1);
 INSERT IGNORE INTO pets(id,name,birth_date,type_id,owner_id) VALUES (2, 'Basil', '2012-08-06', 6, 2);
@@ -65,36 +65,36 @@ INSERT IGNORE INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-
 INSERT IGNORE INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT IGNORE INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (1, 'Otitis', 'Parásitos(ácaros), hongos, bacterias', 'Inflamación del conjunto auditivo, dolor, pérdida de audición', 2, 1);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (2, 'Conjuntivitis', 'Infecciones oculares, alergias, problemas genéticos', 'Inflamación de la mucosa del ojo, pérdida de visión, lagrimeo', 2, 1);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (3, 'Rabia', 'Virus', 'Irritabilidad, exceso de salivación, fiebre, vómitos', 1, 1);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (1, 'Otitis', 'Parasitos(acaros), hongos, bacterias', 'Inflamacion del conjunto auditivo, dolor, perdida de audicion', 2, 1);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (2, 'Conjuntivitis', 'Infecciones oculares, alergias, problemas geneticos', 'Inflamacion de la mucosa del ojo, perdida de vision, lagrimeo', 2, 1);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (3, 'Rabia', 'Virus', 'Irritabilidad, exceso de salivacion, fiebre, vomitos', 1, 1);
 INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (4, 'Leucemia felina', 'Contacto de los fluidos corporales', 'Falta de apetito, somnolencia, anemia, debilidad', 3, 1);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (5, 'Panleucopenia felina', 'Parvovirus', 'Fiebre, hipotermia, vómitos, diarrea, debilidad, deshidratación, anorexia', 3, 1);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (6, 'Inmunodeficiencia felina', 'Lentivirus', 'Infecciones bucales, patologías respiratorias, infecciones intestinales', 3, 1);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (5, 'Panleucopenia felina', 'Parvovirus', 'Fiebre, hipotermia, vomitos, diarrea, debilidad, deshidratacion, anorexia', 3, 1);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (6, 'Inmunodeficiencia felina', 'Lentivirus', 'Infecciones bucales, patologias respiratorias, infecciones intestinales', 3, 1);
 INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (7, 'Peritonitis', 'Virus de la familia de los coronavirus', 'Fiebre, anorexia, aumento del volumen abdominal', 1, 1);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (8, 'Cistitis', 'Formación de minerales que obstruyen el conducto urinario', 'Dolor al orinar, mucha sed, vómitos', 1, 1);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (8, 'Cistitis', 'Formacion de minerales que obstruyen el conducto urinario', 'Dolor al orinar, mucha sed, vomitos', 1, 1);
 INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (9, 'Dermatitis', 'Picadura de pulga', 'Mucho picor', 1, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (10, 'Otitis', 'Cuerpos extraños', 'Inflamación del conducto auditivo, dolor, picor', 1, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (11, 'Artritis', 'Envejecimiento', 'Inflamación de las articulaciones, dolor', 2, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (12, 'Periodontitis', 'Formación de placa bacteriana en dientes y encías', 'Mal aliento, pérdida de dientes', 2, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (13, 'Moquillo', 'Virus', 'Fiebre, deshidratación, tos', 1, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (14, 'Hepatitis', 'Adenovirus', 'Vómitos, sed, dolor', 2, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (15, 'Rabia', 'Mordisco de un animal infectado', 'Fiebre, agresividad, irritabilidad, vómitos', 2, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (16, 'Coronavirus', 'Contacto con secreciones orales y fecales infectadas', 'Deshidratación, vómitos, diarrea', 1, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (17, 'Conjuntivitis', 'Bacterias', 'Inflamación y enrojecimiento ocular', 1, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (18, 'Cáncer', 'Exposición a radiaciones ionizantes, ciertos químicos, motivos genéticos', 'Cansancio, fiebre, dolor', 3, 2);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (19, 'Ácaros y hongos', 'Parásitos', 'Picores excesivos, piel irritada, formación de eccemas', 2, 6);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (10, 'Otitis', 'Cuerpos extraños', 'Inflamacion del conducto auditivo, dolor, picor', 1, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (11, 'Artritis', 'Envejecimiento', 'Inflamacion de las articulaciones, dolor', 2, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (12, 'Periodontitis', 'Formacion de placa bacteriana en dientes y encias', 'Mal aliento, perdida de dientes', 2, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (13, 'Moquillo', 'Virus', 'Fiebre, deshidratacion, tos', 1, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (14, 'Hepatitis', 'Adenovirus', 'Vomitos, sed, dolor', 2, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (15, 'Rabia', 'Mordisco de un animal infectado', 'Fiebre, agresividad, irritabilidad, vomitos', 2, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (16, 'Coronavirus', 'Contacto con secreciones orales y fecales infectadas', 'Deshidratacion, vomitos, diarrea', 1, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (17, 'Conjuntivitis', 'Bacterias', 'Inflamacion y enrojecimiento ocular', 1, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (18, 'Cancer', 'Exposicion a radiaciones ionizantes, ciertos quimicos, motivos geneticos', 'Cansancio, fiebre, dolor', 3, 2);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (19, 'Acaros y hongos', 'Parasitos', 'Picores excesivos, piel irritada, formacion de eccemas', 2, 6);
 INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (20, 'Bronquitis', 'Resfriados, cambios de temperatura, corrientes de aire', 'Dificultad respiratoria, inapetencia, estornudos, ojos lagrimosos, nariz mocosa', 2, 6);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (21, 'Cola mojada', 'Colibacterias', 'Diarrea, deshidratación', 1, 6);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (22, 'Estreñimiento', 'Mala alimentación', 'Carencia o disminución de excrementos, dolor, inapetencia, hinchazón', 1, 6);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (23, 'Cáncer', 'Aumento de la división celular', 'Inapetencia, poca actividad, pérdida de peso y pelo', 3, 6);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (24, 'Disecdisis', 'Problemas en la muda', 'Infecciones o problemas cutáneos', 1, 4);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (25, 'Septicemia', 'Ácaros', 'Dificultad para respirar', 2, 4);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (21, 'Cola mojada', 'Colibacterias', 'Diarrea, deshidratacion', 1, 6);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (22, 'Estreñimiento', 'Mala alimentacion', 'Carencia o disminucion de excrementos, dolor, inapetencia, hinchazon', 1, 6);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (23, 'Cancer', 'Aumento de la division celular', 'Inapetencia, poca actividad, perdida de peso y pelo', 3, 6);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (24, 'Disecdisis', 'Problemas en la muda', 'Infecciones o problemas cutaneos', 1, 4);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (25, 'Septicemia', 'Acaros', 'Dificultad para respirar', 2, 4);
 INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (26, 'Blister', 'Humedad, aseo deficiente del entorno', 'Enrojecimiento en las escamas', 2, 4);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (27, 'Boca Rot', 'Bacterias', 'Acumulación de pus en las encías y entre los dientes', 1, 4);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (28, 'Septicemia', 'Ácaros', 'Dificultad para respirar', 2, 3);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (29, 'Muda', 'Problemas en la muda', 'Infecciones o problemas cutáneos', 2, 3);
-INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (30, 'Pájaro Loco', '', '', 0, 5);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (27, 'Boca Rot', 'Bacterias', 'Acumulacion de pus en las encias y entre los dientes', 1, 4);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (28, 'Septicemia', 'Acaros', 'Dificultad para respirar', 2, 3);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (29, 'Muda', 'Problemas en la muda', 'Infecciones o problemas cutaneos', 2, 3);
+INSERT IGNORE INTO sicknesses(id,name,cause,symptom,severity,type_id) VALUES (30, 'Pajaro Loco', '', '', 0, 5);
 
 INSERT IGNORE INTO vaccines(id,name,components,months,sickness_id) VALUES (1, 'Vacuna A', 'Q,W,E,R', 4, 1);
 INSERT IGNORE INTO vaccines(id,name,components,months,sickness_id) VALUES (2, 'Vacuna B', 'A,S,D,F', 6, 2);
@@ -131,33 +131,33 @@ INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) V
 INSERT IGNORE INTO medicines(id,name,components,treatment,type_id,sickness_id) VALUES (8, 'Medicina H', 'Componente B', '1 cada 24 horas', 4, 2);
 
 INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (1, 'Winston Pet Cares','Evergreen Av. 4' ,'Pitsburg','charles@mail.com', '600033472');
-INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervión','Calle Juan 10' ,'Sevilla','vetnervion@mail.com', '685123477');
-INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (3, 'Clínica Los Arcos','' ,'','', '');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (2, 'Veterinaria Nervion','Calle Juan 10' ,'Sevilla','vetnervion@mail.com', '685123477');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (3, 'Clinica Los Arcos','' ,'','', '');
 INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (4, 'Veterinaria AliPet','Calle Paloma 1' ,'Sevilla','alipet@mail.com', '684559612');
 INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (5, 'Veterinaria Pablo Millan','Calle Estrella Vega 5' ,'Granada','pmillan@mail.com', '963789654');
-INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (6, 'Veterinaria Macarena','Calle Amor 8' ,'Córdoba','vetmac@mail.com', '693258145');
-INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (7, 'Veterinaria Los Remedios','Calle Locura 6' ,'Málaga','vetrem@,mail.com', '652369741');
-INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (8, 'Veterinaria Santiponce','Calle Cueva 3' ,'Jaén','vetsanti@mail.com', '654123789');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (6, 'Veterinaria Macarena','Calle Amor 8' ,'Cordoba','vetmac@mail.com', '693258145');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (7, 'Veterinaria Los Remedios','Calle Locura 6' ,'Malaga','vetrem@,mail.com', '652369741');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (8, 'Veterinaria Santiponce','Calle Cueva 3' ,'Jaen','vetsanti@mail.com', '654123789');
 INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (9, 'Vetpinoli','Av Gracia 9' ,'Almeria','vetpinoli@mail.com', '663214852');
-INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (10, 'Clínica Hispalis','Calle Paloma 12' ,'Sevilla','hispavet@mail.com', '954231852');
-INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (11, 'Clínica lalita','Calle Pino 3' ,'Sevilla','lalita@mail.com', '954231852');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (10, 'Clinica Hispalis','Calle Paloma 12' ,'Sevilla','hispavet@mail.com', '954231852');
+INSERT IGNORE INTO clinics(id,name,address,city,email,telephone) VALUES (11, 'Clinica lalita','Calle Pino 3' ,'Sevilla','lalita@mail.com', '954231852');
 
 
 
 INSERT IGNORE INTO product_types(id, name) VALUES (1, 'Higiene');
 INSERT IGNORE INTO product_types(id, name) VALUES (2, 'Juguetes');
-INSERT IGNORE INTO product_types(id, name) VALUES (3, 'Alimentación');
+INSERT IGNORE INTO product_types(id, name) VALUES (3, 'Alimentacion');
 
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (1,'chámpu hidratante','para pelo seco',4.00,3,1,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (2,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,1,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (3,'Limpiador bucal','contiene láminas masticables para mantener limpia la dentadura del perro',8.00,100,2,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (4,'champú para gato','',20.00,1,1,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (5,'chámpu hidratante','para pelo seco',4.00,34,4,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (6,'chámpu hidratante','para pelo seco',4.00,39,5,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (1,'champu hidratante','para pelo seco',4.00,3,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (2,'Limpiador bucal','contiene laminas masticables para mantener limpia la dentadura del perro',8.00,100,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (3,'Limpiador bucal','contiene laminas masticables para mantener limpia la dentadura del perro',8.00,100,2,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (4,'champu para gato','',20.00,1,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (5,'champu hidratante','para pelo seco',4.00,34,4,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (6,'champu hidratante','para pelo seco',4.00,39,5,1);
 INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (7,'cepillo','para peinar a perros y gatos.',5.00,30,6,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (8,'Stomodine 30 mls.','Stomodine gel para perros y gatos.Limpieza bucal, reduce la formación de placa y sarro. Infecciones cavidad bucal.',6.00,48,1,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (9,'chámpu hidratante','para pelo seco',4.00,3,7,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (10,'chámpu hidratante','para pelo seco',4.00,3,8,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (11,'chámpu hidratante','para pelo seco',4.00,3,9,1);
-INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (12,'chámpu hidratante','para pelo seco',4.00,3,10,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (8,'Stomodine 30 mls.','Stomodine gel para perros y gatos.Limpieza bucal, reduce la formacion de placa y sarro. Infecciones cavidad bucal.',6.00,48,1,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (9,'champu hidratante','para pelo seco',4.00,3,7,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (10,'champu hidratante','para pelo seco',4.00,3,8,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (11,'champu hidratante','para pelo seco',4.00,3,9,1);
+INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (12,'champu hidratante','para pelo seco',4.00,3,10,1);
 INSERT IGNORE INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (13,'','',1.00,1,11,1);
