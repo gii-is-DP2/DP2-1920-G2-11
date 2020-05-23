@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Clinic;
+import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.repository.ClinicRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.DirtiesContext;
@@ -52,4 +53,22 @@ public class ClinicServiceTests {
 		Assertions.assertTrue(clinic.size()==1);
 	}
 	
+	@Test
+	@Transactional
+	void createClinicTest() {
+		Collection<Clinic> clinics = clinicService.findClinics();
+		int size= clinics.size();
+		Clinic clinic = new Clinic();
+		clinic.setId(40);
+		clinic.setName("Clinica Banini");
+		clinic.setCity("Malaga");
+		clinic.setAddress("Calle Paz 3");
+		clinic.setTelephone("123654789");
+		clinic.setEmail("lala@mail.com");
+		
+		
+		this.clinicService.save(clinic);
+		Assertions.assertTrue(size<clinicService.findClinics().size());
+
+	}
 }

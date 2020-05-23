@@ -120,4 +120,16 @@ public class ClinicControllerTests {
 				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("c1"))
 				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicDetailsError"));
 	}
+	
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitCreationForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/new")).
+		andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
+	}
+	
+	
+	
+	
 }
