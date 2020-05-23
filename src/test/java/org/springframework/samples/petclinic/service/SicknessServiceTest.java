@@ -17,10 +17,11 @@ import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-//@AutoConfigureTestDatabase(replace = Replace.NONE)
-
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class SicknessServiceTest {
 
 	@Autowired
@@ -36,8 +37,8 @@ public class SicknessServiceTest {
 	@Test
 	void findSicknessesByPetIdTest() {
 		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(2);
-		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 5 && sicknesses.get(0).getName().equals("Ácaros y hongos") && sicknesses.get(1).getSeverity().equals(2) && sicknesses.get(2).getSymptom().equals("Diarrea, deshidratación")
-			&& sicknesses.get(3).getCause().equals("Mala alimentación"));
+		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 5 && sicknesses.get(0).getName().equals("Acaros y hongos") && sicknesses.get(1).getSeverity().equals(2) && sicknesses.get(2).getSymptom().equals("Diarrea, deshidratacion")
+			&& sicknesses.get(3).getCause().equals("Mala alimentacion"));
 	}
 
 	@Test
@@ -49,7 +50,7 @@ public class SicknessServiceTest {
 	@Test
 	void findSicknessesByIdTest() {
 		Sickness sickness = this.sicknessService.findSicknessesById(25);
-		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Ácaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
+		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Acaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
 
 	}
 
@@ -57,7 +58,7 @@ public class SicknessServiceTest {
 	void optionalFindSicknessesByIdTest() {
 		Optional<Sickness> findSickness = this.sicknessService.optionalFindSicknessesById(25);
 		Sickness sickness = findSickness.get();
-		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Ácaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
+		Assertions.assertTrue(sickness.getName().equals("Septicemia") && sickness.getCause().equals("Acaros") && sickness.getSymptom().equals("Dificultad para respirar") && sickness.getSeverity().equals(2) && sickness.getType().getName().equals("snake"));
 	}
 
 	@Test
@@ -79,11 +80,11 @@ public class SicknessServiceTest {
 
 	@Test
 	void deleteSicknessTest() {
-		Sickness sickness = this.sicknessService.findSicknessesById(13);
+		Sickness sickness = this.sicknessService.findSicknessesById(24);
 		this.sicknessService.deleteVaccineFromSickness(sickness);
 		this.sicknessService.deleteSickness(sickness);
-		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(3);
-		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 9);
+		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(6);
+		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 3);
 	}
 
 	@Test
