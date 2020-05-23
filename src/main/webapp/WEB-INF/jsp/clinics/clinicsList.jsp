@@ -5,6 +5,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%> 
 
 <petclinic:layout pageName="clinics">
 	<h2>Clinics</h2>
@@ -51,4 +52,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<sec:authorize access="hasAuthority('admin')">
+	<spring:url value="/clinics/new" var="clinicUrl">
+                    </spring:url>
+                    <a class="btn btn-default" href="${fn:escapeXml(clinicUrl)}">Create</a>
+						
+							</sec:authorize>
 </petclinic:layout>
