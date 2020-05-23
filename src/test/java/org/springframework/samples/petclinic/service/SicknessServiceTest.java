@@ -17,10 +17,11 @@ import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-//@AutoConfigureTestDatabase(replace = Replace.NONE)
-
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class SicknessServiceTest {
 
 	@Autowired

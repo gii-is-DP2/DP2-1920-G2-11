@@ -14,11 +14,14 @@ import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 //TODO: revisar
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-//@AutoConfigureTestDatabase(replace = Replace.NONE)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class VaccineServiceTest {
 
 	@Autowired
@@ -45,6 +48,7 @@ public class VaccineServiceTest {
 	}
 
 	@Test
+	@Transactional
 	void deleteTest() {
 
 		Vaccine vaccine = this.vaccineService.findVaccineById(1);
@@ -67,6 +71,7 @@ public class VaccineServiceTest {
 	}
 
 	@Test
+	@Transactional
 
 	void saveVaccineTest() {
 		Iterable<Vaccine> vaccines = this.vaccineService.findAll(); 

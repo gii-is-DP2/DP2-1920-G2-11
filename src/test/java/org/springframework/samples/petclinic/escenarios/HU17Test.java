@@ -9,6 +9,8 @@ import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,8 +20,12 @@ import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.repository.VaccineRepository;
 import org.springframework.samples.petclinic.service.ProductService;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class HU17Test {
 
 	@Autowired
@@ -28,6 +34,7 @@ public class HU17Test {
 
 	//Caso positivo
 	@Test
+	@Transactional
 	void deleteProductCorrectly() {
 		Collection<Product> products = productService.findProducts();
 		int size= products.size();
@@ -39,6 +46,7 @@ public class HU17Test {
 	//Caso negativo
 	//TODO: Sale bien pero preguntar por si acaso
 	@Test
+	@Transactional
 	void deleteProductNotCorrectly() {
 		Assertions.assertThrows(InvalidDataAccessApiUsageException.class, () -> {
 			this.productService.delete(productService.findProductById(111));
