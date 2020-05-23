@@ -74,11 +74,14 @@
 				</petclinic:menuItem>
 				</sec:authorize>
 				
+				
+				<sec:authorize access="hasAuthority('admin')">
 				<petclinic:menuItem active="${name eq 'products'}" url="/products"
 					title="products">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Products</span>
 				</petclinic:menuItem>
+				</sec:authorize>
 
 			</ul>
 
