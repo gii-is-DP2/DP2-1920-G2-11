@@ -16,8 +16,12 @@
 
 package org.springframework.samples.petclinic.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
@@ -69,7 +73,18 @@ public class Clinic extends NamedEntity {
 
 	//	@OneToMany(cascade = CascadeType.ALL)
 	//	private Set<Vet> vets;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<Clinic> clinics;
 
+
+	public Set<Clinic> getClinics() {
+		return clinics;
+	}
+
+	public void setClinics(Set<Clinic> clinics) {
+		this.clinics = clinics;
+	}
 
 	public String getAddress() {
 		return this.address;

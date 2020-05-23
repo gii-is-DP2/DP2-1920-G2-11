@@ -55,11 +55,11 @@ public class ProductService {
 		return res;
 	}
 
-	@Transactional
-	public List<Product> findProductsByClinicId(final int clinicId) {
-		List<Product> res = this.productRepository.findProductsByClinicId(clinicId);
-		return res;
-	}
+//	@Transactional
+//	public List<Product> findProductsByClinicId(final int clinicId) {
+//		List<Product> res = this.productRepository.findProductsByClinicId(clinicId);
+//		return res;
+//	}
 
 	@Transactional
 	public void save(final Product product) {

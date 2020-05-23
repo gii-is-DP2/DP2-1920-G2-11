@@ -55,16 +55,16 @@ public class ProductController {
 		}
 	}
 
-	// devuelve los productos filtrado por clinica
-	@GetMapping(value = "/clinics/{clinicId}/products")
-	public String showClinicProducts(final Map<String, Object> model, @PathVariable final int clinicId) {
-		if (this.productService.findProductsByClinicId(clinicId).isEmpty()) {
-			return "products/productDetailsError";
-		} else {
-			model.put("products", this.productService.findProductsByClinicId(clinicId));
-			return "products/clinicProductList";
-		}
-	}
+//	// devuelve los productos filtrado por clinica
+//	@GetMapping(value = "/clinics/{clinicId}/products")
+//	public String showClinicProducts(final Map<String, Object> model, @PathVariable final int clinicId) {
+//		if (this.productService.findProductsByClinicId(clinicId).isEmpty()) {
+//			return "products/productDetailsError";
+//		} else {
+//			model.put("products", this.productService.findProductsByClinicId(clinicId));
+//			return "products/clinicProductList";
+//		}
+//	}
 
 	@GetMapping(value = "products/new")
 	public String createProduct(final ModelMap modelMap) {
