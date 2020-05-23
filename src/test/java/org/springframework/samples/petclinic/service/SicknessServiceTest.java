@@ -80,11 +80,11 @@ public class SicknessServiceTest {
 
 	@Test
 	void deleteSicknessTest() {
-		Sickness sickness = this.sicknessService.findSicknessesById(13);
+		Sickness sickness = this.sicknessService.findSicknessesById(24);
 		this.sicknessService.deleteVaccineFromSickness(sickness);
 		this.sicknessService.deleteSickness(sickness);
-		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(3);
-		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 9);
+		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(6);
+		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 3);
 	}
 
 	@Test
