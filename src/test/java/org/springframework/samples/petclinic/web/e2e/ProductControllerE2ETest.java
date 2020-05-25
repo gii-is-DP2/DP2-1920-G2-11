@@ -103,7 +103,7 @@ public class ProductControllerE2ETest {
 
 	@WithMockUser(username = "owner1", authorities = { "veterinarian", "admin" })
 	@Test
-	void testProcessCreationFormHasErrors1() throws Exception {
+	void testProcessSaveFormHasErrors1() throws Exception {
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/products/save").with(SecurityMockMvcRequestPostProcessors.csrf())
 						.param("name", "Filete"))
@@ -115,7 +115,7 @@ public class ProductControllerE2ETest {
 
 	@WithMockUser(username = "owner1", authorities = { "veterinarian", "admin" })
 	@Test
-	void testProcessCreationFormHasErrors2() throws Exception {
+	void testProcessSaveFormHasErrors2() throws Exception {
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/products/save").with(SecurityMockMvcRequestPostProcessors.csrf())
 						.param("description", "Comida").param("name", "Filete").param("stock", "a").param("price", "A"))
@@ -124,6 +124,14 @@ public class ProductControllerE2ETest {
 				.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "price"))
 				.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "stock"))
 				.andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
+	}
+
+	
+	@WithMockUser(username = "owner1", authorities = { "veterinarian", "admin" })
+	@Test
+	void testInitUpdateForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/{productId}", ProductControllerE2ETest.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
 	}
 
 }

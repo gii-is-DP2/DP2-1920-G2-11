@@ -57,7 +57,7 @@ public class HU16UITest {
     return this;
   }
   @Test
-  public HU16UITest thenICantCreateAProduct() throws Exception {
+  public void thenICantCreateAProduct() throws Exception {
 	  this.driver.findElement(By.xpath("//a[contains(@href, '/products')]")).click(); 
 	  this.driver.findElement(By.xpath("//a[contains(@href, '/products/new')]")).click();
     driver.findElement(By.id("name")).click();
@@ -74,7 +74,6 @@ public class HU16UITest {
     new Select(driver.findElement(By.id("clinic"))).selectByVisibleText("1");
     driver.findElement(By.xpath("(//option[@value='1'])[2]")).click();
     driver.findElement(By.xpath("//button[@type='submit']")).click();
-    return this;
   }
 
   @After

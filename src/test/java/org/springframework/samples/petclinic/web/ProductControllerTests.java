@@ -241,7 +241,7 @@ public class ProductControllerTests {
 	
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessCreationFormHasErrors1() throws Exception {
+	void testProcessSaveFormHasErrors1() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/products/save").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Filete")).andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.model().attributeHasErrors("product")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "description"))
 			.andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
@@ -249,10 +249,17 @@ public class ProductControllerTests {
 	
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessCreationFormHasErrors2() throws Exception {
+	void testProcessSaveFormHasErrors2() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/products/save").with(SecurityMockMvcRequestPostProcessors.csrf()).param("description", "Comida").param("name", "Filete").param("stock", "a").param("price","A")).andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.model().attributeHasErrors("product")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "price"))
 			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "stock"))
+			.andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitUpdateForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/{productId}", ProductControllerTests.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
 	}
 
