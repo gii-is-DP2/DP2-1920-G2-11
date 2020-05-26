@@ -81,6 +81,15 @@ public class ClinicControllerTests {
 		c1.setCity("");
 		c1.setEmail("");
 		c1.setTelephone("");
+		
+		// SHOW ERROR
+				Clinic cError = new Clinic();
+				cError.setId(30);
+				cError.setName("");
+				cError.setAddress("calle Estrella");
+				cError.setCity("Sevilla");
+				cError.setEmail("");
+				cError.setTelephone("");
 
 		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ID)).willReturn(clinic1);
 		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ERROR_ID)).willReturn(c1);
@@ -129,7 +138,15 @@ public class ClinicControllerTests {
 		andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
 	}
 	
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitCreationFormHasError() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/new"))
+		.andExpect(MockMvcResultMatchers.status().isOk())
+		.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("cError"))
+		.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
 	
 	
 	
+	}
 }

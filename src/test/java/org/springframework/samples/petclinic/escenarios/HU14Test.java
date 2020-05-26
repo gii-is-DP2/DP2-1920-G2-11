@@ -26,7 +26,7 @@ import org.springframework.validation.Errors;
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @DirtiesContext
-public class HU14 {
+public class HU14Test {
 
 	//TODO añadir clinica
 	@Autowired
