@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Pet;
@@ -14,8 +16,12 @@ import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class ProductServiceTests {
 
 	@Autowired
@@ -28,7 +34,7 @@ public class ProductServiceTests {
 	@Test
 	void shouldFindProductWithCorrectId() {
 		Product product = this.productService.findProductById(1);
-		Assertions.assertTrue(product.getName().equals("chámpu hidratante"));
+		Assertions.assertTrue(product.getName().equals("champu hidratante"));
 		Assertions.assertTrue(product.getPrice().equals(4.00));
 		Assertions.assertTrue(product.getDescription().equals("para pelo seco"));
 		Assertions.assertTrue(product.getProductType().getId().equals(1));
@@ -55,6 +61,8 @@ public class ProductServiceTests {
 		Assertions.assertTrue(!products2.isEmpty());
 	}
 	
+	@Test
+	@Transactional
 	void createProductTest() {
 		Collection<Product> products = productService.findProducts();
 		int size= products.size();
@@ -69,11 +77,13 @@ public class ProductServiceTests {
 
 	}
 
+	//cambiado id porque se pisa
 	@Test
+	@Transactional
 	void deleteProductTest() {
 		Collection<Product> products = productService.findProducts();
 		int size= products.size();
-		Product product = this.productService.findProductById(1);
+		Product product = this.productService.findProductById(2);
 		this.productService.delete(product);
 		Assertions.assertTrue(size>productService.findProducts().size());
 	}

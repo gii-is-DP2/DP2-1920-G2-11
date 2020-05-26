@@ -6,6 +6,8 @@ import java.util.Locale;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,10 +17,14 @@ import org.springframework.samples.petclinic.model.SicknessValidator;
 import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class HU5Test {
 
 	@Autowired
@@ -34,6 +40,7 @@ public class HU5Test {
 
 	//Caso positivo
 	@Test
+	@Transactional
 	void createSicknessCorrectly() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
@@ -56,6 +63,7 @@ public class HU5Test {
 
 	//Casos negativos
 	@Test
+	@Transactional
 	void createSicknessNameNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = new Sickness();
@@ -74,6 +82,7 @@ public class HU5Test {
 	}
 
 	@Test
+	@Transactional
 	void createSicknessSeverityNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = new Sickness();
@@ -91,6 +100,7 @@ public class HU5Test {
 	}
 
 	@Test
+	@Transactional
 	void createSicknessSeverityOutOfMinRange() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = new Sickness();
@@ -109,6 +119,7 @@ public class HU5Test {
 	}
 
 	@Test
+	@Transactional
 	void createSicknessSeverityOutOfMaxRange() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = new Sickness();
@@ -127,6 +138,7 @@ public class HU5Test {
 	}
 
 	@Test
+	@Transactional
 	void createSicknessNameOutOfLength() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
@@ -146,6 +158,7 @@ public class HU5Test {
 	}
 
 	@Test
+	@Transactional
 	void createSicknessCauseOutOfLength() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
@@ -165,6 +178,7 @@ public class HU5Test {
 	}
 
 	@Test
+	@Transactional
 	void createSicknessSymptomOutOfLength() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);

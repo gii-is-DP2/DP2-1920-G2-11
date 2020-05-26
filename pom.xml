@@ -300,17 +300,6 @@
 				<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-						<excludes>
-							<exclude>**/*ControllerTest.java</exclude>
-							<exclude>**/HU*Test.java</exclude>
-							<exclude>**/*E2ETest.java</exclude>
-							</excludes>
-							<includes>
-							
-							<include>**/*MySQLTest.java</include>
-							</includes>
-						</configuration>
 					</plugin>
        			 </plugins>
        			 </build>

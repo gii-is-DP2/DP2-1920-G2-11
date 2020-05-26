@@ -6,6 +6,8 @@ import java.util.Locale;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,10 +17,14 @@ import org.springframework.samples.petclinic.model.SicknessValidator;
 import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class HU7Test {
 
 	@Autowired
@@ -34,6 +40,7 @@ public class HU7Test {
 
 	//Caso positivo
 	@Test
+	@Transactional
 	void updateSicknessCorrectly() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
@@ -56,6 +63,7 @@ public class HU7Test {
 
 	//Casos negativos
 	@Test
+	@Transactional
 	void updateSicknessNameNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
@@ -74,6 +82,7 @@ public class HU7Test {
 	}
 
 	@Test
+	@Transactional
 	void updateSicknessSeverityNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
@@ -92,6 +101,7 @@ public class HU7Test {
 	}
 
 	@Test
+	@Transactional
 	void updateSicknessSeverityOutOfMinRange() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
@@ -110,6 +120,7 @@ public class HU7Test {
 	}
 
 	@Test
+	@Transactional
 	void updateSicknessSeverityOutOfMaxRange() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
@@ -128,6 +139,7 @@ public class HU7Test {
 	}
 
 	@Test
+	@Transactional
 	void updateSicknessNameOutOfLength() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
@@ -147,6 +159,7 @@ public class HU7Test {
 	}
 
 	@Test
+	@Transactional
 	void updateSicknessCauseOutOfLength() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
@@ -166,6 +179,7 @@ public class HU7Test {
 	}
 
 	@Test
+	@Transactional
 	void updateSicknessSymptomOutOfLength() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);

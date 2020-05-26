@@ -22,11 +22,13 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
-				<petclinic:menuItem active="${name eq 'home'}" url="/"
+				<%-- <petclinic:menuItem active="${name eq 'home'}" url="/"
 					title="home page">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
-				</petclinic:menuItem>
+				</petclinic:menuItem> --%>
+				
+			
 
 				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
 					title="find owners">
@@ -48,13 +50,13 @@
 				</petclinic:menuItem> --%>
 				
 				-->
-				<sec:authorize access="hasAuthority('owner')">
+				
 				<petclinic:menuItem active="${name eq 'clinics'}" url="/clinics"
 					title="clinics">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Clinics</span>
 				</petclinic:menuItem>
-				</sec:authorize>
+				
 
 				<sec:authorize access="hasAuthority('owner')">
 				<petclinic:menuItem active="${name eq 'medicines'}" url="/owner/medicines/"
@@ -72,11 +74,14 @@
 				</petclinic:menuItem>
 				</sec:authorize>
 				
+				
+				<sec:authorize access="hasAuthority('admin')">
 				<petclinic:menuItem active="${name eq 'products'}" url="/products"
 					title="products">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Products</span>
 				</petclinic:menuItem>
+				</sec:authorize>
 
 			</ul>
 

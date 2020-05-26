@@ -21,6 +21,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Clinic;
+import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.repository.ClinicRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,11 @@ public class ClinicService {
 
 	public Collection<Clinic> findByName(final String name) throws DataAccessException {
 		return this.clinicRepository.findByName(name);
+	}
+	
+	@Transactional
+	public void save(final Clinic clinic) {
+		this.clinicRepository.save(clinic);
 	}
 
 }
