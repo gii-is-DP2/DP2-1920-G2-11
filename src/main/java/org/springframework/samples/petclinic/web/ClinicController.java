@@ -75,7 +75,7 @@ public class ClinicController {
 
 	}
 
-	@PostMapping(value = "clinics/new")
+	@PostMapping(value = "clinics/save")
 	public String saveClinic(@Valid final Clinic clinic, final BindingResult result, final ModelMap modelMap) {
 		String view = "clinics/clinicsList";
 		if (result.hasErrors()) {

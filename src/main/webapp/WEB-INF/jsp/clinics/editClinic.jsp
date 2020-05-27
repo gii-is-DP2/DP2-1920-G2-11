@@ -10,7 +10,7 @@
         <h2>
             New Clinic
         </h2>
-        <form:form modelAttribute="clinic" class="form-horizontal">
+        <form:form modelAttribute="clinic" action="save" class="form-horizontal">
             <input type="hidden" name="id" value="${clinic.id}" />
             <div class="form-group has-feedback">
                 <petclinic:inputField label="Name" name="name" />
