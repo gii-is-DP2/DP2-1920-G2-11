@@ -30,22 +30,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
-
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/resources/**", "/webjars/**", "/h2-console/**").permitAll().antMatchers(HttpMethod.GET, "/", "/oups").permitAll().antMatchers("/users/new").permitAll().antMatchers("/admin/**").hasAnyAuthority("admin")
-			.antMatchers("/owners/*/pets/{petId}/sicknesses/delete/**").hasAnyAuthority("veterinarian").antMatchers("/owners/*/pets/*/sicknesses/{sicknessId}/editSickness/**").hasAnyAuthority("veterinarian").antMatchers("/vets/newVaccine")
-			.hasAnyAuthority("veterinarian"/* , "admin" */).antMatchers("/clinics").authenticated()
-			//.antMatchers("/clinics/*").hasAnyAuthority("owner"/* , "admin" */)
-			.antMatchers("/vets/delete/**")
-			.hasAnyAuthority("veterinarian", "admin").antMatchers("/vets/newSickness").hasAnyAuthority("veterinarian")
-			.antMatchers("/clinics/new").hasAnyAuthority("admin")
-			.antMatchers("/vets/**").hasAnyAuthority("veterinarian", "admin", "owner").antMatchers("/owners/**").authenticated()
-			.antMatchers("/sicknesses/delete/**").hasAnyAuthority("veterinarian").antMatchers("/admin/medicines/**").hasAnyAuthority("admin").antMatchers("/owner/medicines/**").hasAnyAuthority("owner").antMatchers("/owner/medicine/**")
-			.hasAnyAuthority("owner").antMatchers("/clinics/**").authenticated().antMatchers("/products/**").authenticated().anyRequest().denyAll().and().formLogin()
-			/* .loginPage("/login") */
-			.failureUrl("/login-error").and().logout().logoutSuccessUrl("/");
+		http.authorizeRequests().antMatchers("/resources/**", "/webjars/**", "/h2-console/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/", "/oups").permitAll().antMatchers("/users/new").permitAll()
+				.antMatchers("/admin/**").hasAnyAuthority("admin")
+				.antMatchers("/owners/*/pets/{petId}/sicknesses/delete/**").hasAnyAuthority("veterinarian")
+				.antMatchers("/owners/*/pets/*/sicknesses/{sicknessId}/editSickness/**").hasAnyAuthority("veterinarian")
+				.antMatchers("/vets/newVaccine").hasAnyAuthority("veterinarian"/* , "admin" */).antMatchers("/clinics")
+				.authenticated()
+				// .antMatchers("/clinics/*").hasAnyAuthority("owner"/* , "admin" */)
+				.antMatchers("/vets/delete/**").hasAnyAuthority("veterinarian", "admin")
+				.antMatchers("/vets/newSickness").hasAnyAuthority("veterinarian")
+				// .antMatchers("/clinics/new").hasAnyAuthority("admin")
+				.antMatchers("/vets/**").hasAnyAuthority("veterinarian", "admin", "owner").antMatchers("/owners/**")
+				.authenticated().antMatchers("/sicknesses/delete/**").hasAnyAuthority("veterinarian")
+				.antMatchers("/admin/medicines/**").hasAnyAuthority("admin").antMatchers("/owner/medicines/**")
+				.hasAnyAuthority("owner").antMatchers("/owner/medicine/**").hasAnyAuthority("owner")
+				// .antMatchers("/clinics/**").authenticated()
+				.antMatchers("/products/**").authenticated().anyRequest().denyAll().and().formLogin()
+				/* .loginPage("/login") */
+				.failureUrl("/login-error").and().logout().logoutSuccessUrl("/");
 
 		// Configuración para que funcione la consola de administración
 		// de la BD H2 (deshabilitar las cabeceras de protección contra
@@ -57,8 +63,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(final AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(this.dataSource).usersByUsernameQuery("select username,password,enabled " + "from users " + "where username = ?")
-			.authoritiesByUsernameQuery("select username, authority " + "from authorities " + "where username = ?").passwordEncoder(this.passwordEncoder());
+		auth.jdbcAuthentication().dataSource(this.dataSource)
+				.usersByUsernameQuery("select username,password,enabled " + "from users " + "where username = ?")
+				.authoritiesByUsernameQuery("select username, authority " + "from authorities " + "where username = ?")
+				.passwordEncoder(this.passwordEncoder());
 	}
 
 	@Bean

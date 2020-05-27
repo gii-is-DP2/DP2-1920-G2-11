@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(controllers = ClinicController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
+
 public class ClinicControllerTests {
 
 	@Autowired
@@ -81,15 +82,15 @@ public class ClinicControllerTests {
 		c1.setCity("");
 		c1.setEmail("");
 		c1.setTelephone("");
-		
+
 		// SHOW ERROR
-				Clinic cError = new Clinic();
-				cError.setId(30);
-				cError.setName("");
-				cError.setAddress("calle Estrella");
-				cError.setCity("Sevilla");
-				cError.setEmail("");
-				cError.setTelephone("");
+		Clinic cError = new Clinic();
+		cError.setId(30);
+		cError.setName("");
+		cError.setAddress("calle Estrella");
+		cError.setCity("Sevilla");
+		cError.setEmail("");
+		cError.setTelephone("");
 
 		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ID)).willReturn(clinic1);
 		BDDMockito.given(this.clinicService.findById(ClinicControllerTests.TEST_CLINIC_ERROR_ID)).willReturn(c1);
@@ -114,39 +115,37 @@ public class ClinicControllerTests {
 
 	}
 
-	
-	
-
-	
-	
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowClinicErrorHtml() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}",
-						ClinicControllerTests.TEST_CLINIC_ERROR_ID))
+				.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerTests.TEST_CLINIC_ERROR_ID))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("c1"))
 				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicDetailsError"));
 	}
-	
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitCreationForm() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/new")).
-		andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/new"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
 	}
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitCreationFormHasError() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/new"))
-		.andExpect(MockMvcResultMatchers.status().isOk())
-		.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("cError"))
-		.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
-	
-	
-	
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/save")
+				.with(SecurityMockMvcRequestPostProcessors.csrf())
+				.param("name", "")
+				.param("address", "nombre")
+				.param("city", "marbella")
+				.param("email", "")
+				.param("telephone", ""))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("clinic"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
+
 	}
 }
