@@ -57,8 +57,6 @@ public class VaccineController {
 		}
 	}
 
-
-
 //	@GetMapping(value = "/vets/listVaccine")
 //	public String listVaccine(final ModelMap modelMap) {
 //		String view = "vaccines/vaccinesList";
@@ -71,24 +69,20 @@ public class VaccineController {
 
 	/* */
 	@GetMapping(path = "/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/delete")
-	public String deleteVaccine(@PathVariable("vaccineId") final int vaccineId,
-			final ModelMap modelMap) {
+	public String deleteVaccine(@PathVariable("vaccineId") final int vaccineId, final ModelMap modelMap) {
 		String view = "welcome";
-		
-		Vaccine vaccine = this.vaccineService.findVaccineById(vaccineId);
 
+		Vaccine vaccine = this.vaccineService.findVaccineById(vaccineId);
 
 		this.vaccineService.delete(vaccine);
 		modelMap.addAttribute("message", "Event sucessfully deleted!");
 
 		modelMap.addAttribute("message", "Event not found!");
-		//view = this.showVaccines(sicknessId, modelMap);
-
+		// view = this.showVaccines(sicknessId, modelMap);
 
 		return view;
 
 	}
-
 
 	// Editar vacuna
 
@@ -98,24 +92,27 @@ public class VaccineController {
 		Vaccine vaccines = this.vaccineService.findVaccineById(vaccineId);
 		//modelMap.addAttribute("sickness", this.sicknessService.findAll());
 		Sickness sickness = vaccines.getSickness();
-		modelMap.addAttribute("vaccines", vaccines);
+		modelMap.addAttribute("vaccine", vaccines);
 		modelMap.addAttribute("sickness", sickness);
-		return "vaccines/editVaccine";
+		return "vaccines/updateVaccine";
 	}
 
-
 	@PostMapping(value = "/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit")
-	public String editingVaccine(@RequestParam("sickness") final int sicknessId,
-			@PathVariable("vaccineId") int vaccineId, @Valid Vaccine vaccine, BindingResult result, ModelMap modelMap) {
+	public String editingVaccine(@Valid Vaccine vaccine, BindingResult result,
+			@PathVariable("vaccineId") int vaccineId , @RequestParam("sickness") final int sicknessId,
+			 ModelMap modelMap) {
 
-		String view;
+		String view;																												
 		if (result.hasErrors()) {
 			modelMap.addAttribute("message", "Operation failed!");
+			modelMap.addAttribute("sickness", sicknessId);
 			//modelMap.addAttribute("sickness", this.sicknessService.findAll());
-			modelMap.addAttribute("vaccines", vaccine);
-			view = "vaccines/editVaccine";
+			modelMap.addAttribute("vaccine", vaccine);
+			view = "vaccines/updateVaccine";
+
 		} else {
-			//vaccine.setSickness(this.sicknessService.findSicknessesById(sicknessId)); // nuevo
+			// vaccine.setSickness(this.sicknessService.findSicknessesById(sicknessId)); 
+			modelMap.addAttribute("sickness", sicknessId);
 			vaccine.setId(vaccineId);
 			this.vaccineService.saveVaccine(vaccine);
 			view = "welcome";
@@ -127,16 +124,16 @@ public class VaccineController {
 	@GetMapping(path = "/vets/newVaccine")
 	public String createVaccine(final ModelMap modelMap) {
 		String view = "vaccines/editVaccine";
-		modelMap.addAttribute("vaccines", new Vaccine());
+		modelMap.addAttribute("vaccine", new Vaccine());
 		modelMap.addAttribute("sicknesses", this.sicknessService.findAll());
 		return view;
 	}
 
 	@PostMapping(path = "/vets/newVaccine")
-	public String saveVaccine(@RequestParam("sickness") final int sicknessId, @Valid final Vaccine vaccine,
-			final BindingResult result, final ModelMap modelMap) {
+	public String saveVaccine(@Valid final Vaccine vaccine, final BindingResult result, @RequestParam("sickness") final int sicknessId, 
+			final ModelMap modelMap) {
 		String view = "welcome";
-		//System.out.println(sicknessId);
+		
 		if (result.hasErrors()) {
 			modelMap.addAttribute("vaccine", vaccine);
 			modelMap.addAttribute("sicknesses", this.sicknessService.findAll());

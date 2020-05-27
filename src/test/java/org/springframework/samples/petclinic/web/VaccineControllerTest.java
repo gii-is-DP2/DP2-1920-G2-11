@@ -4,6 +4,7 @@ package org.springframework.samples.petclinic.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -24,6 +25,8 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = VaccineController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class VaccineControllerTest {
@@ -39,7 +42,7 @@ public class VaccineControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	private Vaccine vaccine;
 
 	private static final int TEST_PET_ID = 1;
@@ -186,6 +189,14 @@ public class VaccineControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
+	void testInitCreationForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newVaccine"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
+	}
+
+	@WithMockUser(value = "spring")
+	@Test
 	void testProcessCreationFormSuccess() throws Exception {
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
@@ -193,6 +204,8 @@ public class VaccineControllerTest {
 						.param("sickness", "Otitis").param("months", "9").param("components", "H20"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
+
+
 
 	// TODO casos negativos
 
@@ -202,26 +215,33 @@ public class VaccineControllerTest {
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
 						.with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR")
-						.param("sickness", "Otitis").param("months", "8").param("components", "H2E"))
+						.param("sickness", "1").param("components", "H2E"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("vaccine"))
-				.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("vaccine", "name"))
+				// .andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("months"))
 				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
 	}
 
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void testProcessCreationFormHasErrors1() throws Exception {
-//		this.mockMvc
-//				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
-//						.with(SecurityMockMvcRequestPostProcessors.csrf())
-//						.param("sickness", "Otitis").param("months", "9").param("components", "H20"))
-//				.andExpect(MockMvcResultMatchers.status().isOk())
-//				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("vaccine"))
-//				.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("vaccine", "name"))
-//				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
-//	}
+	
 
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessUpdateVaccineErrors() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit", 
+				VaccineControllerTest.TEST_VACCINE_ID)
+						.with(SecurityMockMvcRequestPostProcessors.csrf())
+						.param("name", "")
+						.param("components", "kop")
+						.param("months", "3")
+						.param("sickness", "1"))
+			   .andExpect(status().isOk())
+			   .andExpect(model().attributeHasErrors("vaccine"))
+			   //.andExpect(model().attributeHasFieldErrors("vaccine","name"))
+			   .andExpect(view().name("vaccines/updateVaccine"));
+	}
+	
+	
+	
 //	@WithMockUser(value = "spring")
 //	@Test
 //	void testProcessCreationFormHasErrorsNameTooLong() throws Exception {
@@ -236,7 +256,5 @@ public class VaccineControllerTest {
 //				.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("vaccine", "name"))
 //				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
 //	}
-	
-	
-	
+
 }
