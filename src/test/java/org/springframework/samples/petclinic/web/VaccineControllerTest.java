@@ -205,25 +205,7 @@ public class VaccineControllerTest {
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
 
-	@WithMockUser(value = "spring")
-	@Test
-	void testInitUpdateVaccineForm() throws Exception {
 
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit",
-						VaccineControllerTest.TEST_VACCINE_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeExists("vaccines"))
-				.andExpect(MockMvcResultMatchers.model().attribute("vaccines",
-						Matchers.hasProperty("name", Matchers.is("Vacuna A"))))
-				.andExpect(MockMvcResultMatchers.model().attribute("vaccines",
-						Matchers.hasProperty("components", Matchers.is("Q,W,E,R"))))
-				.andExpect(MockMvcResultMatchers.model().attribute("vaccines",
-						Matchers.hasProperty("months", Matchers.is(4))))
-
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
-
-	}
 
 	// TODO casos negativos
 
@@ -244,19 +226,20 @@ public class VaccineControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessUpdateRoomFormHasErrorsOnCapacity() throws Exception {
+	void testProcessUpdateVaccineErrors() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit", 
 				VaccineControllerTest.TEST_VACCINE_ID)
 						.with(SecurityMockMvcRequestPostProcessors.csrf())
 						.param("name", "")
 						.param("components", "kop")
-						.param("months", "3"))
-						//.param("sickness", "1"))
+						.param("months", "3")
+						.param("sickness", "1"))
 			   .andExpect(status().isOk())
-			   .andExpect(model().attributeHasErrors("vaccines"))
-			   .andExpect(model().attributeHasFieldErrors("vaccines","name"))
-			   .andExpect(view().name("vaccines/editVaccine"));
+			   .andExpect(model().attributeHasErrors("vaccine"))
+			   //.andExpect(model().attributeHasFieldErrors("vaccine","name"))
+			   .andExpect(view().name("vaccines/updateVaccine"));
 	}
+	
 	
 	
 //	@WithMockUser(value = "spring")
