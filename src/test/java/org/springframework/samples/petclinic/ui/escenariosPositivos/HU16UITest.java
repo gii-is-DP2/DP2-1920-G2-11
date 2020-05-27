@@ -74,6 +74,7 @@ public class HU16UITest {
     new Select(driver.findElement(By.id("clinic"))).selectByVisibleText("1");
     driver.findElement(By.xpath("(//option[@value='1'])[2]")).click();
     driver.findElement(By.xpath("//button[@type='submit']")).click();
+    assertEquals("Producto 1", driver.findElement(By.linkText("Producto 1")).getText());
   }
 
   @After
