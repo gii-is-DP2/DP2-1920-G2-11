@@ -44,7 +44,7 @@ public class HU16UITest {
 		this.afterILogAsAdmin().thenICantCreateAProduct();
 	}
 	
-  @Test
+ 
   public HU16UITest afterILogAsAdmin() throws Exception {
     driver.get("http://localhost:" + this.port + "/");
     this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
@@ -56,7 +56,7 @@ public class HU16UITest {
     driver.findElement(By.xpath("//button[@type='submit']")).click();
     return this;
   }
-  @Test
+  
   public void thenICantCreateAProduct() throws Exception {
 	  this.driver.findElement(By.xpath("//a[contains(@href, '/products')]")).click(); 
 	  this.driver.findElement(By.xpath("//a[contains(@href, '/products/new')]")).click();
