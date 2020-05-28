@@ -18,7 +18,7 @@
            
 
 			
-				<input type="hidden" name="sickness" value="${sickness}" />
+				<input type="hidden" name="sickness" value="${sickness.id}" />
 		
        
 
