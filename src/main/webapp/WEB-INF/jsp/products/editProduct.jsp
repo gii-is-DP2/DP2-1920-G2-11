@@ -26,11 +26,12 @@
                 <petclinic:inputField label="Stock" name="stock"/>
                 </div>
                 <div class="control-group">
-                    <petclinic:selectField name="ProductType" label="ProductType" names="${ProductTypes}" size="5"/>
-                </div>
-                
-                 <div class="control-group">
-                    <petclinic:selectField name="clinic" label="Clinic" names="${Clinics}" size="5"/>
+                <form:select name="productTypeId" path="productType"
+						items="${ProductTypes}" itemLabel="name" itemValue="id" />
+						</div>
+                <div class="control-group">
+                    <form:select name="clinic" path="clinic"
+						items="${Clinics}" itemLabel="name" itemValue="id" />
                 </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">

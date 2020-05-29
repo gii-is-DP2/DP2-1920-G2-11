@@ -2,6 +2,7 @@
 
 package org.springframework.samples.petclinic.escenarios;
 
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -50,6 +51,8 @@ public class HU16Test {
 	void createProductCorrectly() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
+		Collection<Product> products = productService.findProducts();
+		int size= products.size();
 		Product product = new Product();
 		product.setId(20);
 		product.setName("Producto X");
@@ -58,6 +61,7 @@ public class HU16Test {
 		product.setPrice(2.0);
 		product.setStock(2);
 		this.productService.save(product);
+		Assertions.assertTrue(size<productService.findProducts().size());
 
 	}
 
