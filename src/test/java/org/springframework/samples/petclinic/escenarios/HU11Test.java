@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Sickness;
-import org.springframework.samples.petclinic.model.SicknessValidator;
 import org.springframework.samples.petclinic.model.Vaccine;
 import org.springframework.samples.petclinic.model.VaccineValidator;
 import org.springframework.samples.petclinic.service.PetService;
@@ -30,10 +29,11 @@ import org.springframework.validation.Errors;
 public class HU11Test {
 
 	@Autowired
-	private VaccineService vaccineService;
+	private VaccineService	vaccineService;
 
 	@Autowired
-	private PetService petService;
+	private PetService		petService;
+
 
 	private VaccineValidator createValidator() {
 		return new VaccineValidator();
@@ -93,9 +93,7 @@ public class HU11Test {
 		Assertions.assertThat(errors.hasFieldErrors("name")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be blank");
 	}
-	
-	
-	
+
 	@Test
 	@Transactional
 	void createVaccineMonthEmpty() {
@@ -111,8 +109,7 @@ public class HU11Test {
 		vaccine.setName("Vacune test");
 		vaccine.setSickness(sickness);
 		vaccine.setComponents("h1");
-		
-		
+
 		VaccineValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(vaccine, "vaccine");
 		validator.validate(vaccine, errors);
@@ -121,8 +118,7 @@ public class HU11Test {
 		Assertions.assertThat(errors.hasFieldErrors("months")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be null");
 	}
-	
-	
+
 	@Test
 	@Transactional
 	void createVaccineComponentEmpty() {
@@ -148,8 +144,7 @@ public class HU11Test {
 		Assertions.assertThat(errors.hasFieldErrors("components")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be blank");
 	}
-	
-	
+
 	@Test
 	@Transactional
 	void createVaccineComponentBigEnough() {
@@ -175,8 +170,7 @@ public class HU11Test {
 		Assertions.assertThat(errors.hasFieldErrors("components")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must lower than 70");
 	}
-	
-	
+
 	@Test
 	@Transactional
 	void createVaccineNameBigEnough() {
@@ -202,9 +196,7 @@ public class HU11Test {
 		Assertions.assertThat(errors.hasFieldErrors("name")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must lower than 70");
 	}
-	
-	
-	
+
 	@Test
 	@Transactional
 	void createVaccineNegativeMonth() {
@@ -230,7 +222,7 @@ public class HU11Test {
 		Assertions.assertThat(errors.hasFieldErrors("months")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must be positive number");
 	}
-	
+
 	@Test
 	@Transactional
 	void createVaccineMonthBigEnough() {
@@ -256,6 +248,5 @@ public class HU11Test {
 		Assertions.assertThat(errors.hasFieldErrors("months")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must lower than 60");
 	}
-	
 
 }

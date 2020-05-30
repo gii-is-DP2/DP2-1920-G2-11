@@ -1,97 +1,101 @@
-package org.springframework.samples.petclinic.ui.escenariosPositivos;
 
-import static org.junit.Assert.fail;
+package org.springframework.samples.petclinic.ui.escenariosPositivos;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class HU8HU9HU10UITest {
 
 	@LocalServerPort
-	private int port;
-	private String username;
-	private WebDriver driver;
-	private String baseUrl;
-	private boolean acceptNextAlert = true;
-	private StringBuffer verificationErrors = new StringBuffer();
+	private int				port;
+	private String			username;
+	private WebDriver		driver;
+	private String			baseUrl;
+	private boolean			acceptNextAlert		= true;
+	private StringBuffer	verificationErrors	= new StringBuffer();
+
 
 	@BeforeEach
 	public void setUp() throws Exception {
 
 		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
-		driver = new FirefoxDriver();
-		baseUrl = "https://www.google.com/";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		this.driver = new FirefoxDriver();
+		this.baseUrl = "https://www.google.com/";
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
 	public void testShowClinicListProductsClinicAndShowProduct() throws Exception {
-		this.as("admin1").whenIamLoggedIntheSystemAsOwner().thenICanShowClinic().thenICanListProductsClinic()
-				.thenICanShowAProduct();
+		this.as("admin1").whenIamLoggedIntheSystemAsOwner().thenICanShowClinic().thenICanListProductsClinic().thenICanShowAProduct();
 	}
 
 	private HU8HU9HU10UITest thenICanShowClinic() {
 
-		driver.findElement(By.xpath("//a[contains(@href, '/clinics/1')]")).click();
+		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics/1')]")).click();
 		return this;
 	}
 
 	private HU8HU9HU10UITest thenICanListProductsClinic() {
-		driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-		driver.findElement(By.xpath("//a[contains(@href, '/clinics/5/products')]")).click();
+		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
+		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics/5/products')]")).click();
 		return this;
 	}
 
 	private HU8HU9HU10UITest thenICanShowAProduct() {
-		driver.findElement(By.xpath("//a[contains(@href, '/products/6')]")).click();
+		this.driver.findElement(By.xpath("//a[contains(@href, '/products/6')]")).click();
 		return this;
 	}
 
 	private HU8HU9HU10UITest whenIamLoggedIntheSystemAsOwner() {
-		driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
+		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
 		return this;
 	}
 
 	private HU8HU9HU10UITest as(final String username) {
 		this.username = username;
-		driver.get("http://localhost:" + this.port + "/");
-		driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
-		driver.findElement(By.id("password")).clear();
-		driver.findElement(By.id("password")).sendKeys("0wn3r");
-		driver.findElement(By.id("username")).clear();
-		driver.findElement(By.id("username")).sendKeys("owner1");
-		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		this.driver.get("http://localhost:" + this.port + "/");
+		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
+		this.driver.findElement(By.id("password")).clear();
+		this.driver.findElement(By.id("password")).sendKeys("0wn3r");
+		this.driver.findElement(By.id("username")).clear();
+		this.driver.findElement(By.id("username")).sendKeys("owner1");
+		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
 		return this;
 	}
 
 	@AfterEach
 	public void tearDown() throws Exception {
-		driver.quit();
-		String verificationErrorString = verificationErrors.toString();
+		this.driver.quit();
+		String verificationErrorString = this.verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
+			Assert.fail(verificationErrorString);
 		}
 	}
 
 	private boolean isElementPresent(final By by) {
 		try {
-			driver.findElement(by);
+			this.driver.findElement(by);
 			return true;
 		} catch (NoSuchElementException e) {
 			return false;
@@ -100,7 +104,7 @@ public class HU8HU9HU10UITest {
 
 	private boolean isAlertPresent() {
 		try {
-			driver.switchTo().alert();
+			this.driver.switchTo().alert();
 			return true;
 		} catch (NoAlertPresentException e) {
 			return false;
@@ -109,16 +113,16 @@ public class HU8HU9HU10UITest {
 
 	private String closeAlertAndGetItsText() {
 		try {
-			Alert alert = driver.switchTo().alert();
+			Alert alert = this.driver.switchTo().alert();
 			String alertText = alert.getText();
-			if (acceptNextAlert) {
+			if (this.acceptNextAlert) {
 				alert.accept();
 			} else {
 				alert.dismiss();
 			}
 			return alertText;
 		} finally {
-			acceptNextAlert = true;
+			this.acceptNextAlert = true;
 		}
 	}
 }

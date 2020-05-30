@@ -16,7 +16,6 @@ import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.service.SicknessService;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)

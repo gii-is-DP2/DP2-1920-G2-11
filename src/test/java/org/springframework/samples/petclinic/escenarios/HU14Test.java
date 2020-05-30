@@ -1,5 +1,5 @@
-package org.springframework.samples.petclinic.escenarios;
 
+package org.springframework.samples.petclinic.escenarios;
 
 import java.util.Locale;
 
@@ -13,10 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.samples.petclinic.model.Clinic;
 import org.springframework.samples.petclinic.model.ClinicValidator;
-import org.springframework.samples.petclinic.model.Vaccine;
-import org.springframework.samples.petclinic.model.VaccineValidator;
 import org.springframework.samples.petclinic.service.ClinicService;
-import org.springframework.samples.petclinic.service.VaccineService;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +28,12 @@ public class HU14Test {
 	//TODO añadir clinica
 	@Autowired
 	private ClinicService clinicService;
-	
+
+
 	private ClinicValidator createValidator() {
 		return new ClinicValidator();
 	}
-	
+
 	//caso positivo
 	@Test
 	@Transactional
@@ -48,37 +46,36 @@ public class HU14Test {
 		clinic.setAddress("Calle Locura 5");
 		clinic.setTelephone("653214785");
 		clinic.setId(90);
-		
+
 		ClinicValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(clinic, "clinic");
 		validator.validate(clinic, errors);
 		Assertions.assertThat(errors.getAllErrors()).isEmpty();
-		
+
 		this.clinicService.save(clinic);
-	 }		
+	}
 	//caso negativo
-		
-		@Test
-		@Transactional
-		
-		void createClinicNameBlank() {
-			LocaleContextHolder.setLocale(Locale.ENGLISH);
-			Clinic clinic = new Clinic();
-			//clinic.setName("");
-			clinic.setCity("Sevilla");
-			clinic.setEmail("mal@mail.com");
-			clinic.setAddress("Calle Lora 5");
-			clinic.setTelephone("689214785");
-			clinic.setId(80);
-			
-			ClinicValidator validator = this.createValidator();
-			Errors errors = new BeanPropertyBindingResult(clinic, "clinic");
-			validator.validate(clinic, errors);
 
-			Assertions.assertThat(errors.getErrorCount()).isEqualTo(1);
-			Assertions.assertThat(errors.hasFieldErrors("name")).isTrue();
-			Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be blank");
-		}
-			
+	@Test
+	@Transactional
+
+	void createClinicNameBlank() {
+		LocaleContextHolder.setLocale(Locale.ENGLISH);
+		Clinic clinic = new Clinic();
+		//clinic.setName("");
+		clinic.setCity("Sevilla");
+		clinic.setEmail("mal@mail.com");
+		clinic.setAddress("Calle Lora 5");
+		clinic.setTelephone("689214785");
+		clinic.setId(80);
+
+		ClinicValidator validator = this.createValidator();
+		Errors errors = new BeanPropertyBindingResult(clinic, "clinic");
+		validator.validate(clinic, errors);
+
+		Assertions.assertThat(errors.getErrorCount()).isEqualTo(1);
+		Assertions.assertThat(errors.hasFieldErrors("name")).isTrue();
+		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be blank");
+	}
+
 }
-
