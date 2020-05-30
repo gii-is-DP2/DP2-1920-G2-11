@@ -14,12 +14,17 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class HU19HU20UITest {
 
 	@LocalServerPort
@@ -72,26 +77,24 @@ public class HU19HU20UITest {
 
 	private HU19HU20UITest thenICanFilterMedicines() {
 
-		 this.driver.findElement(By.id("medicinesform")).click();
-		    this.driver.findElement(By.id("petTypeId")).click();
-		    this.driver.findElement(By.xpath("//option[@value='2']")).click();
-		    this.driver.findElement(By.id("sicknessId")).click();
-		    this.driver.findElement(By.xpath("(//option[@value='2'])[2]")).click();
-		    this.driver.findElement(By.xpath("//input[@type='submit']")).click();
-			Assert.assertEquals("Medicines", this.driver.findElement(By.xpath("//h2")).getText());
-			Assert.assertTrue(this.driver.findElement(By.xpath("//table[contains(@id, 'medicinesTable')]")).isDisplayed());
-			Assert.assertTrue(driver.findElement(By.cssSelector("td")).getText().matches("Medicina D"));
-			return this;
+		this.driver.findElement(By.id("medicinesform")).click();
+		this.driver.findElement(By.id("petTypeId")).click();
+		this.driver.findElement(By.xpath("//option[@value='2']")).click();
+		this.driver.findElement(By.id("sicknessId")).click();
+		this.driver.findElement(By.xpath("(//option[@value='2'])[2]")).click();
+		this.driver.findElement(By.xpath("//input[@type='submit']")).click();
+		Assert.assertEquals("Medicines", this.driver.findElement(By.xpath("//h2")).getText());
+		Assert.assertTrue(this.driver.findElement(By.xpath("//table[contains(@id, 'medicinesTable')]")).isDisplayed());
+		Assert.assertTrue(this.driver.findElement(By.cssSelector("td")).getText().matches("Medicina D"));
+		return this;
 	}
-	
+
 	private void thenICanOpenMedicines() {
-			this.driver.findElement(By.linkText("Go")).click();
-			Assert.assertTrue(driver.findElement(By.cssSelector("th")).getText().matches("Name"));
-			Assert.assertTrue(driver.findElement(By.cssSelector("td")).getText().matches("Medicina D"));
+		this.driver.findElement(By.linkText("Go")).click();
+		Assert.assertTrue(this.driver.findElement(By.cssSelector("th")).getText().matches("Name"));
+		Assert.assertTrue(this.driver.findElement(By.cssSelector("td")).getText().matches("Medicina D"));
 	}
-	
-	
-	
+
 	@AfterEach
 	public void tearDown() throws Exception {
 		this.driver.quit();

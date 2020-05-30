@@ -35,7 +35,6 @@ public class ProductController {
 		this.clinicService = clinicService;
 	}
 
-
 	@GetMapping(value = "/products")
 	public String listProducts(final Map<String, Object> model) {
 		model.put("products", this.productService.findProducts());
@@ -82,8 +81,12 @@ public class ProductController {
 	@PostMapping(value = "products/save")
 	public String saveProduct(@Valid final Product product, final BindingResult result, final ModelMap modelMap) {
 		String view = "products/listProducts";
+		Collection<Clinic> clinics = this.clinicService.findClinics();
+		Collection<ProductType> productTypes = this.productTypeService.findProductTypes();
 		if (result.hasErrors()) {
 			modelMap.addAttribute("product", product);
+			modelMap.addAttribute("Clinics", clinics);
+			modelMap.addAttribute("ProductTypes", productTypes);
 			return "products/editProduct";
 		} else {
 			this.productService.save(product);
@@ -92,25 +95,28 @@ public class ProductController {
 		}
 		return view;
 	}
-	
-	@PostMapping(value="products/edit/save")
-	public String editSaveProduct(@Valid Product product, BindingResult result,ModelMap modelMap) {
-		String view="products/listProducts";
-		if(result.hasErrors())
-		{
+
+	@PostMapping(value = "products/edit/save")
+	public String editSaveProduct(@Valid final Product product, final BindingResult result, final ModelMap modelMap) {
+		String view = "products/listProducts";
+		Collection<Clinic> clinics = this.clinicService.findClinics();
+		Collection<ProductType> productTypes = this.productTypeService.findProductTypes();
+		if (result.hasErrors()) {
 			modelMap.addAttribute("product", product);
+			modelMap.addAttribute("Clinics", clinics);
+			modelMap.addAttribute("ProductTypes", productTypes);
 			return "products/editProduct";
-		}else {
-			productService.save(product);
+		} else {
+			this.productService.save(product);
 			modelMap.addAttribute("message", "Product saved!");
-			view=listProducts(modelMap);
+			view = this.listProducts(modelMap);
 		}
 		return view;
 	}
 
 	@GetMapping(value = "products/edit/{productId}")
-	public String editProduct(@PathVariable("productId") int productId, final ModelMap modelMap) {
-		Product p= productService.findProductById(productId);
+	public String editProduct(@PathVariable("productId") final int productId, final ModelMap modelMap) {
+		Product p = this.productService.findProductById(productId);
 		Collection<Clinic> clinics = this.clinicService.findClinics();
 		Collection<ProductType> productTypes = this.productTypeService.findProductTypes();
 		String view = "products/editProduct";
@@ -121,7 +127,7 @@ public class ProductController {
 		return view;
 
 	}
-	
+
 	@GetMapping(value = "products/delete/{productId}")
 	public String deleteProduct(@PathVariable("productId") final int productId, final ModelMap modelMap) {
 		String view = "products/productList";
@@ -138,4 +144,3 @@ public class ProductController {
 	}
 
 }
-

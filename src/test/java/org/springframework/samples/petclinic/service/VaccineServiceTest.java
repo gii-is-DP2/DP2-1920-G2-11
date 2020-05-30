@@ -17,20 +17,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
-//TODO: revisar
-
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @DirtiesContext
 public class VaccineServiceTest {
 
 	@Autowired
-
 	private VaccineService vaccineService;
-	
-	@Autowired
-	private SicknessService sicknessService;
-
 
 
 	@Test
@@ -74,8 +67,7 @@ public class VaccineServiceTest {
 	@Transactional
 
 	void saveVaccineTest() {
-		Iterable<Vaccine> vaccines = this.vaccineService.findAll(); 
-		
+		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
 
 		int n = 0;
 		for (Vaccine v : vaccines) {

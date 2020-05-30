@@ -14,13 +14,17 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.samples.petclinic.ui.escenariosPositivos.HU19HU20UITest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class HU18HU19HU20UITest {
 
 	@LocalServerPort
@@ -28,7 +32,7 @@ public class HU18HU19HU20UITest {
 
 	private String			username;
 	private WebDriver		driver;
-	private String			baseUrl ;
+	private String			baseUrl;
 	private boolean			acceptNextAlert		= true;
 	private StringBuffer	verificationErrors	= new StringBuffer();
 
@@ -48,7 +52,7 @@ public class HU18HU19HU20UITest {
 
 	private HU18HU19HU20UITest as(final String username) {
 		this.username = username;
-		this.driver.get( this.baseUrl + this.port + "/");
+		this.driver.get(this.baseUrl + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
 		this.driver.findElement(By.id("username")).click();
 		this.driver.findElement(By.id("username")).clear();
@@ -69,30 +73,29 @@ public class HU18HU19HU20UITest {
 		Assert.assertTrue(this.driver.findElements(By.xpath("//a[contains(@href, '/admin/medicines/')]")).isEmpty());
 		return this;
 	}
-	
+
 	private HU18HU19HU20UITest butICanListOwnerMedicines() {
 		this.driver.findElement(By.xpath("//a[contains(@href, '/owner/medicines/')]")).click();
 		return this;
 	}
-	
+
 	private HU18HU19HU20UITest thenICantFilterMedicinesWithBadPetTypeAndSicknessIds() {
-		 this.driver.findElement(By.id("medicinesform")).click();
-		    this.driver.findElement(By.id("petTypeId")).click();
-		    this.driver.findElement(By.xpath("//option[@value='23']")).click();
-		    this.driver.findElement(By.id("sicknessId")).click();
-		    this.driver.findElement(By.xpath("(//option[@value='3'])[2]")).click();
-		    this.driver.findElement(By.xpath("//input[@type='submit']")).click();
-			Assert.assertEquals("Medicines", this.driver.findElement(By.xpath("//h2")).getText());
-			Assert.assertTrue(this.driver.findElement(By.xpath("//p[contains(text(), 'Esta combinación no existe en el servidor')]")).isDisplayed());
-			return this;
+		this.driver.findElement(By.id("medicinesform")).click();
+		this.driver.findElement(By.id("petTypeId")).click();
+		this.driver.findElement(By.xpath("//option[@value='23']")).click();
+		this.driver.findElement(By.id("sicknessId")).click();
+		this.driver.findElement(By.xpath("(//option[@value='3'])[2]")).click();
+		this.driver.findElement(By.xpath("//input[@type='submit']")).click();
+		Assert.assertEquals("Medicines", this.driver.findElement(By.xpath("//h2")).getText());
+		Assert.assertTrue(this.driver.findElement(By.xpath("//p[contains(text(), 'Esta combinación no existe en el servidor')]")).isDisplayed());
+		return this;
 	}
-	
+
 	private HU18HU19HU20UITest AndICantFindMedicinesWithBadId() {
-		 this.driver.get( this.baseUrl + this.port + "/owner/medicine/55");
-		 Assert.assertTrue(this.driver.findElement(By.xpath("//p[contains(text(), 'Esta medicina no existe en el servidor')]")).isDisplayed());
-		 return this;
+		this.driver.get(this.baseUrl + this.port + "/owner/medicine/55");
+		Assert.assertTrue(this.driver.findElement(By.xpath("//p[contains(text(), 'Esta medicina no existe en el servidor')]")).isDisplayed());
+		return this;
 	}
-	
 
 	@AfterEach
 	public void tearDown() throws Exception {

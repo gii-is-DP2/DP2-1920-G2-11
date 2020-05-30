@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,87 +13,60 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.springframework.samples.petclinic.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Medicine;
-import org.springframework.samples.petclinic.model.Pet;
-import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.samples.petclinic.model.User;
-import org.springframework.samples.petclinic.model.Authorities;
-import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
-import org.springframework.samples.petclinic.util.EntityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
-
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @DirtiesContext
-class MedicineServiceTests {                
-        @Autowired
+class MedicineServiceTests {
+
+	@Autowired
 	protected MedicineService medicineService;
+
 
 	@Test
 	void findById() {
 		Medicine medicine = this.medicineService.findMedicineById(1);
-		assertThat(medicine.getName().equals("Medicina A")
-		&& medicine.getComponents().equals("Componente A")
-		&& medicine.getPetType().getId().equals(1)&&medicine.getPetType().getName().equals("cat")
-		&& medicine.getSickness().getId().equals(1)&&medicine.getSickness().getName().equals("Otitis")
-		&& medicine.getTreatment().equals("1 cada 8 horas"));
-			
+		Assertions.assertThat(medicine.getName().equals("Medicina A") && medicine.getComponents().equals("Componente A") && medicine.getPetType().getId().equals(1) && medicine.getPetType().getName().equals("cat") && medicine.getSickness().getId().equals(1)
+			&& medicine.getSickness().getName().equals("Otitis") && medicine.getTreatment().equals("1 cada 8 horas"));
+
 		//Prueba negativa
 		Medicine wrongMedicine = this.medicineService.findMedicineById(50);
-		assertThat(wrongMedicine.isNew());
+		Assertions.assertThat(wrongMedicine.isNew());
 	}
 
 	@Test
 	void findMedicines() {
 		Collection<Medicine> medicines = this.medicineService.findMedicines();
-		assertThat(!medicines.isEmpty()
-				&& medicines.size()==8);
+		Assertions.assertThat(!medicines.isEmpty() && medicines.size() == 8);
 
 	}
 
 	@Test
 	void findMedicinesBySicknessIdAndPetTypeId() {
 		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(1, 1);
-		assertThat(medicines.size()==1);
+		Assertions.assertThat(medicines.size() == 1);
 		Medicine medicine = medicines.stream().findFirst().get();
-		assertThat(medicine.getName().equals("Medicina A")
-		&& medicine.getComponents().equals("Componente A")
-		&& medicine.getPetType().getId().equals(1)&&medicine.getPetType().getName().equals("cat")
-		&& medicine.getSickness().getId().equals(1)&&medicine.getSickness().getName().equals("Otitis")
-		&& medicine.getTreatment().equals("1 cada 8 horas"));
-		
-			//Prueba negativa
-		Collection<Medicine> wrongMedicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(43, 38);
-		assertThat(wrongMedicines.isEmpty());
-	}
+		Assertions.assertThat(medicine.getName().equals("Medicina A") && medicine.getComponents().equals("Componente A") && medicine.getPetType().getId().equals(1) && medicine.getPetType().getName().equals("cat") && medicine.getSickness().getId().equals(1)
+			&& medicine.getSickness().getName().equals("Otitis") && medicine.getTreatment().equals("1 cada 8 horas"));
 
-	
+		//Prueba negativa
+		Collection<Medicine> wrongMedicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(43, 38);
+		Assertions.assertThat(wrongMedicines.isEmpty());
+	}
 
 }

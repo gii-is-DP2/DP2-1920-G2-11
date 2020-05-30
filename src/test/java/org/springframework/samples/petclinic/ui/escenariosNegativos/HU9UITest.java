@@ -1,6 +1,8 @@
+
 package org.springframework.samples.petclinic.ui.escenariosNegativos;
 
 import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,29 +14,36 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@DirtiesContext
 public class HU9UITest {
+
 	@LocalServerPort
-	private int port;
-	private String username;
-	private WebDriver driver;
-	private String baseUrl;
-	private boolean acceptNextAlert = true;
-	private StringBuffer verificationErrors = new StringBuffer();
+	private int				port;
+	private String			username;
+	private WebDriver		driver;
+	private String			baseUrl;
+	private boolean			acceptNextAlert		= true;
+	private StringBuffer	verificationErrors	= new StringBuffer();
+
 
 	@BeforeEach
 	public void setUp() throws Exception {
 
 		System.setProperty("webdriver.gecko.driver", System.getenv("webdriver.gecko.driver"));
 
-		driver = new FirefoxDriver();
-		baseUrl = "https://www.google.com/";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		this.driver = new FirefoxDriver();
+		this.baseUrl = "https://www.google.com/";
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
@@ -47,11 +56,11 @@ public class HU9UITest {
 		this.username = username;
 		this.driver.get("http://localhost:" + this.port + "/");
 		this.driver.findElement(By.xpath("//a[contains(@href, '/login')]")).click();
-		driver.findElement(By.id("username")).clear();
-		driver.findElement(By.id("username")).sendKeys("owner1");
-		driver.findElement(By.id("password")).clear();
-		driver.findElement(By.id("password")).sendKeys("0wn3r");
-		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		this.driver.findElement(By.id("username")).clear();
+		this.driver.findElement(By.id("username")).sendKeys("owner1");
+		this.driver.findElement(By.id("password")).clear();
+		this.driver.findElement(By.id("password")).sendKeys("0wn3r");
+		this.driver.findElement(By.xpath("//button[@type='submit']")).click();
 		return this;
 	}
 
@@ -62,23 +71,25 @@ public class HU9UITest {
 	}
 
 	private HU9UITest thenICantListProductsClinic() {
+
 		driver.findElement(By.xpath("//a[contains(@href, '/clinics/3/products')]")).click();
 		Assert.assertEquals("Para más información haz clic aquí", this.driver.findElement(By.xpath("//a[contains(@href, 'mailto:petclinicDP2@hotmail.com')]")).getText());
+
 		return this;
 	}
 
 	@AfterEach
 	public void tearDown() throws Exception {
-		driver.quit();
-		String verificationErrorString = verificationErrors.toString();
+		this.driver.quit();
+		String verificationErrorString = this.verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			Assert.fail(verificationErrorString);
 		}
 	}
 
-	private boolean isElementPresent(By by) {
+	private boolean isElementPresent(final By by) {
 		try {
-			driver.findElement(by);
+			this.driver.findElement(by);
 			return true;
 		} catch (NoSuchElementException e) {
 			return false;
@@ -87,7 +98,7 @@ public class HU9UITest {
 
 	private boolean isAlertPresent() {
 		try {
-			driver.switchTo().alert();
+			this.driver.switchTo().alert();
 			return true;
 		} catch (NoAlertPresentException e) {
 			return false;
@@ -96,16 +107,16 @@ public class HU9UITest {
 
 	private String closeAlertAndGetItsText() {
 		try {
-			Alert alert = driver.switchTo().alert();
+			Alert alert = this.driver.switchTo().alert();
 			String alertText = alert.getText();
-			if (acceptNextAlert) {
+			if (this.acceptNextAlert) {
 				alert.accept();
 			} else {
 				alert.dismiss();
 			}
 			return alertText;
 		} finally {
-			acceptNextAlert = true;
+			this.acceptNextAlert = true;
 		}
 	}
 }
