@@ -66,11 +66,15 @@ public class HU9UITest {
 
 	private HU9UITest whenIamLoggedIntheSystemAsOwner() {
 		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
+		Assert.assertEquals("OWNER1", this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText());
 		return this;
 	}
 
 	private HU9UITest thenICantListProductsClinic() {
-		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics/3/products')]")).click();
+
+		driver.findElement(By.xpath("//a[contains(@href, '/clinics/3/products')]")).click();
+		Assert.assertEquals("Para más información haz clic aquí", this.driver.findElement(By.xpath("//a[contains(@href, 'mailto:petclinicDP2@hotmail.com')]")).getText());
+
 		return this;
 	}
 

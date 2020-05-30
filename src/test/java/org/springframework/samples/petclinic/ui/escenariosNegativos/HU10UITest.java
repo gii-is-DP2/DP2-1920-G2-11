@@ -49,6 +49,8 @@ public class HU10UITest {
 	public void testShowAClinicProductCasoNegativo() throws Exception {
 
 		this.as("owner1").whenIamLoggedIntheSystemAsOwner().thenICantShowAProduct();
+		Assert.assertEquals("OWNER1", this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText());
+
 	}
 
 	private HU10UITest as(final String username) {
@@ -70,7 +72,10 @@ public class HU10UITest {
 	}
 
 	private HU10UITest thenICantShowAProduct() {
-		this.driver.findElement(By.xpath("//a[contains(@href, '/products/4')]")).click();
+
+		driver.findElement(By.xpath("//a[contains(@href, '/products/4')]")).click();
+		Assert.assertEquals("Para más información haz clic aquí", this.driver.findElement(By.xpath("//a[contains(@href, 'mailto:petclinicDP2@hotmail.com')]")).getText());
+
 		return this;
 	}
 

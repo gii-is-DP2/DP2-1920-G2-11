@@ -3,6 +3,10 @@ package org.springframework.samples.petclinic.ui.escenariosPositivos;
 
 import java.util.concurrent.TimeUnit;
 
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,23 +51,35 @@ public class HU8HU9HU10UITest {
 
 	@Test
 	public void testShowClinicListProductsClinicAndShowProduct() throws Exception {
-		this.as("admin1").whenIamLoggedIntheSystemAsOwner().thenICanShowClinic().thenICanListProductsClinic().thenICanShowAProduct();
+
+		this.as("owner1").whenIamLoggedIntheSystemAsOwner().thenICanShowClinic().thenICanListProductsClinic()
+				.thenICanShowAProduct();
+		Assert.assertEquals("OWNER1", this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText());
+
 	}
 
 	private HU8HU9HU10UITest thenICanShowClinic() {
+		
+		driver.findElement(By.xpath("//a[contains(@href, '/clinics/1')]")).click();
+		Assert.assertEquals("Winston Pet Cares", this.driver.findElement(By.xpath("//b")).getText());
 
-		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics/1')]")).click();
 		return this;
 	}
 
 	private HU8HU9HU10UITest thenICanListProductsClinic() {
-		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
-		this.driver.findElement(By.xpath("//a[contains(@href, '/clinics/5/products')]")).click();
+
+		driver.findElement(By.xpath("//a[contains(@href, '/clinics')]")).click();
+		Assert.assertEquals("Winston Pet Cares", this.driver.findElement(By.xpath("//a[contains(text(),'Winston Pet Cares')]")).getText());
+		driver.findElement(By.xpath("//a[contains(@href, '/clinics/5/products')]")).click();
+
 		return this;
 	}
 
 	private HU8HU9HU10UITest thenICanShowAProduct() {
-		this.driver.findElement(By.xpath("//a[contains(@href, '/products/6')]")).click();
+
+		Assert.assertEquals("champu hidratante", this.driver.findElement(By.xpath("//a[contains(text(),'champu hidratante')]")).getText());
+		driver.findElement(By.xpath("//a[contains(@href, '/products/6')]")).click();
+
 		return this;
 	}
 

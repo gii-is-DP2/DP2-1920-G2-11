@@ -186,6 +186,29 @@ public class VaccineControllerTest {
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testInitUpdateForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit",
+				VaccineControllerTest.TEST_VACCINE_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("vaccines/updateVaccine"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testProcessUpdateFormSuccess() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit"
+										,VaccineControllerTest.TEST_VACCINE_ID)
+						.with(SecurityMockMvcRequestPostProcessors.csrf())
+						.param("name", "Vacuna 11")
+						.param("components", "koipesol")
+						.param("months", "3")
+						.param("sickness", "1"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+	}
 
 	@WithMockUser(value = "spring")
 	@Test
@@ -201,7 +224,7 @@ public class VaccineControllerTest {
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
 						.with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR")
-						.param("sickness", "Otitis").param("months", "9").param("components", "H20"))
+						.param("sickness", "1").param("months", "9").param("components", "H20"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
 
