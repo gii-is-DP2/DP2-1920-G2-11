@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.service.ProductService;
@@ -41,8 +42,10 @@ public class HU17Test {
 	@Test
 	@Transactional
 	void deleteProductNotCorrectly() {
-		Assertions.assertThrows(InvalidDataAccessApiUsageException.class, () -> {
-			this.productService.delete(this.productService.findProductById(111));
+		Product product = new Product();
+		product.setId(111);
+		Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
+			this.productService.delete(product);
 		});
 	}
 }

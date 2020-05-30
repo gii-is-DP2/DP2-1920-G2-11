@@ -47,8 +47,8 @@ public class HU16UITest {
 	}
 
 	@Test
-	public void testPruebaCasoNegativoCreate() throws Exception {
-		this.afterILogAsAdmin().thenICantCreateAProduct();
+	public void testPruebaCasoPositivoCreate() throws Exception {
+		this.afterILogAsAdmin().thenICanCreateAProduct();
 	}
 
 	public HU16UITest afterILogAsAdmin() throws Exception {
@@ -63,7 +63,7 @@ public class HU16UITest {
 		return this;
 	}
 
-	public void thenICantCreateAProduct() throws Exception {
+	public void thenICanCreateAProduct() throws Exception {
 		this.driver.findElement(By.xpath("//a[contains(@href, '/products')]")).click();
 		this.driver.findElement(By.xpath("//a[contains(@href, '/products/new')]")).click();
 		this.driver.findElement(By.id("name")).click();

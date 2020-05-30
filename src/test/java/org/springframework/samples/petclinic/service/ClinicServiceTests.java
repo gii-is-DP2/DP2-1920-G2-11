@@ -2,6 +2,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,8 @@ public class ClinicServiceTests {
 
 	@Test
 	void findClinicsTest() {
-		Collection<Clinic> clinics = this.clinicService.findClinics();
-		Assertions.assertTrue(!clinics.isEmpty() && clinics.size() == 11);
-	}
+		List<Clinic> clinics = this.clinicService.findClinics();
+		Assertions.assertTrue(!clinics.isEmpty() && clinics.get(0).getName().equals("Winston Pet Cares") && clinics.get(1).getName().equals("Veterinaria Nervion"));}
 
 	@Test
 	void findByIdTest() {
