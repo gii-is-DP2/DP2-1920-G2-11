@@ -41,6 +41,7 @@ public class HU8UITest {
 	public void testPruebaCasoNegativoShow() throws Exception {
 
 		this.as("owner1").whenIamLoggedIntheSystemAsOwner().thenICantShowAClinic();
+		Assert.assertEquals("OWNER1", this.driver.findElement(By.xpath("//div[@id='main-navbar']/ul[2]/li/a/strong")).getText());
 
 	}
 
@@ -62,7 +63,8 @@ public class HU8UITest {
 	}
 
 	private HU8UITest thenICantShowAClinic() {
-		this.driver.findElement(By.xpath("//a[contains(text(),'Clínica Los Arcos')]")).click();
+		this.driver.findElement(By.xpath("//a[contains(text(),'Clinica Los Arcos')]")).click();
+		Assert.assertEquals("Para más información haz clic aquí", this.driver.findElement(By.xpath("//a[contains(@href, 'mailto:petclinicDP2@hotmail.com')]")).getText());
 		return this;
 	}
 
