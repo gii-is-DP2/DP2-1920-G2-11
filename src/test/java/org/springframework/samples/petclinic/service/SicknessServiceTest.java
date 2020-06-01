@@ -1,6 +1,7 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Medicine;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Sickness;
 import org.springframework.samples.petclinic.model.Vaccine;
@@ -29,6 +31,9 @@ public class SicknessServiceTest {
 
 	@Autowired
 	private VaccineService	vaccineService;
+
+	@Autowired
+	private MedicineService	medicineService;
 
 	@Autowired
 	private PetService		petService;
@@ -94,6 +99,14 @@ public class SicknessServiceTest {
 		List<Vaccine> vaccines = this.vaccineService.findVaccinesBySicknessId(sickness.getId());
 		Assertions.assertTrue(vaccines.isEmpty());
 
+	}
+
+	@Test
+	void deleteMedicineFromSicknessTest() {
+		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		this.sicknessService.deleteMedicineFromSickness(sickness);
+		Collection<Medicine> medicines = this.medicineService.findMedicinesBySicknessIdAndPetTypeId(sickness.getId(), sickness.getType().getId());
+		Assertions.assertTrue(medicines.isEmpty());
 	}
 
 	@Test
