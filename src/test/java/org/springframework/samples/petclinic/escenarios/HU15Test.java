@@ -35,12 +35,6 @@ public class HU15Test {
 	@Test
 	void EditProductCorrect() {
 		
-	//vacuna: (2, 'Vacuna B', 'A,S,D,F', 6, 2);
-	//sickness : (2, 'Conjuntivitis', 'Infecciones oculares, alergias, problemas genéticos', 
-		//'Inflamación de la mucosa del ojo, pérdida de visión, lagrimeo', 2, 1);
-		
-   //petType:  (1, 'cat');
-		
 		Product product = this.productService.findProductById(2);
 	    product.setName("producto cambiado");
 	    
