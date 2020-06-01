@@ -1,6 +1,10 @@
 
 package org.springframework.samples.petclinic.web.e2e;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.samples.petclinic.web.VaccineControllerTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.annotation.DirtiesContext;
@@ -91,6 +96,15 @@ public class VaccineControllerE2ETest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/delete", VaccineControllerE2ETest.TEST_VACCINE_ID)).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 			.andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}
+	
+	@WithMockUser(username = "vet1", authorities = {
+			"veterinarian", "admin"
+		})
+	void testInitCreationForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newVaccine"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
+	}
 
 	@WithMockUser(username = "vet1", authorities = {
 		"veterinarian", "admin"
@@ -100,5 +114,42 @@ public class VaccineControllerE2ETest {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/vets/newVaccine").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR").param("sickness", "Otitis").param("months", "9").param("components", "H20"))
 			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
+	
+	@WithMockUser(username = "vet1", authorities = {
+			"veterinarian", "admin"
+		})
+	@Test
+	void testProcessUpdateVaccineErrors() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit", 
+				VaccineControllerE2ETest.TEST_VACCINE_ID)
+						.with(SecurityMockMvcRequestPostProcessors.csrf())
+						.param("name", "")
+						.param("components", "kop")
+						.param("months", "3")
+						.param("sickness", "1"))
+			   .andExpect(status().isOk())
+			   .andExpect(model().attributeHasErrors("vaccine"))
+			   //.andExpect(model().attributeHasFieldErrors("vaccine","name"))
+			   .andExpect(view().name("vaccines/updateVaccine"));
+	}
+	
+	
+	@WithMockUser(username = "vet1", authorities = {
+			"veterinarian", "admin"
+		})
+	@Test
+	void testProcessCreationFormHasErrors1() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
+						.with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR")
+						.param("sickness", "1").param("components", "H2E"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("vaccine"))
+				// .andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("months"))
+				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
+	}
 
+	
+	
+	
 }
