@@ -87,6 +87,7 @@ public class SicknessServiceTest {
 	void deleteSicknessTest() {
 		Sickness sickness = this.sicknessService.findSicknessesById(24);
 		this.sicknessService.deleteVaccineFromSickness(sickness);
+		this.sicknessService.deleteMedicineFromSickness(sickness);
 		this.sicknessService.deleteSickness(sickness);
 		List<Sickness> sicknesses = this.sicknessService.findSicknessesByPetId(6);
 		Assertions.assertTrue(!sicknesses.isEmpty() && sicknesses.size() == 3);
