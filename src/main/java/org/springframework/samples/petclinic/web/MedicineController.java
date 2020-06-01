@@ -63,7 +63,7 @@ public class MedicineController {
 		List<Sickness> sickness = new ArrayList<Sickness>();
 		List<PetType> petTypes = new ArrayList<PetType>();
 		Collection<Medicine> medicines = new HashSet<Medicine>();
-		sickness.addAll(this.sicknessService.findSicknesses());
+		sickness.addAll(this.sicknessService.findAllSicknesses());
 		petTypes.addAll(this.petTypeService.findPetTypes());
 		model.put("petTypes", petTypes);
 		model.put("sicknesses", sickness);
