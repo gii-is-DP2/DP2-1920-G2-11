@@ -1,5 +1,5 @@
-package org.springframework.samples.petclinic.escenarios;
 
+package org.springframework.samples.petclinic.escenarios;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,46 +21,36 @@ import org.springframework.validation.Errors;
 @DirtiesContext
 public class HU15Test {
 
-	//TODO MODIFICAR VACUNA
 	@Autowired
 	private ProductService productService;
-	
+
+
 	private ProductValidator createValidator() {
 		return new ProductValidator();
 	}
 
-
-
 	//Caso positivo
 	@Test
 	void EditProductCorrect() {
-		
-	//vacuna: (2, 'Vacuna B', 'A,S,D,F', 6, 2);
-	//sickness : (2, 'Conjuntivitis', 'Infecciones oculares, alergias, problemas genéticos', 
-		//'Inflamación de la mucosa del ojo, pérdida de visión, lagrimeo', 2, 1);
-		
-   //petType:  (1, 'cat');
-		
+
 		Product product = this.productService.findProductById(2);
-	    product.setName("producto cambiado");
-	    
+		product.setName("producto cambiado");
+
 		ProductValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(product, "product");
 		validator.validate(product, errors);
 		Assertions.assertThat(errors.getAllErrors()).isEmpty();
-		
+
 		this.productService.save(product);
-		
-		
+
 	}
 
-//caso negativos
-	
-	
+	//caso negativos
+
 	@Test
 	void editProductNameNotCorrectly() {
 		Product product = this.productService.findProductById(3);
-	    product.setName("");
+		product.setName("");
 		ProductValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(product, "product");
 		validator.validate(product, errors);
@@ -69,7 +59,5 @@ public class HU15Test {
 		Assertions.assertThat(errors.hasFieldErrors("name")).isTrue();
 		Assertions.assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("must not be blank");
 	}
-	
-	
-}
 
+}

@@ -4,7 +4,6 @@ package org.springframework.samples.petclinic.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -25,41 +24,40 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = VaccineController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class VaccineControllerTest {
 
 	@Autowired
-	private VaccineController vaccineController;
+	private VaccineController	vaccineController;
 
 	@MockBean
-	private VaccineService vaccineService;
+	private VaccineService		vaccineService;
 
 	@MockBean
-	private SicknessService sicknessService;
+	private SicknessService		sicknessService;
 
 	@Autowired
-	private MockMvc mockMvc;
+	private MockMvc				mockMvc;
 
-	private Vaccine vaccine;
+	private Vaccine				vaccine;
 
-	private static final int TEST_PET_ID = 1;
+	private static final int	TEST_PET_ID					= 1;
 
-	private static final int TEST_PET_ERROR_ID = 3;
+	private static final int	TEST_PET_ERROR_ID			= 3;
 
-	private static final int TEST_SICKNESS_ID = 1;
+	private static final int	TEST_SICKNESS_ID			= 1;
 
-	private static final int TEST_SICKNESS_ERROR_ID = 7;
+	private static final int	TEST_SICKNESS_ERROR_ID		= 7;
 
-	private static final int TEST_VACCINE_ID = 1;
+	private static final int	TEST_VACCINE_ID				= 1;
 
-	private static final int TEST_PET_SHOW_ERROR_ID = 1;
+	private static final int	TEST_PET_SHOW_ERROR_ID		= 1;
 
-	private static final int TEST_SICKNESS_SHOW_ERROR_ID = 6;
+	private static final int	TEST_SICKNESS_SHOW_ERROR_ID	= 6;
 
-	private static final int TEST_VACCINE_ERROR_ID = 8;
+	private static final int	TEST_VACCINE_ERROR_ID		= 8;
+
 
 	@BeforeEach
 	void setup() {
@@ -116,51 +114,33 @@ public class VaccineControllerTest {
 		vaccineError.setMonths(0);
 		vaccineError.setSickness(iF);
 
-		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ID))
-				.willReturn(vaccines);
-		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ID))
-				.willReturn(vaccine);
-		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ERROR_ID))
-				.willReturn(vaccinesError);
-		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ERROR_ID))
-				.willReturn(vaccineError);
+		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ID)).willReturn(vaccines);
+		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ID)).willReturn(vaccine);
+		BDDMockito.given(this.vaccineService.findVaccinesBySicknessId(VaccineControllerTest.TEST_SICKNESS_ERROR_ID)).willReturn(vaccinesError);
+		BDDMockito.given(this.vaccineService.findVaccineById(VaccineControllerTest.TEST_VACCINE_ERROR_ID)).willReturn(vaccineError);
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowVaccineListHtml() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines",
-						VaccineControllerTest.TEST_PET_ID, VaccineControllerTest.TEST_SICKNESS_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeExists("vaccines"))
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/vaccinesList"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines", VaccineControllerTest.TEST_PET_ID, VaccineControllerTest.TEST_SICKNESS_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeExists("vaccines")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccinesList"));
 
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowVaccineErrorHtml() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines",
-						VaccineControllerTest.TEST_PET_ERROR_ID, VaccineControllerTest.TEST_SICKNESS_ERROR_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccinesError"))
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineError"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines", VaccineControllerTest.TEST_PET_ERROR_ID, VaccineControllerTest.TEST_SICKNESS_ERROR_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccinesError")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineError"));
 
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowVaccineShowHtml() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get(
-						"/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}",
-						VaccineControllerTest.TEST_PET_ID, VaccineControllerTest.TEST_SICKNESS_ID,
-						VaccineControllerTest.TEST_VACCINE_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeExists("vaccine"))
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineShow"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}", VaccineControllerTest.TEST_PET_ID, VaccineControllerTest.TEST_SICKNESS_ID, VaccineControllerTest.TEST_VACCINE_ID))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("vaccine")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineShow"));
 
 	}
 
@@ -168,116 +148,65 @@ public class VaccineControllerTest {
 	@Test
 	void testShowVaccineShowErrorHtml() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get(
-						"/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}",
-						VaccineControllerTest.TEST_PET_SHOW_ERROR_ID, VaccineControllerTest.TEST_SICKNESS_SHOW_ERROR_ID,
-						VaccineControllerTest.TEST_VACCINE_ERROR_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccineError"))
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineDetailsError"));
+			.perform(
+				MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/{sicknessId}/vaccines/{vaccineId}", VaccineControllerTest.TEST_PET_SHOW_ERROR_ID, VaccineControllerTest.TEST_SICKNESS_SHOW_ERROR_ID, VaccineControllerTest.TEST_VACCINE_ERROR_ID))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("vaccineError")).andExpect(MockMvcResultMatchers.view().name("vaccines/vaccineDetailsError"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testDeleteVaccine() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/delete",
-						VaccineControllerTest.TEST_VACCINE_ID))
-				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/delete", VaccineControllerTest.TEST_VACCINE_ID)).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 	}
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitUpdateForm() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit",
-				VaccineControllerTest.TEST_VACCINE_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/updateVaccine"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit", VaccineControllerTest.TEST_VACCINE_ID)).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.view().name("vaccines/updateVaccine"));
 	}
-	
+
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessUpdateFormSuccess() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit"
-										,VaccineControllerTest.TEST_VACCINE_ID)
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.param("name", "Vacuna 11")
-						.param("components", "koipesol")
-						.param("months", "3")
-						.param("sickness", "1"))
-				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit", VaccineControllerTest.TEST_VACCINE_ID).with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna 11")
+			.param("components", "koipesol").param("months", "3").param("sickness", "1")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitCreationForm() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newVaccine"))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newVaccine")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
-						.with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR")
-						.param("sickness", "1").param("months", "9").param("components", "H20"))
-				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/vets/newVaccine").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR").param("sickness", "1").param("months", "9").param("components", "H20"))
+			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
 
-
-
-	// TODO casos negativos
+	// casos negativos
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormHasErrors1() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/vets/newVaccine")
-						.with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR")
-						.param("sickness", "1").param("components", "H2E"))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("vaccine"))
-				// .andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("months"))
-				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/vets/newVaccine").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Vacuna RR").param("sickness", "1").param("components", "H2E")).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeHasErrors("vaccine"))
+			// .andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("months"))
+			.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
 	}
-
-	
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessUpdateVaccineErrors() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit", 
-				VaccineControllerTest.TEST_VACCINE_ID)
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.param("name", "")
-						.param("components", "kop")
-						.param("months", "3")
-						.param("sickness", "1"))
-			   .andExpect(status().isOk())
-			   .andExpect(model().attributeHasErrors("vaccine"))
-			   //.andExpect(model().attributeHasFieldErrors("vaccine","name"))
-			   .andExpect(view().name("vaccines/updateVaccine"));
+		this.mockMvc
+			.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit", VaccineControllerTest.TEST_VACCINE_ID).with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "").param("components", "kop")
+				.param("months", "3").param("sickness", "1"))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("vaccine"))
+			//.andExpect(model().attributeHasFieldErrors("vaccine","name"))
+			.andExpect(MockMvcResultMatchers.view().name("vaccines/updateVaccine"));
 	}
-	
-	
-	
-//	@WithMockUser(value = "spring")
-//	@Test
-//	void testProcessCreationFormHasErrorsNameTooLong() throws Exception {
-//		this.mockMvc
-//				.perform(MockMvcRequestBuilders.post("/vets/newVaccines")
-//						.with(SecurityMockMvcRequestPostProcessors.csrf())
-//						.param("name",
-//								"12345678901234567890123456789012345678901234567890123456789012345678901234567890")
-//						.param("sickness", "Otitis").param("months", "9").param("components", "H20"))
-//				.andExpect(MockMvcResultMatchers.status().isOk())
-//				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("vaccine"))
-//				.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("vaccine", "name"))
-//				.andExpect(MockMvcResultMatchers.view().name("vaccines/editVaccine"));
-//	}
 
 }
