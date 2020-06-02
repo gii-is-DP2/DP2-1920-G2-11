@@ -58,7 +58,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian", "owner"
 	})
 	@Test
 	void testShowVaccineErrorHtml() throws Exception {
@@ -68,7 +68,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian", "owner"
 	})
 	@Test
 	void testShowVaccineShowHtml() throws Exception {
@@ -78,7 +78,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian", "owner"
 	})
 	@Test
 	void testShowVaccineShowErrorHtml() throws Exception {
@@ -89,7 +89,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian"
 	})
 	@Test
 	void testDeleteVaccine() throws Exception {
@@ -99,7 +99,7 @@ public class VaccineControllerE2ETest {
 	
 	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
 		})
 	@Test
 	void testInitUpdateForm() throws Exception {
@@ -110,7 +110,7 @@ public class VaccineControllerE2ETest {
 	}
 	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
 		})
 	@Test
 	void testProcessUpdateFormSuccess() throws Exception {
@@ -127,7 +127,7 @@ public class VaccineControllerE2ETest {
 	
 	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
 		})
 	void testInitCreationForm() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newVaccine"))
@@ -136,7 +136,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian"
 	})
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
@@ -145,7 +145,7 @@ public class VaccineControllerE2ETest {
 	}
 	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
 		})
 	@Test
 	void testProcessUpdateVaccineErrors() throws Exception {
@@ -164,7 +164,7 @@ public class VaccineControllerE2ETest {
 	
 	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
 		})
 	@Test
 	void testProcessCreationFormHasErrors1() throws Exception {
