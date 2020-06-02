@@ -142,11 +142,33 @@ public class ProductControllerE2ETest {
 	}
 
 	
-	@WithMockUser(username = "owner1", authorities = { "veterinarian", "admin" })
+	@WithMockUser(username = "vet1", authorities = { "veterinarian", "admin" })
 	@Test
 	void testInitUpdateForm() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/products/edit/{productId}", ProductControllerE2ETest.TEST_PRODUCT_ID)).andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
+	}
+	
+	@WithMockUser(username = "vet1", authorities = { "veterinarian", "admin" })
+	@Test
+	void testProcessEditFormSuccess() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/products/edit/save").with(SecurityMockMvcRequestPostProcessors.csrf()).param("description", "Comida").param("name", "Filete").param("price", "2.00").param("stock", "1"))
+			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.view().name("products/productList"));
+	}
+
+	@WithMockUser(username = "vet1", authorities = { "veterinarian", "admin" })
+	@Test
+	void testProcessEditSaveFormHasErrors1() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/products/edit/save").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "Filete")).andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.model().attributeHasErrors("product")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "description")).andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
+	}
+
+	@WithMockUser(username = "vet1", authorities = { "veterinarian", "admin" })
+	@Test
+	void testProcessEditSaveFormHasErrors2() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/products/edit/save").with(SecurityMockMvcRequestPostProcessors.csrf()).param("description", "Comida").param("name", "Filete").param("stock", "a").param("price", "A"))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("product")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "price"))
+			.andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("product", "stock")).andExpect(MockMvcResultMatchers.view().name("products/editProduct"));
 	}
 
 }
