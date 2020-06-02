@@ -135,7 +135,7 @@ public class ClinicControllerTests {
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testInitCreationFormHasError() throws Exception {
+	void testCreationProccessFormHasError() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/save")
 				.with(SecurityMockMvcRequestPostProcessors.csrf())
 				.param("name", "")

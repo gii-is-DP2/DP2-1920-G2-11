@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.web.ClinicControllerTests;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -54,6 +55,32 @@ public class ClinicControllerE2ETest {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("clinics"))
 				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicDetailsError"));
+
+	}
+	
+	
+	
+	@WithMockUser(username = "owner1", authorities = { "owner" })
+	@Test
+	void testInitCreationForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/new"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
+	}
+
+	@WithMockUser(username = "owner1", authorities = { "owner" })
+	@Test
+	void testCreationProccessFormHasError() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/save")
+				.with(SecurityMockMvcRequestPostProcessors.csrf())
+				.param("name", "")
+				.param("address", "nombre")
+				.param("city", "marbella")
+				.param("email", "")
+				.param("telephone", ""))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("clinic"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
 
 	}
 
