@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +57,7 @@ public class SicknessServiceTest {
 
 	}
 
-	@Transactional
+	@Test
 	void optionalFindSicknessesByIdTest() {
 		Optional<Sickness> findSickness = this.sicknessService.optionalFindSicknessesById(25);
 		Sickness sickness = findSickness.get();

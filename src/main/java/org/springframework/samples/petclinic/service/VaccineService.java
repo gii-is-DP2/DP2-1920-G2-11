@@ -1,9 +1,7 @@
 
-
 package org.springframework.samples.petclinic.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -35,28 +33,20 @@ public class VaccineService {
 
 		return vaccine;
 	}
-	
+
 	@Transactional
 	public void saveVaccine(final Vaccine vaccine) throws DataAccessException {
 		this.vaccineRepository.save(vaccine);
 	}
 
 	@Transactional
-	public void deleteVaccine(final Vaccine vaccine) throws DataAccessException {
-		this.vaccineRepository.deleteById(vaccine.getId());
-	}
-	
-	
-	public void delete(Vaccine vaccine) {
-		vaccineRepository.delete(vaccine);
+	public void delete(final Vaccine vaccine) {
+		this.vaccineRepository.delete(vaccine);
 	}
 
-
+	@Transactional
 	public Iterable<Vaccine> findAll() {
-		// TODO Auto-generated method stub
 		return this.vaccineRepository.findAll();
 	}
-	
-	
-}
 
+}
