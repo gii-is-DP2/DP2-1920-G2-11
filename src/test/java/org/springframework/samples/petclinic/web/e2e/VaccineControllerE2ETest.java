@@ -58,7 +58,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian", "owner"
 	})
 	@Test
 	void testShowVaccineErrorHtml() throws Exception {
@@ -68,7 +68,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian", "owner"
 	})
 	@Test
 	void testShowVaccineShowHtml() throws Exception {
@@ -78,7 +78,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian", "owner"
 	})
 	@Test
 	void testShowVaccineShowErrorHtml() throws Exception {
@@ -89,7 +89,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian"
 	})
 	@Test
 	void testDeleteVaccine() throws Exception {
@@ -97,8 +97,37 @@ public class VaccineControllerE2ETest {
 			.andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}
 	
+	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
+		})
+	@Test
+	void testInitUpdateForm() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit",
+				VaccineControllerE2ETest.TEST_VACCINE_ID))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("vaccines/updateVaccine"));
+	}
+	
+	@WithMockUser(username = "vet1", authorities = {
+			"veterinarian"
+		})
+	@Test
+	void testProcessUpdateFormSuccess() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/owners/*/pets/*/sicknesses/*/vaccines/{vaccineId}/edit"
+										,VaccineControllerE2ETest.TEST_VACCINE_ID)
+						.with(SecurityMockMvcRequestPostProcessors.csrf())
+						.param("name", "Vacuna 11")
+						.param("components", "koipesol")
+						.param("months", "3")
+						.param("sickness", "1"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+	}
+	
+	
+	@WithMockUser(username = "vet1", authorities = {
+			"veterinarian"
 		})
 	void testInitCreationForm() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/vets/newVaccine"))
@@ -107,7 +136,7 @@ public class VaccineControllerE2ETest {
 	}
 
 	@WithMockUser(username = "vet1", authorities = {
-		"veterinarian", "admin"
+		"veterinarian"
 	})
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
@@ -116,7 +145,7 @@ public class VaccineControllerE2ETest {
 	}
 	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
 		})
 	@Test
 	void testProcessUpdateVaccineErrors() throws Exception {
@@ -135,7 +164,7 @@ public class VaccineControllerE2ETest {
 	
 	
 	@WithMockUser(username = "vet1", authorities = {
-			"veterinarian", "admin"
+			"veterinarian"
 		})
 	@Test
 	void testProcessCreationFormHasErrors1() throws Exception {

@@ -127,9 +127,16 @@ public class ClinicControllerTests {
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessCreationFormHasError() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/save").with(SecurityMockMvcRequestPostProcessors.csrf()).param("name", "").param("address", "nombre").param("city", "marbella").param("email", "").param("telephone", ""))
-			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("clinic")).andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
-
+	void testCreationProccessFormHasError() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/save")
+				.with(SecurityMockMvcRequestPostProcessors.csrf())
+				.param("name", "")
+				.param("address", "nombre")
+				.param("city", "marbella")
+				.param("email", "")
+				.param("telephone", ""))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("clinic"))
+				.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
 	}
 }

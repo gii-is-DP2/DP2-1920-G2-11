@@ -40,13 +40,12 @@ public class VaccineService {
 	}
 
 	@Transactional
-	public void delete(final Vaccine vaccine) {
-		this.vaccineRepository.delete(vaccine);
+	public void delete(Vaccine vaccine) {
+		vaccineRepository.deleteById(vaccine.getId());
 	}
 
 	@Transactional
 	public Iterable<Vaccine> findAll() {
 		return this.vaccineRepository.findAll();
 	}
-
 }
