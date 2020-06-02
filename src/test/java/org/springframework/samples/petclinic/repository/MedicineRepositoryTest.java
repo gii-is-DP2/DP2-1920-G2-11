@@ -30,7 +30,6 @@ import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-//@TestPropertySource(locations = "classpath:application-mysql.properties")
 
 class MedicineRepositoryTest {
 

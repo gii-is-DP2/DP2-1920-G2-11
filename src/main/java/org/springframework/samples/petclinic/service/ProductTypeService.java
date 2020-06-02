@@ -17,13 +17,10 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Product;
 import org.springframework.samples.petclinic.model.ProductType;
-import org.springframework.samples.petclinic.repository.ProductRepository;
 import org.springframework.samples.petclinic.repository.ProductTypeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +46,6 @@ public class ProductTypeService {
 	public Collection<ProductType> findProductTypes() throws DataAccessException {
 		return this.productTypeRepository.findAll();
 	}
-
 
 	@Transactional
 	public ProductType findProductsById(final int productId) {

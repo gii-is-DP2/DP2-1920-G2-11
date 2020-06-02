@@ -4,8 +4,6 @@ package org.springframework.samples.petclinic.web.e2e;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -25,17 +23,17 @@ public class SicknessControllerE2ETest {
 	@Autowired
 	private MockMvc				mockMvc;
 
-	private static final int	TEST_PET_ID				= 1;
+	private static final int	TEST_PET_ID						= 1;
 
-	private static final int	TEST_PET_ERROR_ID		= 14;
+	private static final int	TEST_PET_ERROR_ID				= 14;
 
-	private static final int	TEST_SICKNESS_ID		= 1;
+	private static final int	TEST_SICKNESS_ID				= 1;
 
-	private static final int	TEST_PET_SHOW_ERROR_ID	= 11;
+	private static final int	TEST_PET_SHOW_ERROR_ID			= 11;
 
-	private static final int	TEST_SICKNESS_ERROR_ID	= 30;
+	private static final int	TEST_SICKNESS_ERROR_ID			= 30;
 
-	private static final int	TEST_SICKNESS_UPDATE_ID	= 25;
+	private static final int	TEST_SICKNESS_UPDATE_ID			= 25;
 
 	private static final int	TEST_SICKNESS_UPDATE_ERROR_ID	= 26;
 
@@ -80,7 +78,7 @@ public class SicknessControllerE2ETest {
 		"veterinarian"
 	})
 	@Test
-	void testDeleteSicknessWithVacccine() throws Exception {
+	void testDeleteSickness() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/owners/*/pets/{petId}/sicknesses/delete/{sicknessId}", SicknessControllerE2ETest.TEST_PET_ID, SicknessControllerE2ETest.TEST_SICKNESS_ID)).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 			.andExpect(MockMvcResultMatchers.view().name("welcome"));
 	}

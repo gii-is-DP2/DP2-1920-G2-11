@@ -34,7 +34,7 @@ public class HU12Test {
 		for (Vaccine a : vaccines1) {
 			n++;
 		}
-		this.vaccineService.deleteVaccine(vaccine);
+		this.vaccineService.delete(vaccine);
 		Iterable<Vaccine> vaccines2 = this.vaccineService.findAll();
 		int i = 0;
 		for (Vaccine b : vaccines2) {
@@ -52,7 +52,7 @@ public class HU12Test {
 		Vaccine vaccine = new Vaccine();
 		vaccine.setId(50);
 		Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
-			this.vaccineService.deleteVaccine(vaccine);
+			this.vaccineService.delete(vaccine);
 		});
 	}
 
