@@ -41,7 +41,7 @@ public class HU14Test {
 		Clinic clinic = new Clinic();
 		clinic.setName("Clinica Banani");
 		clinic.setCity("Sevilla");
-		clinic.setEmail("email@mail.com");
+		clinic.setEmail("banini@mail.com");
 		clinic.setAddress("Calle Locura 5");
 		clinic.setTelephone("653214785");
 		clinic.setId(90);
@@ -61,7 +61,6 @@ public class HU14Test {
 	void createClinicNameBlank() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Clinic clinic = new Clinic();
-		//clinic.setName("");
 		clinic.setCity("Sevilla");
 		clinic.setEmail("mal@mail.com");
 		clinic.setAddress("Calle Lora 5");

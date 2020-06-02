@@ -26,7 +26,12 @@ public class HU8Test {
 	@Test
 	void shouldFindClinicWithCorrectId() {
 		Clinic clinic = this.clinicService.findById(2);
-		Assertions.assertTrue(clinic.getName().equals("Veterinaria Nervion"));
+		Assertions.assertTrue(clinic.getName().equals("Veterinaria Nervion") && clinic.getAddress().equals("Calle Juan 10") 
+				&& clinic.getCity().equals("Sevilla") 
+				&& clinic.getEmail().equals("vetnervion@mail.com") 
+				&&clinic.getTelephone().equals("685123477") );
+	
+		
 	}
 
 	//Caso negativo
