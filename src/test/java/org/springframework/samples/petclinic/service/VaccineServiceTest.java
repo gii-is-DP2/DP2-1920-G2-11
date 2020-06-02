@@ -25,6 +25,18 @@ public class VaccineServiceTest {
 	@Autowired
 	private VaccineService vaccineService;
 
+	
+	@Test
+	void findAllTest() {
+		Iterable<Vaccine> vaccines = this.vaccineService.findAll();
+		int size = 0;
+		for (Vaccine a : vaccines) {
+			size++;
+		}
+
+		Assertions.assertTrue(size==23);
+		
+	}
 
 	@Test
 	void findVaccinesBySicknessIdTest() {
