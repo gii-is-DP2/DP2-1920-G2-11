@@ -130,7 +130,7 @@ public class VaccineController {
 	public String createVaccine(final ModelMap modelMap) {
 		String view = "vaccines/editVaccine";
 		modelMap.addAttribute("vaccine", new Vaccine());
-		modelMap.addAttribute("sicknesses", this.sicknessService.findAll());
+		modelMap.addAttribute("sicknesses", this.sicknessService.findAllSicknesses());
 		return view;
 	}
 
@@ -141,7 +141,7 @@ public class VaccineController {
 
 		if (result.hasErrors()) {
 			modelMap.addAttribute("vaccine", vaccine);
-			modelMap.addAttribute("sicknesses", this.sicknessService.findAll());
+			modelMap.addAttribute("sicknesses", this.sicknessService.findAllSicknesses());
 			return "vaccines/editVaccine";
 		} else {
 			Sickness enfermedad = this.sicknessService.findSicknessesById(sicknessId);
