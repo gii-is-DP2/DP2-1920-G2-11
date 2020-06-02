@@ -47,16 +47,16 @@ public class VaccineService {
 	}
 	
 	
+	@Transactional
 	public void delete(Vaccine vaccine) {
-		vaccineRepository.delete(vaccine);
+		vaccineRepository.deleteById(vaccine.getId());
 	}
 
-
+	@Transactional
 	public Iterable<Vaccine> findAll() {
 		// TODO Auto-generated method stub
 		return this.vaccineRepository.findAll();
 	}
-	
 	
 }
 
