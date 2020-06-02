@@ -69,7 +69,6 @@ public class ProductServiceTests {
 
 	}
 
-	//cambiado id porque se pisa
 	@Test
 	@Transactional
 	void deleteProductTest() {

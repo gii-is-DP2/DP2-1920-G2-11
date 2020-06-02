@@ -28,20 +28,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class ClinicControllerTests {
 
 	@Autowired
-	private ClinicController clinicController;
+	private ClinicController	clinicController;
 
 	@MockBean
-	private ProductService productService;
+	private ProductService		productService;
 
 	@MockBean
-	private ClinicService clinicService;
+	private ClinicService		clinicService;
 
 	@Autowired
-	private MockMvc mockMvc;
+	private MockMvc				mockMvc;
 
-	private static final int TEST_CLINIC_ID = 1;
+	private static final int	TEST_CLINIC_ID			= 1;
 
-	private static final int TEST_CLINIC_ERROR_ID = 3;
+	private static final int	TEST_CLINIC_ERROR_ID	= 3;
+
 
 	@BeforeEach
 	void setup() {
@@ -100,42 +101,33 @@ public class ClinicControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowClinics() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics")).andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
-				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsList"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("clinics")).andExpect(MockMvcResultMatchers.view().name("clinics/clinicsList"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowClinic() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerTests.TEST_CLINIC_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
-				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsShow"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerTests.TEST_CLINIC_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeExists("clinics"))
+			.andExpect(MockMvcResultMatchers.view().name("clinics/clinicsShow"));
 
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowClinicErrorHtml() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerTests.TEST_CLINIC_ERROR_ID))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("c1"))
-				.andExpect(MockMvcResultMatchers.view().name("clinics/clinicDetailsError"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/{clinicId}", ClinicControllerTests.TEST_CLINIC_ERROR_ID)).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("c1"))
+			.andExpect(MockMvcResultMatchers.view().name("clinics/clinicDetailsError"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitCreationForm() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/new"))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clinics/new")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testInitCreationFormHasError() throws Exception {
+	void testCreationProccessFormHasError() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/clinics/save")
 				.with(SecurityMockMvcRequestPostProcessors.csrf())
 				.param("name", "")
@@ -146,6 +138,5 @@ public class ClinicControllerTests {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.model().attributeHasErrors("clinic"))
 				.andExpect(MockMvcResultMatchers.view().name("clinics/editClinic"));
-
 	}
 }

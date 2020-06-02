@@ -67,10 +67,12 @@ public class HU7Test {
 	void updateSicknessNameNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("");
 		sickness.setCause("Cause 1");
 		sickness.setSymptom("Symptom 1");
 		sickness.setSeverity(2);
+		sickness.setType(pet.getType());
 
 		SicknessValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(sickness, "sickness");
@@ -86,10 +88,12 @@ public class HU7Test {
 	void updateSicknessSeverityNotCorrectly() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("Sickness 1");
 		sickness.setCause("Cause 1");
 		sickness.setSymptom("Symptom 1");
 		sickness.setSeverity(null);
+		sickness.setType(pet.getType());
 
 		SicknessValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(sickness, "sickness");
@@ -105,10 +109,12 @@ public class HU7Test {
 	void updateSicknessSeverityOutOfMinRange() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("Sickness 1");
 		sickness.setCause("Cause 1");
 		sickness.setSymptom("Symptom 1");
 		sickness.setSeverity(-1);
+		sickness.setType(pet.getType());
 
 		SicknessValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(sickness, "sickness");
@@ -124,10 +130,12 @@ public class HU7Test {
 	void updateSicknessSeverityOutOfMaxRange() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("Sickness 1");
 		sickness.setCause("Cause 1");
 		sickness.setSymptom("Symptom 1");
 		sickness.setSeverity(4);
+		sickness.setType(pet.getType());
 
 		SicknessValidator validator = this.createValidator();
 		Errors errors = new BeanPropertyBindingResult(sickness, "sickness");
@@ -144,10 +152,12 @@ public class HU7Test {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 		sickness.setCause("Cause 1");
 		sickness.setSymptom("Symptom 1");
 		sickness.setSeverity(1);
+		sickness.setType(pet.getType());
 
 		SicknessValidator sv = new SicknessValidator();
 		Errors errors = new BeanPropertyBindingResult(sickness, "sickness");
@@ -164,10 +174,12 @@ public class HU7Test {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("Name 1");
 		sickness.setCause("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 		sickness.setSymptom("Symptom 1");
 		sickness.setSeverity(1);
+		sickness.setType(pet.getType());
 
 		SicknessValidator sv = new SicknessValidator();
 		Errors errors = new BeanPropertyBindingResult(sickness, "sickness");
@@ -184,10 +196,12 @@ public class HU7Test {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Sickness sickness = this.sicknessService.findSicknessesById(1);
+		Pet pet = this.petService.findPetById(3);
 		sickness.setName("Name 1");
 		sickness.setCause("Cause 1");
 		sickness.setSymptom("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 		sickness.setSeverity(1);
+		sickness.setType(pet.getType());
 
 		SicknessValidator sv = new SicknessValidator();
 		Errors errors = new BeanPropertyBindingResult(sickness, "sickness");

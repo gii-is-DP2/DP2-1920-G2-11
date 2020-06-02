@@ -25,7 +25,6 @@ import org.springframework.validation.Errors;
 @DirtiesContext
 public class HU14Test {
 
-	//TODO añadir clinica
 	@Autowired
 	private ClinicService clinicService;
 

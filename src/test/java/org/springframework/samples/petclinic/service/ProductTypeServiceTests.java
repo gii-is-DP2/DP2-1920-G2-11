@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic.repository;
+package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
 
@@ -25,29 +25,32 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.model.Medicine;
+import org.springframework.samples.petclinic.model.ProductType;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.DirtiesContext;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-
-class MedicineRepositoryTest {
+@DirtiesContext
+class ProductTypeServiceTests {
 
 	@Autowired
-	protected MedicineRepository medicineRepository;
+	protected	ProductTypeService productTypeService;
 
 
 	@Test
-	void findMedicinesBySicknessIdAndPetTypeId() {
-		Collection<Medicine> medicines = this.medicineRepository.findBySicknessIdAndPetTypeId(1, 1);
-		Assertions.assertThat(medicines.size() == 1);
-		Medicine medicine = medicines.stream().findFirst().get();
-		Assertions.assertThat(medicine.getName().equals("Medicina A") && medicine.getComponents().equals("Componente A") && medicine.getPetType().getId().equals(1) && medicine.getPetType().getName().equals("cat") && medicine.getSickness().getId().equals(1)
-			&& medicine.getSickness().getName().equals("Otitis") && medicine.getTreatment().equals("1 cada 8 horas"));
-
-		//Prueba negativa
-		Collection<Medicine> wrongMedicines = this.medicineRepository.findBySicknessIdAndPetTypeId(43, 38);
-		Assertions.assertThat(wrongMedicines.isEmpty());
+	void findById() {
+		ProductType productType = this.productTypeService.findProductsById(1);
+		Assertions.assertThat(productType.getName().equals("Higiene"));
+		
 	}
+
+	@Test
+	void findProductTypes() {
+		Collection<ProductType> productTypes = this.productTypeService.findProductTypes();
+		Assertions.assertThat(!productTypes.isEmpty() && productTypes.size() == 3);
+
+	}
+
 
 }
