@@ -119,14 +119,6 @@ public class SicknessService {
 		}
 	}
 
-	@Transactional
-	public Iterable<Sickness> findAll() {
-		return this.sicknessRepository.findAll();
 
-	}
-
-	public Collection<Sickness> findSicknesses() {
-		return StreamSupport.stream(this.findAll().spliterator(), false).collect(Collectors.toSet());
-	}
 
 }
