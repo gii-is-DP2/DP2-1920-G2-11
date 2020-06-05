@@ -50,6 +50,7 @@ class HU15Scenarios extends Simulation {
 		.pause(11)
 	}
 
+
 	object EditProduct {
 		val editProduct = exec(http("EditProduct")
 			.get("/products/edit/2")
@@ -68,18 +69,20 @@ class HU15Scenarios extends Simulation {
 			.formParam("_csrf", "${stoken}"))
 			.pause(20)
 	}
-	
 
+	
 	val scnHU15 = scenario("HU15").exec(Home.home,
 									  Login.login,
 									  EditProduct.editProduct
 									  )
 
 	setUp(
-		scnHU15.inject(rampUsers(200) during(100))).protocols(httpProtocol)
+		scnHU15.inject(rampUsers(4000) during (100 seconds))
+		).protocols(httpProtocol)
 		.assertions(
         global.responseTime.max.lt(5000),
         global.responseTime.mean.lt(1000),
         global.successfulRequests.percent.gt(95)
     )
 }
+
