@@ -160,4 +160,3 @@ INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id)
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (10,'champu hidratante','para pelo seco',4.00,3,8,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (11,'champu hidratante','para pelo seco',4.00,3,9,1);
 INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (12,'champu hidratante','para pelo seco',4.00,3,10,1);
-INSERT INTO products(id,name,description,price,stock,clinic_id, product_type_id) VALUES (13,'','',1.00,1,11,1);
